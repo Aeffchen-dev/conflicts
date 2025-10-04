@@ -577,24 +577,16 @@ export function QuizApp() {
         <style>{`
           @keyframes textBounce {
             0% {
-              transform: scale(1);
               opacity: 1;
-              filter: blur(0px);
+              clip-path: inset(0 100% 0 0);
             }
-            30% {
-              transform: scale(1.15);
-              opacity: 0.7;
-              filter: blur(1px);
-            }
-            70% {
-              transform: scale(0.95);
-              opacity: 0.85;
-              filter: blur(0.5px);
+            50% {
+              opacity: 0.3;
+              clip-path: inset(0 50% 0 0);
             }
             100% {
-              transform: scale(1);
               opacity: 1;
-              filter: blur(0px);
+              clip-path: inset(0 0 0 0);
             }
           }
           
