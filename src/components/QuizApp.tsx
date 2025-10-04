@@ -538,7 +538,7 @@ export function QuizApp() {
               transform: 'rotate(-45deg)',
               perspective: '1000px',
               transformStyle: 'preserve-3d',
-              animation: showBandaid ? 'applyBandaid 1.8s cubic-bezier(0.22, 0.61, 0.36, 1)' : 'none',
+              animation: showBandaid ? 'applyBandaid 0.6s ease-in-out' : 'none',
               filter: showBandaid ? 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))' : 'drop-shadow(1px 1px 2px rgba(0,0,0,0.2))',
               transition: 'filter 0.3s ease'
             }}
