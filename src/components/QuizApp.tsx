@@ -459,23 +459,13 @@ export function QuizApp() {
     if (logoAnimating) return;
     
     setLogoAnimating(true);
-    setAnimatingLetterIndex(0);
+    setShowBandaid(true);
     
-    // Start bandaid animation at 60% of text animation (0.45s * 0.6 = 0.27s)
-    setTimeout(() => {
-      setShowBandaid(true);
-    }, 270);
-    
-    // Hide bandaid after its animation completes (270ms delay + 450ms animation)
+    // Hide bandaid after animation completes
     setTimeout(() => {
       setShowBandaid(false);
-    }, 720);
-    
-    // End text animation
-    setTimeout(() => {
       setLogoAnimating(false);
-      setAnimatingLetterIndex(-1);
-    }, 450);
+    }, 800);
   };
 
   const handleToggleChange = (checked: boolean) => {
@@ -522,21 +512,22 @@ export function QuizApp() {
           <span
             style={{
               display: 'inline-block',
-              animation: logoAnimating ? 'textBounce 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55)' : 'none'
+              animation: logoAnimating ? 'textPulse 0.8s ease-in-out' : 'none'
             }}
           >
             Resolve
           </span>
           <div 
             style={{
-              marginLeft: '8px',
-              display: 'inline-block',
-              transform: 'rotate(-45deg) scale(1.6)',
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%) rotate(-45deg) scale(1.6)',
+              opacity: showBandaid ? 1 : 0,
               perspective: '1000px',
               transformStyle: 'preserve-3d',
-              animation: showBandaid ? 'applyBandaid 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55)' : 'none',
-              filter: showBandaid ? 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))' : 'drop-shadow(1px 1px 2px rgba(0,0,0,0.2))',
-              transition: 'filter 0.3s ease'
+              animation: showBandaid ? 'bandaidApply 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none',
+              pointerEvents: 'none'
             }}
           >
             <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -579,54 +570,41 @@ export function QuizApp() {
           </div>
         </div>
         <style>{`
-          @keyframes textBounce {
-            0% {
-              opacity: 1;
-              filter: blur(0px);
-              letter-spacing: 0px;
+          @keyframes textPulse {
+            0%, 100% {
+              filter: brightness(1);
             }
-            25% {
-              opacity: 0.6;
-              filter: blur(2px);
-              letter-spacing: 3px;
+            30% {
+              filter: brightness(1.4);
             }
             50% {
-              opacity: 0.2;
-              filter: blur(5px);
-              letter-spacing: 8px;
+              filter: brightness(1.6);
             }
-            75% {
-              opacity: 0.5;
-              filter: blur(2px);
-              letter-spacing: 2px;
-            }
-            100% {
-              opacity: 1;
-              filter: blur(0px);
-              letter-spacing: 0px;
+            70% {
+              filter: brightness(1.3);
             }
           }
           
-          @keyframes applyBandaid {
+          @keyframes bandaidApply {
             0% {
-              transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
+              transform: translate(-50%, -150%) rotate(-45deg) scale(1.6);
               opacity: 1;
-              filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
-            30% {
-              transform: rotate(-45deg) scaleX(1.33) rotateZ(-14deg) translateY(-4px);
-              animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-              filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.4));
+            40% {
+              transform: translate(-50%, -80%) rotate(-45deg) scale(1.6);
+              opacity: 1;
             }
-            70% {
-              transform: rotate(-45deg) scaleX(1.08) rotateZ(-3deg) translateY(-0.5px);
-              animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-              filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.3));
+            60% {
+              transform: translate(-50%, -50%) rotate(-48deg) scale(1.65);
+              opacity: 1;
+            }
+            80% {
+              transform: translate(-50%, -50%) rotate(-45deg) scale(1.6);
+              opacity: 1;
             }
             100% {
-              transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
+              transform: translate(-50%, -50%) rotate(-45deg) scale(1.6);
               opacity: 1;
-              filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
           }
         `}</style>
