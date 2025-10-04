@@ -601,15 +601,21 @@ export function QuizApp() {
         <style>{`
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) translateY(-30px) scale(0.5);
+              transform: rotate(-50deg) translateY(-40px) translateX(-10px) scale(0.8);
               opacity: 0;
             }
-            50% {
-              transform: rotate(-45deg) translateY(-5px) scale(1.15);
+            40% {
+              transform: rotate(-45deg) translateY(-5px) translateX(0px) scale(1);
               opacity: 1;
             }
-            70% {
-              transform: rotate(-45deg) translateY(2px) scale(0.95);
+            60% {
+              transform: rotate(-43deg) translateY(0px) scale(1.05);
+            }
+            75% {
+              transform: rotate(-45deg) translateY(1px) scale(0.98);
+            }
+            90% {
+              transform: rotate(-45deg) translateY(0px) scale(1.02);
             }
             100% {
               transform: rotate(-45deg) translateY(0px) scale(1);
