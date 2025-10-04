@@ -531,33 +531,12 @@ export function QuizApp() {
           style={{ fontFamily: 'Arial Heavy, Arial, sans-serif', fontSize: '20px', fontWeight: '950' }}
           onClick={handleLogoClick}
         >
-          <span>
-            {"Resolve".split('').map((char, index) => {
-              const rotations = [3, -2, 4, -3, 2, -4, 3];
-              const isAnimating = animatingLetterIndex === index;
-              const isEven = index % 2 === 0;
-              const translateY = isAnimating ? (isEven ? '-3px' : '3px') : '0px';
-              return (
-                <span 
-                  key={index} 
-                  style={{ 
-                    display: 'inline-block',
-                    transform: `rotate(${rotations[index]}deg) translateY(${translateY})`,
-                    transition: 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-                  }}
-                >
-                  {char}
-                </span>
-              );
-            })}
-          </span>
           <div 
             style={{
-              marginLeft: '8px',
+              marginRight: '8px',
               display: 'inline-block',
-              transform: showBandaid ? 'translateY(0px) rotate(0deg) scale(1)' : 'translateY(0px) rotate(0deg) scale(1)',
-              transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
-              animation: showBandaid ? 'applyBandaid 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none'
+              transform: 'rotate(-45deg)',
+              animation: showBandaid ? 'applyBandaid 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none'
             }}
           >
             <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -598,19 +577,42 @@ export function QuizApp() {
               <circle cx="19" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
             </svg>
           </div>
+          <span>
+            {"Resolve".split('').map((char, index) => {
+              const rotations = [3, -2, 4, -3, 2, -4, 3];
+              const isAnimating = animatingLetterIndex === index;
+              const isEven = index % 2 === 0;
+              const translateY = isAnimating ? (isEven ? '-3px' : '3px') : '0px';
+              return (
+                <span 
+                  key={index} 
+                  style={{ 
+                    display: 'inline-block',
+                    transform: `rotate(${rotations[index]}deg) translateY(${translateY})`,
+                    transition: 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                  }}
+                >
+                  {char}
+                </span>
+              );
+            })}
+          </span>
         </div>
         <style>{`
           @keyframes applyBandaid {
             0% {
-              transform: translateY(-20px) rotate(-15deg) scale(0.3);
+              transform: rotate(-45deg) translateY(-30px) scale(0.5);
               opacity: 0;
             }
-            60% {
-              transform: translateY(2px) rotate(3deg) scale(1.1);
+            50% {
+              transform: rotate(-45deg) translateY(-5px) scale(1.15);
               opacity: 1;
             }
+            70% {
+              transform: rotate(-45deg) translateY(2px) scale(0.95);
+            }
             100% {
-              transform: translateY(0px) rotate(0deg) scale(1);
+              transform: rotate(-45deg) translateY(0px) scale(1);
               opacity: 1;
             }
           }
