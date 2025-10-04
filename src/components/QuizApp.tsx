@@ -603,25 +603,33 @@ export function QuizApp() {
         <style>{`
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) translateY(-40px) translateX(-20px) rotateY(-70deg) rotateX(20deg);
+              transform: rotate(-45deg) translateY(-50px) translateX(10px) rotateX(90deg) scale(0.8);
               opacity: 0;
+              filter: blur(2px);
             }
             20% {
-              transform: rotate(-45deg) translateY(-20px) translateX(-10px) rotateY(-60deg) rotateX(25deg);
-              opacity: 1;
+              transform: rotate(-45deg) translateY(-30px) translateX(5px) rotateX(75deg) scale(0.9);
+              opacity: 0.7;
+              filter: blur(1px);
             }
             40% {
-              transform: rotate(-45deg) translateY(-8px) translateX(-3px) rotateY(-40deg) rotateX(20deg);
+              transform: rotate(-45deg) translateY(-15px) translateX(2px) rotateX(55deg) scale(0.95);
+              opacity: 1;
+              filter: blur(0px);
             }
             60% {
-              transform: rotate(-45deg) translateY(-2px) translateX(0px) rotateY(-20deg) rotateX(10deg);
+              transform: rotate(-45deg) translateY(-5px) translateX(0px) rotateX(30deg) scale(1);
             }
-            80% {
-              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateY(-5deg) rotateX(2deg);
+            75% {
+              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateX(10deg) scale(1.02);
+            }
+            90% {
+              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateX(-2deg) scale(0.99);
             }
             100% {
-              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateY(0deg) rotateX(0deg);
+              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateX(0deg) scale(1);
               opacity: 1;
+              filter: blur(0px);
             }
           }
         `}</style>
