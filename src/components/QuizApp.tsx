@@ -465,29 +465,13 @@ export function QuizApp() {
     // Hide bandaid after animation
     setTimeout(() => {
       setShowBandaid(false);
-    }, 800);
+    }, 450);
     
-    // Start smiley rotation after 2/3 of animation
+    // Animate text with pflaster timing
     setTimeout(() => {
-      setLogoSmileyRotating(true);
-      setTimeout(() => {
-        setLogoSmileyRotating(false);
-      }, 400);
-    }, 400);
-    
-    // Animate each letter sequentially (7 letters for "Resolve")
-    for (let i = 0; i < 7; i++) {
-      setTimeout(() => {
-        setAnimatingLetterIndex(i);
-        // Reset animation state after the last letter
-        if (i === 6) {
-          setTimeout(() => {
-            setLogoAnimating(false);
-            setAnimatingLetterIndex(-1);
-          }, 300);
-        }
-      }, i * 75);
-    }
+      setLogoAnimating(false);
+      setAnimatingLetterIndex(-1);
+    }, 450);
   };
 
   const handleToggleChange = (checked: boolean) => {
@@ -528,28 +512,16 @@ export function QuizApp() {
       <div className="bg-black mt-4 flex items-baseline justify-between w-full px-4" style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}>
         <div 
           className="text-white cursor-pointer relative flex items-center" 
-          style={{ fontFamily: 'Arial Heavy, Arial, sans-serif', fontSize: '20px', fontWeight: '950' }}
+          style={{ fontFamily: 'Kokoro, serif', fontSize: '20px', fontWeight: 'bold', fontStyle: 'italic' }}
           onClick={handleLogoClick}
         >
-          <span>
-            {"Resolve".split('').map((char, index) => {
-              const rotations = [3, -2, 4, -3, 2, -4, 3];
-              const isAnimating = animatingLetterIndex === index;
-              const isEven = index % 2 === 0;
-              const translateY = isAnimating ? (isEven ? '-3px' : '3px') : '0px';
-              return (
-                <span 
-                  key={index} 
-                  style={{ 
-                    display: 'inline-block',
-                    transform: `rotate(${rotations[index]}deg) translateY(${translateY})`,
-                    transition: 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-                  }}
-                >
-                  {char}
-                </span>
-              );
-            })}
+          <span
+            style={{
+              display: 'inline-block',
+              animation: logoAnimating ? 'textBounce 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55)' : 'none'
+            }}
+          >
+            Resolve
           </span>
           <div 
             style={{
@@ -623,6 +595,21 @@ export function QuizApp() {
           </span>
         </div>
         <style>{`
+          @keyframes textBounce {
+            0% {
+              transform: scale(1);
+            }
+            30% {
+              transform: scale(1.08);
+            }
+            70% {
+              transform: scale(0.96);
+            }
+            100% {
+              transform: scale(1);
+            }
+          }
+          
           @keyframes applyBandaid {
             0% {
               transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
