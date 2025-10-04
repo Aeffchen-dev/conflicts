@@ -610,20 +610,20 @@ export function QuizApp() {
             }
             /* Ease Out beim Lösen */
             25% {
-              transform: rotate(-45deg) scaleX(0.7) rotateY(-12deg);
+              transform: rotate(-45deg) scaleX(1.3) rotateY(-12deg);
               animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
             }
             50% {
-              transform: rotate(-45deg) scaleX(0.67) rotateY(-15deg);
+              transform: rotate(-45deg) scaleX(1.5) rotateY(-15deg);
               animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
             }
             /* Ease In beim Andrücken */
             75% {
-              transform: rotate(-45deg) scaleX(0.85) rotateY(-6deg);
+              transform: rotate(-45deg) scaleX(1.15) rotateY(-6deg);
               animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
             }
             95% {
-              transform: rotate(-45deg) scaleX(0.98) rotateY(-1deg);
+              transform: rotate(-45deg) scaleX(1.02) rotateY(-1deg);
               animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
             }
             100% {
