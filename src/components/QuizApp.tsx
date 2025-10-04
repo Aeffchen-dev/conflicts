@@ -605,22 +605,22 @@ export function QuizApp() {
         <style>{`
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) translateY(8px) scaleY(0.2) scaleX(0.9);
-              transform-origin: top center;
+              transform: rotate(-45deg) translateX(8px) scaleX(0.2) scaleY(0.9);
+              transform-origin: left center;
               opacity: 0.5;
             }
             15% {
-              transform: rotate(-45deg) translateY(5px) scaleY(0.4) scaleX(0.92);
-              transform-origin: top center;
+              transform: rotate(-45deg) translateX(5px) scaleX(0.4) scaleY(0.92);
+              transform-origin: left center;
               opacity: 0.7;
             }
             30% {
-              transform: rotate(-45deg) translateY(2px) scaleY(0.7) scaleX(0.95);
-              transform-origin: top center;
+              transform: rotate(-45deg) translateX(2px) scaleX(0.7) scaleY(0.95);
+              transform-origin: left center;
               opacity: 0.9;
             }
             45% {
-              transform: rotate(-45deg) translateY(0px) scaleY(1) scaleX(1);
+              transform: rotate(-45deg) translateX(0px) scaleX(1) scaleY(1);
               transform-origin: center center;
               opacity: 1;
             }
