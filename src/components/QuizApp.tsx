@@ -527,41 +527,41 @@ export function QuizApp() {
       {/* App Header with controls - Always visible */}
       <div className="bg-black mt-4 flex items-baseline justify-between w-full px-4" style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}>
         <div 
-          className="text-white cursor-pointer relative" 
+          className="text-white cursor-pointer relative flex items-center" 
           style={{ fontFamily: 'Arial Heavy, Arial, sans-serif', fontSize: '20px', fontWeight: '950' }}
           onClick={handleLogoClick}
         >
-          {"Resolve".split('').map((char, index) => {
-            const rotations = [3, -2, 4, -3, 2, -4, 3];
-            const isAnimating = animatingLetterIndex === index;
-            const isEven = index % 2 === 0;
-            const translateY = isAnimating ? (isEven ? '-3px' : '3px') : '0px';
-            return (
-              <span 
-                key={index} 
-                style={{ 
-                  display: 'inline-block',
-                  transform: `rotate(${rotations[index]}deg) translateY(${translateY})`,
-                  transition: 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-                }}
-              >
-                {char}
-              </span>
-            );
-          })}
-          {showBandaid && (
-            <span 
-              style={{
-                position: 'absolute',
-                top: '-5px',
-                right: '-20px',
-                fontSize: '20px',
-                animation: 'fadeIn 0.3s ease-in-out'
-              }}
-            >
-              🩹
-            </span>
-          )}
+          <span>
+            {"Resolve".split('').map((char, index) => {
+              const rotations = [3, -2, 4, -3, 2, -4, 3];
+              const isAnimating = animatingLetterIndex === index;
+              const isEven = index % 2 === 0;
+              const translateY = isAnimating ? (isEven ? '-3px' : '3px') : '0px';
+              return (
+                <span 
+                  key={index} 
+                  style={{ 
+                    display: 'inline-block',
+                    transform: `rotate(${rotations[index]}deg) translateY(${translateY})`,
+                    transition: 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                  }}
+                >
+                  {char}
+                </span>
+              );
+            })}
+          </span>
+          <span 
+            style={{
+              marginLeft: '8px',
+              fontSize: '20px',
+              display: 'inline-block',
+              transform: showBandaid ? 'rotate(360deg) scale(1.2)' : 'rotate(0deg) scale(1)',
+              transition: 'transform 0.6s ease-in-out'
+            }}
+          >
+            🩹
+          </span>
         </div>
         <button 
           onClick={() => setCategorySelectorOpen(true)}
