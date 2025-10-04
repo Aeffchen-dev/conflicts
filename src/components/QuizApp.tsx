@@ -461,21 +461,21 @@ export function QuizApp() {
     setLogoAnimating(true);
     setAnimatingLetterIndex(0);
     
-    // Start bandaid animation at 60% of text animation (0.45s * 0.6 = 0.27s)
+    // Start bandaid animation at 60% of text animation (0.8s * 0.6 = 0.48s)
     setTimeout(() => {
       setShowBandaid(true);
-    }, 270);
+    }, 480);
     
-    // Hide bandaid after its animation completes (270ms delay + 450ms animation)
+    // Hide bandaid after its animation completes (480ms delay + 450ms animation)
     setTimeout(() => {
       setShowBandaid(false);
-    }, 720);
+    }, 930);
     
     // End text animation
     setTimeout(() => {
       setLogoAnimating(false);
       setAnimatingLetterIndex(-1);
-    }, 450);
+    }, 800);
   };
 
   const handleToggleChange = (checked: boolean) => {
@@ -522,7 +522,7 @@ export function QuizApp() {
           <span
             style={{
               display: 'inline-block',
-              animation: logoAnimating ? 'textBounce 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55)' : 'none'
+              animation: logoAnimating ? 'resolveConflict 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55)' : 'none'
             }}
           >
             Resolve
@@ -579,24 +579,44 @@ export function QuizApp() {
           </div>
         </div>
         <style>{`
-          @keyframes textBounce {
+          @keyframes resolveConflict {
             0% {
+              transform: scaleX(0.7) translateX(0);
               opacity: 1;
               filter: blur(0px);
             }
-            25% {
-              opacity: 0.6;
-              filter: blur(2px);
+            15% {
+              transform: scaleX(0.5) translateX(-2px);
+              opacity: 0.8;
+              filter: blur(1px);
             }
-            50% {
-              opacity: 0.2;
-              filter: blur(5px);
+            30% {
+              transform: scaleX(0.4) translateX(3px);
+              opacity: 0.6;
+              filter: blur(3px);
+            }
+            45% {
+              transform: scaleX(0.35) translateX(-3px);
+              opacity: 0.5;
+              filter: blur(4px);
+            }
+            60% {
+              transform: scaleX(0.6) translateX(2px);
+              opacity: 0.7;
+              filter: blur(2px);
             }
             75% {
-              opacity: 0.5;
-              filter: blur(2px);
+              transform: scaleX(0.9) translateX(-1px);
+              opacity: 0.85;
+              filter: blur(1px);
+            }
+            90% {
+              transform: scaleX(1.05) translateX(0);
+              opacity: 0.95;
+              filter: blur(0.5px);
             }
             100% {
+              transform: scaleX(1) translateX(0);
               opacity: 1;
               filter: blur(0px);
             }
