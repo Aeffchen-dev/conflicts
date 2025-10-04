@@ -573,63 +573,28 @@ export function QuizApp() {
               <circle cx="19" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
             </svg>
           </div>
-          <span>
-            {"Resolve".split('').map((char, index) => {
-              const rotations = [3, -2, 4, -3, 2, -4, 3];
-              const isAnimating = animatingLetterIndex === index;
-              const isEven = index % 2 === 0;
-              const translateY = isAnimating ? (isEven ? '-3px' : '3px') : '0px';
-              return (
-                <span 
-                  key={index} 
-                  style={{ 
-                    display: 'inline-block',
-                    transform: `rotate(${rotations[index]}deg) translateY(${translateY})`,
-                    transition: 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-                  }}
-                >
-                  {char}
-                </span>
-              );
-            })}
-          </span>
         </div>
         <style>{`
           @keyframes textBounce {
             0% {
-              transform: scale(1) translateX(0px);
-              letter-spacing: 0px;
+              transform: scale(1);
               opacity: 1;
-            }
-            15% {
-              transform: scale(0.95) translateX(-3px);
-              letter-spacing: 3px;
-              opacity: 0.9;
+              filter: blur(0px);
             }
             30% {
-              transform: scale(0.92) translateX(3px);
-              letter-spacing: 4px;
-              opacity: 0.85;
-            }
-            50% {
-              transform: scale(0.98) translateX(-2px);
-              letter-spacing: 2px;
-              opacity: 0.92;
+              transform: scale(1.15);
+              opacity: 0.7;
+              filter: blur(1px);
             }
             70% {
-              transform: scale(1.03) translateX(1px);
-              letter-spacing: 1px;
-              opacity: 0.97;
-            }
-            85% {
-              transform: scale(1.01) translateX(0px);
-              letter-spacing: 0.5px;
-              opacity: 1;
+              transform: scale(0.95);
+              opacity: 0.85;
+              filter: blur(0.5px);
             }
             100% {
-              transform: scale(1) translateX(0px);
-              letter-spacing: 0px;
+              transform: scale(1);
               opacity: 1;
+              filter: blur(0px);
             }
           }
           
@@ -639,13 +604,11 @@ export function QuizApp() {
               opacity: 1;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
-            /* Snappy Ease Out beim Lösen */
             30% {
               transform: rotate(-45deg) scaleX(1.33) rotateZ(-14deg) translateY(-4px);
               animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
               filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.4));
             }
-            /* Snappy Ease In beim Andrücken */
             70% {
               transform: rotate(-45deg) scaleX(1.08) rotateZ(-3deg) translateY(-0.5px);
               animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
