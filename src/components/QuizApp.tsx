@@ -459,23 +459,13 @@ export function QuizApp() {
     if (logoAnimating) return;
     
     setLogoAnimating(true);
-    setAnimatingLetterIndex(0);
+    setShowBandaid(true);
     
-    // Start bandaid animation at 60% of text animation (0.45s * 0.6 = 0.27s)
-    setTimeout(() => {
-      setShowBandaid(true);
-    }, 270);
-    
-    // Hide bandaid after its animation completes (270ms delay + 450ms animation)
-    setTimeout(() => {
-      setShowBandaid(false);
-    }, 720);
-    
-    // End text animation
+    // End animations
     setTimeout(() => {
       setLogoAnimating(false);
-      setAnimatingLetterIndex(-1);
-    }, 450);
+      setShowBandaid(false);
+    }, 1200);
   };
 
   const handleToggleChange = (checked: boolean) => {
@@ -522,21 +512,23 @@ export function QuizApp() {
           <span
             style={{
               display: 'inline-block',
-              animation: logoAnimating ? 'textBounce 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55)' : 'none'
+              animation: logoAnimating ? 'textReveal 1.2s ease-out' : 'none',
+              opacity: logoAnimating ? 1 : 0.7,
+              transition: logoAnimating ? 'none' : 'opacity 0.3s ease'
             }}
           >
             Resolve
           </span>
           <div 
             style={{
-              marginLeft: '8px',
-              display: 'inline-block',
-              transform: 'rotate(-45deg) scale(1.6)',
-              perspective: '1000px',
-              transformStyle: 'preserve-3d',
-              animation: showBandaid ? 'applyBandaid 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55)' : 'none',
-              filter: showBandaid ? 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))' : 'drop-shadow(1px 1px 2px rgba(0,0,0,0.2))',
-              transition: 'filter 0.3s ease'
+              position: 'absolute',
+              left: '-5px',
+              top: '-8px',
+              display: showBandaid ? 'inline-block' : 'none',
+              transform: 'rotate(-10deg) scale(2)',
+              transformOrigin: 'center center',
+              animation: showBandaid ? 'bandaidPeelOff 1.2s ease-out forwards' : 'none',
+              zIndex: 10
             }}
           >
             <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -579,54 +571,54 @@ export function QuizApp() {
           </div>
         </div>
         <style>{`
-          @keyframes textBounce {
+          @keyframes textReveal {
             0% {
-              opacity: 1;
-              filter: blur(0px);
-              letter-spacing: 0px;
+              opacity: 0.4;
+              filter: blur(3px) brightness(0.6);
             }
-            25% {
-              opacity: 0.6;
-              filter: blur(2px);
-              letter-spacing: 3px;
-            }
-            50% {
-              opacity: 0.2;
-              filter: blur(5px);
-              letter-spacing: 8px;
-            }
-            75% {
+            30% {
               opacity: 0.5;
-              filter: blur(2px);
-              letter-spacing: 2px;
+              filter: blur(2px) brightness(0.7);
+            }
+            60% {
+              opacity: 0.8;
+              filter: blur(0.5px) brightness(0.95);
             }
             100% {
               opacity: 1;
-              filter: blur(0px);
-              letter-spacing: 0px;
+              filter: blur(0px) brightness(1.2);
             }
           }
           
-          @keyframes applyBandaid {
+          @keyframes bandaidPeelOff {
             0% {
-              transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
+              transform: rotate(-10deg) scale(2) translateY(0);
               opacity: 1;
-              filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
+              filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.4));
             }
-            30% {
-              transform: rotate(-45deg) scaleX(1.33) rotateZ(-14deg) translateY(-4px);
-              animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            25% {
+              transform: rotate(-10deg) scale(2) translateY(0) rotateX(0deg);
+              opacity: 1;
+            }
+            40% {
+              transform: rotate(-5deg) scale(2.1) translateY(-3px) rotateX(15deg);
+              opacity: 0.95;
+              filter: drop-shadow(3px 4px 6px rgba(0,0,0,0.5));
+            }
+            60% {
+              transform: rotate(5deg) scale(2.2) translateY(-8px) translateX(5px) rotateX(25deg);
+              opacity: 0.85;
               filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.4));
             }
-            70% {
-              transform: rotate(-45deg) scaleX(1.08) rotateZ(-3deg) translateY(-0.5px);
-              animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-              filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.3));
+            80% {
+              transform: rotate(15deg) scale(1.8) translateY(-15px) translateX(15px) rotateX(35deg) rotateZ(20deg);
+              opacity: 0.4;
+              filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.2));
             }
             100% {
-              transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
-              opacity: 1;
-              filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
+              transform: rotate(25deg) scale(1.2) translateY(-25px) translateX(25px) rotateX(45deg) rotateZ(30deg);
+              opacity: 0;
+              filter: drop-shadow(0px 0px 0px rgba(0,0,0,0));
             }
           }
         `}</style>
