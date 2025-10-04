@@ -608,23 +608,23 @@ export function QuizApp() {
               transform: rotate(-45deg) translateX(-15px) rotateY(140deg) scaleX(0.15);
               opacity: 1;
             }
-            15% {
-              transform: rotate(-45deg) translateX(-12px) rotateY(120deg) scaleX(0.3);
-            }
-            30% {
+            20% {
               transform: rotate(-45deg) translateX(-9px) rotateY(100deg) scaleX(0.45);
             }
-            45% {
+            35% {
               transform: rotate(-45deg) translateX(-6px) rotateY(75deg) scaleX(0.6);
             }
-            60% {
+            50% {
               transform: rotate(-45deg) translateX(-3px) rotateY(50deg) scaleX(0.75);
             }
-            75% {
-              transform: rotate(-45deg) translateX(-1px) rotateY(25deg) scaleX(0.9);
+            65% {
+              transform: rotate(-45deg) translateX(-1.5px) rotateY(30deg) scaleX(0.85);
+            }
+            80% {
+              transform: rotate(-45deg) translateX(-0.5px) rotateY(15deg) scaleX(0.93);
             }
             90% {
-              transform: rotate(-45deg) translateX(0px) rotateY(5deg) scaleX(0.98);
+              transform: rotate(-45deg) translateX(-0.1px) rotateY(5deg) scaleX(0.98);
             }
             100% {
               transform: rotate(-45deg) translateX(0px) rotateY(0deg) scaleX(1);
