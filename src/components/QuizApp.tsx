@@ -583,27 +583,22 @@ export function QuizApp() {
             0% {
               opacity: 1;
               filter: blur(0px);
-              letter-spacing: 0px;
             }
             25% {
               opacity: 0.6;
               filter: blur(2px);
-              letter-spacing: 3px;
             }
             50% {
               opacity: 0.2;
               filter: blur(5px);
-              letter-spacing: 8px;
             }
             75% {
               opacity: 0.5;
               filter: blur(2px);
-              letter-spacing: 2px;
             }
             100% {
               opacity: 1;
               filter: blur(0px);
-              letter-spacing: 0px;
             }
           }
           
