@@ -80,6 +80,7 @@ export function QuizApp() {
   const [toggleAnimating, setToggleAnimating] = useState(false);
   const [loadingSmileyRotating, setLoadingSmileyRotating] = useState(false);
   const [logoSmileyRotating, setLogoSmileyRotating] = useState(false);
+  const [showBandaid, setShowBandaid] = useState(false);
 
   useEffect(() => {
     fetchQuestions();
@@ -459,27 +460,33 @@ export function QuizApp() {
     
     setLogoAnimating(true);
     setAnimatingLetterIndex(0);
+    setShowBandaid(true);
     
-    // Start smiley rotation after 2/3 of animation (800ms)
+    // Hide bandaid after animation
+    setTimeout(() => {
+      setShowBandaid(false);
+    }, 800);
+    
+    // Start smiley rotation after 2/3 of animation
     setTimeout(() => {
       setLogoSmileyRotating(true);
       setTimeout(() => {
         setLogoSmileyRotating(false);
-      }, 400); // Rotate for 400ms
-    }, 800);
+      }, 400);
+    }, 400);
     
-    // Animate each letter sequentially (16 letters total, 1200ms duration)
-    for (let i = 0; i < 16; i++) {
+    // Animate each letter sequentially (7 letters for "Resolve")
+    for (let i = 0; i < 7; i++) {
       setTimeout(() => {
         setAnimatingLetterIndex(i);
         // Reset animation state after the last letter
-        if (i === 15) {
+        if (i === 6) {
           setTimeout(() => {
             setLogoAnimating(false);
             setAnimatingLetterIndex(-1);
           }, 300);
         }
-      }, i * 75); // 75ms delay between letters for 1200ms total
+      }, i * 75);
     }
   };
 
@@ -520,12 +527,12 @@ export function QuizApp() {
       {/* App Header with controls - Always visible */}
       <div className="bg-black mt-4 flex items-baseline justify-between w-full px-4" style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}>
         <div 
-          className="text-white cursor-pointer" 
+          className="text-white cursor-pointer relative" 
           style={{ fontFamily: 'Arial Heavy, Arial, sans-serif', fontSize: '20px', fontWeight: '950' }}
           onClick={handleLogoClick}
         >
-          {"Intimacy".split('').map((char, index) => {
-            const rotations = [3, -2, 4, -3, 2, -4, 3, -1];
+          {"Resolve".split('').map((char, index) => {
+            const rotations = [3, -2, 4, -3, 2, -4, 3];
             const isAnimating = animatingLetterIndex === index;
             const isEven = index % 2 === 0;
             const translateY = isAnimating ? (isEven ? '-3px' : '3px') : '0px';
@@ -542,61 +549,19 @@ export function QuizApp() {
               </span>
             );
           })}
-          <span style={{ marginLeft: '7px' }}></span>
-          {"Playbook".split('').map((char, index) => {
-            const rotations = [-2, 3, -1, 4, -3, 2, -4, 1];
-            const letterIndex = index + 8; // Continue counting from Intimacy letters
-            const isAnimating = animatingLetterIndex === letterIndex;
-            const isEven = letterIndex % 2 === 0;
-            const translateY = isAnimating ? (isEven ? '-3px' : '3px') : '0px';
-            return (
-              <span 
-                key={index + 100} 
-                style={{ 
-                  display: 'inline-block',
-                  transform: `rotate(${rotations[index]}deg) translateY(${translateY})`,
-                  position: 'relative',
-                  transition: 'transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-                }}
-              >
-                {char === 'o' && index === 6 ? (
-                  <div 
-                    style={{
-                      display: 'inline-block',
-                      width: '15px',
-                      height: '15px',
-                      backgroundColor: '#fbbf24',
-                      borderRadius: '50%',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      flexDirection: 'column',
-                      position: 'relative',
-                      transform: `translateY(2px) rotate(${loading ? (loadingSmileyRotating ? '360deg' : '-2deg') : (logoSmileyRotating ? '360deg' : '-2deg')})`,
-                      transition: 'transform 0.8s ease-in-out'
-                    }}
-                  >
-                    <div style={{ display: 'flex', gap: '2px', position: 'absolute', top: '4.5px', left: '50%', transform: 'translateX(-50%)' }}>
-                      <div style={{ width: '2px', height: '2px', backgroundColor: 'black', borderRadius: '50%' }}></div>
-                      <div style={{ width: '2px', height: '2px', backgroundColor: 'black', borderRadius: '50%' }}></div>
-                    </div>
-                    <div style={{ 
-                      width: '6px', 
-                      height: '2.5px', 
-                      border: '1px solid black', 
-                      borderTop: 'none',
-                      borderRadius: '0 0 6px 6px',
-                      position: 'absolute',
-                      top: '8.5px',
-                      left: '50%',
-                      transform: 'translateX(-50%)'
-                    }}></div>
-                  </div>
-                ) : (
-                  char
-                )}
-              </span>
-            );
-          })}
+          {showBandaid && (
+            <span 
+              style={{
+                position: 'absolute',
+                top: '-5px',
+                right: '-20px',
+                fontSize: '20px',
+                animation: 'fadeIn 0.3s ease-in-out'
+              }}
+            >
+              🩹
+            </span>
+          )}
         </div>
         <button 
           onClick={() => setCategorySelectorOpen(true)}
@@ -608,8 +573,8 @@ export function QuizApp() {
       </div>
 
       {/* Main Quiz Container with multi-slide carousel */}
-      <div className="flex-1 flex flex-col px-4 overflow-hidden mt-4 gap-3" style={{ minHeight: 0 }}>
-        <div className="flex-1 flex items-stretch justify-center min-h-0 relative">
+      <div className="flex-1 flex flex-col px-4 overflow-hidden mt-4 gap-3 pb-4" style={{ minHeight: 0 }}>
+        <div className="flex-1 flex items-stretch justify-center min-h-0 relative" style={{ maxHeight: 'calc(100svh - 180px)' }}>
           {loading ? (
             <div className="flex items-center justify-center h-full text-white text-xl">Lade Fragen...</div>
           ) : hasSlides ? (
@@ -698,7 +663,7 @@ export function QuizApp() {
         </div>
         
         {/* Toggle centered below the card */}
-        <div className="flex items-center justify-center pb-3 w-full">
+        <div className="flex items-center justify-center w-full">
           <div className="flex items-center">
             <div 
               className="flex items-center cursor-pointer py-2" 
