@@ -535,10 +535,10 @@ export function QuizApp() {
             style={{
               marginRight: '8px',
               display: 'inline-block',
-              transform: 'rotate(-45deg)',
+              transform: 'rotate(-45deg) scale(1.2)',
               perspective: '1000px',
               transformStyle: 'preserve-3d',
-              animation: showBandaid ? 'applyBandaid 0.7s ease-out' : 'none',
+              animation: showBandaid ? 'applyBandaid 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55)' : 'none',
               filter: showBandaid ? 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))' : 'drop-shadow(1px 1px 2px rgba(0,0,0,0.2))',
               transition: 'filter 0.3s ease'
             }}
@@ -609,27 +609,17 @@ export function QuizApp() {
               opacity: 1;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
-            /* Ease Out beim Lösen - Ecke hebt sich */
-            20% {
-              transform: rotate(-45deg) scaleX(1.15) rotateZ(-8deg) translateY(-2px);
-              animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
-              filter: drop-shadow(3px 4px 6px rgba(0,0,0,0.35));
-            }
-            45% {
+            /* Snappy Ease Out beim Lösen */
+            30% {
               transform: rotate(-45deg) scaleX(1.33) rotateZ(-14deg) translateY(-4px);
-              animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+              animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
               filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.4));
             }
-            /* Ease In beim Andrücken - Ecke klebt wieder an */
+            /* Snappy Ease In beim Andrücken */
             70% {
-              transform: rotate(-45deg) scaleX(1.12) rotateZ(-5deg) translateY(-1px);
-              animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
+              transform: rotate(-45deg) scaleX(1.08) rotateZ(-3deg) translateY(-0.5px);
+              animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
               filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.3));
-            }
-            90% {
-              transform: rotate(-45deg) scaleX(1.02) rotateZ(-1deg) translateY(0px);
-              animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
-              filter: drop-shadow(1px 2px 3px rgba(0,0,0,0.25));
             }
             100% {
               transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
