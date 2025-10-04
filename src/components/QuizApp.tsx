@@ -603,24 +603,24 @@ export function QuizApp() {
         <style>{`
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) translateY(-40px) translateX(-30px) rotateX(80deg);
+              transform: rotate(-45deg) translateY(-40px) translateX(-20px) rotateY(-70deg) rotateX(20deg);
               opacity: 0;
             }
-            25% {
-              transform: rotate(-45deg) translateY(-15px) translateX(-10px) rotateX(70deg);
+            20% {
+              transform: rotate(-45deg) translateY(-20px) translateX(-10px) rotateY(-60deg) rotateX(25deg);
               opacity: 1;
             }
-            50% {
-              transform: rotate(-45deg) translateY(-5px) translateX(0px) rotateX(45deg);
+            40% {
+              transform: rotate(-45deg) translateY(-8px) translateX(-3px) rotateY(-40deg) rotateX(20deg);
             }
-            70% {
-              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateX(15deg);
+            60% {
+              transform: rotate(-45deg) translateY(-2px) translateX(0px) rotateY(-20deg) rotateX(10deg);
             }
-            85% {
-              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateX(-3deg);
+            80% {
+              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateY(-5deg) rotateX(2deg);
             }
             100% {
-              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateX(0deg);
+              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateY(0deg) rotateX(0deg);
               opacity: 1;
             }
           }
