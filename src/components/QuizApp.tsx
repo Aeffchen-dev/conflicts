@@ -573,27 +573,28 @@ export function QuizApp() {
               <circle cx="19" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
             </svg>
           </div>
-          <span className="inline-block" style={{ animation: 'textDissolve 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55) 1' }}>
-            Resolve
-          </span>
         </div>
         <style>{`
-          @keyframes textDissolve {
+          @keyframes textBounce {
             0% {
+              transform: scale(1);
               opacity: 1;
-              clip-path: inset(0 100% 0 0);
+              filter: blur(0px);
             }
             30% {
-              opacity: 0.3;
-              clip-path: inset(0 50% 0 0);
+              transform: scale(1.15);
+              opacity: 0.7;
+              filter: blur(1px);
             }
             70% {
-              opacity: 0.7;
-              clip-path: inset(0 20% 0 0);
+              transform: scale(0.95);
+              opacity: 0.85;
+              filter: blur(0.5px);
             }
             100% {
+              transform: scale(1);
               opacity: 1;
-              clip-path: inset(0 0 0 0);
+              filter: blur(0px);
             }
           }
           
