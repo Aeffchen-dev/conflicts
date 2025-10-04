@@ -459,13 +459,23 @@ export function QuizApp() {
     if (logoAnimating) return;
     
     setLogoAnimating(true);
-    setShowBandaid(true);
+    setAnimatingLetterIndex(0);
     
-    // End animations
+    // Start bandaid animation at 60% of text animation (0.45s * 0.6 = 0.27s)
+    setTimeout(() => {
+      setShowBandaid(true);
+    }, 270);
+    
+    // Hide bandaid after its animation completes (270ms delay + 450ms animation)
+    setTimeout(() => {
+      setShowBandaid(false);
+    }, 720);
+    
+    // End text animation
     setTimeout(() => {
       setLogoAnimating(false);
-      setShowBandaid(false);
-    }, 1400);
+      setAnimatingLetterIndex(-1);
+    }, 450);
   };
 
   const handleToggleChange = (checked: boolean) => {
@@ -512,25 +522,21 @@ export function QuizApp() {
           <span
             style={{
               display: 'inline-block',
-              animation: logoAnimating ? 'textReveal 1.4s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none',
-              opacity: logoAnimating ? 1 : 0.7,
-              transition: logoAnimating ? 'none' : 'opacity 0.3s ease'
+              animation: logoAnimating ? 'textBounce 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55)' : 'none'
             }}
           >
             Resolve
           </span>
           <div 
             style={{
-              position: 'absolute',
-              left: '-5px',
-              top: '-8px',
-              display: showBandaid ? 'inline-block' : 'none',
-              transform: 'rotate(-8deg) scale(2.2)',
-              transformOrigin: 'center center',
-              animation: showBandaid ? 'bandaidPeelOff 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 'none',
-              zIndex: 10,
+              marginLeft: '8px',
+              display: 'inline-block',
+              transform: 'rotate(-45deg) scale(1.6)',
               perspective: '1000px',
-              transformStyle: 'preserve-3d'
+              transformStyle: 'preserve-3d',
+              animation: showBandaid ? 'applyBandaid 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55)' : 'none',
+              filter: showBandaid ? 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))' : 'drop-shadow(1px 1px 2px rgba(0,0,0,0.2))',
+              transition: 'filter 0.3s ease'
             }}
           >
             <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -573,67 +579,54 @@ export function QuizApp() {
           </div>
         </div>
         <style>{`
-          @keyframes textReveal {
+          @keyframes textBounce {
             0% {
-              opacity: 0.3;
-              filter: blur(4px) brightness(0.5);
-              letter-spacing: -0.5px;
+              opacity: 1;
+              filter: blur(0px);
+              letter-spacing: 0px;
             }
-            20% {
-              opacity: 0.4;
-              filter: blur(3px) brightness(0.6);
+            25% {
+              opacity: 0.6;
+              filter: blur(2px);
+              letter-spacing: 3px;
             }
             50% {
-              opacity: 0.7;
-              filter: blur(1px) brightness(0.9);
-              letter-spacing: 0.2px;
+              opacity: 0.2;
+              filter: blur(5px);
+              letter-spacing: 8px;
             }
             75% {
-              opacity: 0.95;
-              filter: blur(0px) brightness(1.15);
-              letter-spacing: 0px;
+              opacity: 0.5;
+              filter: blur(2px);
+              letter-spacing: 2px;
             }
             100% {
               opacity: 1;
-              filter: blur(0px) brightness(1.2);
+              filter: blur(0px);
               letter-spacing: 0px;
             }
           }
           
-          @keyframes bandaidPeelOff {
+          @keyframes applyBandaid {
             0% {
-              transform: rotate(-8deg) scale(2.2) translateY(0) translateX(0) rotateX(0deg);
-              opacity: 0.95;
-              filter: drop-shadow(2px 3px 5px rgba(0,0,0,0.5));
+              transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
+              opacity: 1;
+              filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
-            15% {
-              transform: rotate(-8deg) scale(2.2) translateY(0) translateX(0) rotateX(0deg);
-              opacity: 0.95;
-            }
-            35% {
-              transform: rotate(-3deg) scale(2.25) translateY(-2px) translateX(1px) rotateX(12deg);
-              opacity: 0.92;
-              filter: drop-shadow(3px 5px 7px rgba(0,0,0,0.55));
-            }
-            55% {
-              transform: rotate(3deg) scale(2.3) translateY(-6px) translateX(4px) rotateX(22deg) rotateZ(8deg);
-              opacity: 0.85;
-              filter: drop-shadow(4px 7px 9px rgba(0,0,0,0.5));
+            30% {
+              transform: rotate(-45deg) scaleX(1.33) rotateZ(-14deg) translateY(-4px);
+              animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+              filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.4));
             }
             70% {
-              transform: rotate(10deg) scale(2.1) translateY(-12px) translateX(10px) rotateX(32deg) rotateZ(18deg);
-              opacity: 0.65;
-              filter: drop-shadow(3px 5px 7px rgba(0,0,0,0.35));
-            }
-            85% {
-              transform: rotate(18deg) scale(1.7) translateY(-20px) translateX(18px) rotateX(42deg) rotateZ(28deg);
-              opacity: 0.35;
-              filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.2));
+              transform: rotate(-45deg) scaleX(1.08) rotateZ(-3deg) translateY(-0.5px);
+              animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+              filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.3));
             }
             100% {
-              transform: rotate(28deg) scale(1.2) translateY(-30px) translateX(30px) rotateX(55deg) rotateZ(40deg);
-              opacity: 0;
-              filter: drop-shadow(0px 0px 0px rgba(0,0,0,0));
+              transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
+              opacity: 1;
+              filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
           }
         `}</style>
