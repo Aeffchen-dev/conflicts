@@ -465,7 +465,7 @@ export function QuizApp() {
     setTimeout(() => {
       setLogoAnimating(false);
       setShowBandaid(false);
-    }, 1000);
+    }, 1400);
   };
 
   const handleToggleChange = (checked: boolean) => {
@@ -512,8 +512,8 @@ export function QuizApp() {
           <span
             style={{
               display: 'inline-block',
-              animation: logoAnimating ? 'textReveal 1s ease-out' : 'none',
-              opacity: 1,
+              animation: logoAnimating ? 'textReveal 1.4s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none',
+              opacity: logoAnimating ? 1 : 0.7,
               transition: logoAnimating ? 'none' : 'opacity 0.3s ease'
             }}
           >
@@ -522,12 +522,12 @@ export function QuizApp() {
           <div 
             style={{
               position: 'absolute',
-              left: '18px',
-              top: '-6px',
+              left: '-5px',
+              top: '-8px',
               display: showBandaid ? 'inline-block' : 'none',
-              transform: 'rotate(-8deg) scale(1.76)',
+              transform: 'rotate(-8deg) scale(2.2)',
               transformOrigin: 'center center',
-              animation: showBandaid ? 'bandaidApply 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards' : 'none',
+              animation: showBandaid ? 'bandaidPeelOff 1.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' : 'none',
               zIndex: 10,
               perspective: '1000px',
               transformStyle: 'preserve-3d'
@@ -575,65 +575,65 @@ export function QuizApp() {
         <style>{`
           @keyframes textReveal {
             0% {
-              opacity: 1;
-              filter: blur(0px) brightness(1);
+              opacity: 0.3;
+              filter: blur(4px) brightness(0.5);
+              letter-spacing: -0.5px;
+            }
+            20% {
+              opacity: 0.4;
+              filter: blur(3px) brightness(0.6);
             }
             50% {
-              opacity: 1;
-              filter: blur(0px) brightness(1);
-            }
-            65% {
-              opacity: 1;
-              filter: blur(0px) brightness(1.4);
+              opacity: 0.7;
+              filter: blur(1px) brightness(0.9);
+              letter-spacing: 0.2px;
             }
             75% {
-              opacity: 1;
-              filter: blur(0px) brightness(1.5);
-            }
-            85% {
-              opacity: 1;
-              filter: blur(0px) brightness(1.3);
-            }
-            92% {
-              opacity: 1;
+              opacity: 0.95;
               filter: blur(0px) brightness(1.15);
+              letter-spacing: 0px;
             }
             100% {
               opacity: 1;
-              filter: blur(0px) brightness(1);
+              filter: blur(0px) brightness(1.2);
+              letter-spacing: 0px;
             }
           }
           
-          @keyframes bandaidApply {
+          @keyframes bandaidPeelOff {
             0% {
-              transform: rotate(-8deg) scale(1.76) translateY(-30px) translateX(-3px) rotateX(12deg);
-              opacity: 0.5;
-              filter: drop-shadow(3px 6px 10px rgba(0,0,0,0.35));
-            }
-            20% {
-              transform: rotate(-8deg) scale(1.76) translateY(-20px) translateX(-2px) rotateX(10deg);
-              opacity: 0.75;
-              filter: drop-shadow(3px 5px 8px rgba(0,0,0,0.4));
-            }
-            40% {
-              transform: rotate(-8deg) scale(1.78) translateY(-8px) translateX(-1px) rotateX(5deg);
-              opacity: 0.9;
-              filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.45));
-            }
-            60% {
-              transform: rotate(-8deg) scale(1.8) translateY(-2px) translateX(0px) rotateX(2deg);
+              transform: rotate(-8deg) scale(2.2) translateY(0) translateX(0) rotateX(0deg);
               opacity: 0.95;
               filter: drop-shadow(2px 3px 5px rgba(0,0,0,0.5));
             }
-            75% {
-              transform: rotate(-8deg) scale(1.76) translateY(0px) translateX(0px) rotateX(0deg);
-              opacity: 1;
-              filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.5));
+            15% {
+              transform: rotate(-8deg) scale(2.2) translateY(0) translateX(0) rotateX(0deg);
+              opacity: 0.95;
+            }
+            35% {
+              transform: rotate(-3deg) scale(2.25) translateY(-2px) translateX(1px) rotateX(12deg);
+              opacity: 0.92;
+              filter: drop-shadow(3px 5px 7px rgba(0,0,0,0.55));
+            }
+            55% {
+              transform: rotate(3deg) scale(2.3) translateY(-6px) translateX(4px) rotateX(22deg) rotateZ(8deg);
+              opacity: 0.85;
+              filter: drop-shadow(4px 7px 9px rgba(0,0,0,0.5));
+            }
+            70% {
+              transform: rotate(10deg) scale(2.1) translateY(-12px) translateX(10px) rotateX(32deg) rotateZ(18deg);
+              opacity: 0.65;
+              filter: drop-shadow(3px 5px 7px rgba(0,0,0,0.35));
+            }
+            85% {
+              transform: rotate(18deg) scale(1.7) translateY(-20px) translateX(18px) rotateX(42deg) rotateZ(28deg);
+              opacity: 0.35;
+              filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.2));
             }
             100% {
-              transform: rotate(-8deg) scale(1.76) translateY(0) translateX(0) rotateX(0deg);
-              opacity: 0.95;
-              filter: drop-shadow(2px 3px 5px rgba(0,0,0,0.5));
+              transform: rotate(28deg) scale(1.2) translateY(-30px) translateX(30px) rotateX(55deg) rotateZ(40deg);
+              opacity: 0;
+              filter: drop-shadow(0px 0px 0px rgba(0,0,0,0));
             }
           }
         `}</style>
