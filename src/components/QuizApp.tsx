@@ -605,36 +605,34 @@ export function QuizApp() {
         <style>{`
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) translateX(8px) scaleX(0.2) scaleY(0.9);
+              transform: rotate(-45deg) translateX(-10px) scaleX(0.15) rotateY(120deg);
               transform-origin: left center;
-              opacity: 0.5;
+              opacity: 0.6;
             }
-            15% {
-              transform: rotate(-45deg) translateX(5px) scaleX(0.4) scaleY(0.92);
+            20% {
+              transform: rotate(-45deg) translateX(-6px) scaleX(0.35) rotateY(95deg);
               transform-origin: left center;
-              opacity: 0.7;
+              opacity: 0.8;
             }
-            30% {
-              transform: rotate(-45deg) translateX(2px) scaleX(0.7) scaleY(0.95);
+            40% {
+              transform: rotate(-45deg) translateX(-3px) scaleX(0.6) rotateY(60deg);
               transform-origin: left center;
-              opacity: 0.9;
-            }
-            45% {
-              transform: rotate(-45deg) translateX(0px) scaleX(1) scaleY(1);
-              transform-origin: center center;
-              opacity: 1;
+              opacity: 0.95;
             }
             60% {
-              transform: rotate(-45deg) scale(1.3);
+              transform: rotate(-45deg) translateX(-1px) scaleX(0.85) rotateY(25deg);
+              transform-origin: left center;
+              opacity: 1;
             }
-            75% {
-              transform: rotate(-45deg) scale(0.75);
+            80% {
+              transform: rotate(-45deg) translateX(0px) scaleX(1) rotateY(0deg);
+              transform-origin: center center;
             }
-            88% {
-              transform: rotate(-45deg) scale(1.12);
+            90% {
+              transform: rotate(-45deg) scaleX(1.05) rotateY(-3deg);
             }
             100% {
-              transform: rotate(-45deg) scale(1);
+              transform: rotate(-45deg) scaleX(1) rotateY(0deg);
               opacity: 1;
             }
           }
