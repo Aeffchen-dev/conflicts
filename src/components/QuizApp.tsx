@@ -605,35 +605,40 @@ export function QuizApp() {
         <style>{`
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) translateY(-25px) scale(0.85);
-              opacity: 0.3;
+              transform: rotate(-45deg) translateY(-30px) rotateX(-35deg);
+              opacity: 0.4;
+              filter: drop-shadow(0px 8px 6px rgba(0,0,0,0.3));
             }
-            25% {
-              transform: rotate(-45deg) translateY(-8px) scale(0.95);
-              opacity: 0.8;
+            20% {
+              transform: rotate(-45deg) translateY(-15px) rotateX(-35deg);
+              opacity: 0.7;
+              filter: drop-shadow(0px 6px 5px rgba(0,0,0,0.25));
             }
-            40% {
-              transform: rotate(-45deg) translateY(-2px) scale(0.98);
+            35% {
+              transform: rotate(-45deg) translateY(-5px) rotateX(-30deg);
+              opacity: 0.9;
+              filter: drop-shadow(0px 3px 4px rgba(0,0,0,0.2));
+            }
+            45% {
+              transform: rotate(-45deg) translateY(0px) rotateX(-25deg);
               opacity: 1;
+              filter: drop-shadow(0px 1px 3px rgba(0,0,0,0.15));
             }
-            50% {
-              transform: rotate(-45deg) translateY(0px) scale(1);
-            }
-            60% {
-              transform: rotate(-45deg) translateY(0px) scale(1.08);
+            55% {
+              transform: rotate(-45deg) translateY(0px) rotateX(-15deg);
+              filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.1));
             }
             70% {
-              transform: rotate(-45deg) translateY(0px) scale(0.96);
+              transform: rotate(-45deg) translateY(0px) rotateX(-5deg);
+              filter: drop-shadow(0px 0px 1px rgba(0,0,0,0.05));
             }
-            80% {
-              transform: rotate(-45deg) translateY(0px) scale(1.04);
-            }
-            90% {
-              transform: rotate(-45deg) translateY(0px) scale(0.99);
+            85% {
+              transform: rotate(-45deg) translateY(0px) rotateX(-1deg);
             }
             100% {
-              transform: rotate(-45deg) translateY(0px) scale(1);
+              transform: rotate(-45deg) translateY(0px) rotateX(0deg);
               opacity: 1;
+              filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
           }
         `}</style>
