@@ -605,35 +605,36 @@ export function QuizApp() {
         <style>{`
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) rotateX(75deg) scale(0.7);
-              transform-origin: bottom center;
-              opacity: 0.6;
+              transform: rotate(-45deg) translateY(8px) scaleY(0.2) scaleX(0.9);
+              transform-origin: top center;
+              opacity: 0.5;
             }
-            20% {
-              transform: rotate(-45deg) rotateX(50deg) scale(0.85);
-              transform-origin: bottom center;
+            15% {
+              transform: rotate(-45deg) translateY(5px) scaleY(0.4) scaleX(0.92);
+              transform-origin: top center;
+              opacity: 0.7;
+            }
+            30% {
+              transform: rotate(-45deg) translateY(2px) scaleY(0.7) scaleX(0.95);
+              transform-origin: top center;
               opacity: 0.9;
             }
-            35% {
-              transform: rotate(-45deg) rotateX(25deg) scale(0.95);
-              transform-origin: bottom center;
+            45% {
+              transform: rotate(-45deg) translateY(0px) scaleY(1) scaleX(1);
+              transform-origin: center center;
               opacity: 1;
             }
-            50% {
-              transform: rotate(-45deg) rotateX(0deg) scale(1.25);
-              transform-origin: center center;
+            60% {
+              transform: rotate(-45deg) scale(1.3);
             }
-            65% {
-              transform: rotate(-45deg) rotateX(0deg) scale(0.8);
+            75% {
+              transform: rotate(-45deg) scale(0.75);
             }
-            80% {
-              transform: rotate(-45deg) rotateX(0deg) scale(1.15);
-            }
-            90% {
-              transform: rotate(-45deg) rotateX(0deg) scale(0.95);
+            88% {
+              transform: rotate(-45deg) scale(1.12);
             }
             100% {
-              transform: rotate(-45deg) rotateX(0deg) scale(1);
+              transform: rotate(-45deg) scale(1);
               opacity: 1;
             }
           }
