@@ -560,14 +560,42 @@ export function QuizApp() {
               animation: showBandaid ? 'applyBandaid 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none'
             }}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="7" y="3" width="10" height="18" rx="2" fill="#d4a574" stroke="#a67c52" strokeWidth="1"/>
-              <rect x="10" y="3" width="4" height="18" fill="#c4956a"/>
-              <circle cx="12" cy="8" r="0.8" fill="#8b6f47"/>
-              <circle cx="12" cy="11" r="0.8" fill="#8b6f47"/>
-              <circle cx="12" cy="14" r="0.8" fill="#8b6f47"/>
-              <circle cx="12" cy="17" r="0.8" fill="#8b6f47"/>
-              <rect x="3" y="10" width="18" height="4" fill="#f5e6d3" stroke="#d4a574" strokeWidth="1"/>
+            <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              {/* Main bandaid body with gradient */}
+              <defs>
+                <linearGradient id="bandaidGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" style={{ stopColor: '#d9b38c', stopOpacity: 1 }} />
+                  <stop offset="50%" style={{ stopColor: '#d4a574', stopOpacity: 1 }} />
+                  <stop offset="100%" style={{ stopColor: '#c9986a', stopOpacity: 1 }} />
+                </linearGradient>
+              </defs>
+              <rect x="1" y="4" width="30" height="16" rx="5" fill="url(#bandaidGradient)" stroke="#b8946a" strokeWidth="0.5"/>
+              
+              {/* Center pad (lighter area) */}
+              <rect x="11" y="6" width="10" height="12" rx="2" fill="#e5d4b8" opacity="0.9"/>
+              
+              {/* Holes pattern - white dots */}
+              <circle cx="5" cy="8" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="8" cy="8" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="5" cy="12" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="8" cy="12" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="5" cy="16" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="8" cy="16" r="0.8" fill="white" opacity="0.9"/>
+              
+              <circle cx="24" cy="8" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="27" cy="8" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="24" cy="12" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="27" cy="12" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="24" cy="16" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="27" cy="16" r="0.8" fill="white" opacity="0.9"/>
+              
+              {/* Center pad holes (smaller, less visible) */}
+              <circle cx="13" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
+              <circle cx="16" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
+              <circle cx="19" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
+              <circle cx="13" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
+              <circle cx="16" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
+              <circle cx="19" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
             </svg>
           </div>
         </div>
