@@ -536,7 +536,9 @@ export function QuizApp() {
               marginRight: '8px',
               display: 'inline-block',
               transform: 'rotate(-45deg)',
-              animation: showBandaid ? 'applyBandaid 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none'
+              perspective: '1000px',
+              transformStyle: 'preserve-3d',
+              animation: showBandaid ? 'applyBandaid 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none'
             }}
           >
             <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -601,18 +603,24 @@ export function QuizApp() {
         <style>{`
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) translateX(-100px) scale(0.6);
+              transform: rotate(-45deg) translateY(-60px) rotateX(60deg) rotateY(-20deg) scale(0.7);
               opacity: 0;
             }
-            60% {
-              transform: rotate(-45deg) translateX(5px) scale(1.1);
+            30% {
+              transform: rotate(-45deg) translateY(-20px) rotateX(40deg) rotateY(-10deg) scale(0.9);
               opacity: 1;
             }
-            80% {
-              transform: rotate(-45deg) translateX(-2px) scale(0.95);
+            50% {
+              transform: rotate(-45deg) translateY(-5px) rotateX(20deg) rotateY(-5deg) scale(1.05);
+            }
+            70% {
+              transform: rotate(-45deg) translateY(0px) rotateX(-5deg) rotateY(2deg) scale(1.02);
+            }
+            85% {
+              transform: rotate(-45deg) translateY(0px) rotateX(2deg) rotateY(-1deg) scale(0.98);
             }
             100% {
-              transform: rotate(-45deg) translateX(0px) scale(1);
+              transform: rotate(-45deg) translateY(0px) rotateX(0deg) rotateY(0deg) scale(1);
               opacity: 1;
             }
           }
