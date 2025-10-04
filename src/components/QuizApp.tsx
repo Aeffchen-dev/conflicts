@@ -597,16 +597,39 @@ export function QuizApp() {
         <style>{`
           @keyframes textBounce {
             0% {
-              transform: scale(1);
+              transform: scale(1) translateX(0px);
+              letter-spacing: 0px;
+              opacity: 1;
+            }
+            15% {
+              transform: scale(0.95) translateX(-3px);
+              letter-spacing: 3px;
+              opacity: 0.9;
             }
             30% {
-              transform: scale(1.08);
+              transform: scale(0.92) translateX(3px);
+              letter-spacing: 4px;
+              opacity: 0.85;
+            }
+            50% {
+              transform: scale(0.98) translateX(-2px);
+              letter-spacing: 2px;
+              opacity: 0.92;
             }
             70% {
-              transform: scale(0.96);
+              transform: scale(1.03) translateX(1px);
+              letter-spacing: 1px;
+              opacity: 0.97;
+            }
+            85% {
+              transform: scale(1.01) translateX(0px);
+              letter-spacing: 0.5px;
+              opacity: 1;
             }
             100% {
-              transform: scale(1);
+              transform: scale(1) translateX(0px);
+              letter-spacing: 0px;
+              opacity: 1;
             }
           }
           
