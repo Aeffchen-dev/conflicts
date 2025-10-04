@@ -603,29 +603,35 @@ export function QuizApp() {
         <style>{`
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateX(0deg) scale(1);
-              opacity: 1;
+              transform: rotate(-45deg) translateY(0px) translateX(-30px) rotateY(180deg) scaleX(0.1);
+              opacity: 0;
             }
             15% {
-              transform: rotate(-45deg) translateY(-2px) translateX(1px) rotateX(15deg) rotateZ(-48deg) scale(1.02);
+              transform: rotate(-45deg) translateY(0px) translateX(-25px) rotateY(160deg) scaleX(0.3);
+              opacity: 0.5;
             }
             30% {
-              transform: rotate(-45deg) translateY(-5px) translateX(3px) rotateX(35deg) rotateZ(-52deg) scale(1.05);
+              transform: rotate(-45deg) translateY(0px) translateX(-20px) rotateY(135deg) scaleX(0.5);
+              opacity: 0.7;
             }
-            50% {
-              transform: rotate(-45deg) translateY(-12px) translateX(8px) rotateX(60deg) rotateZ(-55deg) scale(1.1);
+            45% {
+              transform: rotate(-45deg) translateY(0px) translateX(-15px) rotateY(110deg) scaleX(0.65);
+              opacity: 0.85;
             }
-            70% {
-              transform: rotate(-45deg) translateY(-25px) translateX(15px) rotateX(85deg) rotateZ(-60deg) scale(1.15);
-              opacity: 0.8;
+            60% {
+              transform: rotate(-45deg) translateY(0px) translateX(-8px) rotateY(70deg) scaleX(0.8);
+              opacity: 0.95;
             }
-            85% {
-              transform: rotate(-45deg) translateY(-40px) translateX(25px) rotateX(95deg) rotateZ(-65deg) scale(1.2);
-              opacity: 0.4;
+            75% {
+              transform: rotate(-45deg) translateY(0px) translateX(-3px) rotateY(35deg) scaleX(0.9);
+              opacity: 1;
+            }
+            90% {
+              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateY(10deg) scaleX(0.98);
             }
             100% {
-              transform: rotate(-45deg) translateY(-60px) translateX(35px) rotateX(100deg) rotateZ(-70deg) scale(1.3);
-              opacity: 0;
+              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateY(0deg) scaleX(1);
+              opacity: 1;
             }
           }
         `}</style>
