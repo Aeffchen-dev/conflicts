@@ -603,33 +603,29 @@ export function QuizApp() {
         <style>{`
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) translateY(-50px) translateX(10px) rotateX(90deg) scale(0.8);
-              opacity: 0;
-              filter: blur(2px);
-            }
-            20% {
-              transform: rotate(-45deg) translateY(-30px) translateX(5px) rotateX(75deg) scale(0.9);
-              opacity: 0.7;
-              filter: blur(1px);
-            }
-            40% {
-              transform: rotate(-45deg) translateY(-15px) translateX(2px) rotateX(55deg) scale(0.95);
-              opacity: 1;
-              filter: blur(0px);
-            }
-            60% {
-              transform: rotate(-45deg) translateY(-5px) translateX(0px) rotateX(30deg) scale(1);
-            }
-            75% {
-              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateX(10deg) scale(1.02);
-            }
-            90% {
-              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateX(-2deg) scale(0.99);
-            }
-            100% {
               transform: rotate(-45deg) translateY(0px) translateX(0px) rotateX(0deg) scale(1);
               opacity: 1;
-              filter: blur(0px);
+            }
+            15% {
+              transform: rotate(-45deg) translateY(-2px) translateX(1px) rotateX(15deg) rotateZ(-48deg) scale(1.02);
+            }
+            30% {
+              transform: rotate(-45deg) translateY(-5px) translateX(3px) rotateX(35deg) rotateZ(-52deg) scale(1.05);
+            }
+            50% {
+              transform: rotate(-45deg) translateY(-12px) translateX(8px) rotateX(60deg) rotateZ(-55deg) scale(1.1);
+            }
+            70% {
+              transform: rotate(-45deg) translateY(-25px) translateX(15px) rotateX(85deg) rotateZ(-60deg) scale(1.15);
+              opacity: 0.8;
+            }
+            85% {
+              transform: rotate(-45deg) translateY(-40px) translateX(25px) rotateX(95deg) rotateZ(-65deg) scale(1.2);
+              opacity: 0.4;
+            }
+            100% {
+              transform: rotate(-45deg) translateY(-60px) translateX(35px) rotateX(100deg) rotateZ(-70deg) scale(1.3);
+              opacity: 0;
             }
           }
         `}</style>
