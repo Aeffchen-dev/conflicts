@@ -551,18 +551,42 @@ export function QuizApp() {
               );
             })}
           </span>
-          <span 
+          <div 
             style={{
               marginLeft: '8px',
-              fontSize: '20px',
               display: 'inline-block',
-              transform: showBandaid ? 'rotate(360deg) scale(1.2)' : 'rotate(0deg) scale(1)',
-              transition: 'transform 0.6s ease-in-out'
+              transform: showBandaid ? 'translateY(0px) rotate(0deg) scale(1)' : 'translateY(0px) rotate(0deg) scale(1)',
+              transition: 'all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)',
+              animation: showBandaid ? 'applyBandaid 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none'
             }}
           >
-            🩹
-          </span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="7" y="3" width="10" height="18" rx="2" fill="#d4a574" stroke="#a67c52" strokeWidth="1"/>
+              <rect x="10" y="3" width="4" height="18" fill="#c4956a"/>
+              <circle cx="12" cy="8" r="0.8" fill="#8b6f47"/>
+              <circle cx="12" cy="11" r="0.8" fill="#8b6f47"/>
+              <circle cx="12" cy="14" r="0.8" fill="#8b6f47"/>
+              <circle cx="12" cy="17" r="0.8" fill="#8b6f47"/>
+              <rect x="3" y="10" width="18" height="4" fill="#f5e6d3" stroke="#d4a574" strokeWidth="1"/>
+            </svg>
+          </div>
         </div>
+        <style>{`
+          @keyframes applyBandaid {
+            0% {
+              transform: translateY(-20px) rotate(-15deg) scale(0.3);
+              opacity: 0;
+            }
+            60% {
+              transform: translateY(2px) rotate(3deg) scale(1.1);
+              opacity: 1;
+            }
+            100% {
+              transform: translateY(0px) rotate(0deg) scale(1);
+              opacity: 1;
+            }
+          }
+        `}</style>
         <button 
           onClick={() => setCategorySelectorOpen(true)}
           className="text-white font-normal flex items-center"
