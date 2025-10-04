@@ -519,19 +519,24 @@ export function QuizApp() {
           style={{ fontFamily: 'Kokoro, serif', fontSize: '20px', fontWeight: 'bold', fontStyle: 'italic' }}
           onClick={handleLogoClick}
         >
-          <span
-            style={{
-              display: 'inline-block',
-              animation: logoAnimating ? 'resolveConflict 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55)' : 'none'
-            }}
-          >
-            Resolve
+          <span style={{ display: 'inline-block' }}>
+            {'Resolve'.split('').map((letter, index) => (
+              <span
+                key={index}
+                style={{
+                  display: 'inline-block',
+                  animation: logoAnimating ? `letterConflict${index} 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55)` : 'none'
+                }}
+              >
+                {letter}
+              </span>
+            ))}
           </span>
           <div 
             style={{
               marginLeft: '8px',
               display: 'inline-block',
-              transform: 'rotate(-45deg) scale(1.6)',
+              transform: 'scale(1.6)',
               perspective: '1000px',
               transformStyle: 'preserve-3d',
               animation: showBandaid ? 'applyBandaid 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55)' : 'none',
@@ -579,67 +584,69 @@ export function QuizApp() {
           </div>
         </div>
         <style>{`
-          @keyframes resolveConflict {
-            0% {
-              transform: scaleX(0.7) translateX(0);
-              opacity: 1;
-              filter: blur(0px);
-            }
-            15% {
-              transform: scaleX(0.5) translateX(-2px);
-              opacity: 0.8;
-              filter: blur(1px);
-            }
-            30% {
-              transform: scaleX(0.4) translateX(3px);
-              opacity: 0.6;
-              filter: blur(3px);
-            }
-            45% {
-              transform: scaleX(0.35) translateX(-3px);
-              opacity: 0.5;
-              filter: blur(4px);
-            }
-            60% {
-              transform: scaleX(0.6) translateX(2px);
-              opacity: 0.7;
-              filter: blur(2px);
-            }
-            75% {
-              transform: scaleX(0.9) translateX(-1px);
-              opacity: 0.85;
-              filter: blur(1px);
-            }
-            90% {
-              transform: scaleX(1.05) translateX(0);
-              opacity: 0.95;
-              filter: blur(0.5px);
-            }
-            100% {
-              transform: scaleX(1) translateX(0);
-              opacity: 1;
-              filter: blur(0px);
-            }
+          /* Individual letter animations with randomized conflict */
+          @keyframes letterConflict0 {
+            0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; filter: blur(0); }
+            20% { transform: translateY(-3px) scaleY(0.8); opacity: 0.7; filter: blur(2px); }
+            50% { transform: translateY(4px) scaleY(1.2); opacity: 0.5; filter: blur(3px); }
+            70% { transform: translateY(-2px) scaleY(0.9); opacity: 0.8; filter: blur(1px); }
           }
+          @keyframes letterConflict1 {
+            0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; filter: blur(0); }
+            25% { transform: translateY(5px) scaleY(1.3); opacity: 0.6; filter: blur(3px); }
+            55% { transform: translateY(-4px) scaleY(0.7); opacity: 0.5; filter: blur(4px); }
+            75% { transform: translateY(2px) scaleY(1.1); opacity: 0.7; filter: blur(2px); }
+          }
+          @keyframes letterConflict2 {
+            0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; filter: blur(0); }
+            18% { transform: translateY(-4px) scaleY(0.9); opacity: 0.8; filter: blur(1px); }
+            48% { transform: translateY(6px) scaleY(1.4); opacity: 0.4; filter: blur(4px); }
+            68% { transform: translateY(-3px) scaleY(0.8); opacity: 0.6; filter: blur(2px); }
+          }
+          @keyframes letterConflict3 {
+            0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; filter: blur(0); }
+            22% { transform: translateY(4px) scaleY(1.2); opacity: 0.7; filter: blur(2px); }
+            52% { transform: translateY(-5px) scaleY(0.6); opacity: 0.5; filter: blur(5px); }
+            72% { transform: translateY(2px) scaleY(1.05); opacity: 0.8; filter: blur(1px); }
+          }
+          @keyframes letterConflict4 {
+            0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; filter: blur(0); }
+            28% { transform: translateY(-6px) scaleY(0.7); opacity: 0.6; filter: blur(3px); }
+            58% { transform: translateY(5px) scaleY(1.5); opacity: 0.4; filter: blur(4px); }
+            78% { transform: translateY(-1px) scaleY(0.95); opacity: 0.7; filter: blur(1px); }
+          }
+          @keyframes letterConflict5 {
+            0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; filter: blur(0); }
+            15% { transform: translateY(3px) scaleY(1.1); opacity: 0.8; filter: blur(1px); }
+            45% { transform: translateY(-7px) scaleY(0.5); opacity: 0.5; filter: blur(5px); }
+            65% { transform: translateY(3px) scaleY(1.2); opacity: 0.7; filter: blur(2px); }
+          }
+          @keyframes letterConflict6 {
+            0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; filter: blur(0); }
+            30% { transform: translateY(-2px) scaleY(0.85); opacity: 0.7; filter: blur(2px); }
+            60% { transform: translateY(4px) scaleY(1.3); opacity: 0.6; filter: blur(3px); }
+            80% { transform: translateY(-1px) scaleY(1.05); opacity: 0.8; filter: blur(1px); }
+          }
+          
           
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
+              transform: scaleX(1) translateY(0px);
               opacity: 1;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
             30% {
-              transform: rotate(-45deg) scaleX(1.33) rotateZ(-14deg) translateY(-4px);
+              transform: scaleX(1.33) translateY(-4px);
               animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
               filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.4));
             }
             70% {
-              transform: rotate(-45deg) scaleX(1.08) rotateZ(-3deg) translateY(-0.5px);
+              transform: scaleX(1.08) translateY(-0.5px);
               animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
               filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.3));
             }
             100% {
-              transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
+              transform: scaleX(1) translateY(0px);
               opacity: 1;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
