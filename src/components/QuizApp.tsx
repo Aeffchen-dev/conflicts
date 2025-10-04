@@ -460,14 +460,18 @@ export function QuizApp() {
     
     setLogoAnimating(true);
     setAnimatingLetterIndex(0);
-    setShowBandaid(true);
     
-    // Hide bandaid after animation
+    // Start bandaid animation at 60% of text animation (0.45s * 0.6 = 0.27s)
+    setTimeout(() => {
+      setShowBandaid(true);
+    }, 270);
+    
+    // Hide bandaid after its animation completes (270ms delay + 450ms animation)
     setTimeout(() => {
       setShowBandaid(false);
-    }, 450);
+    }, 720);
     
-    // Animate text with pflaster timing
+    // End text animation
     setTimeout(() => {
       setLogoAnimating(false);
       setAnimatingLetterIndex(-1);
@@ -578,15 +582,28 @@ export function QuizApp() {
           @keyframes textBounce {
             0% {
               opacity: 1;
-              clip-path: inset(0 100% 0 0);
+              filter: blur(0px);
+              letter-spacing: 0px;
+            }
+            25% {
+              opacity: 0.6;
+              filter: blur(2px);
+              letter-spacing: 3px;
             }
             50% {
-              opacity: 0.3;
-              clip-path: inset(0 50% 0 0);
+              opacity: 0.2;
+              filter: blur(5px);
+              letter-spacing: 8px;
+            }
+            75% {
+              opacity: 0.5;
+              filter: blur(2px);
+              letter-spacing: 2px;
             }
             100% {
               opacity: 1;
-              clip-path: inset(0 0 0 0);
+              filter: blur(0px);
+              letter-spacing: 0px;
             }
           }
           
