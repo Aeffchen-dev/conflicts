@@ -606,34 +606,28 @@ export function QuizApp() {
           @keyframes applyBandaid {
             0% {
               transform: rotate(-45deg) scaleX(1) rotateY(0deg);
-              transform-origin: right center;
               opacity: 1;
             }
             /* Ease Out beim Lösen */
             25% {
               transform: rotate(-45deg) scaleX(0.7) rotateY(-12deg);
-              transform-origin: right center;
               animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
             }
             50% {
               transform: rotate(-45deg) scaleX(0.67) rotateY(-15deg);
-              transform-origin: right center;
               animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
             }
             /* Ease In beim Andrücken */
             75% {
               transform: rotate(-45deg) scaleX(0.85) rotateY(-6deg);
-              transform-origin: right center;
               animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
             }
             95% {
               transform: rotate(-45deg) scaleX(0.98) rotateY(-1deg);
-              transform-origin: right center;
               animation-timing-function: cubic-bezier(0.55, 0.06, 0.68, 0.19);
             }
             100% {
               transform: rotate(-45deg) scaleX(1) rotateY(0deg);
-              transform-origin: center center;
               opacity: 1;
             }
           }
