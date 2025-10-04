@@ -573,8 +573,8 @@ export function QuizApp() {
       </div>
 
       {/* Main Quiz Container with multi-slide carousel */}
-      <div className="flex-1 flex flex-col px-4 overflow-hidden mt-4 gap-3 pb-4" style={{ minHeight: 0 }}>
-        <div className="flex-1 flex items-stretch justify-center min-h-0 relative" style={{ maxHeight: 'calc(100svh - 180px)' }}>
+      <div className="flex-1 flex flex-col px-4 pb-4 overflow-hidden mt-4" style={{ minHeight: 0 }}>
+        <div className="flex-1 flex items-stretch justify-center min-h-0 relative">
           {loading ? (
             <div className="flex items-center justify-center h-full text-white text-xl">Lade Fragen...</div>
           ) : hasSlides ? (
@@ -660,40 +660,6 @@ export function QuizApp() {
           ) : (
             <div className="flex items-center justify-center h-full text-white text-xl">Keine Fragen verfügbar</div>
           )}
-        </div>
-        
-        {/* Toggle centered below the card */}
-        <div className="flex items-center justify-center w-full">
-          <div className="flex items-center">
-            <div 
-              className="flex items-center cursor-pointer py-2" 
-              onClick={() => handleToggleClick(false)}
-            >
-              <span 
-                className="text-white font-normal"
-                style={{ fontFamily: 'Arial, sans-serif', marginRight: '8px', fontSize: '14px' }}
-              >
-                question mode
-              </span>
-            </div>
-            <Switch 
-              checked={isMixedMode}
-              onCheckedChange={handleToggleChange}
-              isAnimating={toggleAnimating}
-              className="w-[46px] data-[state=checked]:bg-transparent data-[state=unchecked]:bg-transparent data-[state=checked]:border-white data-[state=unchecked]:border-white border-[1px]"
-            />
-            <div 
-              className="flex items-center cursor-pointer py-2" 
-              onClick={() => handleToggleClick(true)}
-            >
-              <span 
-                className="text-white font-normal"
-                style={{ fontFamily: 'Arial, sans-serif', marginLeft: '8px', fontSize: '14px' }}
-              >
-                action mode
-              </span>
-            </div>
-          </div>
         </div>
       </div>
       
