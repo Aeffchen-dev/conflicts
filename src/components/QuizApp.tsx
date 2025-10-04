@@ -538,7 +538,9 @@ export function QuizApp() {
               transform: 'rotate(-45deg)',
               perspective: '1000px',
               transformStyle: 'preserve-3d',
-              animation: showBandaid ? 'applyBandaid 1.2s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none'
+              animation: showBandaid ? 'applyBandaid 1.8s cubic-bezier(0.22, 0.61, 0.36, 1)' : 'none',
+              filter: showBandaid ? 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))' : 'drop-shadow(1px 1px 2px rgba(0,0,0,0.2))',
+              transition: 'filter 0.3s ease'
             }}
           >
             <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -603,35 +605,55 @@ export function QuizApp() {
         <style>{`
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) translateY(0px) translateX(-30px) rotateY(180deg) scaleX(0.1);
+              transform: rotate(-45deg) translateX(-40px) translateY(-3px) rotateY(200deg) scaleX(0.05) scaleY(0.95);
               opacity: 0;
+              filter: brightness(0.8) blur(1px);
             }
-            15% {
-              transform: rotate(-45deg) translateY(0px) translateX(-25px) rotateY(160deg) scaleX(0.3);
-              opacity: 0.5;
+            10% {
+              transform: rotate(-45deg) translateX(-35px) translateY(-2px) rotateY(175deg) scaleX(0.2) scaleY(0.96);
+              opacity: 0.4;
+              filter: brightness(0.85) blur(0.5px);
+            }
+            20% {
+              transform: rotate(-45deg) translateX(-28px) translateY(-1px) rotateY(150deg) scaleX(0.4) scaleY(0.97);
+              opacity: 0.6;
+              filter: brightness(0.9) blur(0px);
             }
             30% {
-              transform: rotate(-45deg) translateY(0px) translateX(-20px) rotateY(135deg) scaleX(0.5);
-              opacity: 0.7;
+              transform: rotate(-45deg) translateX(-22px) translateY(-0.5px) rotateY(130deg) scaleX(0.55) scaleY(0.98);
+              opacity: 0.75;
             }
-            45% {
-              transform: rotate(-45deg) translateY(0px) translateX(-15px) rotateY(110deg) scaleX(0.65);
+            40% {
+              transform: rotate(-45deg) translateX(-16px) translateY(0px) rotateY(105deg) scaleX(0.68) scaleY(0.99);
               opacity: 0.85;
             }
-            60% {
-              transform: rotate(-45deg) translateY(0px) translateX(-8px) rotateY(70deg) scaleX(0.8);
-              opacity: 0.95;
+            50% {
+              transform: rotate(-45deg) translateX(-11px) translateY(0px) rotateY(80deg) scaleX(0.78) scaleY(0.995);
+              opacity: 0.92;
             }
-            75% {
-              transform: rotate(-45deg) translateY(0px) translateX(-3px) rotateY(35deg) scaleX(0.9);
+            60% {
+              transform: rotate(-45deg) translateX(-7px) translateY(0px) rotateY(60deg) scaleX(0.86) scaleY(1);
+              opacity: 0.96;
+            }
+            70% {
+              transform: rotate(-45deg) translateX(-4px) translateY(0px) rotateY(40deg) scaleX(0.92) scaleY(1);
+              opacity: 0.98;
+            }
+            80% {
+              transform: rotate(-45deg) translateX(-1.5px) translateY(0px) rotateY(20deg) scaleX(0.97) scaleY(1);
               opacity: 1;
             }
             90% {
-              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateY(10deg) scaleX(0.98);
+              transform: rotate(-45deg) translateX(-0.3px) translateY(0px) rotateY(5deg) scaleX(0.995) scaleY(1);
+              filter: brightness(1);
+            }
+            95% {
+              transform: rotate(-45deg) translateX(0.2px) translateY(0px) rotateY(-2deg) scaleX(1.01) scaleY(1);
             }
             100% {
-              transform: rotate(-45deg) translateY(0px) translateX(0px) rotateY(0deg) scaleX(1);
+              transform: rotate(-45deg) translateX(0px) translateY(0px) rotateY(0deg) scaleX(1) scaleY(1);
               opacity: 1;
+              filter: brightness(1) blur(0px);
             }
           }
         `}</style>
