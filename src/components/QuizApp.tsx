@@ -538,7 +538,7 @@ export function QuizApp() {
               transform: 'rotate(-45deg)',
               perspective: '1000px',
               transformStyle: 'preserve-3d',
-              animation: showBandaid ? 'applyBandaid 0.6s ease-in-out' : 'none',
+              animation: showBandaid ? 'applyBandaid 1s cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'none',
               filter: showBandaid ? 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))' : 'drop-shadow(1px 1px 2px rgba(0,0,0,0.2))',
               transition: 'filter 0.3s ease'
             }}
@@ -609,27 +609,50 @@ export function QuizApp() {
               transform-origin: left center;
               opacity: 0.6;
             }
-            20% {
-              transform: rotate(-45deg) translateX(-6px) scaleX(0.35) rotateY(95deg);
+            10% {
+              transform: rotate(-45deg) translateX(-8.5px) scaleX(0.22) rotateY(112deg);
               transform-origin: left center;
-              opacity: 0.8;
+              opacity: 0.68;
+            }
+            20% {
+              transform: rotate(-45deg) translateX(-7px) scaleX(0.32) rotateY(100deg);
+              transform-origin: left center;
+              opacity: 0.76;
+            }
+            30% {
+              transform: rotate(-45deg) translateX(-5.5px) scaleX(0.44) rotateY(85deg);
+              transform-origin: left center;
+              opacity: 0.84;
             }
             40% {
-              transform: rotate(-45deg) translateX(-3px) scaleX(0.6) rotateY(60deg);
+              transform: rotate(-45deg) translateX(-4px) scaleX(0.57) rotateY(68deg);
               transform-origin: left center;
-              opacity: 0.95;
+              opacity: 0.91;
+            }
+            50% {
+              transform: rotate(-45deg) translateX(-2.5px) scaleX(0.7) rotateY(50deg);
+              transform-origin: left center;
+              opacity: 0.96;
             }
             60% {
-              transform: rotate(-45deg) translateX(-1px) scaleX(0.85) rotateY(25deg);
+              transform: rotate(-45deg) translateX(-1.3px) scaleX(0.82) rotateY(32deg);
+              transform-origin: left center;
+              opacity: 0.99;
+            }
+            70% {
+              transform: rotate(-45deg) translateX(-0.5px) scaleX(0.92) rotateY(15deg);
               transform-origin: left center;
               opacity: 1;
             }
             80% {
-              transform: rotate(-45deg) translateX(0px) scaleX(1) rotateY(0deg);
+              transform: rotate(-45deg) translateX(0px) scaleX(0.98) rotateY(5deg);
               transform-origin: center center;
             }
             90% {
-              transform: rotate(-45deg) scaleX(1.05) rotateY(-3deg);
+              transform: rotate(-45deg) scaleX(1.02) rotateY(-1deg);
+            }
+            95% {
+              transform: rotate(-45deg) scaleX(0.99) rotateY(0.5deg);
             }
             100% {
               transform: rotate(-45deg) scaleX(1) rotateY(0deg);
