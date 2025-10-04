@@ -605,38 +605,38 @@ export function QuizApp() {
         <style>{`
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) translateY(-30px) rotateX(-35deg);
+              transform: rotate(-45deg) translateY(-30px) rotateY(-35deg);
               opacity: 0.4;
               filter: drop-shadow(0px 8px 6px rgba(0,0,0,0.3));
             }
             20% {
-              transform: rotate(-45deg) translateY(-15px) rotateX(-35deg);
+              transform: rotate(-45deg) translateY(-15px) rotateY(-35deg);
               opacity: 0.7;
               filter: drop-shadow(0px 6px 5px rgba(0,0,0,0.25));
             }
             35% {
-              transform: rotate(-45deg) translateY(-5px) rotateX(-30deg);
+              transform: rotate(-45deg) translateY(-5px) rotateY(-30deg);
               opacity: 0.9;
               filter: drop-shadow(0px 3px 4px rgba(0,0,0,0.2));
             }
             45% {
-              transform: rotate(-45deg) translateY(0px) rotateX(-25deg);
+              transform: rotate(-45deg) translateY(0px) rotateY(-25deg);
               opacity: 1;
               filter: drop-shadow(0px 1px 3px rgba(0,0,0,0.15));
             }
             55% {
-              transform: rotate(-45deg) translateY(0px) rotateX(-15deg);
+              transform: rotate(-45deg) translateY(0px) rotateY(-15deg);
               filter: drop-shadow(0px 0px 2px rgba(0,0,0,0.1));
             }
             70% {
-              transform: rotate(-45deg) translateY(0px) rotateX(-5deg);
+              transform: rotate(-45deg) translateY(0px) rotateY(-5deg);
               filter: drop-shadow(0px 0px 1px rgba(0,0,0,0.05));
             }
             85% {
-              transform: rotate(-45deg) translateY(0px) rotateX(-1deg);
+              transform: rotate(-45deg) translateY(0px) rotateY(-1deg);
             }
             100% {
-              transform: rotate(-45deg) translateY(0px) rotateX(0deg);
+              transform: rotate(-45deg) translateY(0px) rotateY(0deg);
               opacity: 1;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
