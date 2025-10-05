@@ -99,7 +99,7 @@ export function QuizCard({
     const colorVars = {
       1: { bg: 'hsl(var(--quiz-category1-bg))', text: 'hsl(var(--quiz-category1-text))', pillBg: 'hsl(311 75% 68%)' }, // Pink Lavender pill
       2: { bg: 'hsl(var(--quiz-category2-bg))', text: 'hsl(var(--quiz-category2-text))', pillBg: 'hsl(263 75% 68%)' }, // Lavender Blue pill
-      3: { bg: 'hsl(var(--quiz-category3-bg))', text: 'hsl(var(--quiz-category3-text))', pillBg: 'hsl(217 100% 68%)' }, // Light Blue pill - neon
+      3: { bg: 'hsl(var(--quiz-category3-bg))', text: 'hsl(var(--quiz-category3-text))', pillBg: 'hsl(217 100% 65%)' }, // Light Blue pill - neon
       4: { bg: 'hsl(var(--quiz-category4-bg))', text: 'hsl(var(--quiz-category4-text))', pillBg: 'hsl(195 100% 55%)' }, // Sky Blue pill - neon
       5: { bg: 'hsl(var(--quiz-category5-bg))', text: 'hsl(var(--quiz-category5-text))', pillBg: 'hsl(167 100% 42%)' }, // Magic Mint pill - neon
       6: { bg: 'hsl(var(--quiz-category6-bg))', text: 'hsl(var(--quiz-category6-text))', pillBg: 'hsl(56 90% 58%)' }, // Lemon Chiffon pill
