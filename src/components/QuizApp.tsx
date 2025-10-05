@@ -464,17 +464,17 @@ export function QuizApp() {
     // Reset band-aid state to allow re-animation
     setShowBandaid(false);
     
-    // Text animation duration: 0.8s
-    // Band-aid starts AFTER text completes at 0.8s
+    // Text animation duration: 0.8s + (6 letters * 0.1s delay) = 1.4s
+    // Band-aid starts AFTER text completes at 1.4s
     setTimeout(() => {
       setShowBandaid(true);
-    }, 800);
+    }, 1400);
     
     // End text animation
     setTimeout(() => {
       setLogoAnimating(false);
       setAnimatingLetterIndex(-1);
-    }, 800);
+    }, 1400);
   };
 
   const handleToggleChange = (checked: boolean) => {
@@ -524,7 +524,7 @@ export function QuizApp() {
               style={{
                 display: 'inline-block',
                 opacity: logoAnimating ? 0 : 1,
-                animation: logoAnimating ? `letterReveal${index} 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards` : 'none'
+                animation: logoAnimating ? `letterReveal${index} 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.1}s forwards` : 'none'
               }}
             >
               {letter}
@@ -686,9 +686,9 @@ export function QuizApp() {
               filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.4));
             }
             70% {
-              transform: rotate(-45deg) scaleX(1.08) rotateZ(-3deg) translateY(-0.5px);
+              transform: rotate(-45deg) scaleX(1.03) rotateZ(-1deg) translateY(-0.2px);
               opacity: 1;
-              filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.3));
+              filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.25));
             }
             100% {
               transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
