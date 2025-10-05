@@ -62,8 +62,8 @@ All colors MUST be HSL.
     --quiz-category6-text: 56 85% 18%;       /* Darker Lemon Chiffon text */
     --quiz-category7-bg: 167 82% 78%;        /* Magic Mint #98F5E1 */
     --quiz-category7-text: 167 82% 12%;      /* Darker Magic Mint text */
-    --quiz-category8-bg: 195 81% 76%;        /* Sky Blue #90DBF4 */
-    --quiz-category8-text: 195 81% 12%;      /* Darker Sky Blue text */
+    --quiz-category8-bg: 200 100% 85%;        /* Baby Blue Eyes #AEDDFF */
+    --quiz-category8-text: 200 100% 15%;      /* Darker Baby Blue Eyes text */
     
     /* Legacy category colors - keeping for backward compatibility */
     --quiz-werte-bg: 266 100% 51%;           /* #7004FF */

@@ -104,7 +104,7 @@ export function QuizCard({
       5: { bg: 'hsl(var(--quiz-category5-bg))', text: 'hsl(var(--quiz-category5-text))', pillBg: 'hsl(263 65% 70%)' }, // Lavender Blue pill
       6: { bg: 'hsl(var(--quiz-category6-bg))', text: 'hsl(var(--quiz-category6-text))', pillBg: 'hsl(56 85% 75%)' }, // Lemon Chiffon pill
       7: { bg: 'hsl(var(--quiz-category7-bg))', text: 'hsl(var(--quiz-category7-text))', pillBg: 'hsl(167 82% 60%)' }, // Magic Mint pill
-      8: { bg: 'hsl(var(--quiz-category8-bg))', text: 'hsl(var(--quiz-category8-text))', pillBg: 'hsl(195 81% 60%)' }, // Sky Blue pill
+      8: { bg: 'hsl(var(--quiz-category8-bg))', text: 'hsl(var(--quiz-category8-text))', pillBg: 'hsl(200 100% 70%)' }, // Baby Blue Eyes pill
     };
     
     return colorVars[colorIndex as keyof typeof colorVars] || colorVars[1];
