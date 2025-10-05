@@ -6,4 +6,16 @@ console.log('Main.tsx loading - current URL:', window.location.href);
 console.log('Import meta env:', import.meta.env);
 console.log('Base URL:', import.meta.env.BASE_URL);
 
-createRoot(document.getElementById("root")!).render(<App />);
+const container = document.getElementById('root')!
+const root = createRoot(container)
+root.render(<App />)
+
+// Fade out and remove splash once React has rendered a frame
+const splash = document.getElementById('splash')
+if (splash) {
+  requestAnimationFrame(() => {
+    splash.classList.add('fade-out')
+    setTimeout(() => splash.remove(), 220)
+  })
+}
+
