@@ -869,7 +869,7 @@ export function QuizApp() {
                     }
                     zIndex = 3;
                   } else if (isActiveCategory && isPrevQuestion) {
-                    // Current category, previous question
+                    // Current category, previous question - don't move during horizontal transitions
                     if (isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.abs(dragOffsetY) / 300;
                       const scale = Math.min(1, 0.85 + dragProgress * 0.15);
@@ -879,7 +879,7 @@ export function QuizApp() {
                     }
                     zIndex = 2;
                   } else if (isActiveCategory && isNextQuestion) {
-                    // Current category, next question
+                    // Current category, next question - don't move during horizontal transitions
                     if (isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.abs(dragOffsetY) / 300;
                       const scale = Math.min(1, 0.85 + dragProgress * 0.15);
