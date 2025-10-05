@@ -461,6 +461,9 @@ export function QuizApp() {
     setLogoAnimating(true);
     setAnimatingLetterIndex(0);
     
+    // Reset band-aid state to allow re-animation
+    setShowBandaid(false);
+    
     // Text animation duration: 0.8s
     // Band-aid starts AFTER text completes at 0.8s
     setTimeout(() => {
