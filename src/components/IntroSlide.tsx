@@ -142,7 +142,7 @@ export function IntroSlide({
 
   return (
     <div 
-      className={`relative w-full max-w-[500px] mx-auto bg-[hsl(var(--card-background))] rounded-2xl shadow-card overflow-hidden select-none max-h-full ${animationClass}`}
+      className={`relative w-full max-w-[500px] mx-auto intro-gradient-bg rounded-2xl shadow-card overflow-hidden select-none max-h-full ${animationClass}`}
       style={{
         height: '100%',
         maxHeight: '100%'
