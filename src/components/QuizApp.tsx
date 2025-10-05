@@ -856,7 +856,7 @@ export function QuizApp() {
 
       {/* Main Quiz Container */}
       <div className="flex-1 flex flex-col px-4 pb-4 mt-4" style={{ minHeight: 0, overflow: 'visible' }}>
-        <div className="flex-1 flex items-stretch justify-center min-h-0 relative" style={{ overflow: 'hidden' }}>
+        <div className="flex-1 flex items-stretch justify-center min-h-0 relative" style={{ overflow: 'visible' }}>
           {loading ? (
             <div className="flex items-center justify-center h-full text-white text-xl">Lade Fragen...</div>
           ) : !hasSeenIntro ? (
