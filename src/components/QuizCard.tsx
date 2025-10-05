@@ -212,7 +212,7 @@ export function QuizCard({
       const h = hslMatch[1];
       const s = hslMatch[2];
       const l = parseFloat(hslMatch[3]);
-      const darkerL = Math.max(0, l - 5); // 5% darker
+      const darkerL = Math.max(0, l - 10); // 10% darker
       
       return `linear-gradient(135deg, hsl(${h} ${s}% ${l}%), hsl(${h} ${s}% ${darkerL}%))`;
     }
