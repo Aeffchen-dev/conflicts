@@ -42,6 +42,10 @@ export function QuizCard({
   const [mouseEnd, setMouseEnd] = useState<number | null>(null);
   const [isLocalDragging, setIsLocalDragging] = useState(false);
   const [processedText, setProcessedText] = useState<JSX.Element[]>([]);
+  const [randomAnimation] = useState(() => {
+    const animations = ['animate-wave-border-1', 'animate-wave-border-2', 'animate-wave-border-3'];
+    return animations[Math.floor(Math.random() * animations.length)];
+  });
   
   const textRef = useRef<HTMLHeadingElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -246,7 +250,7 @@ export function QuizCard({
         {question.category.toLowerCase() !== 'intro' && (
           <div className="mb-4">
             <div 
-              className="px-4 py-2 font-medium inline-block animate-wave-border"
+              className={`px-4 py-2 font-medium inline-block ${randomAnimation}`}
               style={{
                 backgroundColor: categoryColors.pillBg,
                 color: categoryColors.text,
