@@ -461,21 +461,21 @@ export function QuizApp() {
     setLogoAnimating(true);
     setAnimatingLetterIndex(0);
     
-    // Start bandaid animation at 60% of text animation (0.8s * 0.6 = 0.48s)
+    // Start bandaid animation after most letters are revealed (7 letters * 80ms + 300ms)
     setTimeout(() => {
       setShowBandaid(true);
-    }, 480);
+    }, 860);
     
-    // Hide bandaid after its animation completes (480ms delay + 450ms animation)
+    // Hide bandaid after its animation completes (860ms delay + 450ms animation)
     setTimeout(() => {
       setShowBandaid(false);
-    }, 930);
+    }, 1310);
     
-    // End text animation
+    // End text animation after all letters are done (7 * 80ms delay + 600ms animation)
     setTimeout(() => {
       setLogoAnimating(false);
       setAnimatingLetterIndex(-1);
-    }, 800);
+    }, 1160);
   };
 
   const handleToggleChange = (checked: boolean) => {
@@ -525,7 +525,7 @@ export function QuizApp() {
                 key={index}
                 style={{
                   display: 'inline-block',
-                  animation: logoAnimating ? `letterConflict${index} 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55)` : 'none'
+                  animation: logoAnimating ? `letterReveal${index} 0.6s ease-out ${index * 0.08}s backwards` : 'none'
                 }}
               >
                 {letter}
@@ -584,48 +584,41 @@ export function QuizApp() {
           </div>
         </div>
         <style>{`
-          /* Individual letter animations with randomized conflict */
-          @keyframes letterConflict0 {
-            0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; filter: blur(0); }
-            20% { transform: translateY(-3px) scaleY(0.8); opacity: 0.7; filter: blur(2px); }
-            50% { transform: translateY(4px) scaleY(1.2); opacity: 0.5; filter: blur(3px); }
-            70% { transform: translateY(-2px) scaleY(0.9); opacity: 0.8; filter: blur(1px); }
+          /* Individual letter reveal animations - left to right */
+          @keyframes letterReveal0 {
+            0% { opacity: 0; filter: blur(8px); transform: translateX(-5px); }
+            60% { opacity: 0.7; filter: blur(3px); }
+            100% { opacity: 1; filter: blur(0); transform: translateX(0); }
           }
-          @keyframes letterConflict1 {
-            0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; filter: blur(0); }
-            25% { transform: translateY(5px) scaleY(1.3); opacity: 0.6; filter: blur(3px); }
-            55% { transform: translateY(-4px) scaleY(0.7); opacity: 0.5; filter: blur(4px); }
-            75% { transform: translateY(2px) scaleY(1.1); opacity: 0.7; filter: blur(2px); }
+          @keyframes letterReveal1 {
+            0% { opacity: 0; filter: blur(10px); transform: translateX(-3px); }
+            55% { opacity: 0.6; filter: blur(4px); }
+            100% { opacity: 1; filter: blur(0); transform: translateX(0); }
           }
-          @keyframes letterConflict2 {
-            0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; filter: blur(0); }
-            18% { transform: translateY(-4px) scaleY(0.9); opacity: 0.8; filter: blur(1px); }
-            48% { transform: translateY(6px) scaleY(1.4); opacity: 0.4; filter: blur(4px); }
-            68% { transform: translateY(-3px) scaleY(0.8); opacity: 0.6; filter: blur(2px); }
+          @keyframes letterReveal2 {
+            0% { opacity: 0; filter: blur(12px); transform: translateX(-6px); }
+            50% { opacity: 0.5; filter: blur(5px); }
+            100% { opacity: 1; filter: blur(0); transform: translateX(0); }
           }
-          @keyframes letterConflict3 {
-            0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; filter: blur(0); }
-            22% { transform: translateY(4px) scaleY(1.2); opacity: 0.7; filter: blur(2px); }
-            52% { transform: translateY(-5px) scaleY(0.6); opacity: 0.5; filter: blur(5px); }
-            72% { transform: translateY(2px) scaleY(1.05); opacity: 0.8; filter: blur(1px); }
+          @keyframes letterReveal3 {
+            0% { opacity: 0; filter: blur(9px); transform: translateX(-4px); }
+            65% { opacity: 0.8; filter: blur(2px); }
+            100% { opacity: 1; filter: blur(0); transform: translateX(0); }
           }
-          @keyframes letterConflict4 {
-            0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; filter: blur(0); }
-            28% { transform: translateY(-6px) scaleY(0.7); opacity: 0.6; filter: blur(3px); }
-            58% { transform: translateY(5px) scaleY(1.5); opacity: 0.4; filter: blur(4px); }
-            78% { transform: translateY(-1px) scaleY(0.95); opacity: 0.7; filter: blur(1px); }
+          @keyframes letterReveal4 {
+            0% { opacity: 0; filter: blur(11px); transform: translateX(-7px); }
+            58% { opacity: 0.65; filter: blur(4px); }
+            100% { opacity: 1; filter: blur(0); transform: translateX(0); }
           }
-          @keyframes letterConflict5 {
-            0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; filter: blur(0); }
-            15% { transform: translateY(3px) scaleY(1.1); opacity: 0.8; filter: blur(1px); }
-            45% { transform: translateY(-7px) scaleY(0.5); opacity: 0.5; filter: blur(5px); }
-            65% { transform: translateY(3px) scaleY(1.2); opacity: 0.7; filter: blur(2px); }
+          @keyframes letterReveal5 {
+            0% { opacity: 0; filter: blur(7px); transform: translateX(-3px); }
+            62% { opacity: 0.75; filter: blur(3px); }
+            100% { opacity: 1; filter: blur(0); transform: translateX(0); }
           }
-          @keyframes letterConflict6 {
-            0%, 100% { transform: translateY(0) scaleY(1); opacity: 1; filter: blur(0); }
-            30% { transform: translateY(-2px) scaleY(0.85); opacity: 0.7; filter: blur(2px); }
-            60% { transform: translateY(4px) scaleY(1.3); opacity: 0.6; filter: blur(3px); }
-            80% { transform: translateY(-1px) scaleY(1.05); opacity: 0.8; filter: blur(1px); }
+          @keyframes letterReveal6 {
+            0% { opacity: 0; filter: blur(10px); transform: translateX(-5px); }
+            60% { opacity: 0.7; filter: blur(2px); }
+            100% { opacity: 1; filter: blur(0); transform: translateX(0); }
           }
           
           
