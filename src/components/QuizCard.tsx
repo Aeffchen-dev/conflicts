@@ -97,14 +97,14 @@ export function QuizCard({
     
     // CSS custom properties for the colors with proper contrast ratios
     const colorVars = {
-      1: { bg: 'hsl(var(--quiz-category1-bg))', text: 'hsl(var(--quiz-category1-text))', pillBg: 'hsl(311 80% 65%)' }, // Pink Lavender pill
-      2: { bg: 'hsl(var(--quiz-category2-bg))', text: 'hsl(var(--quiz-category2-text))', pillBg: 'hsl(263 80% 65%)' }, // Lavender Blue pill
-      3: { bg: 'hsl(var(--quiz-category3-bg))', text: 'hsl(var(--quiz-category3-text))', pillBg: 'hsl(217 90% 60%)' }, // Light Blue pill
-      4: { bg: 'hsl(var(--quiz-category4-bg))', text: 'hsl(var(--quiz-category4-text))', pillBg: 'hsl(195 90% 55%)' }, // Sky Blue pill
-      5: { bg: 'hsl(var(--quiz-category5-bg))', text: 'hsl(var(--quiz-category5-text))', pillBg: 'hsl(167 95% 55%)' }, // Magic Mint pill
-      6: { bg: 'hsl(var(--quiz-category6-bg))', text: 'hsl(var(--quiz-category6-text))', pillBg: 'hsl(56 90% 65%)' }, // Lemon Chiffon pill
-      7: { bg: 'hsl(var(--quiz-category7-bg))', text: 'hsl(var(--quiz-category7-text))', pillBg: 'hsl(167 95% 55%)' }, // Magic Mint pill
-      8: { bg: 'hsl(var(--quiz-category8-bg))', text: 'hsl(var(--quiz-category8-text))', pillBg: 'hsl(200 100% 60%)' }, // Baby Blue Eyes pill
+      1: { bg: 'hsl(var(--quiz-category1-bg))', text: 'hsl(var(--quiz-category1-text))', pillBg: 'hsl(311 80% 58%)' }, // Pink Lavender pill
+      2: { bg: 'hsl(var(--quiz-category2-bg))', text: 'hsl(var(--quiz-category2-text))', pillBg: 'hsl(263 80% 58%)' }, // Lavender Blue pill
+      3: { bg: 'hsl(var(--quiz-category3-bg))', text: 'hsl(var(--quiz-category3-text))', pillBg: 'hsl(217 90% 58%)' }, // Light Blue pill
+      4: { bg: 'hsl(var(--quiz-category4-bg))', text: 'hsl(var(--quiz-category4-text))', pillBg: 'hsl(195 90% 58%)' }, // Sky Blue pill
+      5: { bg: 'hsl(var(--quiz-category5-bg))', text: 'hsl(var(--quiz-category5-text))', pillBg: 'hsl(167 95% 58%)' }, // Magic Mint pill
+      6: { bg: 'hsl(var(--quiz-category6-bg))', text: 'hsl(var(--quiz-category6-text))', pillBg: 'hsl(56 90% 58%)' }, // Lemon Chiffon pill
+      7: { bg: 'hsl(var(--quiz-category7-bg))', text: 'hsl(var(--quiz-category7-text))', pillBg: 'hsl(167 95% 58%)' }, // Magic Mint pill
+      8: { bg: 'hsl(var(--quiz-category8-bg))', text: 'hsl(var(--quiz-category8-text))', pillBg: 'hsl(200 100% 58%)' }, // Baby Blue Eyes pill
     };
     
     return colorVars[colorIndex as keyof typeof colorVars] || colorVars[1];

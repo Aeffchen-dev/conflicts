@@ -49,21 +49,21 @@ All colors MUST be HSL.
     
     /* Category-specific colors from user palette */
     --quiz-category1-bg: 311 64% 85%;        /* Pink Lavender #F1C0E8 */
-    --quiz-category1-text: 311 64% 18%;      /* Darker Pink Lavender text */
+    --quiz-category1-text: 311 64% 10%;      /* Darker Pink Lavender text */
     --quiz-category2-bg: 263 65% 84%;        /* Lavender Blue #CFBAF0 */
-    --quiz-category2-text: 263 65% 15%;      /* Darker Lavender Blue text */
+    --quiz-category2-text: 263 65% 10%;      /* Darker Lavender Blue text */
     --quiz-category3-bg: 217 78% 80%;        /* Light Blue #A3C4F3 */
-    --quiz-category3-text: 217 78% 15%;      /* Darker Light Blue text */
+    --quiz-category3-text: 217 78% 10%;      /* Darker Light Blue text */
     --quiz-category4-bg: 195 81% 76%;        /* Sky Blue #90DBF4 */
-    --quiz-category4-text: 195 81% 12%;      /* Darker Sky Blue text */
+    --quiz-category4-text: 195 81% 8%;       /* Darker Sky Blue text */
     --quiz-category5-bg: 167 82% 78%;        /* Magic Mint #98F5E1 */
-    --quiz-category5-text: 167 82% 12%;      /* Darker Magic Mint text */
+    --quiz-category5-text: 167 82% 8%;       /* Darker Magic Mint text */
     --quiz-category6-bg: 56 85% 89%;         /* Lemon Chiffon #FBF8CC */
-    --quiz-category6-text: 56 85% 18%;       /* Darker Lemon Chiffon text */
+    --quiz-category6-text: 56 85% 10%;       /* Darker Lemon Chiffon text */
     --quiz-category7-bg: 167 82% 78%;        /* Magic Mint #98F5E1 */
-    --quiz-category7-text: 167 82% 12%;      /* Darker Magic Mint text */
-    --quiz-category8-bg: 200 100% 85%;        /* Baby Blue Eyes #AEDDFF */
-    --quiz-category8-text: 200 100% 15%;      /* Darker Baby Blue Eyes text */
+    --quiz-category7-text: 167 82% 8%;       /* Darker Magic Mint text */
+    --quiz-category8-bg: 200 100% 85%;       /* Baby Blue Eyes #AEDDFF */
+    --quiz-category8-text: 200 100% 8%;      /* Darker Baby Blue Eyes text */
     
     /* Legacy category colors - keeping for backward compatibility */
     --quiz-werte-bg: 266 100% 51%;           /* #7004FF */
