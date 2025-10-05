@@ -130,35 +130,68 @@ export default {
 			},
 			keyframes: {
 				'wave-border': {
-					'0%, 100%': {
-						borderRadius: '9999px'
+					'0%': {
+						borderRadius: '73% 27% 56% 44% / 41% 68% 32% 59%'
+					},
+					'5%': {
+						borderRadius: '35% 65% 72% 28% / 59% 31% 69% 41%'
 					},
 					'10%': {
-						borderRadius: '60% 40% 70% 30%'
+						borderRadius: '68% 32% 23% 77% / 32% 44% 56% 68%'
+					},
+					'15%': {
+						borderRadius: '27% 73% 61% 39% / 55% 72% 28% 45%'
 					},
 					'20%': {
-						borderRadius: '40% 60% 50% 50%'
+						borderRadius: '51% 49% 38% 62% / 68% 29% 71% 32%'
+					},
+					'25%': {
+						borderRadius: '39% 61% 75% 25% / 46% 58% 42% 54%'
 					},
 					'30%': {
-						borderRadius: '70% 30% 40% 60%'
+						borderRadius: '66% 34% 29% 71% / 71% 36% 64% 29%'
+					},
+					'35%': {
+						borderRadius: '22% 78% 54% 46% / 38% 65% 35% 62%'
 					},
 					'40%': {
-						borderRadius: '50% 50% 60% 40%'
+						borderRadius: '58% 42% 47% 53% / 63% 44% 56% 37%'
+					},
+					'45%': {
+						borderRadius: '44% 56% 69% 31% / 29% 78% 22% 71%'
 					},
 					'50%': {
-						borderRadius: '30% 70% 30% 70%'
+						borderRadius: '71% 29% 33% 67% / 54% 41% 59% 46%'
+					},
+					'55%': {
+						borderRadius: '33% 67% 58% 42% / 67% 52% 48% 33%'
 					},
 					'60%': {
-						borderRadius: '55% 45% 65% 35%'
+						borderRadius: '62% 38% 41% 59% / 44% 69% 31% 56%'
+					},
+					'65%': {
+						borderRadius: '28% 72% 64% 36% / 58% 27% 73% 42%'
 					},
 					'70%': {
-						borderRadius: '45% 55% 35% 65%'
+						borderRadius: '55% 45% 26% 74% / 41% 63% 37% 59%'
+					},
+					'75%': {
+						borderRadius: '47% 53% 71% 29% / 69% 35% 65% 31%'
 					},
 					'80%': {
-						borderRadius: '65% 35% 55% 45%'
+						borderRadius: '69% 31% 42% 58% / 33% 71% 29% 67%'
+					},
+					'85%': {
+						borderRadius: '36% 64% 57% 43% / 62% 48% 52% 38%'
 					},
 					'90%': {
-						borderRadius: '35% 65% 45% 55%'
+						borderRadius: '64% 36% 34% 66% / 49% 59% 41% 51%'
+					},
+					'95%': {
+						borderRadius: '41% 59% 68% 32% / 56% 38% 62% 44%'
+					},
+					'100%': {
+						borderRadius: '73% 27% 56% 44% / 41% 68% 32% 59%'
 					}
 				},
 				'accordion-down': {
@@ -199,7 +232,7 @@ export default {
 				}
 			},
 			animation: {
-				'wave-border': 'wave-border 8s ease-in-out infinite',
+				'wave-border': 'wave-border 12s ease-in-out infinite',
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'slide-in-left': 'slide-in-left 0.3s ease-in-out',
