@@ -130,116 +130,116 @@ export default {
 			},
 			keyframes: {
 				'wave-border-1': {
-					'0%': { borderRadius: '60% 40% 55% 45% / 50% 55% 45% 50%' },
-					'25%': { borderRadius: '55% 45% 48% 52% / 52% 46% 54% 48%' },
-					'50%': { borderRadius: '45% 55% 50% 50% / 55% 40% 60% 45%' },
-					'75%': { borderRadius: '52% 48% 56% 44% / 48% 52% 48% 52%' },
-					'100%': { borderRadius: '60% 40% 55% 45% / 50% 55% 45% 50%' }
+					'0%': { borderRadius: '65% 35% 60% 40% / 45% 60% 40% 55%' },
+					'25%': { borderRadius: '55% 45% 42% 58% / 58% 42% 58% 42%' },
+					'50%': { borderRadius: '40% 60% 50% 50% / 60% 35% 65% 40%' },
+					'75%': { borderRadius: '50% 50% 58% 42% / 42% 58% 42% 58%' },
+					'100%': { borderRadius: '65% 35% 60% 40% / 45% 60% 40% 55%' }
 				},
 				'wave-border-2': {
-					'0%': { borderRadius: '52% 48% 58% 42% / 55% 48% 52% 45%' },
-					'25%': { borderRadius: '46% 54% 50% 50% / 48% 54% 46% 52%' },
-					'50%': { borderRadius: '48% 52% 42% 58% / 45% 55% 45% 55%' },
-					'75%': { borderRadius: '54% 46% 52% 48% / 52% 46% 54% 48%' },
-					'100%': { borderRadius: '52% 48% 58% 42% / 55% 48% 52% 45%' }
+					'0%': { borderRadius: '48% 52% 62% 38% / 60% 44% 56% 40%' },
+					'25%': { borderRadius: '40% 60% 48% 52% / 44% 58% 42% 56%' },
+					'50%': { borderRadius: '52% 48% 38% 62% / 40% 60% 40% 60%' },
+					'75%': { borderRadius: '60% 40% 54% 46% / 56% 42% 58% 44%' },
+					'100%': { borderRadius: '48% 52% 62% 38% / 60% 44% 56% 40%' }
 				},
 				'wave-border-3': {
-					'0%': { borderRadius: '58% 42% 50% 50% / 48% 56% 44% 52%' },
-					'25%': { borderRadius: '50% 50% 54% 46% / 54% 48% 52% 46%' },
-					'50%': { borderRadius: '42% 58% 54% 46% / 56% 42% 58% 44%' },
-					'75%': { borderRadius: '50% 50% 48% 52% / 46% 54% 46% 54%' },
-					'100%': { borderRadius: '58% 42% 50% 50% / 48% 56% 44% 52%' }
+					'0%': { borderRadius: '62% 38% 48% 52% / 44% 60% 40% 56%' },
+					'25%': { borderRadius: '50% 50% 58% 42% / 58% 44% 56% 42%' },
+					'50%': { borderRadius: '38% 62% 58% 42% / 60% 38% 62% 40%' },
+					'75%': { borderRadius: '52% 48% 44% 56% / 42% 58% 42% 58%' },
+					'100%': { borderRadius: '62% 38% 48% 52% / 44% 60% 40% 56%' }
 				},
 				'wave-border-4': {
-					'0%': { borderRadius: '55% 45% 52% 48% / 52% 50% 50% 48%' },
-					'25%': { borderRadius: '48% 52% 48% 52% / 54% 48% 52% 46%' },
-					'50%': { borderRadius: '45% 55% 48% 52% / 50% 54% 46% 50%' },
-					'75%': { borderRadius: '52% 48% 54% 46% / 48% 52% 48% 52%' },
-					'100%': { borderRadius: '55% 45% 52% 48% / 52% 50% 50% 48%' }
+					'0%': { borderRadius: '58% 42% 55% 45% / 55% 48% 52% 45%' },
+					'25%': { borderRadius: '45% 55% 44% 56% / 58% 44% 56% 42%' },
+					'50%': { borderRadius: '42% 58% 45% 55% / 48% 58% 42% 52%' },
+					'75%': { borderRadius: '55% 45% 58% 42% / 44% 55% 45% 56%' },
+					'100%': { borderRadius: '58% 42% 55% 45% / 55% 48% 52% 45%' }
 				},
 				'wave-border-5': {
-					'0%': { borderRadius: '50% 50% 60% 40% / 54% 46% 54% 46%' },
-					'25%': { borderRadius: '56% 44% 52% 48% / 48% 52% 48% 52%' },
-					'50%': { borderRadius: '54% 46% 40% 60% / 46% 58% 42% 54%' },
-					'75%': { borderRadius: '48% 52% 50% 50% / 52% 48% 52% 48%' },
-					'100%': { borderRadius: '50% 50% 60% 40% / 54% 46% 54% 46%' }
+					'0%': { borderRadius: '46% 54% 64% 36% / 58% 42% 58% 42%' },
+					'25%': { borderRadius: '60% 40% 50% 50% / 44% 56% 44% 56%' },
+					'50%': { borderRadius: '58% 42% 36% 64% / 42% 62% 38% 58%' },
+					'75%': { borderRadius: '44% 56% 52% 48% / 56% 44% 56% 44%' },
+					'100%': { borderRadius: '46% 54% 64% 36% / 58% 42% 58% 42%' }
 				},
 				'wave-border-6': {
-					'0%': { borderRadius: '56% 44% 48% 52% / 50% 52% 48% 50%' },
-					'25%': { borderRadius: '50% 50% 52% 48% / 54% 46% 54% 46%' },
-					'50%': { borderRadius: '44% 56% 52% 48% / 52% 46% 54% 48%' },
-					'75%': { borderRadius: '52% 48% 50% 50% / 46% 54% 46% 54%' },
-					'100%': { borderRadius: '56% 44% 48% 52% / 50% 52% 48% 50%' }
+					'0%': { borderRadius: '60% 40% 44% 56% / 48% 56% 44% 52%' },
+					'25%': { borderRadius: '48% 52% 56% 44% / 58% 42% 58% 42%' },
+					'50%': { borderRadius: '40% 60% 55% 45% / 56% 42% 58% 44%' },
+					'75%': { borderRadius: '56% 44% 48% 52% / 42% 58% 42% 58%' },
+					'100%': { borderRadius: '60% 40% 44% 56% / 48% 56% 44% 52%' }
 				},
 				'wave-border-7': {
-					'0%': { borderRadius: '48% 52% 56% 44% / 58% 48% 52% 42%' },
-					'25%': { borderRadius: '54% 46% 50% 50% / 50% 54% 46% 50%' },
-					'50%': { borderRadius: '52% 48% 44% 56% / 42% 56% 44% 58%' },
-					'75%': { borderRadius: '46% 54% 52% 48% / 54% 46% 54% 46%' },
-					'100%': { borderRadius: '48% 52% 56% 44% / 58% 48% 52% 42%' }
+					'0%': { borderRadius: '44% 56% 60% 40% / 62% 44% 56% 38%' },
+					'25%': { borderRadius: '58% 42% 48% 52% / 48% 58% 42% 52%' },
+					'50%': { borderRadius: '56% 44% 40% 60% / 38% 60% 40% 62%' },
+					'75%': { borderRadius: '42% 58% 54% 46% / 58% 42% 58% 42%' },
+					'100%': { borderRadius: '44% 56% 60% 40% / 62% 44% 56% 38%' }
 				},
 				'wave-border-8': {
-					'0%': { borderRadius: '54% 46% 54% 46% / 48% 54% 46% 52%' },
-					'25%': { borderRadius: '50% 50% 50% 50% / 52% 48% 52% 48%' },
-					'50%': { borderRadius: '46% 54% 46% 54% / 54% 44% 56% 46%' },
-					'75%': { borderRadius: '52% 48% 52% 48% / 48% 54% 46% 52%' },
-					'100%': { borderRadius: '54% 46% 54% 46% / 48% 54% 46% 52%' }
+					'0%': { borderRadius: '58% 42% 58% 42% / 44% 58% 42% 56%' },
+					'25%': { borderRadius: '48% 52% 48% 52% / 56% 44% 56% 44%' },
+					'50%': { borderRadius: '42% 58% 42% 58% / 58% 40% 60% 42%' },
+					'75%': { borderRadius: '54% 46% 56% 44% / 44% 58% 42% 56%' },
+					'100%': { borderRadius: '58% 42% 58% 42% / 44% 58% 42% 56%' }
 				},
 				'wave-border-9': {
-					'0%': { borderRadius: '50% 50% 54% 46% / 56% 50% 50% 44%' },
-					'25%': { borderRadius: '54% 46% 50% 50% / 48% 54% 46% 52%' },
-					'50%': { borderRadius: '52% 48% 46% 54% / 44% 58% 42% 58%' },
-					'75%': { borderRadius: '46% 54% 52% 48% / 52% 46% 54% 48%' },
-					'100%': { borderRadius: '50% 50% 54% 46% / 56% 50% 50% 44%' }
+					'0%': { borderRadius: '48% 52% 58% 42% / 60% 48% 52% 40%' },
+					'25%': { borderRadius: '58% 42% 48% 52% / 44% 58% 42% 56%' },
+					'50%': { borderRadius: '54% 46% 42% 58% / 40% 62% 38% 62%' },
+					'75%': { borderRadius: '42% 58% 56% 44% / 56% 42% 58% 44%' },
+					'100%': { borderRadius: '48% 52% 58% 42% / 60% 48% 52% 40%' }
 				},
 				'wave-border-10': {
-					'0%': { borderRadius: '58% 42% 52% 48% / 52% 48% 52% 48%' },
-					'25%': { borderRadius: '52% 48% 48% 52% / 48% 52% 48% 52%' },
-					'50%': { borderRadius: '42% 58% 48% 52% / 48% 56% 44% 52%' },
-					'75%': { borderRadius: '50% 50% 54% 46% / 54% 46% 54% 46%' },
-					'100%': { borderRadius: '58% 42% 52% 48% / 52% 48% 52% 48%' }
+					'0%': { borderRadius: '62% 38% 54% 46% / 55% 45% 55% 45%' },
+					'25%': { borderRadius: '52% 48% 44% 56% / 44% 56% 44% 56%' },
+					'50%': { borderRadius: '38% 62% 46% 54% / 45% 60% 40% 55%' },
+					'75%': { borderRadius: '52% 48% 58% 42% / 58% 42% 58% 42%' },
+					'100%': { borderRadius: '62% 38% 54% 46% / 55% 45% 55% 45%' }
 				},
 				'wave-border-11': {
-					'0%': { borderRadius: '46% 54% 58% 42% / 54% 46% 54% 46%' },
-					'25%': { borderRadius: '52% 48% 52% 48% / 48% 52% 48% 52%' },
-					'50%': { borderRadius: '54% 46% 42% 58% / 46% 56% 44% 54%' },
-					'75%': { borderRadius: '48% 52% 50% 50% / 52% 48% 52% 48%' },
-					'100%': { borderRadius: '46% 54% 58% 42% / 54% 46% 54% 46%' }
+					'0%': { borderRadius: '42% 58% 62% 38% / 58% 42% 58% 42%' },
+					'25%': { borderRadius: '56% 44% 54% 46% / 44% 56% 44% 56%' },
+					'50%': { borderRadius: '58% 42% 38% 62% / 42% 60% 40% 58%' },
+					'75%': { borderRadius: '44% 56% 52% 48% / 56% 44% 56% 44%' },
+					'100%': { borderRadius: '42% 58% 62% 38% / 58% 42% 58% 42%' }
 				},
 				'wave-border-12': {
-					'0%': { borderRadius: '52% 48% 50% 50% / 50% 54% 46% 50%' },
-					'25%': { borderRadius: '48% 52% 54% 46% / 54% 48% 52% 46%' },
-					'50%': { borderRadius: '48% 52% 54% 46% / 54% 46% 54% 46%' },
-					'75%': { borderRadius: '54% 46% 48% 52% / 46% 54% 46% 54%' },
-					'100%': { borderRadius: '52% 48% 50% 50% / 50% 54% 46% 50%' }
+					'0%': { borderRadius: '54% 46% 48% 52% / 48% 58% 42% 52%' },
+					'25%': { borderRadius: '44% 56% 58% 42% / 58% 44% 56% 42%' },
+					'50%': { borderRadius: '46% 54% 58% 42% / 58% 42% 58% 42%' },
+					'75%': { borderRadius: '58% 42% 44% 56% / 42% 58% 42% 58%' },
+					'100%': { borderRadius: '54% 46% 48% 52% / 48% 58% 42% 52%' }
 				},
 				'wave-border-13': {
-					'0%': { borderRadius: '60% 40% 46% 54% / 48% 52% 48% 52%' },
-					'25%': { borderRadius: '54% 46% 50% 50% / 52% 48% 52% 48%' },
-					'50%': { borderRadius: '40% 60% 54% 46% / 52% 48% 52% 48%' },
-					'75%': { borderRadius: '50% 50% 50% 50% / 48% 54% 46% 52%' },
-					'100%': { borderRadius: '60% 40% 46% 54% / 48% 52% 48% 52%' }
+					'0%': { borderRadius: '64% 36% 42% 58% / 44% 56% 44% 56%' },
+					'25%': { borderRadius: '56% 44% 52% 48% / 56% 44% 56% 44%' },
+					'50%': { borderRadius: '36% 64% 58% 42% / 56% 44% 56% 44%' },
+					'75%': { borderRadius: '52% 48% 48% 52% / 44% 58% 42% 56%' },
+					'100%': { borderRadius: '64% 36% 42% 58% / 44% 56% 44% 56%' }
 				},
 				'wave-border-14': {
-					'0%': { borderRadius: '44% 56% 52% 48% / 56% 44% 56% 44%' },
-					'25%': { borderRadius: '50% 50% 50% 50% / 50% 52% 48% 50%' },
-					'50%': { borderRadius: '56% 44% 48% 52% / 44% 58% 42% 58%' },
-					'75%': { borderRadius: '48% 52% 52% 48% / 52% 46% 54% 48%' },
-					'100%': { borderRadius: '44% 56% 52% 48% / 56% 44% 56% 44%' }
+					'0%': { borderRadius: '40% 60% 54% 46% / 60% 40% 60% 40%' },
+					'25%': { borderRadius: '52% 48% 48% 52% / 48% 56% 44% 52%' },
+					'50%': { borderRadius: '60% 40% 46% 54% / 40% 62% 38% 62%' },
+					'75%': { borderRadius: '44% 56% 56% 44% / 56% 42% 58% 44%' },
+					'100%': { borderRadius: '40% 60% 54% 46% / 60% 40% 60% 40%' }
 				},
 				'wave-border-15': {
-					'0%': { borderRadius: '50% 50% 58% 42% / 52% 50% 50% 48%' },
-					'25%': { borderRadius: '54% 46% 52% 48% / 48% 52% 48% 52%' },
-					'50%': { borderRadius: '52% 48% 42% 58% / 48% 54% 46% 52%' },
-					'75%': { borderRadius: '46% 54% 50% 50% / 52% 48% 52% 48%' },
-					'100%': { borderRadius: '50% 50% 58% 42% / 52% 50% 50% 48%' }
+					'0%': { borderRadius: '48% 52% 62% 38% / 56% 48% 52% 44%' },
+					'25%': { borderRadius: '58% 42% 54% 46% / 44% 56% 44% 56%' },
+					'50%': { borderRadius: '54% 46% 38% 62% / 44% 58% 42% 56%' },
+					'75%': { borderRadius: '42% 58% 52% 48% / 56% 44% 56% 44%' },
+					'100%': { borderRadius: '48% 52% 62% 38% / 56% 48% 52% 44%' }
 				},
 				'wave-border-16': {
-					'0%': { borderRadius: '56% 44% 50% 50% / 54% 48% 52% 46%' },
-					'25%': { borderRadius: '50% 50% 52% 48% / 48% 54% 46% 52%' },
-					'50%': { borderRadius: '44% 56% 52% 48% / 46% 56% 44% 54%' },
-					'75%': { borderRadius: '52% 48% 48% 52% / 52% 46% 54% 48%' },
-					'100%': { borderRadius: '56% 44% 50% 50% / 54% 48% 52% 46%' }
+					'0%': { borderRadius: '60% 40% 48% 52% / 58% 44% 56% 42%' },
+					'25%': { borderRadius: '48% 52% 56% 44% / 44% 58% 42% 56%' },
+					'50%': { borderRadius: '40% 60% 54% 46% / 42% 60% 40% 58%' },
+					'75%': { borderRadius: '56% 44% 44% 56% / 56% 42% 58% 44%' },
+					'100%': { borderRadius: '60% 40% 48% 52% / 58% 44% 56% 42%' }
 				},
 				'accordion-down': {
 					from: {
@@ -279,22 +279,22 @@ export default {
 				}
 			},
 			animation: {
-				'wave-border-1': 'wave-border-1 20s ease-in-out infinite',
-				'wave-border-2': 'wave-border-2 22s ease-in-out infinite',
-				'wave-border-3': 'wave-border-3 21s ease-in-out infinite',
-				'wave-border-4': 'wave-border-4 24s ease-in-out infinite',
-				'wave-border-5': 'wave-border-5 19s ease-in-out infinite',
-				'wave-border-6': 'wave-border-6 23s ease-in-out infinite',
-				'wave-border-7': 'wave-border-7 21s ease-in-out infinite',
-				'wave-border-8': 'wave-border-8 25s ease-in-out infinite',
-				'wave-border-9': 'wave-border-9 18s ease-in-out infinite',
-				'wave-border-10': 'wave-border-10 23s ease-in-out infinite',
-				'wave-border-11': 'wave-border-11 20s ease-in-out infinite',
-				'wave-border-12': 'wave-border-12 22s ease-in-out infinite',
-				'wave-border-13': 'wave-border-13 19s ease-in-out infinite',
-				'wave-border-14': 'wave-border-14 24s ease-in-out infinite',
-				'wave-border-15': 'wave-border-15 21s ease-in-out infinite',
-				'wave-border-16': 'wave-border-16 23s ease-in-out infinite',
+				'wave-border-1': 'wave-border-1 8s ease-in-out infinite',
+				'wave-border-2': 'wave-border-2 9s ease-in-out infinite',
+				'wave-border-3': 'wave-border-3 7s ease-in-out infinite',
+				'wave-border-4': 'wave-border-4 10s ease-in-out infinite',
+				'wave-border-5': 'wave-border-5 8.5s ease-in-out infinite',
+				'wave-border-6': 'wave-border-6 9.5s ease-in-out infinite',
+				'wave-border-7': 'wave-border-7 7.5s ease-in-out infinite',
+				'wave-border-8': 'wave-border-8 10.5s ease-in-out infinite',
+				'wave-border-9': 'wave-border-9 8s ease-in-out infinite',
+				'wave-border-10': 'wave-border-10 9s ease-in-out infinite',
+				'wave-border-11': 'wave-border-11 7.5s ease-in-out infinite',
+				'wave-border-12': 'wave-border-12 10s ease-in-out infinite',
+				'wave-border-13': 'wave-border-13 8.5s ease-in-out infinite',
+				'wave-border-14': 'wave-border-14 9.5s ease-in-out infinite',
+				'wave-border-15': 'wave-border-15 7s ease-in-out infinite',
+				'wave-border-16': 'wave-border-16 10.5s ease-in-out infinite',
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'slide-in-left': 'slide-in-left 0.3s ease-in-out',
