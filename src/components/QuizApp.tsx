@@ -755,9 +755,8 @@ export function QuizApp() {
                     transform: 'rotate(-45deg) scale(1.09)',
                     perspective: '1000px',
                     transformStyle: 'preserve-3d',
-                    opacity: showBandaid ? 1 : 0,
-                    filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))',
-                    transition: showBandaid ? 'none' : 'opacity 0.1s ease'
+                    opacity: 1,
+                    filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
                   }}
                 >
                   <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
