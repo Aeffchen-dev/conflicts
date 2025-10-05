@@ -367,7 +367,7 @@ export function QuizApp() {
 
   // Intro slide state
   const [currentIntroIndex, setCurrentIntroIndex] = useState(0);
-  const totalIntroSlides = 3;
+  const totalIntroSlides = 4;
   
   // Micro-animation state
   const [showMicroAnimation, setShowMicroAnimation] = useState(false);
@@ -380,7 +380,7 @@ export function QuizApp() {
         setShowMicroAnimation(true);
         endTimer = window.setTimeout(() => {
           setShowMicroAnimation(false);
-        }, 500); // match transition duration
+        }, 150); // micro animation duration
       }, 300); // initial delay
       return () => {
         window.clearTimeout(startTimer);
@@ -922,7 +922,7 @@ export function QuizApp() {
               }}
             >
               {/* Render intro slides with horizontal transitions */}
-              {[0, 1, 2].map((slideIndex) => {
+              {[0, 1, 2, 3].map((slideIndex) => {
                 const isActive = slideIndex === currentIntroIndex;
                 const isPrev = slideIndex === currentIntroIndex - 1;
                 const isNext = slideIndex === currentIntroIndex + 1;

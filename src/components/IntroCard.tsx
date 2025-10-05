@@ -20,6 +20,8 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
         return { text: 'Swipe nach rechts und links um zwischen den Kategorien zu wechseln' };
       case 2:
         return { text: 'Swipe nach oben und unten um zwischen den Fragen einer Kategorie zu wechseln' };
+      case 3:
+        return { text: 'Konflikte als Team lösen, statt Gegner zu werden' };
       default:
         return { text: '' };
     }
@@ -73,7 +75,15 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
             color: 'hsl(160, 70%, 15%)'
           }}
         >
-          {content.text}
+          {slideIndex === 3 ? (
+            <>
+              {'Konflikte als '}
+              <span className="shimmer-text">Team</span>
+              {' lösen, statt Gegner zu werden'}
+            </>
+          ) : (
+            content.text
+          )}
         </h1>
       </div>
       
@@ -87,6 +97,22 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       >
         Swipe nach rechts um weiter zu navigieren
       </p>
+      
+      <style>{`
+        @keyframes shimmer {
+          0%, 100% {
+            color: hsl(160, 70%, 15%);
+          }
+          50% {
+            color: hsl(160, 60%, 65%);
+          }
+        }
+        
+        .shimmer-text {
+          animation: shimmer 2s ease-in-out infinite;
+          animation-delay: ${Math.random() * 2}s;
+        }
+      `}</style>
     </div>
   );
 }
