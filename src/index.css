@@ -53,7 +53,7 @@ All colors MUST be HSL.
     --quiz-category2-bg: 275 45% 80%;        /* Light lavender like uploaded image */
     --quiz-category2-text: 275 45% 15%;      /* Darker lavender text */
     --quiz-category3-bg: 340 70% 93%;        /* Light pink */
-    --quiz-category3-text: 325 70% 12%;       /* Darker purple-pink text */
+    --quiz-category3-text: 340 70% 15%;       /* Darker pink text */
     --quiz-category4-bg: 50 70% 80%;         /* Light warm beige */
     --quiz-category4-text: 50 70% 15%;        /* Darker warm beige text */
     --quiz-category5-bg: 270 65% 75%;        /* Light purple */
