@@ -1044,9 +1044,9 @@ export function QuizApp() {
                     if (isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.abs(dragOffsetY) / 300;
                       const scale = Math.min(1, 0.85 + dragProgress * 0.15);
-                      transform = `translateY(calc(-100% - 16px + ${dragOffsetY}px)) scale(${scale})`;
+                      transform = `translateY(calc(-100% + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
-                      transform = 'translateY(calc(-100% - 16px)) scale(0.85)';
+                      transform = 'translateY(-100%) scale(0.85)';
                     }
                     zIndex = 2;
                   } else if (isActiveCategory && isNextQuestion) {
@@ -1054,9 +1054,9 @@ export function QuizApp() {
                     if (isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.abs(dragOffsetY) / 300;
                       const scale = Math.min(1, 0.85 + dragProgress * 0.15);
-                      transform = `translateY(calc(100% + 16px + ${dragOffsetY}px)) scale(${scale})`;
+                      transform = `translateY(calc(100% + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
-                      transform = 'translateY(calc(100% + 16px)) scale(0.85)';
+                      transform = 'translateY(100%) scale(0.85)';
                     }
                     zIndex = 2;
                   } else if (isPrevCategory) {
