@@ -50,15 +50,13 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       <div className="absolute left-0 top-0 w-20 h-full z-20 cursor-pointer" onClick={onSwipeRight} />
       <div className="absolute right-0 top-0 w-20 h-full z-20 cursor-pointer" onClick={onSwipeLeft} />
       
-      <div className="flex-1 flex flex-col items-center justify-center text-center p-8 relative z-10">
+      <div className="flex-1 flex flex-col items-center justify-center text-center p-8 relative z-10 gap-8">
         {/* Double-headed arrow for slide 2 (horizontal) */}
         {slideIndex === 1 && (
           <ArrowLeftRight 
-            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 ${
-              isTransitioning ? 'animate-wobble-horizontal' : ''
-            }`}
+            className={isTransitioning ? 'animate-wobble-horizontal' : ''}
             size={48} 
-            strokeWidth={2.5}
+            strokeWidth={1}
             style={{ color: 'hsl(160, 70%, 15%)' }}
           />
         )}
@@ -66,11 +64,9 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
         {/* Double-headed arrow for slide 3 (vertical) */}
         {slideIndex === 2 && (
           <ArrowUpDown 
-            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 ${
-              isTransitioning ? 'animate-wobble-vertical' : ''
-            }`}
+            className={isTransitioning ? 'animate-wobble-vertical' : ''}
             size={48} 
-            strokeWidth={2.5}
+            strokeWidth={1}
             style={{ color: 'hsl(160, 70%, 15%)' }}
           />
         )}
@@ -107,25 +103,25 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
         
         @keyframes wobble-horizontal {
           0%, 100% {
-            transform: translate(-50%, -50%) translateX(0);
+            transform: translateX(0);
           }
           25% {
-            transform: translate(-50%, -50%) translateX(-8px);
+            transform: translateX(-8px);
           }
           75% {
-            transform: translate(-50%, -50%) translateX(8px);
+            transform: translateX(8px);
           }
         }
         
         @keyframes wobble-vertical {
           0%, 100% {
-            transform: translate(-50%, -50%) translateY(0);
+            transform: translateY(0);
           }
           25% {
-            transform: translate(-50%, -50%) translateY(-8px);
+            transform: translateY(-8px);
           }
           75% {
-            transform: translate(-50%, -50%) translateY(8px);
+            transform: translateY(8px);
           }
         }
         
