@@ -1,3 +1,6 @@
+import { useState, useEffect, useRef } from 'react';
+import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown } from 'lucide-react';
+
 interface IntroCardProps {
   slideIndex: number;
   isActive?: boolean;
@@ -48,6 +51,38 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       <div className="absolute right-0 top-0 w-20 h-full z-20 cursor-pointer" onClick={onSwipeLeft} />
       
       <div className="flex-1 flex flex-col items-center justify-center text-center p-8 relative z-10">
+        {/* Arrows for slide 2 (horizontal) */}
+        {slideIndex === 1 && (
+          <>
+            <ChevronLeft 
+              className="absolute left-8 top-1/2 -translate-y-1/2 animate-pulse" 
+              size={32} 
+              strokeWidth={3}
+            />
+            <ChevronRight 
+              className="absolute right-8 top-1/2 -translate-y-1/2 animate-pulse" 
+              size={32} 
+              strokeWidth={3}
+            />
+          </>
+        )}
+        
+        {/* Arrows for slide 3 (vertical) */}
+        {slideIndex === 2 && (
+          <>
+            <ChevronUp 
+              className="absolute top-16 left-1/2 -translate-x-1/2 animate-pulse" 
+              size={32} 
+              strokeWidth={3}
+            />
+            <ChevronDown 
+              className="absolute bottom-24 left-1/2 -translate-x-1/2 animate-pulse" 
+              size={32} 
+              strokeWidth={3}
+            />
+          </>
+        )}
+        
         <h1 
           style={{ 
             fontFamily: 'Kokoro, serif',
