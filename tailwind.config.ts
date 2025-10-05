@@ -131,34 +131,34 @@ export default {
 			keyframes: {
 				'wave-border': {
 					'0%, 100%': {
-						borderRadius: '2rem'
+						borderRadius: '9999px'
 					},
 					'10%': {
-						borderRadius: '2rem 2.5rem 2rem 2.2rem'
+						borderRadius: '60% 40% 70% 30%'
 					},
 					'20%': {
-						borderRadius: '2.3rem 2rem 2.4rem 2rem'
+						borderRadius: '40% 60% 50% 50%'
 					},
 					'30%': {
-						borderRadius: '2rem 2.2rem 2rem 2.5rem'
+						borderRadius: '70% 30% 40% 60%'
 					},
 					'40%': {
-						borderRadius: '2.4rem 2rem 2.1rem 2rem'
+						borderRadius: '50% 50% 60% 40%'
 					},
 					'50%': {
-						borderRadius: '2rem 2.5rem 2rem 2.3rem'
+						borderRadius: '30% 70% 30% 70%'
 					},
 					'60%': {
-						borderRadius: '2.2rem 2rem 2.5rem 2rem'
+						borderRadius: '55% 45% 65% 35%'
 					},
 					'70%': {
-						borderRadius: '2rem 2.3rem 2rem 2.4rem'
+						borderRadius: '45% 55% 35% 65%'
 					},
 					'80%': {
-						borderRadius: '2.5rem 2rem 2.2rem 2rem'
+						borderRadius: '65% 35% 55% 45%'
 					},
 					'90%': {
-						borderRadius: '2rem 2.4rem 2rem 2.1rem'
+						borderRadius: '35% 65% 45% 55%'
 					}
 				},
 				'accordion-down': {

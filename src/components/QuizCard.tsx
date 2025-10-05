@@ -42,50 +42,11 @@ export function QuizCard({
   const [mouseEnd, setMouseEnd] = useState<number | null>(null);
   const [isLocalDragging, setIsLocalDragging] = useState(false);
   const [processedText, setProcessedText] = useState<JSX.Element[]>([]);
-  const [isInactive, setIsInactive] = useState(false);
   
   const textRef = useRef<HTMLHeadingElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const inactivityTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const minSwipeDistance = 50;
-
-  // Inactivity timer - start wave animation after 1 minute
-  useEffect(() => {
-    const resetTimer = () => {
-      if (inactivityTimerRef.current) {
-        clearTimeout(inactivityTimerRef.current);
-      }
-      setIsInactive(false);
-      
-      inactivityTimerRef.current = setTimeout(() => {
-        setIsInactive(true);
-      }, 60000); // 1 minute
-    };
-
-    // Start timer on mount
-    resetTimer();
-
-    // Reset timer on any user activity
-    const handleActivity = () => {
-      resetTimer();
-    };
-
-    window.addEventListener('mousemove', handleActivity);
-    window.addEventListener('mousedown', handleActivity);
-    window.addEventListener('touchstart', handleActivity);
-    window.addEventListener('keypress', handleActivity);
-
-    return () => {
-      if (inactivityTimerRef.current) {
-        clearTimeout(inactivityTimerRef.current);
-      }
-      window.removeEventListener('mousemove', handleActivity);
-      window.removeEventListener('mousedown', handleActivity);
-      window.removeEventListener('touchstart', handleActivity);
-      window.removeEventListener('keypress', handleActivity);
-    };
-  }, []);
 
   // Process text to clean line breaks
   useEffect(() => {
@@ -239,7 +200,7 @@ export function QuizCard({
 
   return (
     <div 
-      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none ${isInactive ? 'animate-wave-border' : ''}`}
+      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none`}
       style={{
         height: '100%',
         maxHeight: '100%',
@@ -285,7 +246,7 @@ export function QuizCard({
         {question.category.toLowerCase() !== 'intro' && (
           <div className="mb-4">
             <div 
-              className="px-4 py-2 rounded-full font-medium inline-block"
+              className="px-4 py-2 font-medium inline-block animate-wave-border"
               style={{
                 backgroundColor: categoryColors.pillBg,
                 color: categoryColors.text,
