@@ -101,7 +101,7 @@ export function QuizCard({
       2: { bg: 'hsl(var(--quiz-category2-bg))', text: 'hsl(var(--quiz-category2-text))', pillBg: 'hsl(311 64% 70%)' }, // Pink Lavender pill
       3: { bg: 'hsl(var(--quiz-category3-bg))', text: 'hsl(var(--quiz-category3-text))', pillBg: 'hsl(263 65% 70%)' }, // Lavender Blue pill
       4: { bg: 'hsl(var(--quiz-category4-bg))', text: 'hsl(var(--quiz-category4-text))', pillBg: 'hsl(27 88% 75%)' }, // Champagne Pink pill
-      5: { bg: 'hsl(var(--quiz-category5-bg))', text: 'hsl(var(--quiz-category5-text))', pillBg: 'hsl(263 65% 70%)' }, // Lavender Blue pill
+      5: { bg: 'hsl(var(--quiz-category5-bg))', text: 'hsl(var(--quiz-category5-text))', pillBg: 'hsl(200 100% 70%)' }, // Baby Blue Eyes pill
       6: { bg: 'hsl(var(--quiz-category6-bg))', text: 'hsl(var(--quiz-category6-text))', pillBg: 'hsl(56 85% 75%)' }, // Lemon Chiffon pill
       7: { bg: 'hsl(var(--quiz-category7-bg))', text: 'hsl(var(--quiz-category7-text))', pillBg: 'hsl(167 82% 60%)' }, // Magic Mint pill
       8: { bg: 'hsl(var(--quiz-category8-bg))', text: 'hsl(var(--quiz-category8-text))', pillBg: 'hsl(200 100% 70%)' }, // Baby Blue Eyes pill
