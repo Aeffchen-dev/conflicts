@@ -963,6 +963,7 @@ export function QuizApp() {
                       isPrev={isPrev}
                       onSwipeLeft={nextCategory}
                       onSwipeRight={prevCategory}
+                      isTransitioning={isTransitioning || isDragging}
                     />
                   </div>
                 );

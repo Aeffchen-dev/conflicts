@@ -5,9 +5,10 @@ interface IntroCardProps {
   isPrev?: boolean;
   onSwipeLeft?: () => void;
   onSwipeRight?: () => void;
+  isTransitioning?: boolean;
 }
 
-export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev = false, onSwipeLeft, onSwipeRight }: IntroCardProps) {
+export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev = false, onSwipeLeft, onSwipeRight, isTransitioning = false }: IntroCardProps) {
   const getContent = () => {
     switch (slideIndex) {
       case 0:
@@ -18,12 +19,12 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       case 1:
         return {
           text: 'Swipe nach rechts und links um zwischen den Kategorien zu wechseln',
-          animationClass: isActive ? 'animate-slide-horizontal-active' : isNext ? 'animate-slide-horizontal-next' : isPrev ? 'animate-slide-horizontal-prev' : ''
+          animationClass: !isTransitioning && isActive ? 'animate-slide-horizontal-active' : !isTransitioning && isNext ? 'animate-slide-horizontal-next' : !isTransitioning && isPrev ? 'animate-slide-horizontal-prev' : ''
         };
       case 2:
         return {
           text: 'Swipe nach oben und unten um zwischen den Fragen einer Kategorie zu wechseln',
-          animationClass: isActive ? 'animate-slide-vertical-active' : isNext ? 'animate-slide-vertical-next' : isPrev ? 'animate-slide-vertical-prev' : ''
+          animationClass: !isTransitioning && isActive ? 'animate-slide-vertical-active' : !isTransitioning && isNext ? 'animate-slide-vertical-next' : !isTransitioning && isPrev ? 'animate-slide-vertical-prev' : ''
         };
       default:
         return { text: '', animationClass: '' };
