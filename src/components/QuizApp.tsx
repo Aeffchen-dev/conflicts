@@ -1031,6 +1031,9 @@ export function QuizApp() {
                     transform = 'translateX(0) scale(1)';
                   } else if (isTransitioning && transitionDirection === 'up') {
                     transform = 'translateY(0) scale(1)';
+                  } else if (isTransitioning && transitionDirection === 'left' && currentIntroIndex === 3) {
+                    // During horizontal transition from slide 3, hide previous slides
+                    transform = 'translateX(calc(-100% - 16px)) scale(0.8)';
                   } else {
                     // Slide 3's previous is slide 2, which is above (vertical)
                     if (currentIntroIndex === 3 && slideIndex === 2) {

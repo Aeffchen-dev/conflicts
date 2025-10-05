@@ -116,16 +116,16 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
           0%, 100% {
             transform: translateY(0);
           }
-          15% {
+          5% {
             transform: translateY(-15px);
           }
-          30% {
+          10% {
             transform: translateY(0);
           }
         }
         
         .team-letter {
-          animation: letterBounce 2s ease-in-out infinite;
+          animation: letterBounce 3s ease-in-out infinite;
         }
       `}</style>
     </div>
