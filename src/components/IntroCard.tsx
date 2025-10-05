@@ -165,11 +165,11 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
         }
         
         .animate-wobble-horizontal {
-          animation: wobble-horizontal 0.6s ease-in-out infinite;
+          animation: wobble-horizontal 0.5s ease-in-out 0.3s 1;
         }
         
         .animate-wobble-vertical {
-          animation: wobble-vertical 0.6s ease-in-out infinite;
+          animation: wobble-vertical 0.5s ease-in-out 0.3s 1;
         }
         
         @keyframes slide-horizontal-active {
