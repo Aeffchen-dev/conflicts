@@ -84,6 +84,7 @@ export function QuizApp() {
   const [showBandaid, setShowBandaid] = useState(true);
 
   useEffect(() => {
+    console.log('QuizApp mounted, loading state:', loading);
     fetchQuestions();
     
     // Show bandaid immediately without animation on load
@@ -958,7 +959,13 @@ export function QuizApp() {
       <div className="flex-1 flex flex-col px-4 pb-4 mt-4" style={{ minHeight: 0, overflow: 'visible' }}>
         <div className="flex-1 flex items-stretch justify-center min-h-0 relative" style={{ overflow: 'visible' }}>
           {loading ? (
-            <div className="flex items-center justify-center h-full" style={{ perspective: '1000px' }}>
+            <div 
+              className="flex items-center justify-center h-full w-full" 
+              style={{ 
+                perspective: '1000px',
+                backgroundColor: 'transparent'
+              }}
+            >
               <div className="animate-wiggle-loading">
                 <svg 
                   width="31" 
