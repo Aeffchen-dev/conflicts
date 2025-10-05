@@ -79,16 +79,14 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
             <>
               {'Konflikte als '}
               {['T', 'e', 'a', 'm'].map((letter, index) => {
-                const randomRotation = (Math.random() * 12 - 6).toFixed(2); // -6 to +6 degrees
                 return (
                   <span
                     key={index}
                     className="team-letter"
                     style={{
                       display: 'inline-block',
-                      '--rotation': `${randomRotation}deg`,
-                      animationDelay: `${index * 0.05}s`
-                    } as React.CSSProperties}
+                      animationDelay: `${index * 0.1}s`
+                    }}
                   >
                     {letter}
                   </span>
@@ -114,21 +112,20 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       </p>
       
       <style>{`
-        @keyframes letterRotate {
+        @keyframes letterBounce {
           0%, 100% {
-            transform: rotate(0deg);
+            transform: translateY(0);
           }
           15% {
-            transform: rotate(var(--rotation));
+            transform: translateY(-15px);
           }
           30% {
-            transform: rotate(0deg);
+            transform: translateY(0);
           }
         }
         
         .team-letter {
-          animation: letterRotate 1.5s ease-out infinite;
-          transform-origin: center;
+          animation: letterBounce 2s ease-in-out infinite;
         }
       `}</style>
     </div>
