@@ -58,7 +58,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
         className="text-center"
         style={{ 
           fontFamily: 'Arial, sans-serif',
-          fontSize: '12px',
+          fontSize: '14px',
           color: 'black'
         }}
       >
