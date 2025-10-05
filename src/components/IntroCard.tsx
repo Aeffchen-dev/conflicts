@@ -73,21 +73,27 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       </p>
       
       <style>{`
-        @keyframes reveal-wipe {
+        @keyframes background-fill {
           0% {
-            clip-path: inset(0 100% 0 0);
+            background-size: 0% 100%;
           }
           28.57% {
-            clip-path: inset(0 0 0 0);
+            background-size: 100% 100%;
           }
           100% {
-            clip-path: inset(0 0 0 0);
+            background-size: 100% 100%;
           }
         }
         
         .text-color-wave {
           color: hsl(160, 70%, 15%);
-          animation: reveal-wipe 7s ease-out infinite;
+          background: linear-gradient(90deg, hsl(160, 70%, 40%) 0%, hsl(160, 70%, 40%) 100%);
+          background-repeat: no-repeat;
+          background-position: left center;
+          background-size: 0% 100%;
+          -webkit-background-clip: text;
+          background-clip: text;
+          animation: background-fill 7s ease-out infinite;
         }
         
         @keyframes slide-horizontal-active {
