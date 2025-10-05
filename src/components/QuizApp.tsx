@@ -483,12 +483,35 @@ export function QuizApp() {
       categorized[q.category].push(q);
     });
     
-    // Shuffle questions within each category
+    // Shuffle questions within each category (random on every reload)
     Object.keys(categorized).forEach(category => {
       categorized[category] = categorized[category].sort(() => Math.random() - 0.5);
     });
     
-    setCategorizedQuestions(categorized);
+    // Sort categories in specific order
+    const categoryOrder = [
+      'Klarheit',
+      'Hören & Verstehen',
+      'Selbst verantwortung',
+      'Brücken bauen',
+      'Weitergehen'
+    ];
+    
+    const sortedCategorized: { [category: string]: Question[] } = {};
+    categoryOrder.forEach(cat => {
+      if (categorized[cat]) {
+        sortedCategorized[cat] = categorized[cat];
+      }
+    });
+    
+    // Add any remaining categories not in the order list
+    Object.keys(categorized).forEach(cat => {
+      if (!categoryOrder.includes(cat)) {
+        sortedCategorized[cat] = categorized[cat];
+      }
+    });
+    
+    setCategorizedQuestions(sortedCategorized);
     setCurrentCategoryIndex(0);
     setCurrentQuestionIndexInCategory(0);
   }, [selectedCategories, allQuestions, isMixedMode, hasToggleBeenChanged]);
