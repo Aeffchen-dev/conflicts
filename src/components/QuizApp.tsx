@@ -1126,8 +1126,12 @@ export function QuizApp() {
                   return (
                     <div
                       key={`category-${catIndex}-question-${qIndex}`}
-                      className={`absolute inset-0 w-full h-full ${isActiveCategory && isCurrent ? 'pointer-events-auto' : 'pointer-events-none'}`}
+                      className={`absolute w-full ${isActiveCategory && isCurrent ? 'pointer-events-auto' : 'pointer-events-none'}`}
                       style={{
+                        height: isActiveCategory && isCurrent ? 'calc(90% - 8px)' : '100%',
+                        top: 0,
+                        left: 0,
+                        right: 0,
                         transform: `${categoryHorizontalTransform} ${verticalTransform}`,
                         zIndex: categoryZIndex * 10 + verticalZIndex,
                         transition: isDragging 
