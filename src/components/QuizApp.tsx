@@ -375,8 +375,18 @@ export function QuizApp() {
   // Trigger micro-animation when on slides 2 or 3
   useEffect(() => {
     if ((currentIntroIndex === 1 || currentIntroIndex === 2) && !isTransitioning && !isDragging) {
-      const timer = setTimeout(() => setShowMicroAnimation(true), 300);
-      return () => clearTimeout(timer);
+      let endTimer: number | undefined;
+      const startTimer = window.setTimeout(() => {
+        setShowMicroAnimation(true);
+        endTimer = window.setTimeout(() => {
+          setShowMicroAnimation(false);
+        }, 500); // match transition duration
+      }, 300); // initial delay
+      return () => {
+        window.clearTimeout(startTimer);
+        if (endTimer) window.clearTimeout(endTimer);
+        setShowMicroAnimation(false);
+      };
     } else {
       setShowMicroAnimation(false);
     }
