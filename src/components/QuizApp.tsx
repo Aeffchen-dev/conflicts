@@ -464,17 +464,17 @@ export function QuizApp() {
     // Reset band-aid state to allow re-animation
     setShowBandaid(false);
     
-    // Text animation duration: 0.8s
-    // Band-aid starts AFTER text completes at 0.8s
+    // Text animation duration: 7 letters * 0.1s delay + 0.2s animation = 0.9s
+    // Band-aid starts AFTER text completes
     setTimeout(() => {
       setShowBandaid(true);
-    }, 800);
+    }, 900);
     
     // End text animation
     setTimeout(() => {
       setLogoAnimating(false);
       setAnimatingLetterIndex(-1);
-    }, 800);
+    }, 900);
   };
 
   const handleToggleChange = (checked: boolean) => {
@@ -523,8 +523,10 @@ export function QuizApp() {
               key={index}
               style={{
                 display: 'inline-block',
-                animation: logoAnimating ? `letterReveal 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.08}s forwards` : 'none',
-                opacity: logoAnimating ? 0 : 1
+                opacity: logoAnimating ? 0 : 1,
+                filter: logoAnimating ? 'blur(15px)' : 'blur(0px)',
+                transform: logoAnimating ? 'translateX(-10px)' : 'translateX(0)',
+                animation: logoAnimating ? `letterReveal 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.1}s forwards` : 'none'
               }}
             >
               {letter}
@@ -586,7 +588,7 @@ export function QuizApp() {
           @keyframes letterReveal {
             0% {
               opacity: 0;
-              filter: blur(8px);
+              filter: blur(15px);
               transform: translateX(-10px);
             }
             100% {
