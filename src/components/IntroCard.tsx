@@ -99,18 +99,29 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       </p>
       
       <style>{`
-        @keyframes shimmer {
+        @keyframes teamPulse {
           0%, 100% {
             color: hsl(160, 70%, 15%);
+            transform: scale(1);
+          }
+          25% {
+            color: hsl(160, 65%, 45%);
+            transform: scale(1.05);
           }
           50% {
             color: hsl(160, 60%, 65%);
+            transform: scale(1.08);
+          }
+          75% {
+            color: hsl(160, 65%, 45%);
+            transform: scale(1.05);
           }
         }
         
         .shimmer-text {
-          animation: shimmer 2s ease-in-out infinite;
-          animation-delay: ${Math.random() * 2}s;
+          display: inline-block;
+          animation: teamPulse 3s ease-in-out infinite;
+          transform-origin: center;
         }
       `}</style>
     </div>

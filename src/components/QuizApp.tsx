@@ -1157,6 +1157,60 @@ export function QuizApp() {
                   })()}
                 </div>
               )}
+              
+              {/* Render first category slide when transitioning from slide 3 */}
+              {currentIntroIndex === 3 && categories.length > 0 && (
+                <div
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  style={{
+                    transform: (isDragging && dragDirection === 'horizontal' && dragOffsetX < 0) 
+                      ? `translateX(calc(100% + 16px + ${dragOffsetX}px)) scale(${Math.min(1, 0.8 + Math.abs(dragOffsetX) / 300 * 0.2)})`
+                      : (isTransitioning && transitionDirection === 'left')
+                        ? 'translateX(0) scale(1)'
+                        : 'translateX(calc(100% + 16px)) scale(0.8)',
+                    zIndex: isTransitioning && transitionDirection === 'left' ? 4 : 2,
+                    transition: isDragging ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  }}
+                >
+                  {(() => {
+                    const firstCategory = categories[0];
+                    const categoryQuestions = categorizedQuestions[firstCategory] || [];
+                    const questionIndexForCategory = questionIndicesPerCategory[firstCategory] || 0;
+                    
+                    return categoryQuestions.map((q, qIndex) => {
+                      const isCurrent = qIndex === questionIndexForCategory;
+                      const isNext = qIndex === (questionIndexForCategory + 1) % categoryQuestions.length;
+                      
+                      // Show current and next question during transition
+                      if (!isCurrent && !isNext) return null;
+                      
+                      return (
+                        <div
+                          key={`preview-slide3-${firstCategory}-${qIndex}`}
+                          className="absolute w-full h-full pointer-events-none"
+                          style={{
+                            height: isCurrent ? 'calc(90% - 8px)' : '100%',
+                            top: 0,
+                            left: 0,
+                            right: 0,
+                            transform: isCurrent ? 'translateY(0) scale(1)' : 'translateY(calc(90% + 16px)) scale(1)',
+                            zIndex: isCurrent ? 3 : 1,
+                          }}
+                        >
+                          <QuizCard
+                            question={q}
+                            onSwipeLeft={nextCategory}
+                            onSwipeRight={prevCategory}
+                            onSwipeUp={nextQuestion}
+                            onSwipeDown={prevQuestion}
+                            categoryIndex={categoryColorMap[firstCategory] || 0}
+                          />
+                        </div>
+                      );
+                    });
+                  })()}
+                </div>
+              )}
             </div>
           ) : hasQuestions && currentQuestion ? (
             <div 
