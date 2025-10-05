@@ -59,7 +59,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
         style={{ 
           fontFamily: 'Arial, sans-serif',
           fontSize: '12px',
-          opacity: 0.7
+          color: 'black'
         }}
       >
         Swipe nach rechts um weiter zu navigieren
