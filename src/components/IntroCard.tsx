@@ -76,16 +76,16 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       
       <style>{`
         @keyframes text-pulse {
-          0%, 100% {
+          0%, 20%, 100% {
             opacity: 1;
           }
-          50% {
+          10% {
             opacity: 0.4;
           }
         }
         
         .text-pulse {
-          animation: text-pulse 2s ease-in-out 3;
+          animation: text-pulse 10s ease-in-out 1.5s infinite;
         }
         
         @keyframes slide-horizontal-active {
