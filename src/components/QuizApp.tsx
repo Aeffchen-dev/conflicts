@@ -660,13 +660,13 @@ export function QuizApp() {
   return (
     <div className="min-h-[100svh] h-[100svh] bg-background overflow-hidden flex flex-col relative" style={{ height: '100svh' }}>
       {/* App Header with controls - Always visible */}
-      <div className="mt-4 flex items-center justify-center w-full px-4 relative z-50" style={{ paddingTop: 'env(safe-area-inset-top, 0)', backgroundColor: 'black' }}>
+      <div className="mt-4 flex items-center justify-between w-full px-4 relative z-50" style={{ paddingTop: 'env(safe-area-inset-top, 0)', backgroundColor: 'black' }}>
         <div 
           className="text-white cursor-pointer relative flex items-center" 
           style={{ fontFamily: 'Kokoro, serif', fontSize: '20px', fontWeight: 'bold', fontStyle: 'italic' }}
           onClick={handleLogoClick}
         >
-          {'Resolve this conflict'.split('').map((letter, index) => (
+          {'Resolve'.split('').map((letter, index) => (
             <span
               key={index}
               style={{
@@ -700,20 +700,33 @@ export function QuizApp() {
                   <stop offset="100%" style={{ stopColor: '#c9986a', stopOpacity: 1 }} />
                 </linearGradient>
               </defs>
-              <rect x="0" y="7" width="32" height="10" rx="4" fill="url(#bandaidGradient)" />
+              <rect x="1" y="4" width="30" height="16" rx="5" fill="url(#bandaidGradient)" stroke="#b8946a" strokeWidth="0.5"/>
               
-              {/* 5 horizontal holes in the middle */}
-              <rect x="5" y="10" width="1.8" height="4" rx="0.9" fill="rgba(0,0,0,0.15)" />
-              <rect x="9.5" y="10" width="1.8" height="4" rx="0.9" fill="rgba(0,0,0,0.15)" />
-              <rect x="14.5" y="10" width="1.8" height="4" rx="0.9" fill="rgba(0,0,0,0.15)" />
-              <rect x="19.5" y="10" width="1.8" height="4" rx="0.9" fill="rgba(0,0,0,0.15)" />
-              <rect x="24.5" y="10" width="1.8" height="4" rx="0.9" fill="rgba(0,0,0,0.15)" />
+              {/* Center pad (lighter area) */}
+              <rect x="11" y="6" width="10" height="12" rx="2" fill="#e5d4b8" opacity="0.9"/>
               
-              {/* Left gauze pad */}
-              <rect x="2" y="9" width="8" height="6" rx="1.5" fill="white" fillOpacity="0.5" />
+              {/* Holes pattern - white dots */}
+              <circle cx="5" cy="8" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="8" cy="8" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="5" cy="12" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="8" cy="12" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="5" cy="16" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="8" cy="16" r="0.8" fill="white" opacity="0.9"/>
               
-              {/* Right gauze pad */}
-              <rect x="22" y="9" width="8" height="6" rx="1.5" fill="white" fillOpacity="0.5" />
+              <circle cx="24" cy="8" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="27" cy="8" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="24" cy="12" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="27" cy="12" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="24" cy="16" r="0.8" fill="white" opacity="0.9"/>
+              <circle cx="27" cy="16" r="0.8" fill="white" opacity="0.9"/>
+              
+              {/* Center pad holes (smaller, less visible) */}
+              <circle cx="13" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
+              <circle cx="16" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
+              <circle cx="19" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
+              <circle cx="13" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
+              <circle cx="16" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
+              <circle cx="19" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
             </svg>
           </div>
         </div>
@@ -721,8 +734,8 @@ export function QuizApp() {
           @keyframes letterReveal0 {
             0% {
               opacity: 0;
-              filter: blur(1px);
-              transform: translateX(0);
+              filter: blur(8px);
+              transform: translateX(-10px);
             }
             100% {
               opacity: 1;
@@ -734,8 +747,8 @@ export function QuizApp() {
           @keyframes letterReveal1 {
             0% {
               opacity: 0;
-              filter: blur(2px);
-              transform: translateX(-1px);
+              filter: blur(6px);
+              transform: translateX(-8px);
             }
             100% {
               opacity: 1;
@@ -747,8 +760,8 @@ export function QuizApp() {
           @keyframes letterReveal2 {
             0% {
               opacity: 0;
-              filter: blur(4px);
-              transform: translateX(-2px);
+              filter: blur(10px);
+              transform: translateX(-12px);
             }
             100% {
               opacity: 1;
@@ -760,8 +773,8 @@ export function QuizApp() {
           @keyframes letterReveal3 {
             0% {
               opacity: 0;
-              filter: blur(5px);
-              transform: translateX(-3px);
+              filter: blur(7px);
+              transform: translateX(-9px);
             }
             100% {
               opacity: 1;
@@ -773,8 +786,8 @@ export function QuizApp() {
           @keyframes letterReveal4 {
             0% {
               opacity: 0;
-              filter: blur(7px);
-              transform: translateX(-5px);
+              filter: blur(9px);
+              transform: translateX(-11px);
             }
             100% {
               opacity: 1;
@@ -786,7 +799,7 @@ export function QuizApp() {
           @keyframes letterReveal5 {
             0% {
               opacity: 0;
-              filter: blur(7px);
+              filter: blur(5px);
               transform: translateX(-7px);
             }
             100% {
@@ -832,11 +845,18 @@ export function QuizApp() {
             }
           }
         `}</style>
+        <button 
+          onClick={() => setCategorySelectorOpen(true)}
+          className="text-white font-normal flex items-center"
+          style={{ fontSize: '14px' }}
+        >
+          Kategorien wählen
+        </button>
       </div>
 
       {/* Main Quiz Container */}
-      <div className="flex-1 flex flex-col px-4 overflow-hidden mt-4" style={{ minHeight: 0, paddingBottom: 0 }}>
-        <div className="flex-1 flex items-stretch justify-center min-h-0 relative" style={{ marginBottom: '16px' }}>
+      <div className="flex-1 flex flex-col px-4 pb-4 overflow-hidden mt-4" style={{ minHeight: 0 }}>
+        <div className="flex-1 flex items-stretch justify-center min-h-0 relative">
           {loading ? (
             <div className="flex items-center justify-center h-full text-white text-xl">Lade Fragen...</div>
           ) : !hasSeenIntro ? (
@@ -1094,17 +1114,6 @@ export function QuizApp() {
           ) : (
             <div className="flex items-center justify-center h-full text-white text-xl">Keine Fragen verfügbar</div>
           )}
-        </div>
-        
-        {/* Kategorien wählen button - Below card, centered */}
-        <div className="flex justify-center px-4" style={{ marginTop: '16px', marginBottom: '16px' }}>
-          <button 
-            onClick={() => setCategorySelectorOpen(true)}
-            className="text-white font-normal flex items-center"
-            style={{ fontSize: '14px' }}
-          >
-            Kategorien wählen
-          </button>
         </div>
       </div>
       
