@@ -970,13 +970,17 @@ export function QuizApp() {
               })}
               
               {/* Render first category slide when transitioning from last intro slide */}
-              {currentIntroIndex === totalIntroSlides - 1 && isTransitioning && transitionDirection === 'left' && categories.length > 0 && (
+              {currentIntroIndex === totalIntroSlides - 1 && categories.length > 0 && (
                 <div
                   className="absolute inset-0 w-full h-full pointer-events-none"
                   style={{
-                    transform: 'translateX(0) scale(1)',
-                    zIndex: 4,
-                    transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    transform: (isDragging && dragDirection === 'horizontal' && dragOffsetX < 0) 
+                      ? `translateX(calc(100% + 16px + ${dragOffsetX}px)) scale(${Math.min(1, 0.8 + Math.abs(dragOffsetX) / 300 * 0.2)})`
+                      : (isTransitioning && transitionDirection === 'left')
+                        ? 'translateX(0) scale(1)'
+                        : 'translateX(calc(100% + 16px)) scale(0.8)',
+                    zIndex: isTransitioning && transitionDirection === 'left' ? 4 : 1,
+                    transition: isDragging ? 'none' : isTransitioning ? 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   }}
                 >
                   {(() => {
