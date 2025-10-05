@@ -1,9 +1,11 @@
 interface IntroCardProps {
   slideIndex: number;
   isActive?: boolean;
+  isNext?: boolean;
+  isPrev?: boolean;
 }
 
-export function IntroCard({ slideIndex, isActive = false }: IntroCardProps) {
+export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev = false }: IntroCardProps) {
   const getContent = () => {
     switch (slideIndex) {
       case 0:
@@ -14,12 +16,12 @@ export function IntroCard({ slideIndex, isActive = false }: IntroCardProps) {
       case 1:
         return {
           text: 'Swipe left and right to change the category',
-          animationClass: 'animate-slide-horizontal'
+          animationClass: isActive ? 'animate-slide-horizontal-active' : isNext ? 'animate-slide-horizontal-next' : isPrev ? 'animate-slide-horizontal-prev' : ''
         };
       case 2:
         return {
           text: 'Swipe up or down to change the question',
-          animationClass: 'animate-slide-vertical'
+          animationClass: isActive ? 'animate-slide-vertical-active' : isNext ? 'animate-slide-vertical-next' : isPrev ? 'animate-slide-vertical-prev' : ''
         };
       default:
         return { text: '', animationClass: '' };
@@ -30,7 +32,7 @@ export function IntroCard({ slideIndex, isActive = false }: IntroCardProps) {
 
   return (
     <div 
-      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none h-full flex flex-col justify-center items-center p-8 ${isActive ? content.animationClass : ''}`}
+      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none h-full flex flex-col justify-center items-center p-8 ${content.animationClass}`}
       style={{
         backgroundColor: 'hsl(0, 0%, 40%)',
         color: 'white'
@@ -53,7 +55,7 @@ export function IntroCard({ slideIndex, isActive = false }: IntroCardProps) {
       </div>
       
       <style>{`
-        @keyframes slide-horizontal {
+        @keyframes slide-horizontal-active {
           0% {
             transform: translateX(0) scale(1);
           }
@@ -65,7 +67,19 @@ export function IntroCard({ slideIndex, isActive = false }: IntroCardProps) {
           }
         }
         
-        @keyframes slide-vertical {
+        @keyframes slide-horizontal-next {
+          0% {
+            transform: translateX(calc(100% + 16px)) scale(0.8);
+          }
+          50% {
+            transform: translateX(60%) scale(0.85);
+          }
+          100% {
+            transform: translateX(calc(100% + 16px)) scale(0.8);
+          }
+        }
+        
+        @keyframes slide-vertical-active {
           0% {
             transform: translateY(0) scale(1);
           }
@@ -77,12 +91,32 @@ export function IntroCard({ slideIndex, isActive = false }: IntroCardProps) {
           }
         }
         
-        .animate-slide-horizontal {
-          animation: slide-horizontal 0.8s ease-in-out 0.5s 1;
+        @keyframes slide-vertical-next {
+          0% {
+            transform: translateY(calc(100% + 16px)) scale(0.85);
+          }
+          50% {
+            transform: translateY(60%) scale(0.9);
+          }
+          100% {
+            transform: translateY(calc(100% + 16px)) scale(0.85);
+          }
         }
         
-        .animate-slide-vertical {
-          animation: slide-vertical 0.8s ease-in-out 0.5s 1;
+        .animate-slide-horizontal-active {
+          animation: slide-horizontal-active 0.8s ease-in-out 0.5s 1;
+        }
+        
+        .animate-slide-horizontal-next {
+          animation: slide-horizontal-next 0.8s ease-in-out 0.5s 1;
+        }
+        
+        .animate-slide-vertical-active {
+          animation: slide-vertical-active 0.8s ease-in-out 0.5s 1;
+        }
+        
+        .animate-slide-vertical-next {
+          animation: slide-vertical-next 0.8s ease-in-out 0.5s 1;
         }
       `}</style>
     </div>

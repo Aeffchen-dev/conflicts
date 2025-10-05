@@ -947,7 +947,7 @@ export function QuizApp() {
                       transition: isDragging ? 'none' : isTransitioning ? 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     }}
                   >
-                    <IntroCard slideIndex={slideIndex} isActive={isActive} />
+                    <IntroCard slideIndex={slideIndex} isActive={isActive} isNext={isNext} isPrev={isPrev} />
                   </div>
                 );
               })}
