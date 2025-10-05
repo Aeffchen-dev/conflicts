@@ -53,35 +53,35 @@ export function IntroCard({ slideIndex }: IntroCardProps) {
       
       <style>{`
         @keyframes slide-horizontal {
-          0%, 100% {
+          0% {
             transform: translateX(0) scale(1);
           }
-          25% {
-            transform: translateX(-15px) scale(0.98);
+          50% {
+            transform: translateX(-120px) scale(0.95);
           }
-          75% {
-            transform: translateX(15px) scale(0.98);
+          100% {
+            transform: translateX(0) scale(1);
           }
         }
         
         @keyframes slide-vertical {
-          0%, 100% {
+          0% {
             transform: translateY(0) scale(1);
           }
-          25% {
-            transform: translateY(-15px) scale(0.98);
+          50% {
+            transform: translateY(-120px) scale(0.95);
           }
-          75% {
-            transform: translateY(15px) scale(0.98);
+          100% {
+            transform: translateY(0) scale(1);
           }
         }
         
         .animate-slide-horizontal {
-          animation: slide-horizontal 2.5s ease-in-out infinite;
+          animation: slide-horizontal 1.5s ease-in-out 0.5s 1;
         }
         
         .animate-slide-vertical {
-          animation: slide-vertical 2.5s ease-in-out infinite;
+          animation: slide-vertical 1.5s ease-in-out 0.5s 1;
         }
       `}</style>
     </div>
