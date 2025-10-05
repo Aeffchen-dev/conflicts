@@ -931,6 +931,19 @@ export function QuizApp() {
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
           }
+          
+          @keyframes pulse-scale {
+            0%, 100% {
+              transform: rotate(-45deg) scale(1.3);
+            }
+            50% {
+              transform: rotate(-45deg) scale(1.45);
+            }
+          }
+          
+          .animate-pulse-scale {
+            animation: pulse-scale 1.5s ease-in-out infinite;
+          }
         `}</style>
         <button 
           onClick={() => setCategorySelectorOpen(true)}
@@ -945,13 +958,59 @@ export function QuizApp() {
       <div className="flex-1 flex flex-col px-4 pb-4 mt-4" style={{ minHeight: 0, overflow: 'visible' }}>
         <div className="flex-1 flex items-stretch justify-center min-h-0 relative" style={{ overflow: 'visible' }}>
           {loading ? (
-            <div className="flex items-center justify-center h-full text-white" style={{ fontSize: '14px' }}>
-              Lade Fragen
-              <span className="loading-dots">
-                <span className="dot-1">.</span>
-                <span className="dot-2">.</span>
-                <span className="dot-3">.</span>
-              </span>
+            <div className="flex items-center justify-center h-full">
+              <div className="animate-pulse-scale">
+                <svg 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  viewBox="0 0 32 24"
+                  className="w-16 h-12"
+                  style={{
+                    transform: 'rotate(-45deg) scale(1.3)',
+                    filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
+                  }}
+                >
+                  {/* Left adhesive strip */}
+                  <rect x="0" y="0" width="10" height="24" rx="1" fill="white" opacity="0.95"/>
+                  
+                  {/* Center pad */}
+                  <rect x="10" y="6" width="12" height="12" rx="1" fill="#f5e6d3"/>
+                  
+                  {/* Right adhesive strip */}
+                  <rect x="22" y="0" width="10" height="24" rx="1" fill="white" opacity="0.95"/>
+                  
+                  {/* Left holes */}
+                  <circle cx="3" cy="4" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="6" cy="4" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="3" cy="8" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="6" cy="8" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="3" cy="12" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="6" cy="12" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="3" cy="16" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="6" cy="16" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="3" cy="20" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="6" cy="20" r="0.8" fill="white" opacity="0.9"/>
+                  
+                  {/* Right holes */}
+                  <circle cx="24" cy="4" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="27" cy="4" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="24" cy="8" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="27" cy="8" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="24" cy="12" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="27" cy="12" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="24" cy="16" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="27" cy="16" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="24" cy="20" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="27" cy="20" r="0.8" fill="white" opacity="0.9"/>
+                  
+                  {/* Center pad holes */}
+                  <circle cx="13" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
+                  <circle cx="16" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
+                  <circle cx="19" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
+                  <circle cx="13" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
+                  <circle cx="16" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
+                  <circle cx="19" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
+                </svg>
+              </div>
             </div>
           ) : !hasSeenIntro ? (
             /* Render intro slides */
