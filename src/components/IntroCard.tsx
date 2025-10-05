@@ -75,13 +75,13 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       <style>{`
         @keyframes color-wave {
           0% {
-            background-position: 0% center;
+            background-position: 100% center;
           }
           16.67% {
-            background-position: 100% center;
+            background-position: -100% center;
           }
           100% {
-            background-position: 100% center;
+            background-position: -100% center;
           }
         }
         
@@ -94,8 +94,8 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
             hsl(160, 70%, 15%) 60%,
             hsl(160, 70%, 15%) 100%
           );
-          background-size: 200% 100%;
-          background-position: 0% center;
+          background-size: 300% 100%;
+          background-position: 100% center;
           -webkit-background-clip: text;
           background-clip: text;
           color: transparent;
