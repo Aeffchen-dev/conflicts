@@ -75,10 +75,13 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       <style>{`
         @keyframes color-wave {
           0% {
+            background-position: 200% center;
+          }
+          20% {
             background-position: -100% center;
           }
           100% {
-            background-position: 200% center;
+            background-position: -100% center;
           }
         }
         
@@ -100,7 +103,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
           background-clip: text;
           color: transparent;
           -webkit-text-fill-color: transparent;
-          animation: color-wave 5s linear infinite;
+          animation: color-wave 10s ease-in-out infinite;
           text-shadow: 0 0 0.5px hsl(160, 70%, 10% / 0.2);
         }
         
