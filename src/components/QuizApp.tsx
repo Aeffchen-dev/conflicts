@@ -1002,7 +1002,7 @@ export function QuizApp() {
                   <circle cx="24" cy="20" r="0.8" fill="white" opacity="0.9"/>
                   <circle cx="27" cy="20" r="0.8" fill="white" opacity="0.9"/>
                   
-                  {/* Center pad holes */}
+                  {/* Center pad holes (smaller, less visible) */}
                   <circle cx="13" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
                   <circle cx="16" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
                   <circle cx="19" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
