@@ -342,76 +342,43 @@ export function QuizApp() {
     }
   };
 
-  // Multi-slide system state
-  const [isTransitioning, setIsTransitioning] = useState(false);
-  const [transitionDirection, setTransitionDirection] = useState<'left' | 'right' | null>(null);
+  // Category navigation state
+  const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
+  const [currentQuestionIndexInCategory, setCurrentQuestionIndexInCategory] = useState(0);
+  const [categorizedQuestions, setCategorizedQuestions] = useState<{ [category: string]: Question[] }>({});
 
-  // Real-time dragging state
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState(0);
-  const [dragStartX, setDragStartX] = useState(0);
+  const nextCategory = () => {
+    const categories = Object.keys(categorizedQuestions);
+    setCurrentCategoryIndex((prev) => (prev + 1) % categories.length);
+    setCurrentQuestionIndexInCategory(0);
+  };
+
+  const prevCategory = () => {
+    const categories = Object.keys(categorizedQuestions);
+    setCurrentCategoryIndex((prev) => (prev - 1 + categories.length) % categories.length);
+    setCurrentQuestionIndexInCategory(0);
+  };
 
   const nextQuestion = () => {
-    if (currentIndex < slides.length - 1 && !isTransitioning) {
-      setIsTransitioning(true);
-      setTransitionDirection('left');
-      
-      setTimeout(() => {
-        setCurrentIndex(prev => prev + 1);
-        setIsTransitioning(false);
-        setTransitionDirection(null);
-      }, 300);
-    }
+    const currentCategory = Object.keys(categorizedQuestions)[currentCategoryIndex];
+    const questionsInCategory = categorizedQuestions[currentCategory] || [];
+    setCurrentQuestionIndexInCategory((prev) => (prev + 1) % questionsInCategory.length);
   };
 
   const prevQuestion = () => {
-    if (currentIndex > 0 && !isTransitioning) {
-      setIsTransitioning(true);
-      setTransitionDirection('right');
-      
-      setTimeout(() => {
-        setCurrentIndex(prev => prev - 1);
-        setIsTransitioning(false);
-        setTransitionDirection(null);
-      }, 300);
-    }
-  };
-
-  // Real-time drag handlers
-  const handleDragStart = (clientX: number) => {
-    if (isTransitioning) return;
-    setIsDragging(true);
-    setDragStartX(clientX);
-    setDragOffset(0);
-  };
-
-  const handleDragMove = (clientX: number) => {
-    if (!isDragging) return;
-    const offset = clientX - dragStartX;
-    setDragOffset(offset);
-  };
-
-  const handleDragEnd = () => {
-    if (!isDragging) return;
-    
-    const threshold = 120;
-    
-    if (Math.abs(dragOffset) > threshold) {
-      if (dragOffset > 0 && currentIndex > 0) {
-        prevQuestion();
-      } else if (dragOffset < 0 && currentIndex < slides.length - 1) {
-        nextQuestion();
-      }
-    }
-    
-    setIsDragging(false);
-    setDragOffset(0);
+    const currentCategory = Object.keys(categorizedQuestions)[currentCategoryIndex];
+    const questionsInCategory = categorizedQuestions[currentCategory] || [];
+    setCurrentQuestionIndexInCategory((prev) => (prev - 1 + questionsInCategory.length) % questionsInCategory.length);
   };
 
   const handleKeyPress = (e: KeyboardEvent) => {
     if (e.key === 'ArrowLeft') {
-      prevQuestion();
+      prevCategory();
     } else if (e.key === 'ArrowRight') {
+      nextCategory();
+    } else if (e.key === 'ArrowUp') {
+      prevQuestion();
+    } else if (e.key === 'ArrowDown') {
       nextQuestion();
     }
   };
@@ -419,55 +386,36 @@ export function QuizApp() {
   useEffect(() => {
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [currentIndex]);
+  }, [currentCategoryIndex, categorizedQuestions]);
 
-  // Filter and order slides based on categories and mode
+  // Organize questions by category
   useEffect(() => {
-    // Filter by categories
     let filteredQuestions = allQuestions.filter(q => 
       selectedCategories.includes(q.category)
     );
     
-    // Filter by type based on toggle - when toggle is off (isMixedMode=false), show only "Frage" content
     if (!isMixedMode) {
       filteredQuestions = filteredQuestions.filter(q => q.type === 'Frage');
     }
     
-    setQuestions(filteredQuestions);
+    const organized: { [category: string]: Question[] } = {};
     
-    const slides: SlideItem[] = [];
-    
-    let orderedQuestions: Question[];
-    
-    if (isMixedMode && hasToggleBeenChanged) {
-      // Only prioritize "Aktion" questions when user actively switched to action mode
-      const aktionQuestions = filteredQuestions.filter(q => q.type === 'Aktion');
-      const frageQuestions = filteredQuestions.filter(q => q.type === 'Frage');
-      
-      // Shuffle each type separately
-      const shuffledAktionQuestions = smartShuffle([...aktionQuestions]);
-      const shuffledFrageQuestions = smartShuffle([...frageQuestions]);
-      
-      // Combine with "Aktion" questions first
-      orderedQuestions = [...shuffledAktionQuestions, ...shuffledFrageQuestions];
-    } else {
-      // For initial load or question mode, just shuffle normally
-      orderedQuestions = smartShuffle([...filteredQuestions]);
-    }
-    
-    // Add question slides
-    orderedQuestions.forEach(q => {
-      slides.push({ type: 'question', question: q });
+    filteredQuestions.forEach(q => {
+      if (!organized[q.category]) {
+        organized[q.category] = [];
+      }
+      organized[q.category].push(q);
     });
     
-    setSlides(slides);
-    setCurrentIndex(0); // Reset to first slide when filtering/mode changes
-  }, [selectedCategories, allQuestions, availableCategories.length, isMixedMode, hasToggleBeenChanged]);
-
-  // Clamp current index whenever slides length changes to prevent out-of-bounds access
-  useEffect(() => {
-    setCurrentIndex((i) => (slides.length ? Math.min(i, slides.length - 1) : 0));
-  }, [slides.length]);
+    // Shuffle questions within each category
+    Object.keys(organized).forEach(category => {
+      organized[category] = smartShuffle(organized[category]);
+    });
+    
+    setCategorizedQuestions(organized);
+    setCurrentCategoryIndex(0);
+    setCurrentQuestionIndexInCategory(0);
+  }, [selectedCategories, allQuestions, isMixedMode, hasToggleBeenChanged]);
 
   const handleCategoriesChange = (categories: string[]) => {
     setSelectedCategories(categories);
@@ -523,9 +471,43 @@ export function QuizApp() {
     }
   };
 
-  const hasSlides = slides.length > 0;
-  const safeIndex = hasSlides ? Math.min(currentIndex, slides.length - 1) : 0;
-  const safeSlide = hasSlides ? slides[safeIndex] : undefined;
+  const categories = Object.keys(categorizedQuestions);
+  const hasCategories = categories.length > 0;
+  const currentCategory = hasCategories ? categories[currentCategoryIndex] : '';
+  const questionsInCategory = categorizedQuestions[currentCategory] || [];
+  const hasQuestions = questionsInCategory.length > 0;
+  const currentQuestion = hasQuestions ? questionsInCategory[currentQuestionIndexInCategory] : undefined;
+
+  // Touch handlers for horizontal swipe
+  const [touchStartX, setTouchStartX] = useState(0);
+  const [touchStartY, setTouchStartY] = useState(0);
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX);
+    setTouchStartY(e.touches[0].clientY);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const deltaX = e.changedTouches[0].clientX - touchStartX;
+    const deltaY = e.changedTouches[0].clientY - touchStartY;
+    
+    // Horizontal swipe (category change)
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+      if (deltaX > 0) {
+        prevCategory();
+      } else {
+        nextCategory();
+      }
+    }
+    // Vertical swipe (question change)
+    else if (Math.abs(deltaY) > 50) {
+      if (deltaY > 0) {
+        prevQuestion();
+      } else {
+        nextQuestion();
+      }
+    }
+  };
 
   return (
     <div className="min-h-[100svh] h-[100svh] bg-background overflow-hidden flex flex-col" style={{ height: '100svh' }}>
@@ -724,95 +706,49 @@ export function QuizApp() {
         </button>
       </div>
 
-      {/* Main Quiz Container with multi-slide carousel */}
-      <div className="flex-1 flex flex-col px-4 pb-4 overflow-hidden mt-4" style={{ minHeight: 0 }}>
+      {/* Main Quiz Container */}
+      <div 
+        className="flex-1 flex flex-col px-4 pb-4 overflow-hidden mt-4" 
+        style={{ minHeight: 0 }}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+      >
         <div className="flex-1 flex items-stretch justify-center min-h-0 relative">
           {loading ? (
             <div className="flex items-center justify-center h-full text-white text-xl">Lade Fragen...</div>
-          ) : hasSlides ? (
-            <div className="relative w-full h-full flex items-center justify-center">
-              {/* Render current slide and adjacent slides for transitions */}
-              {slides.map((slide, index) => {
-                const isActive = index === safeIndex;
-                const isPrev = index === safeIndex - 1;
-                const isNext = index === safeIndex + 1;
-                
-                if (!isActive && !isPrev && !isNext) return null;
-                
-                let transform = '';
-                let zIndex = 1;
-                
-                if (isActive) {
-                  // Current slide positioning
-                  if (isDragging) {
-                    // Calculate drag progress for scaling and rotation
-                    const dragProgress = Math.abs(dragOffset) / 300; // Normalize to 0-1
-                    const scale = Math.max(0.8, 1 - dragProgress * 0.2); // Scale from 1 to 0.8
-                    const rotation = dragOffset > 0 ? dragProgress * 5 : -dragProgress * 5; // Rotate up to 5 degrees
-                    transform = `translateX(${dragOffset}px) scale(${scale}) rotate(${rotation}deg)`;
-                  } else if (isTransitioning && transitionDirection === 'left') {
-                    transform = 'translateX(calc(-100% - 16px)) scale(0.8) rotate(-5deg)';
-                  } else if (isTransitioning && transitionDirection === 'right') {
-                    transform = 'translateX(calc(100% + 16px)) scale(0.8) rotate(5deg)';
-                  } else {
-                    transform = 'translateX(0) scale(1) rotate(0deg)';
-                  }
-                  zIndex = 2;
-                } else if (isPrev) {
-                  // Previous slide positioning
-                  if (isDragging) {
-                    // Calculate scale for incoming slide based on drag progress
-                    const dragProgress = Math.abs(dragOffset) / 300;
-                    const scale = Math.min(1, 0.8 + dragProgress * 0.2); // Scale from 0.8 to 1
-                    transform = `translateX(calc(-100% - 16px + ${dragOffset}px)) scale(${scale}) rotate(0deg)`;
-                  } else if (isTransitioning && transitionDirection === 'right') {
-                    transform = 'translateX(0) scale(1) rotate(0deg)';
-                  } else {
-                    transform = 'translateX(calc(-100% - 16px)) scale(0.8) rotate(0deg)';
-                  }
-                } else if (isNext) {
-                  // Next slide positioning
-                  if (isDragging) {
-                    // Calculate scale for incoming slide based on drag progress
-                    const dragProgress = Math.abs(dragOffset) / 300;
-                    const scale = Math.min(1, 0.8 + dragProgress * 0.2); // Scale from 0.8 to 1
-                    transform = `translateX(calc(100% + 16px + ${dragOffset}px)) scale(${scale}) rotate(0deg)`;
-                  } else if (isTransitioning && transitionDirection === 'left') {
-                    transform = 'translateX(0) scale(1) rotate(0deg)';
-                  } else {
-                    transform = 'translateX(calc(100% + 16px)) scale(0.8) rotate(0deg)';
-                  }
-                }
-                
-                return (
-                  <div
-                    key={`slide-${index}`}
-                    className="absolute inset-0 w-full h-full"
-                    style={{
-                      transform,
-                      zIndex,
-                      transition: isDragging ? 'none' : 'transform 0.3s ease-in-out'
-                    }}
-                  >
-                    <QuizCard
-                      question={slide.question!}
-                      onSwipeLeft={nextQuestion}
-                      onSwipeRight={prevQuestion}
-                      categoryIndex={categoryColorMap[slide.question!.category] || 0}
-                      onDragStart={handleDragStart}
-                      onDragMove={handleDragMove}
-                      onDragEnd={handleDragEnd}
-                      dragOffset={isDragging ? dragOffset : 0}
-                      isDragging={isDragging}
-                    />
-                  </div>
-                );
-              })}
+          ) : hasCategories && currentQuestion ? (
+            <div className="w-full h-full flex items-center justify-center">
+              <QuizCard
+                question={currentQuestion}
+                onSwipeLeft={nextCategory}
+                onSwipeRight={prevCategory}
+                categoryIndex={categoryColorMap[currentQuestion.category] || 0}
+              />
             </div>
           ) : (
             <div className="flex items-center justify-center h-full text-white text-xl">Keine Fragen verfügbar</div>
           )}
         </div>
+        
+        {/* Navigation indicators */}
+        {hasCategories && (
+          <div className="flex flex-col items-center mt-4 gap-2">
+            <div className="flex gap-2">
+              {categories.map((cat, idx) => (
+                <div 
+                  key={cat}
+                  className="w-2 h-2 rounded-full transition-all"
+                  style={{ 
+                    backgroundColor: idx === currentCategoryIndex ? 'white' : 'rgba(255,255,255,0.3)'
+                  }}
+                />
+              ))}
+            </div>
+            <div className="text-white text-xs opacity-60">
+              {currentCategory} ({currentQuestionIndexInCategory + 1}/{questionsInCategory.length})
+            </div>
+          </div>
+        )}
       </div>
       
       <CategorySelector
