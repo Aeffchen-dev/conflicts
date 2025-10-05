@@ -394,16 +394,10 @@ export function QuizApp() {
 
   const nextCategory = () => {
     if (!isTransitioning) {
-      // If we're in intro slides, advance through them
-      if (!hasSeenIntro && currentIntroIndex < totalIntroSlides - 1) {
+      // If we're in intro slides 0-2, advance horizontally
+      if (!hasSeenIntro && currentIntroIndex < 2) {
         setIsTransitioning(true);
-        
-        // Slide 2 -> 3 should be vertical (down), others horizontal (left)
-        if (currentIntroIndex === 2) {
-          setTransitionDirection('down');
-        } else {
-          setTransitionDirection('left');
-        }
+        setTransitionDirection('left');
         
         setTimeout(() => {
           setCurrentIntroIndex(prev => prev + 1);
@@ -411,8 +405,8 @@ export function QuizApp() {
           setTransitionDirection(null);
         }, 300);
       } 
-      // Move from last intro to first category
-      else if (!hasSeenIntro && currentIntroIndex === totalIntroSlides - 1) {
+      // From slide 2 or 3, horizontal swipe goes to first category
+      else if (!hasSeenIntro && (currentIntroIndex === 2 || currentIntroIndex === 3)) {
         setIsTransitioning(true);
         setTransitionDirection('left');
         
@@ -439,16 +433,10 @@ export function QuizApp() {
 
   const prevCategory = () => {
     if (!isTransitioning) {
-      // If we're in intro slides (not first one), go back
-      if (!hasSeenIntro && currentIntroIndex > 0) {
+      // If we're in intro slides 1-2, go back horizontally
+      if (!hasSeenIntro && currentIntroIndex > 0 && currentIntroIndex <= 2) {
         setIsTransitioning(true);
-        
-        // Slide 3 -> 2 should be vertical (up), others horizontal (right)
-        if (currentIntroIndex === 3) {
-          setTransitionDirection('up');
-        } else {
-          setTransitionDirection('right');
-        }
+        setTransitionDirection('right');
         
         setTimeout(() => {
           setCurrentIntroIndex(prev => prev - 1);
@@ -467,6 +455,33 @@ export function QuizApp() {
           setTransitionDirection(null);
         }, 300);
       }
+    }
+  };
+  
+  // New functions for vertical navigation to/from slide 3
+  const goToSlide3 = () => {
+    if (!isTransitioning && !hasSeenIntro && currentIntroIndex === 2) {
+      setIsTransitioning(true);
+      setTransitionDirection('down');
+      
+      setTimeout(() => {
+        setCurrentIntroIndex(3);
+        setIsTransitioning(false);
+        setTransitionDirection(null);
+      }, 300);
+    }
+  };
+  
+  const returnFromSlide3 = () => {
+    if (!isTransitioning && !hasSeenIntro && currentIntroIndex === 3) {
+      setIsTransitioning(true);
+      setTransitionDirection('up');
+      
+      setTimeout(() => {
+        setCurrentIntroIndex(2);
+        setIsTransitioning(false);
+        setTransitionDirection(null);
+      }, 300);
     }
   };
 
@@ -549,11 +564,11 @@ export function QuizApp() {
       } else if (dragDirection === 'vertical' && Math.abs(dragOffsetY) > threshold) {
         // On slide 2, swipe down goes to slide 3
         if (currentIntroIndex === 2 && dragOffsetY < 0) {
-          nextCategory();
+          goToSlide3();
         }
         // On slide 3, swipe up goes back to slide 2
         else if (currentIntroIndex === 3 && dragOffsetY > 0) {
-          prevCategory();
+          returnFromSlide3();
         }
       }
     }
