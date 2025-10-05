@@ -9,35 +9,19 @@ interface IntroCardProps {
   onSwipeLeft?: () => void;
   onSwipeRight?: () => void;
   isTransitioning?: boolean;
-  nextDirection?: 'horizontal' | 'vertical';
 }
 
-export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev = false, onSwipeLeft, onSwipeRight, isTransitioning = false, nextDirection }: IntroCardProps) {
+export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev = false, onSwipeLeft, onSwipeRight, isTransitioning = false }: IntroCardProps) {
   const getContent = () => {
     switch (slideIndex) {
       case 0:
-        return {
-          text: 'Fragen um akute Konflikte gut zu navigieren und zufriedenstellend lösen zu können',
-          animationClass: ''
-        };
+        return { text: 'Fragen um akute Konflikte gut zu navigieren und zufriedenstellend lösen zu können' };
       case 1:
-        return {
-          text: 'Swipe nach rechts und links um zwischen den Kategorien zu wechseln',
-          animationClass: !isTransitioning && isActive ? 'animate-slide-horizontal-active' : !isTransitioning && isNext ? 'animate-slide-horizontal-next' : !isTransitioning && isPrev ? 'animate-slide-horizontal-prev' : ''
-        };
+        return { text: 'Swipe nach rechts und links um zwischen den Kategorien zu wechseln' };
       case 2:
-        return {
-          text: 'Swipe nach oben und unten um zwischen den Fragen einer Kategorie zu wechseln',
-          animationClass: !isTransitioning && isActive
-            ? 'animate-slide-vertical-active'
-            : !isTransitioning && isNext
-              ? (nextDirection === 'horizontal' ? 'animate-slide-horizontal-next' : 'animate-slide-vertical-next')
-              : !isTransitioning && isPrev
-                ? 'animate-slide-vertical-prev'
-                : ''
-        };
+        return { text: 'Swipe nach oben und unten um zwischen den Fragen einer Kategorie zu wechseln' };
       default:
-        return { text: '', animationClass: '' };
+        return { text: '' };
     }
   };
 
@@ -46,7 +30,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
 
   return (
     <div 
-      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none flex flex-col justify-between items-center ${content.animationClass}`}
+      className="relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none flex flex-col justify-between items-center"
       style={{
         height: '100%',
         backgroundColor: 'hsl(160, 55%, 75%)',
@@ -103,69 +87,6 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       >
         Swipe nach rechts um weiter zu navigieren
       </p>
-      
-      <style>{`
-        @keyframes slide-horizontal-active {
-          0% {
-            transform: translateX(0) scale(1);
-          }
-          50% {
-            transform: translateX(-20%) scale(0.95);
-          }
-          100% {
-            transform: translateX(0) scale(1);
-          }
-        }
-        
-        @keyframes slide-horizontal-next {
-          0% {
-            transform: translateX(calc(100% + 16px)) scale(0.8);
-          }
-          100% {
-            transform: translateX(20%) scale(0.9);
-          }
-        }
-        
-        @keyframes slide-vertical-active {
-          0% {
-            transform: translateY(0) scale(1);
-          }
-          50% {
-            transform: translateY(-20%) scale(0.95);
-          }
-          100% {
-            transform: translateY(0) scale(1);
-          }
-        }
-        
-        @keyframes slide-vertical-next {
-          0% {
-            transform: translateY(calc(100% + 16px)) scale(0.85);
-          }
-          50% {
-            transform: translateY(10%) scale(0.92);
-          }
-          100% {
-            transform: translateY(calc(100% + 16px)) scale(0.85);
-          }
-        }
-        
-        .animate-slide-horizontal-active {
-          animation: slide-horizontal-active 0.5s ease-in-out 0.3s 1;
-        }
-        
-        .animate-slide-horizontal-next {
-          animation: slide-horizontal-next 0.5s ease-in-out 0.3s 1;
-        }
-        
-        .animate-slide-vertical-active {
-          animation: slide-vertical-active 0.5s ease-in-out 0.3s 1;
-        }
-        
-        .animate-slide-vertical-next {
-          animation: slide-vertical-next 0.5s ease-in-out 0.3s 1;
-        }
-      `}</style>
     </div>
   );
 }

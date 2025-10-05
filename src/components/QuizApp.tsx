@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { QuizCard } from './QuizCard';
 import { CategorySelector } from './CategorySelector';
 import { IntroSlide } from './IntroSlide';
@@ -906,6 +906,21 @@ export function QuizApp() {
                 
                 if (!isActive && !isPrev && !isNext) return null;
                 
+                // Use a ref to track micro-animation timing
+                const microAnimationTimerRef = useRef<NodeJS.Timeout | null>(null);
+                const [showMicroAnimation, setShowMicroAnimation] = useState(false);
+                
+                useEffect(() => {
+                  if ((currentIntroIndex === 1 || currentIntroIndex === 2) && !isTransitioning && !isDragging && isActive) {
+                    microAnimationTimerRef.current = setTimeout(() => setShowMicroAnimation(true), 300);
+                    return () => {
+                      if (microAnimationTimerRef.current) clearTimeout(microAnimationTimerRef.current);
+                    };
+                  } else {
+                    setShowMicroAnimation(false);
+                  }
+                }, [currentIntroIndex, isTransitioning, isDragging, isActive]);
+                
                 let transform = '';
                 let zIndex = 1;
                 
@@ -918,6 +933,12 @@ export function QuizApp() {
                     transform = 'translateX(calc(-100% - 16px)) scale(0.8)';
                   } else if (isTransitioning && transitionDirection === 'right') {
                     transform = 'translateX(calc(100% + 16px)) scale(0.8)';
+                  } else if (showMicroAnimation && currentIntroIndex === 1) {
+                    // Horizontal micro-animation: slide slightly left
+                    transform = 'translateX(-15%) scale(0.98)';
+                  } else if (showMicroAnimation && currentIntroIndex === 2) {
+                    // Vertical micro-animation: slide slightly up
+                    transform = 'translateY(-15%) scale(0.98)';
                   } else {
                     transform = 'translateX(0) scale(1)';
                   }
@@ -940,6 +961,12 @@ export function QuizApp() {
                     transform = `translateX(calc(100% + 16px + ${dragOffsetX}px)) scale(${scale})`;
                   } else if (isTransitioning && transitionDirection === 'left') {
                     transform = 'translateX(0) scale(1)';
+                  } else if (showMicroAnimation && currentIntroIndex === 1) {
+                    // Horizontal micro-animation: next slide peeks in from right
+                    transform = 'translateX(calc(100% + 16px - 20%)) scale(0.85)';
+                  } else if (showMicroAnimation && currentIntroIndex === 2) {
+                    // Vertical micro-animation: next slide peeks in from bottom
+                    transform = 'translateY(calc(100% + 16px - 20%)) scale(0.85)';
                   } else {
                     transform = 'translateX(calc(100% + 16px)) scale(0.8)';
                   }
@@ -953,7 +980,7 @@ export function QuizApp() {
                     style={{
                       transform,
                       zIndex,
-                      transition: isDragging ? 'none' : isTransitioning ? 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      transition: isDragging ? 'none' : (isTransitioning || showMicroAnimation) ? 'transform 0.5s ease-in-out' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     }}
                   >
                     <IntroCard 
@@ -964,7 +991,6 @@ export function QuizApp() {
                       onSwipeLeft={nextCategory}
                       onSwipeRight={prevCategory}
                       isTransitioning={isTransitioning || isDragging}
-                      nextDirection={isNext && currentIntroIndex === 1 ? 'horizontal' : undefined}
                     />
                   </div>
                 );
