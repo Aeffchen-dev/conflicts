@@ -114,11 +114,8 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
           0% {
             transform: translateX(calc(100% + 16px)) scale(0.8);
           }
-          50% {
-            transform: translateX(10%) scale(0.9);
-          }
           100% {
-            transform: translateX(calc(100% + 16px)) scale(0.8);
+            transform: translateX(20%) scale(0.9);
           }
         }
         
