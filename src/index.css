@@ -178,6 +178,7 @@ All colors MUST be HSL.
     overflow: hidden;
     height: 100vh;
     height: 100svh;
+    overscroll-behavior: none;
   }
 
   body {
@@ -187,6 +188,8 @@ All colors MUST be HSL.
     height: 100svh;
     position: fixed;
     width: 100%;
+    overscroll-behavior: none;
+    touch-action: none;
   }
 }
 
