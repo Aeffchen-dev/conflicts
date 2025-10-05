@@ -86,23 +86,8 @@ export function QuizApp() {
   useEffect(() => {
     fetchQuestions();
     
-    // Trigger full logo animation on initial load (same as tap)
-    setLogoAnimating(true);
-    setAnimatingLetterIndex(0);
-    
-    // Reset band-aid state to allow animation
-    setShowBandaid(false);
-    
-    // Band-aid starts AFTER text completes at 1.1s
-    setTimeout(() => {
-      setShowBandaid(true);
-    }, 1100);
-    
-    // End text animation
-    setTimeout(() => {
-      setLogoAnimating(false);
-      setAnimatingLetterIndex(-1);
-    }, 1100);
+    // Show bandaid immediately without animation on load
+    setShowBandaid(true);
   }, []);
 
   // Rotate smiley during loading
