@@ -990,34 +990,19 @@ export function QuizApp() {
                     
                     return categoryQuestions.map((q, qIndex) => {
                       const isCurrent = qIndex === questionIndexForCategory;
-                      const isPrevQ = qIndex === (questionIndexForCategory - 1 + categoryQuestions.length) % categoryQuestions.length;
-                      const isNextQ = qIndex === (questionIndexForCategory + 1) % categoryQuestions.length;
                       
-                      if (!isCurrent && !isPrevQ && !isNextQ) return null;
-                      
-                      let verticalTransform = '';
-                      let qZIndex = 1;
-                      
-                      if (isCurrent) {
-                        verticalTransform = 'translateY(0) scale(1)';
-                        qZIndex = 3;
-                      } else if (isPrevQ) {
-                        verticalTransform = 'translateY(calc(-100% - 8px)) scale(0.95)';
-                        qZIndex = 1;
-                      } else if (isNextQ) {
-                        verticalTransform = 'translateY(calc(100% + 8px)) scale(0.95)';
-                        qZIndex = 2;
-                      }
+                      // Only show current question during transition
+                      if (!isCurrent) return null;
                       
                       return (
                         <div
                           key={`preview-${firstCategory}-${qIndex}`}
                           className="absolute inset-0 w-full h-full pointer-events-none"
                           style={{
-                            transform: verticalTransform,
-                            zIndex: qZIndex,
+                            transform: 'translateY(0) scale(1)',
+                            zIndex: 3,
                             transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                            height: isCurrent ? 'calc(90% - 8px)' : '100%',
+                            height: 'calc(90% - 8px)',
                           }}
                         >
                           <QuizCard
