@@ -841,7 +841,12 @@ export function QuizApp() {
                   // Only render this question if:
                   // 1. It's in the active category and is current/prev/next question
                   // 2. It's in prev/next category and is the current question of that category
-                  const shouldRender = (isActiveCategory && (isActiveQuestion || isPrevQuestion || isNextQuestion)) ||
+                  // 3. Don't show prev/next questions during horizontal transitions
+                  const isHorizontalTransition = (isDragging && dragDirection === 'horizontal') || 
+                                                (isTransitioning && (transitionDirection === 'left' || transitionDirection === 'right'));
+                  
+                  const shouldRender = (isActiveCategory && isActiveQuestion) ||
+                                      (isActiveCategory && (isPrevQuestion || isNextQuestion) && !isHorizontalTransition) ||
                                       ((isPrevCategory || isNextCategory) && isActiveQuestion);
                   
                   if (!shouldRender) return null;
