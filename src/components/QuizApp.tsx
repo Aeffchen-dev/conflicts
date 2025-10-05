@@ -535,10 +535,10 @@ export function QuizApp() {
               marginLeft: '8px',
               display: 'inline-block',
               transform: 'rotate(-45deg) scale(1.28)',
-              perspective: '400px',
+              perspective: '1000px',
               transformStyle: 'preserve-3d',
               opacity: showBandaid ? 1 : 0,
-              animation: showBandaid ? 'applyBandaid 0.8s cubic-bezier(0.34, 1.56, 0.64, 1)' : 'none',
+              animation: showBandaid ? 'applyBandaid 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'none',
               filter: showBandaid ? 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))' : 'drop-shadow(1px 1px 2px rgba(0,0,0,0.2))',
               transition: showBandaid ? 'none' : 'opacity 0.1s ease'
             }}
@@ -676,29 +676,24 @@ export function QuizApp() {
           
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) scale(0.6) rotateZ(0deg) rotateX(-60deg) translateY(-20px) translateZ(-30px);
+              transform: rotate(-45deg) scaleX(1.28) rotateZ(0deg) translateY(0px);
               opacity: 0;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
-            25% {
-              transform: rotate(-45deg) scale(1.4) rotateZ(-8deg) rotateX(45deg) translateY(-8px) translateZ(20px);
+            30% {
+              transform: rotate(-45deg) scaleX(1.7) rotateZ(-14deg) translateY(-4px);
               opacity: 1;
-              filter: drop-shadow(6px 8px 12px rgba(0,0,0,0.5));
+              filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.4));
             }
-            50% {
-              transform: rotate(-45deg) scale(1.8) rotateZ(-18deg) rotateX(35deg) translateY(-6px) translateZ(15px);
+            80% {
+              transform: rotate(-45deg) scaleX(1.29) rotateZ(-0.3deg) translateY(-0.05px);
               opacity: 1;
-              filter: drop-shadow(5px 7px 10px rgba(0,0,0,0.45));
-            }
-            75% {
-              transform: rotate(-45deg) scale(1.4) rotateZ(-4deg) rotateX(8deg) translateY(-1px) translateZ(5px);
-              opacity: 1;
-              filter: drop-shadow(2px 3px 5px rgba(0,0,0,0.3));
+              filter: drop-shadow(1.5px 1.5px 2.5px rgba(0,0,0,0.22));
             }
             100% {
-              transform: rotate(-45deg) scale(1.28) rotateZ(0deg) rotateX(0deg) translateY(0px) translateZ(0px);
+              transform: rotate(-45deg) scaleX(1.28) rotateZ(0deg) translateY(0px);
               opacity: 1;
-              filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+              filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
           }
         `}</style>
