@@ -760,12 +760,12 @@ export function QuizApp() {
               }}
             >
               {letter}
-              {index === 3 && ( // Position on 'f'
+              {index === 4 && ( // Position on 'l'
                 <div 
                   style={{
                     position: 'absolute',
                     right: '-8px',
-                    top: '0px',
+                    bottom: '0px',
                     transform: 'rotate(-45deg) scale(1.09)',
                     perspective: '1000px',
                     transformStyle: 'preserve-3d',
