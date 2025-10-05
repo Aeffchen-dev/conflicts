@@ -1,5 +1,3 @@
-import { ArrowLeftRight, ArrowUpDown } from 'lucide-react';
-
 interface IntroCardProps {
   slideIndex: number;
 }
@@ -10,23 +8,20 @@ export function IntroCard({ slideIndex }: IntroCardProps) {
       case 0:
         return {
           text: 'Dieses Frage-Spiel hilft euch in einer akuten Konflikt-Situation diesen möglichst gut zu lösen.',
-          showPill: false,
-          icon: null
+          animationClass: ''
         };
       case 1:
         return {
           text: 'Swipe left and right to change the category',
-          showPill: false,
-          icon: <ArrowLeftRight className="w-12 h-12 animate-swipe-horizontal" />
+          animationClass: 'animate-slide-horizontal'
         };
       case 2:
         return {
           text: 'Swipe up or down to change the question',
-          showPill: false,
-          icon: <ArrowUpDown className="w-12 h-12 animate-swipe-vertical" />
+          animationClass: 'animate-slide-vertical'
         };
       default:
-        return { text: '', showPill: false, icon: null };
+        return { text: '', animationClass: '' };
     }
   };
 
@@ -34,60 +29,59 @@ export function IntroCard({ slideIndex }: IntroCardProps) {
 
   return (
     <div 
-      className="relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none h-full flex flex-col justify-center items-center p-8"
+      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none h-full flex flex-col justify-center items-center p-8 ${content.animationClass}`}
       style={{
         backgroundColor: 'hsl(0, 0%, 40%)',
         color: 'white'
       }}
     >
-      <div className="flex flex-col items-center justify-center gap-6 text-center">
-        <p 
-          className="text-lg md:text-xl lg:text-2xl max-w-md"
+      <div className="flex flex-col items-center justify-center text-center">
+        <h1 
+          className="text-3xl md:text-4xl lg:text-5xl max-w-full leading-tight lg:leading-[1.09]"
           style={{ 
-            fontFamily: 'Arial, sans-serif',
-            lineHeight: '1.5'
+            fontFamily: 'Kokoro, serif',
+            fontWeight: 'bold',
+            fontStyle: 'italic',
+            hyphens: 'none',
+            overflowWrap: 'break-word',
+            wordBreak: 'normal'
           }}
         >
           {content.text}
-        </p>
-        {content.icon && (
-          <div className="mt-4">
-            {content.icon}
-          </div>
-        )}
+        </h1>
       </div>
       
       <style>{`
-        @keyframes swipe-horizontal {
+        @keyframes slide-horizontal {
           0%, 100% {
-            transform: translateX(0);
+            transform: translateX(0) scale(1);
           }
           25% {
-            transform: translateX(-10px);
+            transform: translateX(-15px) scale(0.98);
           }
           75% {
-            transform: translateX(10px);
+            transform: translateX(15px) scale(0.98);
           }
         }
         
-        @keyframes swipe-vertical {
+        @keyframes slide-vertical {
           0%, 100% {
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
           }
           25% {
-            transform: translateY(-10px);
+            transform: translateY(-15px) scale(0.98);
           }
           75% {
-            transform: translateY(10px);
+            transform: translateY(15px) scale(0.98);
           }
         }
         
-        .animate-swipe-horizontal {
-          animation: swipe-horizontal 2s ease-in-out infinite;
+        .animate-slide-horizontal {
+          animation: slide-horizontal 2.5s ease-in-out infinite;
         }
         
-        .animate-swipe-vertical {
-          animation: swipe-vertical 2s ease-in-out infinite;
+        .animate-slide-vertical {
+          animation: slide-vertical 2.5s ease-in-out infinite;
         }
       `}</style>
     </div>
