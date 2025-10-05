@@ -772,8 +772,7 @@ export function QuizApp() {
                     opacity: showBandaid ? 1 : 0,
                     animation: showBandaid ? 'applyBandaid 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'none',
                     filter: showBandaid ? 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))' : 'drop-shadow(1px 1px 2px rgba(0,0,0,0.2))',
-                    transition: showBandaid ? 'none' : 'opacity 0.1s ease',
-                    zIndex: 10
+                    transition: showBandaid ? 'none' : 'opacity 0.1s ease'
                   }}
                 >
                   <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
