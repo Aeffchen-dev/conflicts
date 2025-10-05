@@ -35,7 +35,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
 
   return (
     <div 
-      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none flex flex-col justify-between items-center ${content.animationClass}`}
+      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none flex flex-col justify-between items-center mb-4 ${content.animationClass}`}
       style={{
         height: '80%',
         backgroundColor: 'hsl(160, 55%, 75%)',
