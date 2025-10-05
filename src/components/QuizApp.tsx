@@ -1128,7 +1128,7 @@ export function QuizApp() {
                       key={`category-${catIndex}-question-${qIndex}`}
                       className={`absolute w-full ${isActiveCategory && isCurrent ? 'pointer-events-auto' : 'pointer-events-none'}`}
                       style={{
-                        height: isActiveCategory && isCurrent ? 'calc(90% - 8px)' : '100%',
+                        height: isCurrent ? 'calc(90% - 8px)' : '100%',
                         top: 0,
                         left: 0,
                         right: 0,
