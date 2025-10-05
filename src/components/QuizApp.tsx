@@ -461,21 +461,21 @@ export function QuizApp() {
     setLogoAnimating(true);
     setAnimatingLetterIndex(0);
     
-    // Start bandaid animation after most letters are revealed (7 letters * 80ms + 300ms)
+    // Start bandaid animation at 60% of text animation (0.45s * 0.6 = 0.27s)
     setTimeout(() => {
       setShowBandaid(true);
-    }, 860);
+    }, 270);
     
-    // Hide bandaid after its animation completes (860ms delay + 450ms animation)
+    // Hide bandaid after its animation completes (270ms delay + 450ms animation)
     setTimeout(() => {
       setShowBandaid(false);
-    }, 1310);
+    }, 720);
     
-    // End text animation after all letters are done (7 * 80ms delay + 600ms animation)
+    // End text animation
     setTimeout(() => {
       setLogoAnimating(false);
       setAnimatingLetterIndex(-1);
-    }, 1160);
+    }, 450);
   };
 
   const handleToggleChange = (checked: boolean) => {
@@ -519,24 +519,19 @@ export function QuizApp() {
           style={{ fontFamily: 'Kokoro, serif', fontSize: '20px', fontWeight: 'bold', fontStyle: 'italic' }}
           onClick={handleLogoClick}
         >
-          <span style={{ display: 'inline-block' }}>
-            {'Resolve'.split('').map((letter, index) => (
-              <span
-                key={index}
-                style={{
-                  display: 'inline-block',
-                  animation: logoAnimating ? `letterReveal${index} 0.6s ease-out ${index * 0.08}s backwards` : 'none'
-                }}
-              >
-                {letter}
-              </span>
-            ))}
+          <span
+            style={{
+              display: 'inline-block',
+              animation: logoAnimating ? 'textBounce 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55)' : 'none'
+            }}
+          >
+            Resolve
           </span>
           <div 
             style={{
               marginLeft: '8px',
               display: 'inline-block',
-              transform: 'scale(1.6)',
+              transform: 'rotate(-45deg) scale(1.6)',
               perspective: '1000px',
               transformStyle: 'preserve-3d',
               animation: showBandaid ? 'applyBandaid 0.45s cubic-bezier(0.68, -0.55, 0.27, 1.55)' : 'none',
@@ -584,62 +579,47 @@ export function QuizApp() {
           </div>
         </div>
         <style>{`
-          /* Individual letter reveal animations - left to right */
-          @keyframes letterReveal0 {
-            0% { opacity: 0; filter: blur(8px); transform: translateX(-5px); }
-            60% { opacity: 0.7; filter: blur(3px); }
-            100% { opacity: 1; filter: blur(0); transform: translateX(0); }
+          @keyframes textBounce {
+            0% {
+              opacity: 1;
+              filter: blur(0px);
+            }
+            25% {
+              opacity: 0.6;
+              filter: blur(2px);
+            }
+            50% {
+              opacity: 0.2;
+              filter: blur(5px);
+            }
+            75% {
+              opacity: 0.5;
+              filter: blur(2px);
+            }
+            100% {
+              opacity: 1;
+              filter: blur(0px);
+            }
           }
-          @keyframes letterReveal1 {
-            0% { opacity: 0; filter: blur(10px); transform: translateX(-3px); }
-            55% { opacity: 0.6; filter: blur(4px); }
-            100% { opacity: 1; filter: blur(0); transform: translateX(0); }
-          }
-          @keyframes letterReveal2 {
-            0% { opacity: 0; filter: blur(12px); transform: translateX(-6px); }
-            50% { opacity: 0.5; filter: blur(5px); }
-            100% { opacity: 1; filter: blur(0); transform: translateX(0); }
-          }
-          @keyframes letterReveal3 {
-            0% { opacity: 0; filter: blur(9px); transform: translateX(-4px); }
-            65% { opacity: 0.8; filter: blur(2px); }
-            100% { opacity: 1; filter: blur(0); transform: translateX(0); }
-          }
-          @keyframes letterReveal4 {
-            0% { opacity: 0; filter: blur(11px); transform: translateX(-7px); }
-            58% { opacity: 0.65; filter: blur(4px); }
-            100% { opacity: 1; filter: blur(0); transform: translateX(0); }
-          }
-          @keyframes letterReveal5 {
-            0% { opacity: 0; filter: blur(7px); transform: translateX(-3px); }
-            62% { opacity: 0.75; filter: blur(3px); }
-            100% { opacity: 1; filter: blur(0); transform: translateX(0); }
-          }
-          @keyframes letterReveal6 {
-            0% { opacity: 0; filter: blur(10px); transform: translateX(-5px); }
-            60% { opacity: 0.7; filter: blur(2px); }
-            100% { opacity: 1; filter: blur(0); transform: translateX(0); }
-          }
-          
           
           @keyframes applyBandaid {
             0% {
-              transform: scaleX(1) translateY(0px);
+              transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
               opacity: 1;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
             30% {
-              transform: scaleX(1.33) translateY(-4px);
+              transform: rotate(-45deg) scaleX(1.33) rotateZ(-14deg) translateY(-4px);
               animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
               filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.4));
             }
             70% {
-              transform: scaleX(1.08) translateY(-0.5px);
+              transform: rotate(-45deg) scaleX(1.08) rotateZ(-3deg) translateY(-0.5px);
               animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
               filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.3));
             }
             100% {
-              transform: scaleX(1) translateY(0px);
+              transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
               opacity: 1;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
