@@ -397,7 +397,13 @@ export function QuizApp() {
       // If we're in intro slides, advance through them
       if (!hasSeenIntro && currentIntroIndex < totalIntroSlides - 1) {
         setIsTransitioning(true);
-        setTransitionDirection('left');
+        
+        // Slide 2 -> 3 should be vertical (down), others horizontal (left)
+        if (currentIntroIndex === 2) {
+          setTransitionDirection('down');
+        } else {
+          setTransitionDirection('left');
+        }
         
         setTimeout(() => {
           setCurrentIntroIndex(prev => prev + 1);
@@ -436,7 +442,13 @@ export function QuizApp() {
       // If we're in intro slides (not first one), go back
       if (!hasSeenIntro && currentIntroIndex > 0) {
         setIsTransitioning(true);
-        setTransitionDirection('right');
+        
+        // Slide 3 -> 2 should be vertical (up), others horizontal (right)
+        if (currentIntroIndex === 3) {
+          setTransitionDirection('up');
+        } else {
+          setTransitionDirection('right');
+        }
         
         setTimeout(() => {
           setCurrentIntroIndex(prev => prev - 1);
@@ -941,12 +953,16 @@ export function QuizApp() {
                     transform = 'translateX(calc(-100% - 16px)) scale(0.8)';
                   } else if (isTransitioning && transitionDirection === 'right') {
                     transform = 'translateX(calc(100% + 16px)) scale(0.8)';
+                  } else if (isTransitioning && transitionDirection === 'down') {
+                    transform = 'translateY(calc(-100% - 16px)) scale(0.8)';
+                  } else if (isTransitioning && transitionDirection === 'up') {
+                    transform = 'translateY(calc(100% + 16px)) scale(0.8)';
                   } else if (showMicroAnimation && currentIntroIndex === 1) {
-                    // Horizontal micro-animation: slide slightly left
-                    transform = 'translateX(-15%) scale(0.98)';
+                    // Horizontal micro-animation: slide more visibly left
+                    transform = 'translateX(-25%) scale(0.96)';
                   } else if (showMicroAnimation && currentIntroIndex === 2) {
-                    // Vertical micro-animation: slide slightly up
-                    transform = 'translateY(-15%) scale(0.98)';
+                    // Vertical micro-animation: slide more visibly up
+                    transform = 'translateY(-25%) scale(0.96)';
                   } else {
                     transform = 'translateX(0) scale(1)';
                   }
@@ -958,8 +974,15 @@ export function QuizApp() {
                     transform = `translateX(calc(-100% - 16px + ${dragOffsetX}px)) scale(${scale})`;
                   } else if (isTransitioning && transitionDirection === 'right') {
                     transform = 'translateX(0) scale(1)';
+                  } else if (isTransitioning && transitionDirection === 'up') {
+                    transform = 'translateY(0) scale(1)';
                   } else {
-                    transform = 'translateX(calc(-100% - 16px)) scale(0.8)';
+                    // Position previous slides to the left OR above depending on which slide we're on
+                    if (currentIntroIndex === 3 && slideIndex === 2) {
+                      transform = 'translateY(calc(-100% - 16px)) scale(0.8)';
+                    } else {
+                      transform = 'translateX(calc(-100% - 16px)) scale(0.8)';
+                    }
                   }
                   zIndex = 1;
                 } else if (isNext) {
@@ -967,16 +990,27 @@ export function QuizApp() {
                     const dragProgress = Math.abs(dragOffsetX) / 300;
                     const scale = Math.min(1, 0.8 + dragProgress * 0.2);
                     transform = `translateX(calc(100% + 16px + ${dragOffsetX}px)) scale(${scale})`;
+                  } else if (isDragging && dragDirection === 'vertical') {
+                    const dragProgress = Math.abs(dragOffsetY) / 300;
+                    const scale = Math.min(1, 0.8 + dragProgress * 0.2);
+                    transform = `translateY(calc(100% + 16px + ${dragOffsetY}px)) scale(${scale})`;
                   } else if (isTransitioning && transitionDirection === 'left') {
                     transform = 'translateX(0) scale(1)';
+                  } else if (isTransitioning && transitionDirection === 'down') {
+                    transform = 'translateY(0) scale(1)';
                   } else if (showMicroAnimation && currentIntroIndex === 1) {
-                    // Horizontal micro-animation: next slide peeks in from right
-                    transform = 'translateX(calc(100% + 16px - 20%)) scale(0.85)';
+                    // Horizontal micro-animation: next slide peeks in more from right
+                    transform = 'translateX(calc(100% + 16px - 30%)) scale(0.88)';
                   } else if (showMicroAnimation && currentIntroIndex === 2) {
-                    // Vertical micro-animation: next slide peeks in from bottom
-                    transform = 'translateY(calc(100% + 16px - 20%)) scale(0.85)';
+                    // Vertical micro-animation: next slide (slide 3) peeks in more from bottom
+                    transform = 'translateY(calc(100% + 16px - 30%)) scale(0.88)';
                   } else {
-                    transform = 'translateX(calc(100% + 16px)) scale(0.8)';
+                    // Position next slides to the right OR below depending on which slide we're on
+                    if (currentIntroIndex === 2 && slideIndex === 3) {
+                      transform = 'translateY(calc(100% + 16px)) scale(0.8)';
+                    } else {
+                      transform = 'translateX(calc(100% + 16px)) scale(0.8)';
+                    }
                   }
                   zIndex = 1;
                 }
@@ -988,7 +1022,7 @@ export function QuizApp() {
                     style={{
                       transform,
                       zIndex,
-                      transition: isDragging ? 'none' : (isTransitioning || showMicroAnimation) ? 'transform 0.5s ease-in-out' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      transition: isDragging ? 'none' : (isTransitioning || showMicroAnimation) ? 'transform 0.15s ease-in-out' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     }}
                   >
                     <IntroCard 
