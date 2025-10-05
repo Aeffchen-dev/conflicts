@@ -1072,23 +1072,23 @@ export function QuizApp() {
                   let verticalZIndex = 1;
                   
                   if (isBeforePrev) {
-                    // Before previous question - positioned above prev
+                    // Before previous question - positioned far above, out of viewport
                     if (isActiveCategory && isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
                       const scale = dragOffsetY > 0 ? Math.min(1, 0.85 + dragProgress * 0.15) : 1;
-                      verticalTransform = `translateY(calc(-140vh - 32px + ${dragOffsetY}px)) scale(${scale})`;
+                      verticalTransform = `translateY(calc(-200vh + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
-                      verticalTransform = 'translateY(calc(-140vh - 32px)) scale(1)';
+                      verticalTransform = 'translateY(-200vh) scale(1)';
                     }
                     verticalZIndex = 0;
                   } else if (isPrev) {
-                    // Previous question - positioned above
+                    // Previous question - positioned above, out of viewport after transition
                     if (isActiveCategory && isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
                       const scale = dragOffsetY > 0 ? Math.min(1, 0.85 + dragProgress * 0.15) : 1;
-                      verticalTransform = `translateY(calc(-70vh - 16px + ${dragOffsetY}px)) scale(${scale})`;
+                      verticalTransform = `translateY(calc(-100vh + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
-                      verticalTransform = 'translateY(calc(-70vh - 16px)) scale(1)';
+                      verticalTransform = 'translateY(-100vh) scale(1)';
                     }
                     verticalZIndex = 0;
                   } else if (isCurrent) {
