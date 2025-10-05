@@ -380,7 +380,7 @@ export function QuizApp() {
         setShowMicroAnimation(true);
         endTimer = window.setTimeout(() => {
           setShowMicroAnimation(false);
-        }, 150); // micro animation duration
+        }, 250); // micro animation duration
       }, 300); // initial delay
       return () => {
         window.clearTimeout(startTimer);
@@ -1077,7 +1077,7 @@ export function QuizApp() {
                     style={{
                       transform,
                       zIndex,
-                      transition: isDragging ? 'none' : (isTransitioning || showMicroAnimation) ? 'transform 0.15s ease-in-out' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      transition: isDragging ? 'none' : (isTransitioning || showMicroAnimation) ? 'transform 0.25s ease-in-out' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     }}
                   >
                     <IntroCard 
