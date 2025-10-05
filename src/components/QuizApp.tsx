@@ -1018,15 +1018,12 @@ export function QuizApp() {
                   const isPrevQuestion = qIndex === (questionIndexToUse - 1 + categoryQuestions.length) % categoryQuestions.length;
                   const isNextQuestion = qIndex === (questionIndexToUse + 1) % categoryQuestions.length;
                   
-                  // Only render:
-                  // 1. Current question of active category (always)
-                  // 2. Prev/next questions of active category (only during vertical swipes)
-                  // 3. Current question of prev/next categories (during horizontal swipes)
+                  // Render all vertical slides (prev/current/next) for active category
+                  // Only render current question for prev/next categories during horizontal swipes
                   const isHorizontalTransition = (isDragging && dragDirection === 'horizontal') || 
                                                 (isTransitioning && (transitionDirection === 'left' || transitionDirection === 'right'));
                   
-                  const shouldRender = (isActiveCategory && isActiveQuestion) ||
-                                      (isActiveCategory && (isPrevQuestion || isNextQuestion) && !isHorizontalTransition) ||
+                  const shouldRender = (isActiveCategory && (isActiveQuestion || isPrevQuestion || isNextQuestion)) ||
                                       ((isPrevCategory || isNextCategory) && isActiveQuestion);
                   
                   if (!shouldRender) return null;
@@ -1054,25 +1051,25 @@ export function QuizApp() {
                     }
                     zIndex = 3;
                   } else if (isActiveCategory && isPrevQuestion) {
-                    // Current category, previous question - position higher off-screen
+                    // Current category, previous question - always visible above
                     if (isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.abs(dragOffsetY) / 300;
                       const scale = Math.min(1, 0.85 + dragProgress * 0.15);
-                      transform = `translateY(calc(-120% + ${dragOffsetY}px)) scale(${scale})`;
+                      transform = `translateY(calc(-70vh - 16px + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
-                      transform = 'translateY(-120%) scale(0.85)';
+                      transform = 'translateY(calc(-70vh - 16px)) scale(0.85)';
                     }
-                    zIndex = 2;
+                    zIndex = 1;
                   } else if (isActiveCategory && isNextQuestion) {
-                    // Current category, next question - don't move during horizontal transitions
+                    // Current category, next question - always visible below
                     if (isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.abs(dragOffsetY) / 300;
                       const scale = Math.min(1, 0.85 + dragProgress * 0.15);
-                      transform = `translateY(calc(100% + ${dragOffsetY}px)) scale(${scale})`;
+                      transform = `translateY(calc(70vh + 16px + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
-                      transform = 'translateY(100%) scale(0.85)';
+                      transform = 'translateY(calc(70vh + 16px)) scale(0.85)';
                     }
-                    zIndex = 2;
+                    zIndex = 1;
                   } else if (isPrevCategory) {
                     // Previous category - keep vertically centered during horizontal transitions
                     if (isDragging && dragDirection === 'horizontal') {
