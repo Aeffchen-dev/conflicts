@@ -129,6 +129,38 @@ export default {
 				sm: 'calc(var(--radius) - 4px)'
 			},
 			keyframes: {
+				'wave-border': {
+					'0%, 100%': {
+						borderRadius: '2rem'
+					},
+					'10%': {
+						borderRadius: '2rem 2.5rem 2rem 2.2rem'
+					},
+					'20%': {
+						borderRadius: '2.3rem 2rem 2.4rem 2rem'
+					},
+					'30%': {
+						borderRadius: '2rem 2.2rem 2rem 2.5rem'
+					},
+					'40%': {
+						borderRadius: '2.4rem 2rem 2.1rem 2rem'
+					},
+					'50%': {
+						borderRadius: '2rem 2.5rem 2rem 2.3rem'
+					},
+					'60%': {
+						borderRadius: '2.2rem 2rem 2.5rem 2rem'
+					},
+					'70%': {
+						borderRadius: '2rem 2.3rem 2rem 2.4rem'
+					},
+					'80%': {
+						borderRadius: '2.5rem 2rem 2.2rem 2rem'
+					},
+					'90%': {
+						borderRadius: '2rem 2.4rem 2rem 2.1rem'
+					}
+				},
 				'accordion-down': {
 					from: {
 						height: '0'
@@ -167,6 +199,7 @@ export default {
 				}
 			},
 			animation: {
+				'wave-border': 'wave-border 8s ease-in-out infinite',
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'slide-in-left': 'slide-in-left 0.3s ease-in-out',
