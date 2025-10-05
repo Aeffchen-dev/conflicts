@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { ArrowLeftRight, ArrowUpDown } from 'lucide-react';
 
 interface IntroCardProps {
   slideIndex: number;
@@ -21,12 +22,12 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       case 1:
         return {
           text: 'Swipe nach rechts und links um zwischen den Kategorien zu wechseln',
-          animationClass: !isTransitioning && (isActive || isNext) ? 'animate-slide-horizontal-active' : ''
+          animationClass: !isTransitioning && isActive ? 'animate-slide-horizontal-active' : !isTransitioning && isNext ? 'animate-slide-horizontal-next' : !isTransitioning && isPrev ? 'animate-slide-horizontal-prev' : ''
         };
       case 2:
         return {
           text: 'Swipe nach oben und unten um zwischen den Fragen einer Kategorie zu wechseln',
-          animationClass: !isTransitioning && (isActive || isNext) ? 'animate-slide-vertical-active' : ''
+          animationClass: !isTransitioning && isActive ? 'animate-slide-vertical-active' : !isTransitioning && isNext ? 'animate-slide-vertical-next' : !isTransitioning && isPrev ? 'animate-slide-vertical-prev' : ''
         };
       default:
         return { text: '', animationClass: '' };
@@ -49,55 +50,29 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       <div className="absolute left-0 top-0 w-20 h-full z-20 cursor-pointer" onClick={onSwipeRight} />
       <div className="absolute right-0 top-0 w-20 h-full z-20 cursor-pointer" onClick={onSwipeLeft} />
       
-      <div className="flex-1 flex flex-col items-center justify-center text-center p-8 relative z-10 gap-8">
-        {/* Connected horizontal arrows for slide 2 */}
+      <div className="flex-1 flex flex-col items-center justify-center text-center p-8 relative z-10">
+        {/* Double-headed arrow for slide 2 (horizontal) */}
         {slideIndex === 1 && (
-          <svg 
-            width="120" 
-            height="40" 
-            viewBox="0 0 120 40" 
+          <ArrowLeftRight 
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 ${
+              isTransitioning ? 'animate-wobble-horizontal' : ''
+            }`}
+            size={48} 
+            strokeWidth={2.5}
             style={{ color: 'hsl(160, 70%, 15%)' }}
-          >
-            <defs>
-              <marker id="arrow-left" markerWidth="10" markerHeight="10" refX="1" refY="5" orient="auto">
-                <polygon points="10,5 1,1 1,9" fill="currentColor" />
-              </marker>
-              <marker id="arrow-right" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
-                <polygon points="1,5 10,1 10,9" fill="currentColor" />
-              </marker>
-            </defs>
-            {/* Left arrow */}
-            <line x1="25" y1="20" x2="10" y2="20" stroke="currentColor" strokeWidth="3" markerEnd="url(#arrow-left)" />
-            {/* Center line */}
-            <line x1="25" y1="20" x2="95" y2="20" stroke="currentColor" strokeWidth="3" />
-            {/* Right arrow */}
-            <line x1="95" y1="20" x2="110" y2="20" stroke="currentColor" strokeWidth="3" markerEnd="url(#arrow-right)" />
-          </svg>
+          />
         )}
         
-        {/* Connected vertical arrows for slide 3 */}
+        {/* Double-headed arrow for slide 3 (vertical) */}
         {slideIndex === 2 && (
-          <svg 
-            width="40" 
-            height="120" 
-            viewBox="0 0 40 120" 
+          <ArrowUpDown 
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 ${
+              isTransitioning ? 'animate-wobble-vertical' : ''
+            }`}
+            size={48} 
+            strokeWidth={2.5}
             style={{ color: 'hsl(160, 70%, 15%)' }}
-          >
-            <defs>
-              <marker id="arrow-up" markerWidth="10" markerHeight="10" refX="5" refY="1" orient="auto">
-                <polygon points="5,10 1,1 9,1" fill="currentColor" />
-              </marker>
-              <marker id="arrow-down" markerWidth="10" markerHeight="10" refX="5" refY="9" orient="auto">
-                <polygon points="5,1 1,10 9,10" fill="currentColor" />
-              </marker>
-            </defs>
-            {/* Up arrow */}
-            <line x1="20" y1="25" x2="20" y2="10" stroke="currentColor" strokeWidth="3" markerEnd="url(#arrow-up)" />
-            {/* Center line */}
-            <line x1="20" y1="25" x2="20" y2="95" stroke="currentColor" strokeWidth="3" />
-            {/* Down arrow */}
-            <line x1="20" y1="95" x2="20" y2="110" stroke="currentColor" strokeWidth="3" markerEnd="url(#arrow-down)" />
-          </svg>
+          />
         )}
         
         <h1 
@@ -129,6 +104,38 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       </p>
       
       <style>{`
+        
+        @keyframes wobble-horizontal {
+          0%, 100% {
+            transform: translate(-50%, -50%) translateX(0);
+          }
+          25% {
+            transform: translate(-50%, -50%) translateX(-8px);
+          }
+          75% {
+            transform: translate(-50%, -50%) translateX(8px);
+          }
+        }
+        
+        @keyframes wobble-vertical {
+          0%, 100% {
+            transform: translate(-50%, -50%) translateY(0);
+          }
+          25% {
+            transform: translate(-50%, -50%) translateY(-8px);
+          }
+          75% {
+            transform: translate(-50%, -50%) translateY(8px);
+          }
+        }
+        
+        .animate-wobble-horizontal {
+          animation: wobble-horizontal 0.6s ease-in-out infinite;
+        }
+        
+        .animate-wobble-vertical {
+          animation: wobble-vertical 0.6s ease-in-out infinite;
+        }
         
         @keyframes slide-horizontal-active {
           0% {
