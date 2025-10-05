@@ -1318,9 +1318,9 @@ export function QuizApp() {
                   let verticalTransform = '';
                   let verticalZIndex = 1;
                   
-                  // For previous category during horizontal transition, show current question at same vertical position
-                  if (isPrevCategory && !isCurrent) {
-                    return null; // Only show current question for previous category
+                  // For previous category during horizontal transition, show current + next question
+                  if (isPrevCategory && !isCurrent && !isNext) {
+                    return null; // Show current and next question for previous category
                   }
                   
                   // For next category during horizontal transition/drag, show current + next vertical
