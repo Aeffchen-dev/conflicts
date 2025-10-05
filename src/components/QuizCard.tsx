@@ -202,8 +202,8 @@ export function QuizCard({
     <div 
       className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none`}
       style={{
-        height: 'calc(50vh - 16px)',
-        maxHeight: 'calc(50vh - 16px)',
+        height: '70vh',
+        maxHeight: '70vh',
         marginBottom: '16px',
         backgroundColor: question.category.toLowerCase() !== 'intro' ? categoryColors.bg : 'hsl(var(--card-background))',
         color: question.category.toLowerCase() !== 'intro' ? categoryColors.text : 'hsl(var(--foreground))'
