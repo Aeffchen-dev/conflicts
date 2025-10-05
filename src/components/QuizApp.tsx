@@ -764,7 +764,7 @@ export function QuizApp() {
                 <div 
                   style={{
                     position: 'absolute',
-                    right: '-8px',
+                    right: '-4px',
                     bottom: '0px',
                     transform: 'rotate(-45deg) scale(1.09)',
                     perspective: '1000px',
