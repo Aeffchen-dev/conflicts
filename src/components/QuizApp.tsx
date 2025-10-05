@@ -1058,7 +1058,8 @@ export function QuizApp() {
                   categoryZIndex = 1;
                 }
                 
-                // For each category, render current and next questions as separate DOM elements
+                // For each category, render prev, current and next questions as separate DOM elements
+                const prevQ = categoryQuestions[(questionIndexForCategory - 1 + categoryQuestions.length) % categoryQuestions.length];
                 const currentQ = categoryQuestions[questionIndexForCategory];
                 const nextQ = categoryQuestions[(questionIndexForCategory + 1) % categoryQuestions.length];
                 
@@ -1073,6 +1074,34 @@ export function QuizApp() {
                       pointerEvents: 'none'
                     }}
                   >
+                    {/* Previous question - visible at top */}
+                    {prevQ && (
+                      <div
+                        className="absolute inset-0 w-full h-full pointer-events-none"
+                        style={{
+                          transform: isActiveCategory && isDragging && dragDirection === 'vertical'
+                            ? `translateY(calc(-70vh - 16px + ${dragOffsetY}px)) scale(0.85)`
+                            : 'translateY(calc(-70vh - 16px)) scale(0.85)',
+                          zIndex: 0,
+                          transition: isDragging && dragDirection === 'vertical' ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                        }}
+                      >
+                        <QuizCard
+                          question={prevQ}
+                          onSwipeLeft={nextCategory}
+                          onSwipeRight={prevCategory}
+                          onSwipeUp={prevQuestion}
+                          onSwipeDown={nextQuestion}
+                          categoryIndex={categoryColorMap[prevQ.category] || 0}
+                          onDragStart={() => {}}
+                          onDragMove={() => {}}
+                          onDragEnd={() => {}}
+                          dragOffset={0}
+                          isDragging={false}
+                        />
+                      </div>
+                    )}
+                    
                     {/* Current question in this category */}
                     {currentQ && (
                       <div
