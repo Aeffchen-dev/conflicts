@@ -108,10 +108,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
           color: 'hsl(160, 70%, 15%)'
         }}
       >
-        {slideIndex === 2 
-          ? 'Swipe nach unten um weiter zu navigieren'
-          : 'Swipe nach rechts um weiter zu navigieren'
-        }
+        Swipe nach rechts um weiter zu navigieren
       </p>
       
       <style>{`
