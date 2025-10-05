@@ -746,7 +746,7 @@ export function QuizApp() {
       <div className="mt-4 flex items-center justify-between w-full px-4 relative z-50" style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}>
         <div 
           className="text-white cursor-pointer relative flex items-center" 
-          style={{ fontFamily: 'Kokoro, serif', fontSize: '20px', fontWeight: 'bold', fontStyle: 'italic' }}
+          style={{ fontFamily: 'Kokoro, serif', fontSize: '26px', fontWeight: 'bold', fontStyle: 'italic' }}
           onClick={handleLogoClick}
         >
           {'Resolve'.split('').map((letter, index) => (
