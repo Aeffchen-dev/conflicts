@@ -1050,115 +1050,82 @@ export function QuizApp() {
                   categoryZIndex = 1;
                 }
                 
-                // For each category, render prev, current and next questions as separate DOM elements
-                const prevQ = categoryQuestions[(questionIndexForCategory - 1 + categoryQuestions.length) % categoryQuestions.length];
-                const currentQ = categoryQuestions[questionIndexForCategory];
-                const nextQ = categoryQuestions[(questionIndexForCategory + 1) % categoryQuestions.length];
-                
-                return (
-                  <div
-                    key={`category-${catIndex}`}
-                    className={`absolute inset-0 w-full h-full`}
-                    style={{
-                      transform: categoryHorizontalTransform,
-                      zIndex: categoryZIndex,
-                      transition: isDragging && dragDirection === 'horizontal' ? 'none' : 'transform 0.3s ease-in-out',
-                      pointerEvents: 'none'
-                    }}
-                  >
-                    {/* Previous question - visible at top */}
-                    {prevQ && (
-                      <div
-                        className="absolute inset-0 w-full h-full pointer-events-none"
-                        style={{
-                          transform: isActiveCategory && isDragging && dragDirection === 'vertical' && dragOffsetY > 0
-                            ? `translateY(calc(-70vh - 16px + ${dragOffsetY}px)) scale(0.85)`
-                            : 'translateY(calc(-70vh - 16px)) scale(0.85)',
-                          zIndex: 0,
-                          transition: isDragging && dragDirection === 'vertical' ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                        }}
-                      >
-                        <QuizCard
-                          question={prevQ}
-                          onSwipeLeft={nextCategory}
-                          onSwipeRight={prevCategory}
-                          onSwipeUp={prevQuestion}
-                          onSwipeDown={nextQuestion}
-                          categoryIndex={categoryColorMap[prevQ.category] || 0}
-                          onDragStart={() => {}}
-                          onDragMove={() => {}}
-                          onDragEnd={() => {}}
-                          dragOffset={0}
-                          isDragging={false}
-                        />
-                      </div>
-                    )}
-                    
-                    {/* Current question in this category */}
-                    {currentQ && (
-                      <div
-                        className={`absolute inset-0 w-full h-full ${isActiveCategory ? 'pointer-events-auto' : 'pointer-events-none'}`}
-                        style={{
-                          transform: isActiveCategory && isDragging && dragDirection === 'vertical' 
-                            ? (() => {
-                                const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
-                                const scale = Math.max(0.85, 1 - dragProgress * 0.15);
-                                return `translateY(${dragOffsetY}px) scale(${scale})`;
-                              })()
-                            : 'translateY(0) scale(1)',
-                          zIndex: 2,
-                          transition: isDragging && dragDirection === 'vertical' ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                        }}
-                      >
-                        <QuizCard
-                          question={currentQ}
-                          onSwipeLeft={nextCategory}
-                          onSwipeRight={prevCategory}
-                          onSwipeUp={prevQuestion}
-                          onSwipeDown={nextQuestion}
-                          categoryIndex={categoryColorMap[currentQ.category] || 0}
-                          onDragStart={() => {}}
-                          onDragMove={() => {}}
-                          onDragEnd={() => {}}
-                          dragOffset={0}
-                          isDragging={false}
-                        />
-                      </div>
-                    )}
-                    
-                    {/* Next question in this category - render for all visible categories */}
-                    {nextQ && (
-                      <div
-                        className="absolute inset-0 w-full h-full pointer-events-none"
-                        style={{
-                          transform: isActiveCategory && isDragging && dragDirection === 'vertical' && dragOffsetY < 0
-                            ? (() => {
-                                const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
-                                const scale = Math.min(1, 0.85 + dragProgress * 0.15);
-                                return `translateY(calc(70vh + 16px + ${dragOffsetY}px)) scale(${scale})`;
-                              })()
-                            : 'translateY(calc(70vh + 16px)) scale(0.85)',
-                          zIndex: 1,
-                          transition: isDragging && dragDirection === 'vertical' ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
-                        }}
-                      >
-                        <QuizCard
-                          question={nextQ}
-                          onSwipeLeft={nextCategory}
-                          onSwipeRight={prevCategory}
-                          onSwipeUp={prevQuestion}
-                          onSwipeDown={nextQuestion}
-                          categoryIndex={categoryColorMap[nextQ.category] || 0}
-                          onDragStart={() => {}}
-                          onDragMove={() => {}}
-                          onDragEnd={() => {}}
-                          dragOffset={0}
-                          isDragging={false}
-                        />
-                      </div>
-                    )}
-                  </div>
-                );
+                // Create a DOM element for every question in this category
+                return categoryQuestions.map((question, qIndex) => {
+                  const relativePosition = qIndex - questionIndexForCategory;
+                  const normalizedPosition = relativePosition >= 0 
+                    ? relativePosition 
+                    : relativePosition + categoryQuestions.length;
+                  
+                  // Only render prev, current, and next
+                  if (normalizedPosition > 1 && normalizedPosition < categoryQuestions.length - 1) {
+                    return null;
+                  }
+                  
+                  const isCurrent = qIndex === questionIndexForCategory;
+                  const isNext = qIndex === (questionIndexForCategory + 1) % categoryQuestions.length;
+                  const isPrev = qIndex === (questionIndexForCategory - 1 + categoryQuestions.length) % categoryQuestions.length;
+                  
+                  let verticalTransform = '';
+                  let verticalZIndex = 1;
+                  
+                  if (isPrev) {
+                    // Previous question - positioned above
+                    verticalTransform = isActiveCategory && isDragging && dragDirection === 'vertical' && dragOffsetY > 0
+                      ? `translateY(calc(-70vh - 16px + ${dragOffsetY}px)) scale(0.85)`
+                      : 'translateY(calc(-70vh - 16px)) scale(0.85)';
+                    verticalZIndex = 0;
+                  } else if (isCurrent) {
+                    // Current question - centered
+                    if (isActiveCategory && isDragging && dragDirection === 'vertical') {
+                      const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
+                      const scale = Math.max(0.85, 1 - dragProgress * 0.15);
+                      verticalTransform = `translateY(${dragOffsetY}px) scale(${scale})`;
+                    } else {
+                      verticalTransform = 'translateY(0) scale(1)';
+                    }
+                    verticalZIndex = 2;
+                  } else if (isNext) {
+                    // Next question - positioned below
+                    if (isActiveCategory && isDragging && dragDirection === 'vertical' && dragOffsetY < 0) {
+                      const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
+                      const scale = Math.min(1, 0.85 + dragProgress * 0.15);
+                      verticalTransform = `translateY(calc(70vh + 16px + ${dragOffsetY}px)) scale(${scale})`;
+                    } else {
+                      verticalTransform = 'translateY(calc(70vh + 16px)) scale(0.85)';
+                    }
+                    verticalZIndex = 1;
+                  }
+                  
+                  return (
+                    <div
+                      key={`category-${catIndex}-question-${qIndex}`}
+                      className={`absolute inset-0 w-full h-full ${isActiveCategory && isCurrent ? 'pointer-events-auto' : 'pointer-events-none'}`}
+                      style={{
+                        transform: `${categoryHorizontalTransform} ${verticalTransform}`,
+                        zIndex: categoryZIndex * 10 + verticalZIndex,
+                        transition: isDragging 
+                          ? 'none' 
+                          : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                        pointerEvents: isActiveCategory && isCurrent ? 'auto' : 'none'
+                      }}
+                    >
+                      <QuizCard
+                        question={question}
+                        onSwipeLeft={nextCategory}
+                        onSwipeRight={prevCategory}
+                        onSwipeUp={prevQuestion}
+                        onSwipeDown={nextQuestion}
+                        categoryIndex={categoryColorMap[question.category] || 0}
+                        onDragStart={() => {}}
+                        onDragMove={() => {}}
+                        onDragEnd={() => {}}
+                        dragOffset={0}
+                        isDragging={false}
+                      />
+                    </div>
+                  );
+                });
               })}
             </div>
           ) : (
