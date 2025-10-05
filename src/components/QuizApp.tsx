@@ -534,7 +534,7 @@ export function QuizApp() {
             style={{
               marginLeft: '8px',
               display: 'inline-block',
-              transform: 'rotate(-45deg) scale(1.6)',
+              transform: 'rotate(-45deg) scale(1.28)',
               perspective: '1000px',
               transformStyle: 'preserve-3d',
               opacity: showBandaid ? 1 : 0,
