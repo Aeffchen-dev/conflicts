@@ -179,11 +179,14 @@ export function CategorySelector({
               0% {
                 width: calc(100% - 40px);
               }
-              50% {
-                width: calc(100% + 5px);
+              40% {
+                width: calc(100% + 15px);
               }
-              70% {
-                width: calc(100% - 2px);
+              60% {
+                width: calc(100% - 8px);
+              }
+              80% {
+                width: calc(100% + 4px);
               }
               100% {
                 width: 100%;
