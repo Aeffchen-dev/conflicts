@@ -58,7 +58,7 @@ export function IntroCard({ slideIndex, isActive = false }: IntroCardProps) {
             transform: translateX(0) scale(1);
           }
           50% {
-            transform: translateX(-120px) scale(0.95);
+            transform: translateX(-40%) scale(0.9);
           }
           100% {
             transform: translateX(0) scale(1);
@@ -70,7 +70,7 @@ export function IntroCard({ slideIndex, isActive = false }: IntroCardProps) {
             transform: translateY(0) scale(1);
           }
           50% {
-            transform: translateY(-120px) scale(0.95);
+            transform: translateY(-40%) scale(0.9);
           }
           100% {
             transform: translateY(0) scale(1);
@@ -78,11 +78,11 @@ export function IntroCard({ slideIndex, isActive = false }: IntroCardProps) {
         }
         
         .animate-slide-horizontal {
-          animation: slide-horizontal 1.5s ease-in-out 0.5s 1;
+          animation: slide-horizontal 0.8s ease-in-out 0.5s 1;
         }
         
         .animate-slide-vertical {
-          animation: slide-vertical 1.5s ease-in-out 0.5s 1;
+          animation: slide-vertical 0.8s ease-in-out 0.5s 1;
         }
       `}</style>
     </div>
