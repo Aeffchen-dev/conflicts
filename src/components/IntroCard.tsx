@@ -21,12 +21,12 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       case 1:
         return {
           text: 'Swipe nach rechts und links um zwischen den Kategorien zu wechseln',
-          animationClass: !isTransitioning && isActive ? 'animate-slide-horizontal-active' : !isTransitioning && isNext ? 'animate-slide-horizontal-next' : !isTransitioning && isPrev ? 'animate-slide-horizontal-prev' : ''
+          animationClass: !isTransitioning && (isActive || isNext) ? 'animate-slide-horizontal-active' : ''
         };
       case 2:
         return {
           text: 'Swipe nach oben und unten um zwischen den Fragen einer Kategorie zu wechseln',
-          animationClass: !isTransitioning && isActive ? 'animate-slide-vertical-active' : !isTransitioning && isNext ? 'animate-slide-vertical-next' : !isTransitioning && isPrev ? 'animate-slide-vertical-prev' : ''
+          animationClass: !isTransitioning && (isActive || isNext) ? 'animate-slide-vertical-active' : ''
         };
       default:
         return { text: '', animationClass: '' };
