@@ -32,13 +32,13 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
 
   return (
     <div 
-      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none h-full flex flex-col justify-center items-center p-8 ${content.animationClass}`}
+      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none h-full flex flex-col justify-between items-center p-8 ${content.animationClass}`}
       style={{
         backgroundColor: 'hsl(160, 55%, 75%)',
         color: 'hsl(160, 70%, 15%)'
       }}
     >
-      <div className="flex flex-col items-center justify-center text-center">
+      <div className="flex-1 flex flex-col items-center justify-center text-center">
         <h1 
           className="text-3xl md:text-4xl lg:text-5xl max-w-full leading-tight lg:leading-[1.09]"
           style={{ 
@@ -53,6 +53,17 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
           {content.text}
         </h1>
       </div>
+      
+      <p 
+        className="text-center"
+        style={{ 
+          fontFamily: 'Arial, sans-serif',
+          fontSize: '12px',
+          opacity: 0.7
+        }}
+      >
+        Swipe nach rechts um weiter zu navigieren
+      </p>
       
       <style>{`
         @keyframes slide-horizontal-active {
