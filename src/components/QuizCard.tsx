@@ -215,32 +215,32 @@ export function QuizCard({
       onMouseUp={onMouseUp}
       onMouseLeave={onMouseLeave}
     >
-      {/* Top Click Area - Swipe Up */}
-      <div 
-        className="absolute top-0 left-0 right-0 h-20 z-10 cursor-pointer"
-        onClick={onSwipeUp}
-      />
-
-      {/* Bottom Click Area - Swipe Down */}
-      <div 
-        className="absolute bottom-0 left-0 right-0 h-20 z-10 cursor-pointer"
-        onClick={onSwipeDown}
-      />
-
-      {/* Left Click Area - Swipe Right */}
-      <div 
-        className="absolute left-0 top-0 w-20 h-full z-10 cursor-pointer"
-        onClick={onSwipeRight}
-      />
-
-      {/* Right Click Area - Swipe Left */}
-      <div 
-        className="absolute right-0 top-0 w-20 h-full z-10 cursor-pointer"
-        onClick={onSwipeLeft}
-      />
-
       {/* Main Content */}
-      <div className={`h-full flex flex-col justify-start ${question.category.toLowerCase() === 'intro' ? 'p-8' : 'p-8 lg:p-10'}`}>
+      <div className={`h-full flex flex-col justify-start ${question.category.toLowerCase() === 'intro' ? 'p-8' : 'p-8 lg:p-10'} relative`}>
+        
+        {/* Top Click Area - Swipe Up */}
+        <div 
+          className="absolute top-0 left-0 right-0 h-20 z-20 cursor-pointer"
+          onClick={onSwipeUp}
+        />
+
+        {/* Bottom Click Area - Swipe Down */}
+        <div 
+          className="absolute bottom-0 left-0 right-0 h-20 z-20 cursor-pointer"
+          onClick={onSwipeDown}
+        />
+
+        {/* Left Click Area - Swipe Right */}
+        <div 
+          className="absolute left-0 top-0 w-20 h-full z-20 cursor-pointer"
+          onClick={onSwipeRight}
+        />
+
+        {/* Right Click Area - Swipe Left */}
+        <div 
+          className="absolute right-0 top-0 w-20 h-full z-20 cursor-pointer"
+          onClick={onSwipeLeft}
+        />
         
         {/* Category Pill - Only for non-intro slides */}
         {question.category.toLowerCase() !== 'intro' && (
