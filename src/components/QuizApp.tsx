@@ -766,7 +766,7 @@ export function QuizApp() {
                     position: 'absolute',
                     right: '-6px',
                     bottom: '0px',
-                    transform: 'rotate(-45deg) scale(1.28)',
+                    transform: 'rotate(-45deg) scale(1.09)',
                     perspective: '1000px',
                     transformStyle: 'preserve-3d',
                     opacity: showBandaid ? 1 : 0,
@@ -911,22 +911,22 @@ export function QuizApp() {
           
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) scale(1.28, 1.28) rotateZ(0deg);
+              transform: rotate(-45deg) scale(1.09, 1.09) rotateZ(0deg);
               opacity: 0;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
             30% {
-              transform: rotate(-45deg) scale(1.6, 1.45) rotateZ(-8deg);
+              transform: rotate(-45deg) scale(1.36, 1.23) rotateZ(-8deg);
               opacity: 1;
               filter: drop-shadow(3px 4px 6px rgba(0,0,0,0.35));
             }
             80% {
-              transform: rotate(-45deg) scale(1.3, 1.29) rotateZ(-0.3deg);
+              transform: rotate(-45deg) scale(1.11, 1.10) rotateZ(-0.3deg);
               opacity: 1;
               filter: drop-shadow(1.5px 1.5px 2.5px rgba(0,0,0,0.22));
             }
             100% {
-              transform: rotate(-45deg) scale(1.28, 1.28) rotateZ(0deg);
+              transform: rotate(-45deg) scale(1.09, 1.09) rotateZ(0deg);
               opacity: 1;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
