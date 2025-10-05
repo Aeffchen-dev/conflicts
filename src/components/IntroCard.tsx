@@ -72,7 +72,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
             transform: translateX(calc(100% + 16px)) scale(0.8);
           }
           50% {
-            transform: translateX(60%) scale(0.85);
+            transform: translateX(20%) scale(0.95);
           }
           100% {
             transform: translateX(calc(100% + 16px)) scale(0.8);
@@ -96,7 +96,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
             transform: translateY(calc(100% + 16px)) scale(0.85);
           }
           50% {
-            transform: translateY(60%) scale(0.9);
+            transform: translateY(20%) scale(0.95);
           }
           100% {
             transform: translateY(calc(100% + 16px)) scale(0.85);
