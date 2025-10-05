@@ -1318,14 +1318,24 @@ export function QuizApp() {
                   let verticalTransform = '';
                   let verticalZIndex = 1;
                   
-                  // For previous category, show current question at same vertical position as active category's current
+                  // For previous category during horizontal transition, show current question at same vertical position
                   if (isPrevCategory && !isCurrent) {
                     return null; // Only show current question for previous category
                   }
                   
-                  // For next category, show current question at same vertical position as active category's current  
-                  if (isNextCategory && !isCurrent) {
-                    return null; // Only show current question for next category
+                  // For next category during horizontal transition/drag, show current + next vertical
+                  if (isNextCategory && !isCurrent && !isNext) {
+                    return null; // Show current and next question for next category
+                  }
+                  
+                  // For active category during horizontal drag/transition, always show current + next vertical
+                  if (isActiveCategory && (isDragging && dragDirection === 'horizontal' || isTransitioning && (transitionDirection === 'left' || transitionDirection === 'right'))) {
+                    // Show both current and next question
+                    if (!isCurrent && !isNext) {
+                      return null;
+                    }
+                  } else if (isActiveCategory && !isCurrent && !isNext && !isPrev && !isBeforePrev && !isAfterNext) {
+                    return null;
                   }
                   
                   if (isBeforePrev) {
