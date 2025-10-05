@@ -344,7 +344,7 @@ export function QuizApp() {
 
   // Category and question navigation state
   const [currentCategoryIndex, setCurrentCategoryIndex] = useState(0);
-  const [currentQuestionIndexInCategory, setCurrentQuestionIndexInCategory] = useState(0);
+  const [questionIndicesPerCategory, setQuestionIndicesPerCategory] = useState<{ [category: string]: number }>({});
   const [categorizedQuestions, setCategorizedQuestions] = useState<{ [category: string]: Question[] }>({});
   
   // Unified drag state
@@ -358,6 +358,7 @@ export function QuizApp() {
   const categories = Object.keys(categorizedQuestions);
   const currentCategory = categories[currentCategoryIndex] || '';
   const questionsInCategory = categorizedQuestions[currentCategory] || [];
+  const currentQuestionIndexInCategory = questionIndicesPerCategory[currentCategory] || 0;
 
   // Animation states
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -370,7 +371,6 @@ export function QuizApp() {
       
       setTimeout(() => {
         setCurrentCategoryIndex((prev) => (prev + 1) % categories.length);
-        setCurrentQuestionIndexInCategory(0);
         setIsTransitioning(false);
         setTransitionDirection(null);
       }, 300);
@@ -384,7 +384,6 @@ export function QuizApp() {
       
       setTimeout(() => {
         setCurrentCategoryIndex((prev) => (prev - 1 + categories.length) % categories.length);
-        setCurrentQuestionIndexInCategory(0);
         setIsTransitioning(false);
         setTransitionDirection(null);
       }, 300);
@@ -392,11 +391,19 @@ export function QuizApp() {
   };
 
   const nextQuestion = () => {
-    setCurrentQuestionIndexInCategory((prev) => (prev + 1) % questionsInCategory.length);
+    const newIndex = (currentQuestionIndexInCategory + 1) % questionsInCategory.length;
+    setQuestionIndicesPerCategory(prev => ({
+      ...prev,
+      [currentCategory]: newIndex
+    }));
   };
 
   const prevQuestion = () => {
-    setCurrentQuestionIndexInCategory((prev) => (prev - 1 + questionsInCategory.length) % questionsInCategory.length);
+    const newIndex = (currentQuestionIndexInCategory - 1 + questionsInCategory.length) % questionsInCategory.length;
+    setQuestionIndicesPerCategory(prev => ({
+      ...prev,
+      [currentCategory]: newIndex
+    }));
   };
 
   // Unified drag handlers that detect direction
@@ -530,8 +537,19 @@ export function QuizApp() {
     });
     
     setCategorizedQuestions(sortedCategorized);
+    
+    // Initialize question indices for each category to 0 if not already set
+    setQuestionIndicesPerCategory(prev => {
+      const newIndices = { ...prev };
+      Object.keys(sortedCategorized).forEach(cat => {
+        if (!(cat in newIndices)) {
+          newIndices[cat] = 0;
+        }
+      });
+      return newIndices;
+    });
+    
     setCurrentCategoryIndex(0);
-    setCurrentQuestionIndexInCategory(0);
   }, [selectedCategories, allQuestions, isMixedMode, hasToggleBeenChanged]);
 
   const handleCategoriesChange = (categories: string[]) => {
@@ -832,9 +850,12 @@ export function QuizApp() {
                 
                 const categoryQuestions = categorizedQuestions[category] || [];
                 
-                // For prev/next categories, always show question 0 to avoid visible jumps
-                // For active category, use the current question index
-                const questionIndexToUse = isActiveCategory ? currentQuestionIndexInCategory : 0;
+                // Get the question index for this specific category
+                const questionIndexForCategory = questionIndicesPerCategory[category] || 0;
+                
+                // For prev/next categories during horizontal transitions, show the question they're currently on
+                // For active category, use its current question index
+                const questionIndexToUse = questionIndexForCategory;
                 
                 // For each category, render previous/current/next questions
                 return categoryQuestions.map((question, qIndex) => {
