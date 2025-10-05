@@ -111,13 +111,15 @@ export function CategorySelector({
               return (
                 <div 
                   key={category}
-                  className="flex items-center justify-between cursor-pointer rounded-full"
+                  className="flex items-center justify-between cursor-pointer rounded-full transition-all duration-300 ease-out"
                   style={{ 
                     backgroundColor: borderColor,
                     paddingLeft: '32px',
                     paddingRight: '8px',
                     paddingTop: '8px',
-                    paddingBottom: '8px'
+                    paddingBottom: '8px',
+                    width: isSelected ? '100%' : 'calc(100% - 40px)',
+                    animation: isSelected ? 'bounceWidth 0.4s ease-out' : 'none'
                   }}
                   onClick={() => handleCategoryToggle(category)}
                 >
@@ -171,6 +173,23 @@ export function CategorySelector({
               })}
             </div>
           </ScrollArea>
+          
+          <style>{`
+            @keyframes bounceWidth {
+              0% {
+                width: calc(100% - 40px);
+              }
+              50% {
+                width: calc(100% + 5px);
+              }
+              70% {
+                width: calc(100% - 2px);
+              }
+              100% {
+                width: 100%;
+              }
+            }
+          `}</style>
         </div>
       </DialogContent>
     </Dialog>
