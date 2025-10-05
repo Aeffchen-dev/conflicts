@@ -347,15 +347,13 @@ export function QuizApp() {
   const [currentQuestionIndexInCategory, setCurrentQuestionIndexInCategory] = useState(0);
   const [categorizedQuestions, setCategorizedQuestions] = useState<{ [category: string]: Question[] }>({});
   
-  // Drag state for horizontal (category) swipe
-  const [isDraggingHorizontal, setIsDraggingHorizontal] = useState(false);
-  const [dragOffsetX, setDragOffsetX] = useState(0);
+  // Unified drag state
+  const [isDragging, setIsDragging] = useState(false);
   const [dragStartX, setDragStartX] = useState(0);
-  
-  // Drag state for vertical (question) swipe
-  const [isDraggingVertical, setIsDraggingVertical] = useState(false);
-  const [dragOffsetY, setDragOffsetY] = useState(0);
   const [dragStartY, setDragStartY] = useState(0);
+  const [dragOffsetX, setDragOffsetX] = useState(0);
+  const [dragOffsetY, setDragOffsetY] = useState(0);
+  const [dragDirection, setDragDirection] = useState<'horizontal' | 'vertical' | null>(null);
 
   const categories = Object.keys(categorizedQuestions);
   const currentCategory = categories[currentCategoryIndex] || '';
@@ -364,74 +362,68 @@ export function QuizApp() {
   const nextCategory = () => {
     setCurrentCategoryIndex((prev) => (prev + 1) % categories.length);
     setCurrentQuestionIndexInCategory(0);
-    setDragOffsetX(0);
   };
 
   const prevCategory = () => {
     setCurrentCategoryIndex((prev) => (prev - 1 + categories.length) % categories.length);
     setCurrentQuestionIndexInCategory(0);
-    setDragOffsetX(0);
   };
 
   const nextQuestion = () => {
     setCurrentQuestionIndexInCategory((prev) => (prev + 1) % questionsInCategory.length);
-    setDragOffsetY(0);
   };
 
   const prevQuestion = () => {
     setCurrentQuestionIndexInCategory((prev) => (prev - 1 + questionsInCategory.length) % questionsInCategory.length);
-    setDragOffsetY(0);
   };
 
-  // Horizontal drag handlers for category switching
-  const handleDragStartX = (clientX: number) => {
-    setIsDraggingHorizontal(true);
+  // Unified drag handlers that detect direction
+  const handleDragStart = (clientX: number, clientY: number) => {
+    setIsDragging(true);
     setDragStartX(clientX);
+    setDragStartY(clientY);
     setDragOffsetX(0);
+    setDragOffsetY(0);
+    setDragDirection(null);
   };
 
-  const handleDragMoveX = (clientX: number) => {
-    if (!isDraggingHorizontal) return;
-    const offset = clientX - dragStartX;
-    setDragOffsetX(offset);
+  const handleDragMove = (clientX: number, clientY: number) => {
+    if (!isDragging) return;
+    
+    const offsetX = clientX - dragStartX;
+    const offsetY = clientY - dragStartY;
+    
+    // Determine direction on first significant movement
+    if (!dragDirection && (Math.abs(offsetX) > 10 || Math.abs(offsetY) > 10)) {
+      if (Math.abs(offsetX) > Math.abs(offsetY)) {
+        setDragDirection('horizontal');
+      } else {
+        setDragDirection('vertical');
+      }
+    }
+    
+    // Only update offset in the detected direction
+    if (dragDirection === 'horizontal') {
+      setDragOffsetX(offsetX);
+      setDragOffsetY(0);
+    } else if (dragDirection === 'vertical') {
+      setDragOffsetY(offsetY);
+      setDragOffsetX(0);
+    }
   };
 
-  const handleDragEndX = () => {
-    if (!isDraggingHorizontal) return;
+  const handleDragEnd = () => {
+    if (!isDragging) return;
     
     const threshold = 80;
     
-    if (Math.abs(dragOffsetX) > threshold) {
+    if (dragDirection === 'horizontal' && Math.abs(dragOffsetX) > threshold) {
       if (dragOffsetX > 0) {
         prevCategory();
       } else {
         nextCategory();
       }
-    }
-    
-    setIsDraggingHorizontal(false);
-    setDragOffsetX(0);
-  };
-
-  // Vertical drag handlers for question switching
-  const handleDragStartY = (clientY: number) => {
-    setIsDraggingVertical(true);
-    setDragStartY(clientY);
-    setDragOffsetY(0);
-  };
-
-  const handleDragMoveY = (clientY: number) => {
-    if (!isDraggingVertical) return;
-    const offset = clientY - dragStartY;
-    setDragOffsetY(offset);
-  };
-
-  const handleDragEndY = () => {
-    if (!isDraggingVertical) return;
-    
-    const threshold = 80;
-    
-    if (Math.abs(dragOffsetY) > threshold) {
+    } else if (dragDirection === 'vertical' && Math.abs(dragOffsetY) > threshold) {
       if (dragOffsetY > 0) {
         prevQuestion();
       } else {
@@ -439,8 +431,10 @@ export function QuizApp() {
       }
     }
     
-    setIsDraggingVertical(false);
+    setIsDragging(false);
+    setDragOffsetX(0);
     setDragOffsetY(0);
+    setDragDirection(null);
   };
 
   const handleKeyPress = (e: KeyboardEvent) => {
@@ -779,37 +773,36 @@ export function QuizApp() {
             <div 
               className="relative w-full h-full flex items-center justify-center"
               onMouseDown={(e) => {
-                handleDragStartX(e.clientX);
-                handleDragStartY(e.clientY);
+                handleDragStart(e.clientX, e.clientY);
               }}
               onMouseMove={(e) => {
-                handleDragMoveX(e.clientX);
-                handleDragMoveY(e.clientY);
+                handleDragMove(e.clientX, e.clientY);
               }}
               onMouseUp={() => {
-                handleDragEndX();
-                handleDragEndY();
+                handleDragEnd();
+              }}
+              onMouseLeave={() => {
+                if (isDragging) {
+                  handleDragEnd();
+                }
               }}
               onTouchStart={(e) => {
                 const touch = e.touches[0];
-                handleDragStartX(touch.clientX);
-                handleDragStartY(touch.clientY);
+                handleDragStart(touch.clientX, touch.clientY);
               }}
               onTouchMove={(e) => {
                 const touch = e.touches[0];
-                handleDragMoveX(touch.clientX);
-                handleDragMoveY(touch.clientY);
+                handleDragMove(touch.clientX, touch.clientY);
               }}
               onTouchEnd={() => {
-                handleDragEndX();
-                handleDragEndY();
+                handleDragEnd();
               }}
             >
               <div
                 className="absolute inset-0 w-full h-full"
                 style={{
                   transform: `translateX(${dragOffsetX}px) translateY(${dragOffsetY}px)`,
-                  transition: isDraggingHorizontal || isDraggingVertical ? 'none' : 'transform 0.3s ease-out'
+                  transition: isDragging ? 'none' : 'transform 0.3s ease-out'
                 }}
               >
                 <QuizCard
