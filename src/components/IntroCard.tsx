@@ -8,10 +8,12 @@ interface IntroCardProps {
   isPrev?: boolean;
   onSwipeLeft?: () => void;
   onSwipeRight?: () => void;
+  onSwipeUp?: () => void;
+  onSwipeDown?: () => void;
   isTransitioning?: boolean;
 }
 
-export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev = false, onSwipeLeft, onSwipeRight, isTransitioning = false }: IntroCardProps) {
+export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev = false, onSwipeLeft, onSwipeRight, onSwipeUp, onSwipeDown, isTransitioning = false }: IntroCardProps) {
   const getContent = () => {
     switch (slideIndex) {
       case 0:
@@ -42,6 +44,14 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       {/* Tap zones */}
       <div className="absolute left-0 top-0 w-20 h-full z-20 cursor-pointer" onClick={onSwipeRight} />
       <div className="absolute right-0 top-0 w-20 h-full z-20 cursor-pointer" onClick={onSwipeLeft} />
+      
+      {/* Vertical tap zones only on slide 3 */}
+      {slideIndex === 2 && (
+        <>
+          <div className="absolute top-0 left-0 w-full h-20 z-20 cursor-pointer" onClick={onSwipeUp} />
+          <div className="absolute bottom-0 left-0 w-full h-20 z-20 cursor-pointer" onClick={onSwipeDown} />
+        </>
+      )}
       
       <div className="flex-1 flex flex-col items-center justify-center text-center p-8 relative z-10 gap-6">
         {/* Double-headed arrow for slide 2 (horizontal) */}
