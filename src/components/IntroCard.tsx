@@ -115,19 +115,19 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
         }
         
         .animate-slide-horizontal-active {
-          animation: slide-horizontal-active 0.8s ease-in-out 0.5s 1;
+          animation: slide-horizontal-active 0.5s ease-in-out 0.3s 1;
         }
         
         .animate-slide-horizontal-next {
-          animation: slide-horizontal-next 0.8s ease-in-out 0.5s 1;
+          animation: slide-horizontal-next 0.5s ease-in-out 0.3s 1;
         }
         
         .animate-slide-vertical-active {
-          animation: slide-vertical-active 0.8s ease-in-out 0.5s 1;
+          animation: slide-vertical-active 0.5s ease-in-out 0.3s 1;
         }
         
         .animate-slide-vertical-next {
-          animation: slide-vertical-next 0.8s ease-in-out 0.5s 1;
+          animation: slide-vertical-next 0.5s ease-in-out 0.3s 1;
         }
       `}</style>
     </div>
