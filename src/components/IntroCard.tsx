@@ -45,6 +45,10 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       <div className="intro-blob intro-blob-6" />
       <div className="intro-blob intro-blob-7" />
       <div className="intro-blob intro-blob-8" />
+      <div className="intro-blob intro-blob-9" />
+      <div className="intro-blob intro-blob-10" />
+      <div className="intro-blob intro-blob-11" />
+      <div className="intro-blob intro-blob-12" />
       
       {/* Tap zones */}
       <div className="absolute left-0 top-0 w-20 h-full z-20 cursor-pointer" onClick={onSwipeRight} />
