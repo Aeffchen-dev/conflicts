@@ -1004,110 +1004,122 @@ export function QuizApp() {
                 if (!isActiveCategory && !isPrevCategory && !isNextCategory) return null;
                 
                 const categoryQuestions = categorizedQuestions[category] || [];
-                
-                // Get the question index for this specific category
                 const questionIndexForCategory = questionIndicesPerCategory[category] || 0;
                 
-                // For prev/next categories during horizontal transitions, show the question they're currently on
-                // For active category, use its current question index
-                const questionIndexToUse = questionIndexForCategory;
+                // Calculate horizontal transform for this category
+                let categoryHorizontalTransform = '';
+                let categoryZIndex = 1;
                 
-                // For each category, render previous/current/next questions
-                return categoryQuestions.map((question, qIndex) => {
-                  const isActiveQuestion = qIndex === questionIndexToUse;
-                  const isPrevQuestion = qIndex === (questionIndexToUse - 1 + categoryQuestions.length) % categoryQuestions.length;
-                  const isNextQuestion = qIndex === (questionIndexToUse + 1) % categoryQuestions.length;
-                  
-                  // Render current and next slides for active category (no previous)
-                  // Only render current question for prev/next categories during horizontal swipes
-                  const isHorizontalTransition = (isDragging && dragDirection === 'horizontal') || 
-                                                (isTransitioning && (transitionDirection === 'left' || transitionDirection === 'right'));
-                  
-                  const shouldRender = (isActiveCategory && (isActiveQuestion || isNextQuestion)) ||
-                                      ((isPrevCategory || isNextCategory) && isActiveQuestion);
-                  
-                  if (!shouldRender) return null;
-                  
-                  let transform = '';
-                  let zIndex = 1;
-                  
-                  if (isActiveCategory && isActiveQuestion) {
-                    // Current category, current question
-                    if (isDragging && dragDirection === 'horizontal') {
-                      const dragProgress = Math.abs(dragOffsetX) / 300;
-                      const scale = Math.max(0.8, 1 - dragProgress * 0.2);
-                      const rotation = dragOffsetX > 0 ? dragProgress * 5 : -dragProgress * 5;
-                      transform = `translateX(${dragOffsetX}px) scale(${scale}) rotate(${rotation}deg)`;
-                    } else if (isDragging && dragDirection === 'vertical') {
-                      transform = `translateY(${dragOffsetY}px)`;
-                    } else if (isTransitioning && transitionDirection === 'left') {
-                      transform = 'translateX(calc(-100% - 16px)) scale(0.8) rotate(-5deg)';
-                    } else if (isTransitioning && transitionDirection === 'right') {
-                      transform = 'translateX(calc(100% + 16px)) scale(0.8) rotate(5deg)';
-                    } else {
-                      transform = 'translateX(0) translateY(0) scale(1) rotate(0deg)';
-                    }
-                    zIndex = 3;
-                  } else if (isActiveCategory && isNextQuestion) {
-                    // Current category, next question - visible below with 16px margin
-                    if (isDragging && dragDirection === 'vertical') {
-                      transform = `translateY(calc(70vh + 16px + ${dragOffsetY}px))`;
-                    } else {
-                      transform = 'translateY(calc(70vh + 16px))';
-                    }
-                    zIndex = 1;
-                  } else if (isPrevCategory) {
-                    // Previous category - keep vertically centered during horizontal transitions
-                    if (isDragging && dragDirection === 'horizontal') {
-                      const dragProgress = Math.abs(dragOffsetX) / 300;
-                      const scale = Math.min(1, 0.8 + dragProgress * 0.2);
-                      transform = `translateX(calc(-100% - 16px + ${dragOffsetX}px)) translateY(0) scale(${scale}) rotate(0deg)`;
-                    } else if (isTransitioning && transitionDirection === 'right') {
-                      transform = 'translateX(0) translateY(0) scale(1) rotate(0deg)';
-                    } else {
-                      transform = 'translateX(calc(-100% - 16px)) translateY(0) scale(0.8) rotate(0deg)';
-                    }
-                    zIndex = 1;
-                  } else if (isNextCategory) {
-                    // Next category - keep vertically centered during horizontal transitions
-                    if (isDragging && dragDirection === 'horizontal') {
-                      const dragProgress = Math.abs(dragOffsetX) / 300;
-                      const scale = Math.min(1, 0.8 + dragProgress * 0.2);
-                      transform = `translateX(calc(100% + 16px + ${dragOffsetX}px)) translateY(0) scale(${scale}) rotate(0deg)`;
-                    } else if (isTransitioning && transitionDirection === 'left') {
-                      transform = 'translateX(0) translateY(0) scale(1) rotate(0deg)';
-                    } else {
-                      transform = 'translateX(calc(100% + 16px)) translateY(0) scale(0.8) rotate(0deg)';
-                    }
-                    zIndex = 1;
+                if (isActiveCategory) {
+                  if (isDragging && dragDirection === 'horizontal') {
+                    const dragProgress = Math.abs(dragOffsetX) / 300;
+                    const scale = Math.max(0.8, 1 - dragProgress * 0.2);
+                    const rotation = dragOffsetX > 0 ? dragProgress * 5 : -dragProgress * 5;
+                    categoryHorizontalTransform = `translateX(${dragOffsetX}px) scale(${scale}) rotate(${rotation}deg)`;
+                  } else if (isTransitioning && transitionDirection === 'left') {
+                    categoryHorizontalTransform = 'translateX(calc(-100% - 16px)) scale(0.8) rotate(-5deg)';
+                  } else if (isTransitioning && transitionDirection === 'right') {
+                    categoryHorizontalTransform = 'translateX(calc(100% + 16px)) scale(0.8) rotate(5deg)';
+                  } else {
+                    categoryHorizontalTransform = 'translateX(0) scale(1) rotate(0deg)';
                   }
-                  
-                  return (
-                    <div
-                      key={`category-${catIndex}-question-${qIndex}`}
-                      className={`absolute inset-0 w-full h-full ${isActiveCategory && isActiveQuestion ? 'pointer-events-auto' : 'pointer-events-none'}`}
-                      style={{
-                        transform,
-                        zIndex,
-                        transition: isDragging ? 'none' : 'transform 0.3s ease-in-out'
-                      }}
-                    >
-                      <QuizCard
-                        question={question}
-                        onSwipeLeft={nextCategory}
-                        onSwipeRight={prevCategory}
-                        onSwipeUp={prevQuestion}
-                        onSwipeDown={nextQuestion}
-                        categoryIndex={categoryColorMap[question.category] || 0}
-                        onDragStart={() => {}}
-                        onDragMove={() => {}}
-                        onDragEnd={() => {}}
-                        dragOffset={0}
-                        isDragging={false}
-                      />
-                    </div>
-                  );
-                });
+                  categoryZIndex = 3;
+                } else if (isPrevCategory) {
+                  if (isDragging && dragDirection === 'horizontal') {
+                    const dragProgress = Math.abs(dragOffsetX) / 300;
+                    const scale = Math.min(1, 0.8 + dragProgress * 0.2);
+                    categoryHorizontalTransform = `translateX(calc(-100% - 16px + ${dragOffsetX}px)) scale(${scale}) rotate(0deg)`;
+                  } else if (isTransitioning && transitionDirection === 'right') {
+                    categoryHorizontalTransform = 'translateX(0) scale(1) rotate(0deg)';
+                  } else {
+                    categoryHorizontalTransform = 'translateX(calc(-100% - 16px)) scale(0.8) rotate(0deg)';
+                  }
+                  categoryZIndex = 1;
+                } else if (isNextCategory) {
+                  if (isDragging && dragDirection === 'horizontal') {
+                    const dragProgress = Math.abs(dragOffsetX) / 300;
+                    const scale = Math.min(1, 0.8 + dragProgress * 0.2);
+                    categoryHorizontalTransform = `translateX(calc(100% + 16px + ${dragOffsetX}px)) scale(${scale}) rotate(0deg)`;
+                  } else if (isTransitioning && transitionDirection === 'left') {
+                    categoryHorizontalTransform = 'translateX(0) scale(1) rotate(0deg)';
+                  } else {
+                    categoryHorizontalTransform = 'translateX(calc(100% + 16px)) scale(0.8) rotate(0deg)';
+                  }
+                  categoryZIndex = 1;
+                }
+                
+                // For each category, render current and next questions as separate DOM elements
+                const currentQ = categoryQuestions[questionIndexForCategory];
+                const nextQ = categoryQuestions[(questionIndexForCategory + 1) % categoryQuestions.length];
+                
+                return (
+                  <div
+                    key={`category-${catIndex}`}
+                    className={`absolute inset-0 w-full h-full`}
+                    style={{
+                      transform: categoryHorizontalTransform,
+                      zIndex: categoryZIndex,
+                      transition: isDragging && dragDirection === 'horizontal' ? 'none' : 'transform 0.3s ease-in-out',
+                      pointerEvents: 'none'
+                    }}
+                  >
+                    {/* Current question in this category */}
+                    {currentQ && (
+                      <div
+                        className={`absolute inset-0 w-full h-full ${isActiveCategory ? 'pointer-events-auto' : 'pointer-events-none'}`}
+                        style={{
+                          transform: isActiveCategory && isDragging && dragDirection === 'vertical' 
+                            ? `translateY(${dragOffsetY}px)` 
+                            : 'translateY(0)',
+                          zIndex: 2,
+                          transition: isDragging && dragDirection === 'vertical' ? 'none' : 'transform 0.3s ease-in-out'
+                        }}
+                      >
+                        <QuizCard
+                          question={currentQ}
+                          onSwipeLeft={nextCategory}
+                          onSwipeRight={prevCategory}
+                          onSwipeUp={prevQuestion}
+                          onSwipeDown={nextQuestion}
+                          categoryIndex={categoryColorMap[currentQ.category] || 0}
+                          onDragStart={() => {}}
+                          onDragMove={() => {}}
+                          onDragEnd={() => {}}
+                          dragOffset={0}
+                          isDragging={false}
+                        />
+                      </div>
+                    )}
+                    
+                    {/* Next question in this category - only render for active category */}
+                    {isActiveCategory && nextQ && (
+                      <div
+                        className="absolute inset-0 w-full h-full pointer-events-none"
+                        style={{
+                          transform: isDragging && dragDirection === 'vertical'
+                            ? `translateY(calc(70vh + 16px + ${dragOffsetY}px))`
+                            : 'translateY(calc(70vh + 16px))',
+                          zIndex: 1,
+                          transition: isDragging && dragDirection === 'vertical' ? 'none' : 'transform 0.3s ease-in-out'
+                        }}
+                      >
+                        <QuizCard
+                          question={nextQ}
+                          onSwipeLeft={nextCategory}
+                          onSwipeRight={prevCategory}
+                          onSwipeUp={prevQuestion}
+                          onSwipeDown={nextQuestion}
+                          categoryIndex={categoryColorMap[nextQ.category] || 0}
+                          onDragStart={() => {}}
+                          onDragMove={() => {}}
+                          onDragEnd={() => {}}
+                          dragOffset={0}
+                          isDragging={false}
+                        />
+                      </div>
+                    )}
+                  </div>
+                );
               })}
             </div>
           ) : (
