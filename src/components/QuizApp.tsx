@@ -1014,31 +1014,38 @@ export function QuizApp() {
                 
                 if (isActiveCategory) {
                   if (isDragging && dragDirection === 'horizontal') {
-                    categoryHorizontalTransform = `translateX(${dragOffsetX}px)`;
+                    const dragProgress = Math.abs(dragOffsetX) / 300;
+                    const scale = Math.max(0.8, 1 - dragProgress * 0.2);
+                    const rotation = dragOffsetX > 0 ? dragProgress * 5 : -dragProgress * 5;
+                    categoryHorizontalTransform = `translateX(${dragOffsetX}px) scale(${scale}) rotate(${rotation}deg)`;
                   } else if (isTransitioning && transitionDirection === 'left') {
-                    categoryHorizontalTransform = 'translateX(calc(-100% - 16px))';
+                    categoryHorizontalTransform = 'translateX(calc(-100% - 16px)) scale(0.8) rotate(-5deg)';
                   } else if (isTransitioning && transitionDirection === 'right') {
-                    categoryHorizontalTransform = 'translateX(calc(100% + 16px))';
+                    categoryHorizontalTransform = 'translateX(calc(100% + 16px)) scale(0.8) rotate(5deg)';
                   } else {
-                    categoryHorizontalTransform = 'translateX(0)';
+                    categoryHorizontalTransform = 'translateX(0) scale(1) rotate(0deg)';
                   }
                   categoryZIndex = 3;
                 } else if (isPrevCategory) {
                   if (isDragging && dragDirection === 'horizontal') {
-                    categoryHorizontalTransform = `translateX(calc(-100% - 16px + ${dragOffsetX}px))`;
+                    const dragProgress = Math.abs(dragOffsetX) / 300;
+                    const scale = Math.min(1, 0.8 + dragProgress * 0.2);
+                    categoryHorizontalTransform = `translateX(calc(-100% - 16px + ${dragOffsetX}px)) scale(${scale}) rotate(0deg)`;
                   } else if (isTransitioning && transitionDirection === 'right') {
-                    categoryHorizontalTransform = 'translateX(0)';
+                    categoryHorizontalTransform = 'translateX(0) scale(1) rotate(0deg)';
                   } else {
-                    categoryHorizontalTransform = 'translateX(calc(-100% - 16px))';
+                    categoryHorizontalTransform = 'translateX(calc(-100% - 16px)) scale(0.8) rotate(0deg)';
                   }
                   categoryZIndex = 1;
                 } else if (isNextCategory) {
                   if (isDragging && dragDirection === 'horizontal') {
-                    categoryHorizontalTransform = `translateX(calc(100% + 16px + ${dragOffsetX}px))`;
+                    const dragProgress = Math.abs(dragOffsetX) / 300;
+                    const scale = Math.min(1, 0.8 + dragProgress * 0.2);
+                    categoryHorizontalTransform = `translateX(calc(100% + 16px + ${dragOffsetX}px)) scale(${scale}) rotate(0deg)`;
                   } else if (isTransitioning && transitionDirection === 'left') {
-                    categoryHorizontalTransform = 'translateX(0)';
+                    categoryHorizontalTransform = 'translateX(0) scale(1) rotate(0deg)';
                   } else {
-                    categoryHorizontalTransform = 'translateX(calc(100% + 16px))';
+                    categoryHorizontalTransform = 'translateX(calc(100% + 16px)) scale(0.8) rotate(0deg)';
                   }
                   categoryZIndex = 1;
                 }
