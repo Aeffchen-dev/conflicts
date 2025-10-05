@@ -138,13 +138,13 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
         
         @keyframes glow-sweep {
           0% {
-            text-shadow: -100px 0 20px rgba(255, 255, 255, 0);
+            text-shadow: -100px 0 30px rgba(255, 255, 255, 0);
           }
           50% {
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.6);
+            text-shadow: 0 0 40px rgba(255, 255, 255, 1), 0 0 60px rgba(255, 255, 255, 0.9), 0 0 80px rgba(255, 255, 255, 0.7);
           }
           100% {
-            text-shadow: 100px 0 20px rgba(255, 255, 255, 0);
+            text-shadow: 100px 0 30px rgba(255, 255, 255, 0);
           }
         }
         
