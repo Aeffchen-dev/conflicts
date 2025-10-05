@@ -436,19 +436,29 @@ export function QuizApp() {
   };
 
   const nextQuestion = () => {
+    if (isTransitioning) return;
     const newIndex = (currentQuestionIndexInCategory + 1) % questionsInCategory.length;
-    setQuestionIndicesPerCategory(prev => ({
-      ...prev,
-      [currentCategory]: newIndex
-    }));
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setQuestionIndicesPerCategory(prev => ({
+        ...prev,
+        [currentCategory]: newIndex
+      }));
+      setIsTransitioning(false);
+    }, 300);
   };
 
   const prevQuestion = () => {
+    if (isTransitioning) return;
     const newIndex = (currentQuestionIndexInCategory - 1 + questionsInCategory.length) % questionsInCategory.length;
-    setQuestionIndicesPerCategory(prev => ({
-      ...prev,
-      [currentCategory]: newIndex
-    }));
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setQuestionIndicesPerCategory(prev => ({
+        ...prev,
+        [currentCategory]: newIndex
+      }));
+      setIsTransitioning(false);
+    }, 300);
   };
 
   // Unified drag handlers that detect direction
