@@ -1091,12 +1091,12 @@ export function QuizApp() {
                       </div>
                     )}
                     
-                    {/* Next question in this category - only render for active category */}
-                    {isActiveCategory && nextQ && (
+                    {/* Next question in this category - render for all visible categories */}
+                    {nextQ && (
                       <div
                         className="absolute inset-0 w-full h-full pointer-events-none"
                         style={{
-                          transform: isDragging && dragDirection === 'vertical'
+                          transform: isActiveCategory && isDragging && dragDirection === 'vertical'
                             ? `translateY(calc(70vh + 16px + ${dragOffsetY}px))`
                             : 'translateY(calc(70vh + 16px))',
                           zIndex: 1,
