@@ -1073,9 +1073,9 @@ export function QuizApp() {
                   
                   if (isBeforePrev) {
                     // Before previous question - positioned above prev
-                    if (isActiveCategory && isDragging && dragDirection === 'vertical' && dragOffsetY > 0) {
+                    if (isActiveCategory && isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
-                      const scale = Math.min(1, 0.85 + dragProgress * 0.15);
+                      const scale = dragOffsetY > 0 ? Math.min(1, 0.85 + dragProgress * 0.15) : 1;
                       verticalTransform = `translateY(calc(-140vh - 32px + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
                       verticalTransform = 'translateY(calc(-140vh - 32px)) scale(1)';
@@ -1083,9 +1083,9 @@ export function QuizApp() {
                     verticalZIndex = 0;
                   } else if (isPrev) {
                     // Previous question - positioned above
-                    if (isActiveCategory && isDragging && dragDirection === 'vertical' && dragOffsetY > 0) {
+                    if (isActiveCategory && isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
-                      const scale = Math.min(1, 0.85 + dragProgress * 0.15);
+                      const scale = dragOffsetY > 0 ? Math.min(1, 0.85 + dragProgress * 0.15) : 1;
                       verticalTransform = `translateY(calc(-70vh - 16px + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
                       verticalTransform = 'translateY(calc(-70vh - 16px)) scale(1)';
@@ -1103,9 +1103,9 @@ export function QuizApp() {
                     verticalZIndex = 2;
                   } else if (isNext) {
                     // Next question - positioned below
-                    if (isActiveCategory && isDragging && dragDirection === 'vertical' && dragOffsetY < 0) {
+                    if (isActiveCategory && isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
-                      const scale = Math.min(1, 0.85 + dragProgress * 0.15);
+                      const scale = dragOffsetY < 0 ? Math.min(1, 0.85 + dragProgress * 0.15) : 1;
                       verticalTransform = `translateY(calc(70vh + 16px + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
                       verticalTransform = 'translateY(calc(70vh + 16px)) scale(1)';
@@ -1113,9 +1113,9 @@ export function QuizApp() {
                     verticalZIndex = 1;
                   } else if (isAfterNext) {
                     // After next question - positioned below next
-                    if (isActiveCategory && isDragging && dragDirection === 'vertical' && dragOffsetY < 0) {
+                    if (isActiveCategory && isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
-                      const scale = Math.min(1, 0.85 + dragProgress * 0.15);
+                      const scale = dragOffsetY < 0 ? Math.min(1, 0.85 + dragProgress * 0.15) : 1;
                       verticalTransform = `translateY(calc(140vh + 32px + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
                       verticalTransform = 'translateY(calc(140vh + 32px)) scale(1)';
