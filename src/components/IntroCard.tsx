@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { ArrowLeftRight, ArrowUpDown } from 'lucide-react';
 
 interface IntroCardProps {
   slideIndex: number;
@@ -51,24 +50,64 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       <div className="absolute right-0 top-0 w-20 h-full z-20 cursor-pointer" onClick={onSwipeLeft} />
       
       <div className="flex-1 flex flex-col items-center justify-center text-center p-8 relative z-10 gap-8">
-        {/* Double-headed arrow for slide 2 (horizontal) */}
+        {/* Custom horizontal double arrow for slide 2 */}
         {slideIndex === 1 && (
-          <ArrowLeftRight 
+          <svg 
+            width="100" 
+            height="24" 
+            viewBox="0 0 100 24" 
             className={isTransitioning ? 'animate-wobble-horizontal' : ''}
-            size={48} 
-            strokeWidth={1}
             style={{ color: 'hsl(160, 70%, 15%)' }}
-          />
+          >
+            <defs>
+              <marker id="arrowhead-left" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                <polygon points="10,5 0,0 0,10" fill="currentColor" />
+              </marker>
+              <marker id="arrowhead-right" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                <polygon points="0,5 10,0 10,10" fill="currentColor" />
+              </marker>
+            </defs>
+            <line 
+              x1="10" 
+              y1="12" 
+              x2="90" 
+              y2="12" 
+              stroke="currentColor" 
+              strokeWidth="1" 
+              markerStart="url(#arrowhead-left)" 
+              markerEnd="url(#arrowhead-right)"
+            />
+          </svg>
         )}
         
-        {/* Double-headed arrow for slide 3 (vertical) */}
+        {/* Custom vertical double arrow for slide 3 */}
         {slideIndex === 2 && (
-          <ArrowUpDown 
+          <svg 
+            width="24" 
+            height="100" 
+            viewBox="0 0 24 100" 
             className={isTransitioning ? 'animate-wobble-vertical' : ''}
-            size={48} 
-            strokeWidth={1}
             style={{ color: 'hsl(160, 70%, 15%)' }}
-          />
+          >
+            <defs>
+              <marker id="arrowhead-up" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto-start-reverse">
+                <polygon points="5,10 0,0 10,0" fill="currentColor" />
+              </marker>
+              <marker id="arrowhead-down" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                <polygon points="5,0 0,10 10,10" fill="currentColor" />
+              </marker>
+            </defs>
+            <line 
+              x1="12" 
+              y1="10" 
+              x2="12" 
+              y2="90" 
+              stroke="currentColor" 
+              strokeWidth="1" 
+              markerStart="url(#arrowhead-up)" 
+              markerEnd="url(#arrowhead-down)"
+            />
+          </svg>
         )}
         
         <h1 
