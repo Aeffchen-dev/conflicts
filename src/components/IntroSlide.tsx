@@ -174,7 +174,7 @@ export function IntroSlide({
             {/* Main title - vertically and horizontally centered */}
             <div className="flex-1 flex items-center justify-center">
               <h1 
-                className="text-3xl md:text-4xl lg:text-4xl font-bold text-foreground text-center leading-tight"
+                className="text-3xl md:text-4xl lg:text-4xl font-bold text-foreground text-center leading-tight intro-text-reflection"
                 style={{ fontFamily: 'Kokoro, serif', fontWeight: 'bold', fontStyle: 'italic' }}
               >
                 Offene Beziehung: Wie gehen wir das richtig an?
