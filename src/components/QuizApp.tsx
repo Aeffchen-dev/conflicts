@@ -1354,6 +1354,9 @@ export function QuizApp() {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
                       const scale = dragOffsetY > 0 ? Math.min(1, 0.85 + dragProgress * 0.15) : 1;
                       verticalTransform = `translateY(calc(-200% + ${dragOffsetY}px)) scale(${scale})`;
+                    } else if (isActiveCategory && isTransitioning && transitionDirection === 'up') {
+                      // During upward transition, move all slides together
+                      verticalTransform = 'translateY(calc(100% + 16px)) scale(1)';
                     } else {
                       verticalTransform = 'translateY(-200%) scale(1)';
                     }
@@ -1364,6 +1367,9 @@ export function QuizApp() {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
                       const scale = Math.max(0.85, 1 - dragProgress * 0.15);
                       verticalTransform = `translateY(${dragOffsetY}px) scale(${scale})`;
+                    } else if (isActiveCategory && isTransitioning && transitionDirection === 'up') {
+                      // During upward transition, move all slides together
+                      verticalTransform = 'translateY(calc(200% + 32px)) scale(0.85)';
                     } else {
                       verticalTransform = 'translateY(0) scale(1)';
                     }
@@ -1374,6 +1380,9 @@ export function QuizApp() {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
                       const scale = dragOffsetY < 0 ? Math.min(1, 0.85 + dragProgress * 0.15) : 1;
                       verticalTransform = `translateY(calc(90% + 16px + ${dragOffsetY}px)) scale(${scale})`;
+                    } else if (isActiveCategory && isTransitioning && transitionDirection === 'up') {
+                      // During upward transition, move all slides together
+                      verticalTransform = 'translateY(calc(290% + 48px)) scale(1)';
                     } else {
                       verticalTransform = 'translateY(calc(90% + 16px)) scale(1)';
                     }
