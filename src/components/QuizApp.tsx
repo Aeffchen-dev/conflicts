@@ -524,7 +524,8 @@ export function QuizApp() {
               style={{
                 display: 'inline-block',
                 opacity: logoAnimating ? 0 : 1,
-                animation: logoAnimating ? `letterReveal${index} 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards` : 'none'
+                animation: logoAnimating ? `letterReveal 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.08}s forwards` : 'none',
+                filter: logoAnimating ? 'blur(8px)' : 'blur(0px)'
               }}
             >
               {letter}
@@ -583,89 +584,11 @@ export function QuizApp() {
           </div>
         </div>
         <style>{`
-          @keyframes letterReveal0 {
+          @keyframes letterReveal {
             0% {
               opacity: 0;
               filter: blur(8px);
               transform: translateX(-10px);
-            }
-            100% {
-              opacity: 1;
-              filter: blur(0px);
-              transform: translateX(0);
-            }
-          }
-          
-          @keyframes letterReveal1 {
-            0% {
-              opacity: 0;
-              filter: blur(6px);
-              transform: translateX(-8px);
-            }
-            100% {
-              opacity: 1;
-              filter: blur(0px);
-              transform: translateX(0);
-            }
-          }
-          
-          @keyframes letterReveal2 {
-            0% {
-              opacity: 0;
-              filter: blur(10px);
-              transform: translateX(-12px);
-            }
-            100% {
-              opacity: 1;
-              filter: blur(0px);
-              transform: translateX(0);
-            }
-          }
-          
-          @keyframes letterReveal3 {
-            0% {
-              opacity: 0;
-              filter: blur(7px);
-              transform: translateX(-9px);
-            }
-            100% {
-              opacity: 1;
-              filter: blur(0px);
-              transform: translateX(0);
-            }
-          }
-          
-          @keyframes letterReveal4 {
-            0% {
-              opacity: 0;
-              filter: blur(9px);
-              transform: translateX(-11px);
-            }
-            100% {
-              opacity: 1;
-              filter: blur(0px);
-              transform: translateX(0);
-            }
-          }
-          
-          @keyframes letterReveal5 {
-            0% {
-              opacity: 0;
-              filter: blur(5px);
-              transform: translateX(-7px);
-            }
-            100% {
-              opacity: 1;
-              filter: blur(0px);
-              transform: translateX(0);
-            }
-          }
-          
-          @keyframes letterReveal6 {
-            0% {
-              opacity: 0;
-              filter: blur(11px);
-              transform: translateX(-13px);
             }
             100% {
               opacity: 1;
@@ -681,14 +604,14 @@ export function QuizApp() {
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
             30% {
-              transform: rotate(-45deg) scaleX(1.33) rotateZ(-14deg) translateY(-4px);
+              transform: rotate(-45deg) scaleX(1.12) rotateZ(-8deg) translateY(-2px);
               opacity: 1;
-              filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.4));
+              filter: drop-shadow(3px 4px 6px rgba(0,0,0,0.35));
             }
             70% {
-              transform: rotate(-45deg) scaleX(1.08) rotateZ(-3deg) translateY(-0.5px);
+              transform: rotate(-45deg) scaleX(1.04) rotateZ(-2deg) translateY(-0.5px);
               opacity: 1;
-              filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.3));
+              filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.25));
             }
             100% {
               transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
