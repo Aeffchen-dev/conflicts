@@ -482,25 +482,26 @@ export function QuizApp() {
       categorized[category] = categorized[category].sort(() => Math.random() - 0.5);
     });
     
-    // Sort categories in specific order
+    // Sort categories in specific order based on actual CSV data
     const categoryOrder = [
       'Klarheit',
       'Hören & Verstehen',
-      'Selbst verantwortung',
-      'Brücken bauen',
-      'Weitergehen'
+      'Selbstverantwortung', // No space - matches CSV
+      'Brücken bauen'
     ];
     
     const sortedCategorized: { [category: string]: Question[] } = {};
+    
+    // Only add categories that exist in the data
     categoryOrder.forEach(cat => {
-      if (categorized[cat]) {
+      if (categorized[cat] && categorized[cat].length > 0) {
         sortedCategorized[cat] = categorized[cat];
       }
     });
     
     // Add any remaining categories not in the order list
     Object.keys(categorized).forEach(cat => {
-      if (!categoryOrder.includes(cat)) {
+      if (!categoryOrder.includes(cat) && categorized[cat].length > 0) {
         sortedCategorized[cat] = categorized[cat];
       }
     });
