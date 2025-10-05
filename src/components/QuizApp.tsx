@@ -1125,21 +1125,22 @@ export function QuizApp() {
                     
                     return categoryQuestions.map((q, qIndex) => {
                       const isCurrent = qIndex === questionIndexForCategory;
+                      const isNext = qIndex === (questionIndexForCategory + 1) % categoryQuestions.length;
                       
-                      // Only show current question during transition
-                      if (!isCurrent) return null;
+                      // Show current and next question during transition
+                      if (!isCurrent && !isNext) return null;
                       
                       return (
                         <div
                           key={`preview-${firstCategory}-${qIndex}`}
                           className="absolute w-full h-full pointer-events-none"
                           style={{
-                            height: 'calc(90% - 8px)',
+                            height: isCurrent ? 'calc(90% - 8px)' : '100%',
                             top: 0,
                             left: 0,
                             right: 0,
-                            transform: 'translateY(0) scale(1)',
-                            zIndex: 3,
+                            transform: isCurrent ? 'translateY(0) scale(1)' : 'translateY(calc(90% + 16px)) scale(1)',
+                            zIndex: isCurrent ? 3 : 1,
                           }}
                         >
                           <QuizCard
