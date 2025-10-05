@@ -843,9 +843,9 @@ export function QuizApp() {
                   const isNextQuestion = qIndex === (questionIndexToUse + 1) % categoryQuestions.length;
                   
                   // Only render this question if:
-                  // 1. It's in the active category and is current/prev/next question
-                  // 2. It's in prev/next category and is the first question (index 0)
-                  // 3. Don't show prev/next questions during horizontal transitions
+                  // 1. It's in the active category and is the current question (always visible)
+                  // 2. It's in the active category and is prev/next question (only during vertical swipes)
+                  // 3. It's in prev/next category and is the first question (visible during horizontal transitions)
                   const isHorizontalTransition = (isDragging && dragDirection === 'horizontal') || 
                                                 (isTransitioning && (transitionDirection === 'left' || transitionDirection === 'right'));
                   
