@@ -1071,9 +1071,13 @@ export function QuizApp() {
                   
                   if (isPrev) {
                     // Previous question - positioned above
-                    verticalTransform = isActiveCategory && isDragging && dragDirection === 'vertical' && dragOffsetY > 0
-                      ? `translateY(calc(-70vh - 16px + ${dragOffsetY}px)) scale(0.85)`
-                      : 'translateY(calc(-70vh - 16px)) scale(0.85)';
+                    if (isActiveCategory && isDragging && dragDirection === 'vertical' && dragOffsetY > 0) {
+                      const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
+                      const scale = Math.min(1, 0.85 + dragProgress * 0.15);
+                      verticalTransform = `translateY(calc(-70vh - 16px + ${dragOffsetY}px)) scale(${scale})`;
+                    } else {
+                      verticalTransform = 'translateY(calc(-70vh - 16px)) scale(1)';
+                    }
                     verticalZIndex = 0;
                   } else if (isCurrent) {
                     // Current question - centered
@@ -1092,7 +1096,7 @@ export function QuizApp() {
                       const scale = Math.min(1, 0.85 + dragProgress * 0.15);
                       verticalTransform = `translateY(calc(70vh + 16px + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
-                      verticalTransform = 'translateY(calc(70vh + 16px)) scale(0.85)';
+                      verticalTransform = 'translateY(calc(70vh + 16px)) scale(1)';
                     }
                     verticalZIndex = 1;
                   }
