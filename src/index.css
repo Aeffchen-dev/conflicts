@@ -102,6 +102,9 @@ All colors MUST be HSL.
     /* Animations */
     --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-quick: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    /* Gradient animation */
+    --gradient-angle: 135deg;
 
     --sidebar-background: 0 0% 98%;
 
@@ -198,4 +201,22 @@ All colors MUST be HSL.
   to {
     stroke-dashoffset: 0;
   }
+}
+
+/* Gradient rotation animation */
+@keyframes gradient-rotate {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient-rotate 8s ease infinite;
 }

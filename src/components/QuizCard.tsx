@@ -198,13 +198,35 @@ export function QuizCard({
     }
   };
 
+  // Extract HSL values for gradient calculation
+  const getBgWithGradient = () => {
+    if (question.category.toLowerCase() === 'intro') {
+      return 'hsl(var(--card-background))';
+    }
+    
+    // Parse the HSL color to create a darker version
+    const bgColor = categoryColors.bg;
+    const hslMatch = bgColor.match(/hsl\(([\d.]+)\s+([\d.]+)%\s+([\d.]+)%\)/);
+    
+    if (hslMatch) {
+      const h = hslMatch[1];
+      const s = hslMatch[2];
+      const l = parseFloat(hslMatch[3]);
+      const darkerL = Math.max(0, l - 5); // 5% darker
+      
+      return `linear-gradient(135deg, hsl(${h} ${s}% ${l}%), hsl(${h} ${s}% ${darkerL}%))`;
+    }
+    
+    return bgColor;
+  };
+
   return (
     <div 
-      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none max-h-full`}
+      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none max-h-full animate-gradient`}
       style={{
         height: '100%',
         maxHeight: '100%',
-        backgroundColor: question.category.toLowerCase() !== 'intro' ? categoryColors.bg : 'hsl(var(--card-background))',
+        background: getBgWithGradient(),
         color: question.category.toLowerCase() !== 'intro' ? categoryColors.text : 'hsl(var(--foreground))'
       }}
       onTouchStart={onTouchStart}
