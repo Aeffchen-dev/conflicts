@@ -48,12 +48,12 @@ All colors MUST be HSL.
     --quiz-surface: 0 0% 12%;
     
     /* Category-specific colors from user palette */
-    --quiz-category1-bg: 185 83% 76%;        /* Electric Blue #8EECF5 */
-    --quiz-category1-text: 185 83% 12%;      /* Darker Electric Blue text */
+    --quiz-category1-bg: 167 82% 78%;        /* Magic Mint #98F5E1 */
+    --quiz-category1-text: 167 82% 12%;      /* Darker Magic Mint text */
     --quiz-category2-bg: 311 64% 85%;        /* Pink Lavender #F1C0E8 */
     --quiz-category2-text: 311 64% 18%;      /* Darker Pink Lavender text */
-    --quiz-category3-bg: 356 100% 91%;       /* Baby Pink #FFCFD2 */
-    --quiz-category3-text: 356 100% 20%;     /* Darker Baby Pink text */
+    --quiz-category3-bg: 126 87% 85%;        /* Granny Smith Apple (lime green) #B9FBC0 */
+    --quiz-category3-text: 126 87% 15%;      /* Darker lime green text */
     --quiz-category4-bg: 27 88% 90%;         /* Champagne Pink #FDE4CF */
     --quiz-category4-text: 27 88% 18%;       /* Darker Champagne Pink text */
     --quiz-category5-bg: 263 65% 84%;        /* Lavender Blue #CFBAF0 */
