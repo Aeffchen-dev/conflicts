@@ -100,7 +100,7 @@ export function QuizCard({
       5: { bg: 'hsl(var(--quiz-category5-bg))', text: 'hsl(var(--quiz-category5-text))', pillBg: 'hsl(270 65% 65%)' }, // 10% darker than 75%
       6: { bg: 'hsl(var(--quiz-category6-bg))', text: 'hsl(var(--quiz-category6-text))', pillBg: 'hsl(55 85% 65%)' }, // 5% darker for Spielerische Intimität
       7: { bg: 'hsl(var(--quiz-category7-bg))', text: 'hsl(var(--quiz-category7-text))', pillBg: 'hsl(160 55% 65%)' }, // 10% darker than 75%
-      8: { bg: 'hsl(var(--quiz-category8-bg))', text: 'hsl(var(--quiz-category8-text))', pillBg: 'hsl(200 65% 60%)' }, // 10% darker than 70%
+      8: { bg: 'hsl(var(--quiz-category8-bg))', text: 'hsl(var(--quiz-category8-text))', pillBg: 'hsl(200 65% 75%)' }, // Lighter blue
     };
     
     return colorVars[colorIndex as keyof typeof colorVars] || colorVars[1];
