@@ -749,69 +749,73 @@ export function QuizApp() {
           style={{ fontFamily: 'Kokoro, serif', fontSize: '23px', fontWeight: 'bold', fontStyle: 'italic' }}
           onClick={handleLogoClick}
         >
-          {'Resolve'.split('').map((letter, index) => (
+          {['C', 'o', 'n', 'f', 'l', 'i', 'c', 't', 's'].map((letter, index) => (
             <span
               key={index}
               style={{
                 display: 'inline-block',
+                position: 'relative',
                 opacity: logoAnimating ? 0 : 1,
                 animation: logoAnimating ? `letterReveal${index} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.1}s forwards` : 'none'
               }}
             >
               {letter}
+              {index === 3 && ( // Position on 'f'
+                <div 
+                  style={{
+                    position: 'absolute',
+                    right: '-6px',
+                    bottom: '0px',
+                    transform: 'rotate(-45deg) scale(1.28)',
+                    perspective: '1000px',
+                    transformStyle: 'preserve-3d',
+                    opacity: showBandaid ? 1 : 0,
+                    animation: showBandaid ? 'applyBandaid 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'none',
+                    filter: showBandaid ? 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))' : 'drop-shadow(1px 1px 2px rgba(0,0,0,0.2))',
+                    transition: showBandaid ? 'none' : 'opacity 0.1s ease'
+                  }}
+                >
+                  <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    {/* Main bandaid body with gradient */}
+                    <defs>
+                      <linearGradient id="bandaidGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style={{ stopColor: '#d9b38c', stopOpacity: 1 }} />
+                        <stop offset="50%" style={{ stopColor: '#d4a574', stopOpacity: 1 }} />
+                        <stop offset="100%" style={{ stopColor: '#c9986a', stopOpacity: 1 }} />
+                      </linearGradient>
+                    </defs>
+                    <rect x="1" y="4" width="30" height="16" rx="5" fill="url(#bandaidGradient)" stroke="#b8946a" strokeWidth="0.5"/>
+                    
+                    {/* Center pad (lighter area) */}
+                    <rect x="11" y="6" width="10" height="12" rx="2" fill="#e5d4b8" opacity="0.9"/>
+                    
+                    {/* Holes pattern - white dots */}
+                    <circle cx="5" cy="8" r="0.8" fill="white" opacity="0.9"/>
+                    <circle cx="8" cy="8" r="0.8" fill="white" opacity="0.9"/>
+                    <circle cx="5" cy="12" r="0.8" fill="white" opacity="0.9"/>
+                    <circle cx="8" cy="12" r="0.8" fill="white" opacity="0.9"/>
+                    <circle cx="5" cy="16" r="0.8" fill="white" opacity="0.9"/>
+                    <circle cx="8" cy="16" r="0.8" fill="white" opacity="0.9"/>
+                    
+                    <circle cx="24" cy="8" r="0.8" fill="white" opacity="0.9"/>
+                    <circle cx="27" cy="8" r="0.8" fill="white" opacity="0.9"/>
+                    <circle cx="24" cy="12" r="0.8" fill="white" opacity="0.9"/>
+                    <circle cx="27" cy="12" r="0.8" fill="white" opacity="0.9"/>
+                    <circle cx="24" cy="16" r="0.8" fill="white" opacity="0.9"/>
+                    <circle cx="27" cy="16" r="0.8" fill="white" opacity="0.9"/>
+                    
+                    {/* Center pad holes (smaller, less visible) */}
+                    <circle cx="13" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
+                    <circle cx="16" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
+                    <circle cx="19" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
+                    <circle cx="13" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
+                    <circle cx="16" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
+                    <circle cx="19" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
+                  </svg>
+                </div>
+              )}
             </span>
           ))}
-          <div 
-            style={{
-              marginLeft: '4px',
-              display: 'inline-block',
-              transform: 'rotate(-45deg) scale(1.28) translateY(2px) translateX(-3px)',
-              perspective: '1000px',
-              transformStyle: 'preserve-3d',
-              opacity: showBandaid ? 1 : 0,
-              animation: showBandaid ? 'applyBandaid 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94)' : 'none',
-              filter: showBandaid ? 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))' : 'drop-shadow(1px 1px 2px rgba(0,0,0,0.2))',
-              transition: showBandaid ? 'none' : 'opacity 0.1s ease'
-            }}
-          >
-            <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* Main bandaid body with gradient */}
-              <defs>
-                <linearGradient id="bandaidGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" style={{ stopColor: '#d9b38c', stopOpacity: 1 }} />
-                  <stop offset="50%" style={{ stopColor: '#d4a574', stopOpacity: 1 }} />
-                  <stop offset="100%" style={{ stopColor: '#c9986a', stopOpacity: 1 }} />
-                </linearGradient>
-              </defs>
-              <rect x="1" y="4" width="30" height="16" rx="5" fill="url(#bandaidGradient)" stroke="#b8946a" strokeWidth="0.5"/>
-              
-              {/* Center pad (lighter area) */}
-              <rect x="11" y="6" width="10" height="12" rx="2" fill="#e5d4b8" opacity="0.9"/>
-              
-              {/* Holes pattern - white dots */}
-              <circle cx="5" cy="8" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="8" cy="8" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="5" cy="12" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="8" cy="12" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="5" cy="16" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="8" cy="16" r="0.8" fill="white" opacity="0.9"/>
-              
-              <circle cx="24" cy="8" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="27" cy="8" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="24" cy="12" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="27" cy="12" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="24" cy="16" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="27" cy="16" r="0.8" fill="white" opacity="0.9"/>
-              
-              {/* Center pad holes (smaller, less visible) */}
-              <circle cx="13" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
-              <circle cx="16" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
-              <circle cx="19" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
-              <circle cx="13" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
-              <circle cx="16" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
-              <circle cx="19" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
-            </svg>
-          </div>
         </div>
         <style>{`
           @keyframes letterReveal0 {
@@ -907,22 +911,22 @@ export function QuizApp() {
           
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) scale(1.28, 1.28) rotateZ(0deg) translateY(2px) translateX(-3px);
+              transform: rotate(-45deg) scale(1.28, 1.28) rotateZ(0deg);
               opacity: 0;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
             30% {
-              transform: rotate(-45deg) scale(1.6, 1.45) rotateZ(-8deg) translateY(0px) translateX(-3px);
+              transform: rotate(-45deg) scale(1.6, 1.45) rotateZ(-8deg);
               opacity: 1;
               filter: drop-shadow(3px 4px 6px rgba(0,0,0,0.35));
             }
             80% {
-              transform: rotate(-45deg) scale(1.3, 1.29) rotateZ(-0.3deg) translateY(1.95px) translateX(-3px);
+              transform: rotate(-45deg) scale(1.3, 1.29) rotateZ(-0.3deg);
               opacity: 1;
               filter: drop-shadow(1.5px 1.5px 2.5px rgba(0,0,0,0.22));
             }
             100% {
-              transform: rotate(-45deg) scale(1.28, 1.28) rotateZ(0deg) translateY(2px) translateX(-3px);
+              transform: rotate(-45deg) scale(1.28, 1.28) rotateZ(0deg);
               opacity: 1;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
