@@ -61,7 +61,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       </div>
       
       <p 
-        className={`text-center p-8 relative z-10 ${slideIndex === 0 ? 'text-glow-sweep' : ''}`}
+        className="text-center p-8 relative z-10"
         style={{ 
           fontFamily: 'Arial, sans-serif',
           fontSize: '14px',
@@ -134,22 +134,6 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
         
         .animate-slide-vertical-next {
           animation: slide-vertical-next 0.5s ease-in-out 0.3s 1;
-        }
-        
-        @keyframes glow-sweep {
-          0% {
-            text-shadow: -100px 0 30px rgba(255, 255, 255, 0);
-          }
-          50% {
-            text-shadow: 0 0 40px rgba(255, 255, 255, 1), 0 0 60px rgba(255, 255, 255, 0.9), 0 0 80px rgba(255, 255, 255, 0.7);
-          }
-          100% {
-            text-shadow: 100px 0 30px rgba(255, 255, 255, 0);
-          }
-        }
-        
-        .text-glow-sweep {
-          animation: glow-sweep 1.5s ease-in-out 1.5s 1;
         }
       `}</style>
     </div>
