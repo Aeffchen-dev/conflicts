@@ -727,9 +727,15 @@ export function QuizApp() {
   const currentQuestion = hasQuestions ? questionsInCategory[currentQuestionIndexInCategory] : null;
 
   return (
-    <div className="min-h-[100svh] h-[100svh] bg-background overflow-hidden flex flex-col relative animate-fade-in" style={{ height: '100svh' }}>
+    <div className="min-h-[100svh] h-[100svh] bg-background overflow-hidden flex flex-col relative" style={{ height: '100svh' }}>
       {/* App Header with controls - Always visible */}
-      <div className="mt-4 flex items-center justify-between w-full px-4 relative z-50" style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}>
+      <div 
+        className="mt-4 flex items-center justify-between w-full px-4 relative z-50 transition-opacity duration-300" 
+        style={{ 
+          paddingTop: 'env(safe-area-inset-top, 0)',
+          opacity: loading ? 0 : 1
+        }}
+      >
         <div 
           className="text-white cursor-pointer relative flex items-center" 
           style={{ fontFamily: 'Kokoro, serif', fontSize: '25px', fontWeight: 'bold', fontStyle: 'italic', lineHeight: '1' }}
@@ -955,7 +961,14 @@ export function QuizApp() {
       </div>
 
       {/* Main Quiz Container */}
-      <div className="flex-1 flex flex-col px-4 pb-4 mt-4" style={{ minHeight: 0, overflow: 'visible' }}>
+      <div 
+        className="flex-1 flex flex-col px-4 pb-4 mt-4 transition-opacity duration-300" 
+        style={{ 
+          minHeight: 0, 
+          overflow: 'visible',
+          opacity: loading ? 0 : 1
+        }}
+      >
         <div className="flex-1 flex items-stretch justify-center min-h-0 relative" style={{ overflow: 'visible' }}>
           {loading ? (
             <div 
