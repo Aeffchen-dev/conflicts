@@ -746,7 +746,7 @@ export function QuizApp() {
       <div className="mt-4 flex items-center justify-between w-full px-4 relative z-50" style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}>
         <div 
           className="text-white cursor-pointer relative flex items-center" 
-          style={{ fontFamily: 'Kokoro, serif', fontSize: '30px', fontWeight: 'bold', fontStyle: 'italic' }}
+          style={{ fontFamily: 'Kokoro, serif', fontSize: '20px', fontWeight: 'bold', fontStyle: 'italic' }}
           onClick={handleLogoClick}
         >
           {'Resolve'.split('').map((letter, index) => (
@@ -763,11 +763,9 @@ export function QuizApp() {
           ))}
           <div 
             style={{
-              position: 'absolute',
-              left: '-6px',
-              bottom: '-6px',
+              marginLeft: '8px',
               display: 'inline-block',
-              transform: 'rotate(-45deg) scale(1.28)',
+              transform: 'rotate(-45deg) scale(1.28) translateY(2px) translateX(-3px)',
               perspective: '1000px',
               transformStyle: 'preserve-3d',
               opacity: showBandaid ? 1 : 0,
@@ -909,22 +907,22 @@ export function QuizApp() {
           
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) scale(1.28, 1.28) rotateZ(0deg);
+              transform: rotate(-45deg) scale(1.28, 1.28) rotateZ(0deg) translateY(2px) translateX(-3px);
               opacity: 0;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
             30% {
-              transform: rotate(-45deg) scale(1.6, 1.45) rotateZ(-8deg) translateY(-2px);
+              transform: rotate(-45deg) scale(1.6, 1.45) rotateZ(-8deg) translateY(0px) translateX(-3px);
               opacity: 1;
               filter: drop-shadow(3px 4px 6px rgba(0,0,0,0.35));
             }
             80% {
-              transform: rotate(-45deg) scale(1.3, 1.29) rotateZ(-0.3deg) translateY(-0.05px);
+              transform: rotate(-45deg) scale(1.3, 1.29) rotateZ(-0.3deg) translateY(1.95px) translateX(-3px);
               opacity: 1;
               filter: drop-shadow(1.5px 1.5px 2.5px rgba(0,0,0,0.22));
             }
             100% {
-              transform: rotate(-45deg) scale(1.28, 1.28) rotateZ(0deg);
+              transform: rotate(-45deg) scale(1.28, 1.28) rotateZ(0deg) translateY(2px) translateX(-3px);
               opacity: 1;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
