@@ -84,8 +84,7 @@
       #splash-header { margin-top: 1rem; display: flex; align-items: baseline; justify-content: space-between; width: 100%; padding: 0 1rem; padding-top: env(safe-area-inset-top, 0); }
       #splash-logo { color: white; font-family: 'Kokoro', serif; font-size: 25px; font-weight: bold; font-style: italic; position: relative; display: inline-flex; }
       #splash-logo span { display: inline-block; position: relative; }
-      #splash-logo-bandaid { position: absolute; right: -4px; bottom: 0; transform: rotate(-45deg) scale(1.09); filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3)); z-index: 10; }
-      #splash-categories { color: white; font-family: Arial, sans-serif; font-size: 14px; font-weight: normal; }
+      #splash-categories { color: white; font-family: Arial, sans-serif; font-size: 14px; font-weight: normal; display: flex; align-items: center; }
       
       /* Loading bandaid centered in remaining space */
       #splash-content { flex: 1; display: flex; align-items: center; justify-content: center; perspective: 1000px; }
@@ -108,7 +107,7 @@
       <div id="splash-header">
         <div id="splash-logo">
           <span>C</span><span>o</span><span>n</span><span>f</span><span style="position: relative;">l
-            <svg id="splash-logo-bandaid" width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; right: -4px; bottom: 0px; transform: rotate(-45deg) scale(1.09); perspective: 1000px; transform-style: preserve-3d; opacity: 1; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3)); z-index: 10;">
               <defs>
                 <linearGradient id="bandaidGradientHeader" x1="0%" y1="0%" x2="0%" y2="100%">
                   <stop offset="0%" stop-color="#d9b38c" stop-opacity="1" />
@@ -139,7 +138,7 @@
             </svg>
           </span><span>i</span><span>c</span><span>t</span><span>s</span>
         </div>
-        <div id="splash-categories">Kategorien wählen</div>
+        <button id="splash-categories">Kategorien wählen</button>
       </div>
 
       <!-- Loading bandaid -->
