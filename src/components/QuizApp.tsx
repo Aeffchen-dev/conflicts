@@ -359,14 +359,36 @@ export function QuizApp() {
   const currentCategory = categories[currentCategoryIndex] || '';
   const questionsInCategory = categorizedQuestions[currentCategory] || [];
 
+  // Animation states
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const [transitionDirection, setTransitionDirection] = useState<'left' | 'right' | null>(null);
+
   const nextCategory = () => {
-    setCurrentCategoryIndex((prev) => (prev + 1) % categories.length);
-    setCurrentQuestionIndexInCategory(0);
+    if (!isTransitioning && categories.length > 0) {
+      setIsTransitioning(true);
+      setTransitionDirection('left');
+      
+      setTimeout(() => {
+        setCurrentCategoryIndex((prev) => (prev + 1) % categories.length);
+        setCurrentQuestionIndexInCategory(0);
+        setIsTransitioning(false);
+        setTransitionDirection(null);
+      }, 300);
+    }
   };
 
   const prevCategory = () => {
-    setCurrentCategoryIndex((prev) => (prev - 1 + categories.length) % categories.length);
-    setCurrentQuestionIndexInCategory(0);
+    if (!isTransitioning && categories.length > 0) {
+      setIsTransitioning(true);
+      setTransitionDirection('right');
+      
+      setTimeout(() => {
+        setCurrentCategoryIndex((prev) => (prev - 1 + categories.length) % categories.length);
+        setCurrentQuestionIndexInCategory(0);
+        setIsTransitioning(false);
+        setTransitionDirection(null);
+      }, 300);
+    }
   };
 
   const nextQuestion = () => {
@@ -379,6 +401,7 @@ export function QuizApp() {
 
   // Unified drag handlers that detect direction
   const handleDragStart = (clientX: number, clientY: number) => {
+    if (isTransitioning) return;
     setIsDragging(true);
     setDragStartX(clientX);
     setDragStartY(clientY);
@@ -771,53 +794,113 @@ export function QuizApp() {
           {loading ? (
             <div className="flex items-center justify-center h-full text-white text-xl">Lade Fragen...</div>
           ) : hasQuestions && currentQuestion ? (
-            <div 
-              className="relative w-full h-full flex items-center justify-center"
-              onMouseDown={(e) => {
-                handleDragStart(e.clientX, e.clientY);
-              }}
-              onMouseMove={(e) => {
-                handleDragMove(e.clientX, e.clientY);
-              }}
-              onMouseUp={() => {
-                handleDragEnd();
-              }}
-              onMouseLeave={() => {
-                if (isDragging) {
-                  handleDragEnd();
+            <div className="relative w-full h-full flex items-center justify-center">
+              {/* Render current category and adjacent categories for smooth transitions */}
+              {categories.map((category, catIndex) => {
+                const isActive = catIndex === currentCategoryIndex;
+                const isPrev = catIndex === (currentCategoryIndex - 1 + categories.length) % categories.length;
+                const isNext = catIndex === (currentCategoryIndex + 1) % categories.length;
+                
+                if (!isActive && !isPrev && !isNext) return null;
+                
+                const categoryQuestions = categorizedQuestions[category] || [];
+                const currentQ = categoryQuestions[currentQuestionIndexInCategory] || categoryQuestions[0];
+                
+                if (!currentQ) return null;
+                
+                let transform = '';
+                let zIndex = 1;
+                
+                if (isActive) {
+                  // Current category positioning
+                  if (isDragging && dragDirection === 'horizontal') {
+                    const dragProgress = Math.abs(dragOffsetX) / 300;
+                    const scale = Math.max(0.8, 1 - dragProgress * 0.2);
+                    const rotation = dragOffsetX > 0 ? dragProgress * 5 : -dragProgress * 5;
+                    transform = `translateX(${dragOffsetX}px) translateY(${dragOffsetY}px) scale(${scale}) rotate(${rotation}deg)`;
+                  } else if (isDragging && dragDirection === 'vertical') {
+                    transform = `translateX(0) translateY(${dragOffsetY}px) scale(1) rotate(0deg)`;
+                  } else if (isTransitioning && transitionDirection === 'left') {
+                    transform = 'translateX(calc(-100% - 16px)) scale(0.8) rotate(-5deg)';
+                  } else if (isTransitioning && transitionDirection === 'right') {
+                    transform = 'translateX(calc(100% + 16px)) scale(0.8) rotate(5deg)';
+                  } else {
+                    transform = 'translateX(0) translateY(0) scale(1) rotate(0deg)';
+                  }
+                  zIndex = 2;
+                } else if (isPrev) {
+                  // Previous category positioning
+                  if (isDragging && dragDirection === 'horizontal') {
+                    const dragProgress = Math.abs(dragOffsetX) / 300;
+                    const scale = Math.min(1, 0.8 + dragProgress * 0.2);
+                    transform = `translateX(calc(-100% - 16px + ${dragOffsetX}px)) scale(${scale}) rotate(0deg)`;
+                  } else if (isTransitioning && transitionDirection === 'right') {
+                    transform = 'translateX(0) scale(1) rotate(0deg)';
+                  } else {
+                    transform = 'translateX(calc(-100% - 16px)) scale(0.8) rotate(0deg)';
+                  }
+                } else if (isNext) {
+                  // Next category positioning
+                  if (isDragging && dragDirection === 'horizontal') {
+                    const dragProgress = Math.abs(dragOffsetX) / 300;
+                    const scale = Math.min(1, 0.8 + dragProgress * 0.2);
+                    transform = `translateX(calc(100% + 16px + ${dragOffsetX}px)) scale(${scale}) rotate(0deg)`;
+                  } else if (isTransitioning && transitionDirection === 'left') {
+                    transform = 'translateX(0) scale(1) rotate(0deg)';
+                  } else {
+                    transform = 'translateX(calc(100% + 16px)) scale(0.8) rotate(0deg)';
+                  }
                 }
-              }}
-              onTouchStart={(e) => {
-                const touch = e.touches[0];
-                handleDragStart(touch.clientX, touch.clientY);
-              }}
-              onTouchMove={(e) => {
-                const touch = e.touches[0];
-                handleDragMove(touch.clientX, touch.clientY);
-              }}
-              onTouchEnd={() => {
-                handleDragEnd();
-              }}
-            >
-              <div
-                className="absolute inset-0 w-full h-full"
-                style={{
-                  transform: `translateX(${dragOffsetX}px) translateY(${dragOffsetY}px)`,
-                  transition: isDragging ? 'none' : 'transform 0.3s ease-out'
-                }}
-              >
-                <QuizCard
-                  question={currentQuestion}
-                  onSwipeLeft={nextCategory}
-                  onSwipeRight={prevCategory}
-                  categoryIndex={categoryColorMap[currentQuestion.category] || 0}
-                  onDragStart={() => {}}
-                  onDragMove={() => {}}
-                  onDragEnd={() => {}}
-                  dragOffset={0}
-                  isDragging={false}
-                />
-              </div>
+                
+                return (
+                  <div
+                    key={`category-${catIndex}`}
+                    className="absolute inset-0 w-full h-full"
+                    style={{
+                      transform,
+                      zIndex,
+                      transition: isDragging ? 'none' : 'transform 0.3s ease-in-out'
+                    }}
+                    onMouseDown={(e) => {
+                      handleDragStart(e.clientX, e.clientY);
+                    }}
+                    onMouseMove={(e) => {
+                      handleDragMove(e.clientX, e.clientY);
+                    }}
+                    onMouseUp={() => {
+                      handleDragEnd();
+                    }}
+                    onMouseLeave={() => {
+                      if (isDragging) {
+                        handleDragEnd();
+                      }
+                    }}
+                    onTouchStart={(e) => {
+                      const touch = e.touches[0];
+                      handleDragStart(touch.clientX, touch.clientY);
+                    }}
+                    onTouchMove={(e) => {
+                      const touch = e.touches[0];
+                      handleDragMove(touch.clientX, touch.clientY);
+                    }}
+                    onTouchEnd={() => {
+                      handleDragEnd();
+                    }}
+                  >
+                    <QuizCard
+                      question={currentQ}
+                      onSwipeLeft={() => {}}
+                      onSwipeRight={() => {}}
+                      categoryIndex={categoryColorMap[currentQ.category] || 0}
+                      onDragStart={() => {}}
+                      onDragMove={() => {}}
+                      onDragEnd={() => {}}
+                      dragOffset={0}
+                      isDragging={false}
+                    />
+                  </div>
+                );
+              })}
               
               {/* Category indicator */}
               <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex gap-2">
