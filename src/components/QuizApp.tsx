@@ -1069,10 +1069,14 @@ export function QuizApp() {
                         className={`absolute inset-0 w-full h-full ${isActiveCategory ? 'pointer-events-auto' : 'pointer-events-none'}`}
                         style={{
                           transform: isActiveCategory && isDragging && dragDirection === 'vertical' 
-                            ? `translateY(${dragOffsetY}px)` 
-                            : 'translateY(0)',
+                            ? (() => {
+                                const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
+                                const scale = Math.max(0.85, 1 - dragProgress * 0.15);
+                                return `translateY(${dragOffsetY}px) scale(${scale})`;
+                              })()
+                            : 'translateY(0) scale(1)',
                           zIndex: 2,
-                          transition: isDragging && dragDirection === 'vertical' ? 'none' : 'transform 0.3s ease-in-out'
+                          transition: isDragging && dragDirection === 'vertical' ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
                         }}
                       >
                         <QuizCard
@@ -1097,10 +1101,14 @@ export function QuizApp() {
                         className="absolute inset-0 w-full h-full pointer-events-none"
                         style={{
                           transform: isActiveCategory && isDragging && dragDirection === 'vertical'
-                            ? `translateY(calc(70vh + 16px + ${dragOffsetY}px))`
-                            : 'translateY(calc(70vh + 16px))',
+                            ? (() => {
+                                const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
+                                const scale = Math.min(1, 0.85 + dragProgress * 0.15);
+                                return `translateY(calc(70vh + 16px + ${dragOffsetY}px)) scale(${scale})`;
+                              })()
+                            : 'translateY(calc(70vh + 16px)) scale(0.85)',
                           zIndex: 1,
-                          transition: isDragging && dragDirection === 'vertical' ? 'none' : 'transform 0.3s ease-in-out'
+                          transition: isDragging && dragDirection === 'vertical' ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
                         }}
                       >
                         <QuizCard
