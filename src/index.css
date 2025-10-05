@@ -199,3 +199,25 @@ All colors MUST be HSL.
     stroke-dashoffset: 0;
   }
 }
+
+/* Loading dots animation */
+@keyframes loading-dots {
+  0%, 20% {
+    opacity: 0;
+  }
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.loading-dots {
+  animation: loading-dots 1.4s infinite;
+}
+
+.loading-dots::before {
+  content: '...';
+  animation: loading-dots 1.4s infinite;
+}
