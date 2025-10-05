@@ -84,6 +84,16 @@ export function QuizApp() {
 
   useEffect(() => {
     fetchQuestions();
+    
+    // Trigger logo animation on initial load
+    setLogoAnimating(true);
+    setAnimatingLetterIndex(0);
+    
+    // Text animation duration: 0.5s + (6 letters * 0.1s delay) = 1.1s
+    setTimeout(() => {
+      setLogoAnimating(false);
+      setAnimatingLetterIndex(-1);
+    }, 1100);
   }, []);
 
   // Rotate smiley during loading
