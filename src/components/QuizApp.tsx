@@ -464,17 +464,17 @@ export function QuizApp() {
     // Reset band-aid state to allow re-animation
     setShowBandaid(false);
     
-    // Text animation duration: 0.5s + (6 letters * 0.1s delay) = 1.1s
-    // Band-aid starts AFTER text completes at 1.1s
+    // Text animation duration: 0.4s + (6 letters * 0.1s delay) = 1.0s
+    // Band-aid starts AFTER text completes at 1.0s
     setTimeout(() => {
       setShowBandaid(true);
-    }, 1100);
+    }, 1000);
     
     // End text animation
     setTimeout(() => {
       setLogoAnimating(false);
       setAnimatingLetterIndex(-1);
-    }, 1100);
+    }, 1000);
   };
 
   const handleToggleChange = (checked: boolean) => {
@@ -524,7 +524,7 @@ export function QuizApp() {
               style={{
                 display: 'inline-block',
                 opacity: logoAnimating ? 0 : 1,
-                animation: logoAnimating ? `letterReveal${index} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.1}s forwards` : 'none'
+                animation: logoAnimating ? `letterReveal${index} 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.1}s forwards` : 'none'
               }}
             >
               {letter}
@@ -680,13 +680,18 @@ export function QuizApp() {
               opacity: 0;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
-            30% {
-              transform: rotate(-45deg) scaleX(1.33) rotateZ(-14deg) translateY(-4px);
+            25% {
+              transform: rotate(-45deg) scaleX(1.25) rotateZ(-12deg) translateY(-3px);
               opacity: 1;
-              filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.4));
+              filter: drop-shadow(4px 5px 7px rgba(0,0,0,0.38));
             }
-            80% {
-              transform: rotate(-45deg) scaleX(1.01) rotateZ(-0.3deg) translateY(-0.05px);
+            50% {
+              transform: rotate(-45deg) scaleX(1.08) rotateZ(-4deg) translateY(-1px);
+              opacity: 1;
+              filter: drop-shadow(2.5px 2.5px 4px rgba(0,0,0,0.28));
+            }
+            75% {
+              transform: rotate(-45deg) scaleX(1.02) rotateZ(-0.5deg) translateY(-0.1px);
               opacity: 1;
               filter: drop-shadow(1.5px 1.5px 2.5px rgba(0,0,0,0.22));
             }
