@@ -31,6 +31,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
   };
 
   const content = getContent();
+  console.info('IntroCard: smallTextWave', { slideIndex, waveActive: slideIndex === 0 });
 
   return (
     <div 
@@ -82,22 +83,20 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
         }
         
         .text-color-wave {
-          /* Use current text color as base and a 10% lighter mix for the wave */
-          --base: currentColor;
-          --light: color-mix(in oklab, var(--base) 90%, white 10%);
-
+          /* Explicit HSL colors to ensure visibility (base +10% lightness) */
           background-image: linear-gradient(
             90deg,
-            var(--base) 0%,
-            var(--base) 45%,
-            var(--light) 50%,
-            var(--base) 55%,
-            var(--base) 100%
+            hsl(160, 70%, 15%) 0%,
+            hsl(160, 70%, 15%) 40%,
+            hsl(160, 70%, 25%) 50%,
+            hsl(160, 70%, 15%) 60%,
+            hsl(160, 70%, 15%) 100%
           );
           background-size: 200% 100%;
           background-position: -100% center;
           -webkit-background-clip: text;
           background-clip: text;
+          color: transparent;
           -webkit-text-fill-color: transparent;
           animation: color-wave 5s linear infinite;
         }
