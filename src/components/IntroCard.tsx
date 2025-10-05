@@ -47,7 +47,6 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       
       <div className="flex-1 flex flex-col items-center justify-center text-center p-8 relative z-10">
         <h1 
-          className={slideIndex === 0 ? 'text-pulse' : ''}
           style={{ 
             fontFamily: 'Kokoro, serif',
             fontWeight: 'bold',
@@ -65,7 +64,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       </div>
       
       <p 
-        className={`text-center p-8 relative z-10 inline-block mx-auto`}
+        className={`text-center p-8 relative z-10 inline-block mx-auto ${slideIndex === 0 ? 'text-pulse' : ''}`}
         style={{ 
           fontFamily: 'Arial, sans-serif',
           fontSize: '14px',
@@ -78,12 +77,10 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       <style>{`
         @keyframes text-pulse {
           0%, 100% {
-            transform: scale(1);
             opacity: 1;
           }
           50% {
-            transform: scale(1.05);
-            opacity: 0.8;
+            opacity: 0.4;
           }
         }
         
