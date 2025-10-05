@@ -660,23 +660,22 @@ export function QuizApp() {
   return (
     <div className="min-h-[100svh] h-[100svh] bg-background overflow-hidden flex flex-col relative" style={{ height: '100svh' }}>
       {/* App Header with controls - Always visible */}
-      <div className="mt-4 flex items-baseline justify-between w-full px-4 relative z-50" style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}>
+      <div className="mt-4 flex items-center justify-between w-full px-4 relative z-50" style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}>
         <div 
-          className="text-white cursor-pointer relative flex items-baseline" 
+          className="text-white cursor-pointer relative flex items-center" 
           style={{ fontFamily: 'Kokoro, serif', fontSize: '20px', fontWeight: 'bold', fontStyle: 'italic' }}
           onClick={handleLogoClick}
         >
-          {'Konflikte lösen'.split('').map((letter, index) => (
+          {'Resolve'.split('').map((letter, index) => (
             <span
               key={index}
               style={{
                 display: 'inline-block',
                 opacity: logoAnimating ? 0 : 1,
-                animation: logoAnimating ? `letterReveal${index} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.065}s forwards` : 'none',
-                minWidth: letter === ' ' ? '0.3em' : 'auto'
+                animation: logoAnimating ? `letterReveal${index} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.1}s forwards` : 'none'
               }}
             >
-              {letter === ' ' ? '\u00A0' : letter}
+              {letter}
             </span>
           ))}
           <div 
@@ -848,7 +847,7 @@ export function QuizApp() {
         `}</style>
         <button 
           onClick={() => setCategorySelectorOpen(true)}
-          className="text-white font-normal flex items-baseline"
+          className="text-white font-normal flex items-center"
           style={{ fontSize: '14px' }}
         >
           Kategorien wählen
