@@ -11,6 +11,8 @@ interface QuizCardProps {
   question: Question;
   onSwipeLeft: () => void;
   onSwipeRight: () => void;
+  onSwipeUp?: () => void;
+  onSwipeDown?: () => void;
   animationClass?: string;
   categoryIndex?: number;
   onDragStart?: (clientX: number) => void;
@@ -23,7 +25,9 @@ interface QuizCardProps {
 export function QuizCard({ 
   question, 
   onSwipeLeft, 
-  onSwipeRight, 
+  onSwipeRight,
+  onSwipeUp,
+  onSwipeDown,
   animationClass = '', 
   categoryIndex = 0,
   onDragStart,
@@ -211,13 +215,25 @@ export function QuizCard({
       onMouseUp={onMouseUp}
       onMouseLeave={onMouseLeave}
     >
-      {/* Left Click Area - Previous */}
+      {/* Top Click Area - Swipe Up */}
+      <div 
+        className="absolute top-0 left-0 right-0 h-20 z-10 cursor-pointer"
+        onClick={onSwipeUp}
+      />
+
+      {/* Bottom Click Area - Swipe Down */}
+      <div 
+        className="absolute bottom-0 left-0 right-0 h-20 z-10 cursor-pointer"
+        onClick={onSwipeDown}
+      />
+
+      {/* Left Click Area - Swipe Right */}
       <div 
         className="absolute left-0 top-0 w-20 h-full z-10 cursor-pointer"
         onClick={onSwipeRight}
       />
 
-      {/* Right Click Area - Next */}
+      {/* Right Click Area - Swipe Left */}
       <div 
         className="absolute right-0 top-0 w-20 h-full z-10 cursor-pointer"
         onClick={onSwipeLeft}

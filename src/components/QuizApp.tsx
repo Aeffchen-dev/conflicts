@@ -1097,8 +1097,10 @@ export function QuizApp() {
                     >
                       <QuizCard
                         question={question}
-                        onSwipeLeft={() => {}}
-                        onSwipeRight={() => {}}
+                        onSwipeLeft={nextCategory}
+                        onSwipeRight={prevCategory}
+                        onSwipeUp={prevQuestion}
+                        onSwipeDown={nextQuestion}
                         categoryIndex={categoryColorMap[question.category] || 0}
                         onDragStart={() => {}}
                         onDragMove={() => {}}
