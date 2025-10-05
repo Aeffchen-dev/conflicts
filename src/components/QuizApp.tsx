@@ -512,7 +512,7 @@ export function QuizApp() {
   return (
     <div className="min-h-[100svh] h-[100svh] bg-background overflow-hidden flex flex-col" style={{ height: '100svh' }}>
       {/* App Header with controls - Always visible */}
-      <div className="bg-black mt-4 flex items-center justify-between w-full px-4" style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}>
+      <div className="bg-black mt-4 flex items-baseline justify-between w-full px-4" style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}>
         <div 
           className="text-white cursor-pointer relative flex items-center" 
           style={{ fontFamily: 'Kokoro, serif', fontSize: '20px', fontWeight: 'bold', fontStyle: 'italic' }}
@@ -534,7 +534,7 @@ export function QuizApp() {
             style={{
               marginLeft: '8px',
               display: 'inline-block',
-              transform: 'rotate(-45deg) scale(1.472)',
+              transform: 'rotate(-45deg) scale(1.28)',
               perspective: '1000px',
               transformStyle: 'preserve-3d',
               opacity: showBandaid ? 1 : 0,
@@ -676,22 +676,22 @@ export function QuizApp() {
           
           @keyframes applyBandaid {
             0% {
-              transform: rotate(-45deg) scale(1.472) rotateZ(0deg) translateY(0px);
+              transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
               opacity: 0;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
             30% {
-              transform: rotate(-45deg) scale(1.96) rotateZ(-14deg) translateY(-4px);
+              transform: rotate(-45deg) scaleX(1.33) rotateZ(-14deg) translateY(-4px);
               opacity: 1;
               filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.4));
             }
             80% {
-              transform: rotate(-45deg) scale(1.487) rotateZ(-0.3deg) translateY(-0.05px);
+              transform: rotate(-45deg) scaleX(1.01) rotateZ(-0.3deg) translateY(-0.05px);
               opacity: 1;
               filter: drop-shadow(1.5px 1.5px 2.5px rgba(0,0,0,0.22));
             }
             100% {
-              transform: rotate(-45deg) scale(1.472) rotateZ(0deg) translateY(0px);
+              transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
               opacity: 1;
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
