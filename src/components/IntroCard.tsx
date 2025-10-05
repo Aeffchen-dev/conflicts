@@ -61,7 +61,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       </div>
       
       <p 
-        className="text-center p-8 relative z-10"
+        className={`text-center p-8 relative z-10 ${slideIndex === 0 ? 'text-opacity-sweep' : ''}`}
         style={{ 
           fontFamily: 'Arial, sans-serif',
           fontSize: '14px',
@@ -72,6 +72,23 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       </p>
       
       <style>{`
+        @keyframes opacity-sweep {
+          0%, 100% {
+            background: linear-gradient(90deg, black 0%, black 100%);
+          }
+          50% {
+            background: linear-gradient(90deg, rgba(0,0,0,0.3) 0%, black 100%);
+          }
+        }
+        
+        .text-opacity-sweep {
+          background: linear-gradient(90deg, black 0%, black 100%);
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+          animation: opacity-sweep 5s ease-in-out infinite;
+        }
+        
         @keyframes slide-horizontal-active {
           0% {
             transform: translateX(0) scale(1);
