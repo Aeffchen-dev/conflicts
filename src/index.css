@@ -215,15 +215,15 @@ All colors MUST be HSL.
   background: linear-gradient(
     90deg,
     transparent 0%,
-    transparent 40%,
-    rgba(255, 255, 255, 0.08) 48%,
-    rgba(255, 255, 255, 0.15) 50%,
-    rgba(255, 255, 255, 0.08) 52%,
-    transparent 60%,
+    transparent 35%,
+    rgba(255, 255, 255, 0.25) 45%,
+    rgba(255, 255, 255, 0.4) 50%,
+    rgba(255, 255, 255, 0.25) 55%,
+    transparent 65%,
     transparent 100%
   );
   background-size: 200% 100%;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: movingReflection 8s linear infinite;
+  animation: movingReflection 6s linear infinite;
 }
