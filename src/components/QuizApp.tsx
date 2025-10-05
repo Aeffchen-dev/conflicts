@@ -80,7 +80,7 @@ export function QuizApp() {
   const [toggleAnimating, setToggleAnimating] = useState(false);
   const [loadingSmileyRotating, setLoadingSmileyRotating] = useState(false);
   const [logoSmileyRotating, setLogoSmileyRotating] = useState(false);
-  const [showBandaid, setShowBandaid] = useState(false);
+  const [showBandaid, setShowBandaid] = useState(true);
 
   useEffect(() => {
     fetchQuestions();
