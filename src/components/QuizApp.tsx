@@ -968,6 +968,68 @@ export function QuizApp() {
                   </div>
                 );
               })}
+              
+              {/* Render first category slide when transitioning from last intro slide */}
+              {currentIntroIndex === totalIntroSlides - 1 && isTransitioning && transitionDirection === 'left' && categories.length > 0 && (
+                <div
+                  className="absolute inset-0 w-full h-full pointer-events-none"
+                  style={{
+                    transform: 'translateX(0) scale(1)',
+                    zIndex: 4,
+                    transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                  }}
+                >
+                  {(() => {
+                    const firstCategory = categories[0];
+                    const categoryQuestions = categorizedQuestions[firstCategory] || [];
+                    const questionIndexForCategory = questionIndicesPerCategory[firstCategory] || 0;
+                    
+                    return categoryQuestions.map((q, qIndex) => {
+                      const isCurrent = qIndex === questionIndexForCategory;
+                      const isPrevQ = qIndex === (questionIndexForCategory - 1 + categoryQuestions.length) % categoryQuestions.length;
+                      const isNextQ = qIndex === (questionIndexForCategory + 1) % categoryQuestions.length;
+                      
+                      if (!isCurrent && !isPrevQ && !isNextQ) return null;
+                      
+                      let verticalTransform = '';
+                      let qZIndex = 1;
+                      
+                      if (isCurrent) {
+                        verticalTransform = 'translateY(0) scale(1)';
+                        qZIndex = 3;
+                      } else if (isPrevQ) {
+                        verticalTransform = 'translateY(calc(-100% - 8px)) scale(0.95)';
+                        qZIndex = 1;
+                      } else if (isNextQ) {
+                        verticalTransform = 'translateY(calc(100% + 8px)) scale(0.95)';
+                        qZIndex = 2;
+                      }
+                      
+                      return (
+                        <div
+                          key={`preview-${firstCategory}-${qIndex}`}
+                          className="absolute inset-0 w-full h-full pointer-events-none"
+                          style={{
+                            transform: verticalTransform,
+                            zIndex: qZIndex,
+                            transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                            height: isCurrent ? 'calc(90% - 8px)' : '100%',
+                          }}
+                        >
+                          <QuizCard
+                            question={q}
+                            onSwipeLeft={nextCategory}
+                            onSwipeRight={prevCategory}
+                            onSwipeUp={nextQuestion}
+                            onSwipeDown={prevQuestion}
+                            categoryIndex={categoryColorMap[firstCategory]}
+                          />
+                        </div>
+                      );
+                    });
+                  })()}
+                </div>
+              )}
             </div>
           ) : hasQuestions && currentQuestion ? (
             <div 
