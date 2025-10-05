@@ -859,7 +859,12 @@ export function QuizApp() {
         <div className="flex-1 flex items-stretch justify-center min-h-0 relative" style={{ overflow: 'visible' }}>
           {loading ? (
             <div className="flex items-center justify-center h-full text-white" style={{ fontSize: '14px' }}>
-              Lade Fragen<span className="loading-dots">...</span>
+              Lade Fragen
+              <span className="loading-dots">
+                <span className="dot-1">.</span>
+                <span className="dot-2">.</span>
+                <span className="dot-3">.</span>
+              </span>
             </div>
           ) : !hasSeenIntro ? (
             /* Render intro slides */

@@ -201,23 +201,32 @@ All colors MUST be HSL.
 }
 
 /* Loading dots animation */
-@keyframes loading-dots {
-  0%, 20% {
-    opacity: 0;
+@keyframes loading-dot {
+  0%, 60%, 100% {
+    opacity: 0.2;
   }
-  40% {
+  30% {
     opacity: 1;
-  }
-  100% {
-    opacity: 0;
   }
 }
 
 .loading-dots {
-  animation: loading-dots 1.4s infinite;
+  display: inline-block;
+  margin-left: 4px;
 }
 
-.loading-dots::before {
-  content: '...';
-  animation: loading-dots 1.4s infinite;
+.loading-dots span {
+  animation: loading-dot 1.4s infinite;
+}
+
+.loading-dots .dot-1 {
+  animation-delay: 0s;
+}
+
+.loading-dots .dot-2 {
+  animation-delay: 0.2s;
+}
+
+.loading-dots .dot-3 {
+  animation-delay: 0.4s;
 }
