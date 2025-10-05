@@ -149,7 +149,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
         }
         
         .text-glow-sweep {
-          animation: glow-sweep 1.5s ease-in-out 1s 1;
+          animation: glow-sweep 1.5s ease-in-out 1.5s 1;
         }
       `}</style>
     </div>
