@@ -61,7 +61,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       </div>
       
       <p 
-        className="text-center p-8 relative z-10 intro-gloss-text"
+        className={`text-center p-8 relative z-10 ${slideIndex === 0 ? 'intro-gloss-text' : ''}`}
         style={{ 
           fontFamily: 'Arial, sans-serif',
           fontSize: '14px',
@@ -136,13 +136,37 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
           animation: slide-vertical-next 0.5s ease-in-out 0.3s 1;
         }
         
+        @keyframes gloss-shine {
+          0%, 100% {
+            text-shadow: 
+              0 1px 2px rgba(255, 255, 255, 0.8),
+              0 2px 4px rgba(255, 255, 255, 0.6),
+              0 -1px 1px rgba(0, 0, 0, 0.1);
+          }
+          25% {
+            text-shadow: 
+              1px 1px 3px rgba(255, 255, 255, 0.9),
+              -1px 2px 5px rgba(255, 255, 255, 0.7),
+              0 -1px 2px rgba(0, 0, 0, 0.15);
+          }
+          50% {
+            text-shadow: 
+              -1px 1px 2px rgba(255, 255, 255, 0.85),
+              1px 3px 6px rgba(255, 255, 255, 0.65),
+              0 -1px 1px rgba(0, 0, 0, 0.12);
+          }
+          75% {
+            text-shadow: 
+              0 2px 4px rgba(255, 255, 255, 0.95),
+              0 1px 3px rgba(255, 255, 255, 0.8),
+              0 -1px 2px rgba(0, 0, 0, 0.1);
+          }
+        }
+        
         .intro-gloss-text {
-          text-shadow: 
-            0 1px 2px rgba(255, 255, 255, 0.8),
-            0 2px 4px rgba(255, 255, 255, 0.6),
-            0 -1px 1px rgba(0, 0, 0, 0.1);
           font-weight: 500;
           letter-spacing: 0.3px;
+          animation: gloss-shine 3s ease-in-out 1s infinite;
         }
       `}</style>
     </div>
