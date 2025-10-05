@@ -933,22 +933,31 @@ export function QuizApp() {
           }
           
           @keyframes wiggle-loading {
-            0%, 100% {
-              transform: rotate(-45deg) scale(1.3) translateX(0) translateY(0);
+            0% {
+              transform: rotate(-45deg) scale(1.56) perspective(500px) rotateX(60deg) rotateY(-15deg);
+              opacity: 0.7;
             }
-            25% {
-              transform: rotate(-45deg) scale(1.3) translateX(-3px) translateY(2px) rotate(2deg);
+            40% {
+              transform: rotate(-45deg) scale(1.56) perspective(500px) rotateX(20deg) rotateY(-5deg);
+              opacity: 1;
             }
-            50% {
-              transform: rotate(-45deg) scale(1.3) translateX(3px) translateY(-2px) rotate(-2deg);
+            60% {
+              transform: rotate(-45deg) scale(1.56) perspective(500px) rotateX(5deg) rotateY(2deg);
+              opacity: 1;
             }
-            75% {
-              transform: rotate(-45deg) scale(1.3) translateX(-2px) translateY(1px) rotate(1deg);
+            80% {
+              transform: rotate(-45deg) scale(1.56) perspective(500px) rotateX(-2deg) rotateY(0deg);
+              opacity: 1;
+            }
+            100% {
+              transform: rotate(-45deg) scale(1.56) perspective(500px) rotateX(0deg) rotateY(0deg);
+              opacity: 1;
             }
           }
           
           .animate-wiggle-loading {
-            animation: wiggle-loading 0.8s ease-in-out infinite;
+            animation: wiggle-loading 1.2s ease-out infinite;
+            transform-style: preserve-3d;
           }
         `}</style>
         <button 
@@ -964,17 +973,14 @@ export function QuizApp() {
       <div className="flex-1 flex flex-col px-4 pb-4 mt-4" style={{ minHeight: 0, overflow: 'visible' }}>
         <div className="flex-1 flex items-stretch justify-center min-h-0 relative" style={{ overflow: 'visible' }}>
           {loading ? (
-            <div className="flex items-center justify-center h-full">
+            <div className="flex items-center justify-center h-full" style={{ perspective: '1000px' }}>
               <div className="animate-wiggle-loading">
                 <svg 
-                  width="26" 
-                  height="26" 
+                  width="31" 
+                  height="31" 
                   viewBox="0 0 32 24" 
                   fill="none" 
                   xmlns="http://www.w3.org/2000/svg"
-                  style={{
-                    filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
-                  }}
                 >
                   {/* Main bandaid body with gradient */}
                   <defs>
