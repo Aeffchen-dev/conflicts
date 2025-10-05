@@ -467,7 +467,12 @@ export function QuizApp() {
       setShowBandaid(true);
     }, 800);
     
-    // End text animation (band-aid stays visible)
+    // Hide bandaid after its animation completes (800ms delay + 600ms animation)
+    setTimeout(() => {
+      setShowBandaid(false);
+    }, 1400);
+    
+    // End text animation
     setTimeout(() => {
       setLogoAnimating(false);
       setAnimatingLetterIndex(-1);
