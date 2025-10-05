@@ -85,11 +85,19 @@ export function QuizApp() {
   useEffect(() => {
     fetchQuestions();
     
-    // Trigger logo animation on initial load
+    // Trigger full logo animation on initial load (same as tap)
     setLogoAnimating(true);
     setAnimatingLetterIndex(0);
     
-    // Text animation duration: 0.5s + (6 letters * 0.1s delay) = 1.1s
+    // Reset band-aid state to allow animation
+    setShowBandaid(false);
+    
+    // Band-aid starts AFTER text completes at 1.1s
+    setTimeout(() => {
+      setShowBandaid(true);
+    }, 1100);
+    
+    // End text animation
     setTimeout(() => {
       setLogoAnimating(false);
       setAnimatingLetterIndex(-1);
