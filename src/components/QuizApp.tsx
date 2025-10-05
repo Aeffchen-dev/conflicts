@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { QuizCard } from './QuizCard';
 import { CategorySelector } from './CategorySelector';
 import { IntroSlide } from './IntroSlide';
+import { IntroCard } from './IntroCard';
 import { Switch } from './ui/switch';
 
 interface Question {
@@ -364,29 +365,73 @@ export function QuizApp() {
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [transitionDirection, setTransitionDirection] = useState<'left' | 'right' | null>(null);
 
+  // Intro slide state
+  const [currentIntroIndex, setCurrentIntroIndex] = useState(0);
+  const totalIntroSlides = 3;
+
   const nextCategory = () => {
-    if (!isTransitioning && categories.length > 0) {
-      setIsTransitioning(true);
-      setTransitionDirection('left');
-      
-      setTimeout(() => {
-        setCurrentCategoryIndex((prev) => (prev + 1) % categories.length);
-        setIsTransitioning(false);
-        setTransitionDirection(null);
-      }, 300);
+    if (!isTransitioning) {
+      // If we're in intro slides, advance through them
+      if (!hasSeenIntro && currentIntroIndex < totalIntroSlides - 1) {
+        setIsTransitioning(true);
+        setTransitionDirection('left');
+        
+        setTimeout(() => {
+          setCurrentIntroIndex(prev => prev + 1);
+          setIsTransitioning(false);
+          setTransitionDirection(null);
+        }, 300);
+      } 
+      // Move from last intro to first category
+      else if (!hasSeenIntro && currentIntroIndex === totalIntroSlides - 1) {
+        setIsTransitioning(true);
+        setTransitionDirection('left');
+        
+        setTimeout(() => {
+          setHasSeenIntro(true);
+          setCurrentCategoryIndex(0);
+          setIsTransitioning(false);
+          setTransitionDirection(null);
+        }, 300);
+      }
+      // Normal category navigation (skip intro slides on endless scroll)
+      else if (categories.length > 0) {
+        setIsTransitioning(true);
+        setTransitionDirection('left');
+        
+        setTimeout(() => {
+          setCurrentCategoryIndex((prev) => (prev + 1) % categories.length);
+          setIsTransitioning(false);
+          setTransitionDirection(null);
+        }, 300);
+      }
     }
   };
 
   const prevCategory = () => {
-    if (!isTransitioning && categories.length > 0) {
-      setIsTransitioning(true);
-      setTransitionDirection('right');
-      
-      setTimeout(() => {
-        setCurrentCategoryIndex((prev) => (prev - 1 + categories.length) % categories.length);
-        setIsTransitioning(false);
-        setTransitionDirection(null);
-      }, 300);
+    if (!isTransitioning) {
+      // If we're in intro slides (not first one), go back
+      if (!hasSeenIntro && currentIntroIndex > 0) {
+        setIsTransitioning(true);
+        setTransitionDirection('right');
+        
+        setTimeout(() => {
+          setCurrentIntroIndex(prev => prev - 1);
+          setIsTransitioning(false);
+          setTransitionDirection(null);
+        }, 300);
+      }
+      // Normal category navigation (skip intro slides on endless scroll)
+      else if (hasSeenIntro && categories.length > 0) {
+        setIsTransitioning(true);
+        setTransitionDirection('right');
+        
+        setTimeout(() => {
+          setCurrentCategoryIndex((prev) => (prev - 1 + categories.length) % categories.length);
+          setIsTransitioning(false);
+          setTransitionDirection(null);
+        }, 300);
+      }
     }
   };
 
@@ -483,6 +528,9 @@ export function QuizApp() {
     window.addEventListener('keydown', handleKeyPress);
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [currentCategoryIndex, currentQuestionIndexInCategory, categorizedQuestions]);
+
+  // Track if we've shown intro slides
+  const [hasSeenIntro, setHasSeenIntro] = useState(false);
 
   // Organize questions by category
   useEffect(() => {
@@ -811,6 +859,99 @@ export function QuizApp() {
         <div className="flex-1 flex items-stretch justify-center min-h-0 relative">
           {loading ? (
             <div className="flex items-center justify-center h-full text-white text-xl">Lade Fragen...</div>
+          ) : !hasSeenIntro ? (
+            /* Render intro slides */
+            <div 
+              className="relative w-full h-full flex items-center justify-center"
+              onMouseDown={(e) => {
+                handleDragStart(e.clientX, e.clientY);
+              }}
+              onMouseMove={(e) => {
+                handleDragMove(e.clientX, e.clientY);
+              }}
+              onMouseUp={() => {
+                handleDragEnd();
+              }}
+              onMouseLeave={() => {
+                if (isDragging) {
+                  handleDragEnd();
+                }
+              }}
+              onTouchStart={(e) => {
+                const touch = e.touches[0];
+                handleDragStart(touch.clientX, touch.clientY);
+              }}
+              onTouchMove={(e) => {
+                const touch = e.touches[0];
+                handleDragMove(touch.clientX, touch.clientY);
+              }}
+              onTouchEnd={() => {
+                handleDragEnd();
+              }}
+            >
+              {/* Render intro slides with horizontal transitions */}
+              {[0, 1, 2].map((slideIndex) => {
+                const isActive = slideIndex === currentIntroIndex;
+                const isPrev = slideIndex === currentIntroIndex - 1;
+                const isNext = slideIndex === currentIntroIndex + 1;
+                
+                if (!isActive && !isPrev && !isNext) return null;
+                
+                let transform = '';
+                let zIndex = 1;
+                
+                if (isActive) {
+                  if (isDragging && dragDirection === 'horizontal') {
+                    const dragProgress = Math.abs(dragOffsetX) / 300;
+                    const scale = Math.max(0.8, 1 - dragProgress * 0.2);
+                    transform = `translateX(${dragOffsetX}px) scale(${scale})`;
+                  } else if (isTransitioning && transitionDirection === 'left') {
+                    transform = 'translateX(calc(-100% - 16px)) scale(0.8)';
+                  } else if (isTransitioning && transitionDirection === 'right') {
+                    transform = 'translateX(calc(100% + 16px)) scale(0.8)';
+                  } else {
+                    transform = 'translateX(0) scale(1)';
+                  }
+                  zIndex = 3;
+                } else if (isPrev) {
+                  if (isDragging && dragDirection === 'horizontal') {
+                    const dragProgress = Math.abs(dragOffsetX) / 300;
+                    const scale = Math.min(1, 0.8 + dragProgress * 0.2);
+                    transform = `translateX(calc(-100% - 16px + ${dragOffsetX}px)) scale(${scale})`;
+                  } else if (isTransitioning && transitionDirection === 'right') {
+                    transform = 'translateX(0) scale(1)';
+                  } else {
+                    transform = 'translateX(calc(-100% - 16px)) scale(0.8)';
+                  }
+                  zIndex = 1;
+                } else if (isNext) {
+                  if (isDragging && dragDirection === 'horizontal') {
+                    const dragProgress = Math.abs(dragOffsetX) / 300;
+                    const scale = Math.min(1, 0.8 + dragProgress * 0.2);
+                    transform = `translateX(calc(100% + 16px + ${dragOffsetX}px)) scale(${scale})`;
+                  } else if (isTransitioning && transitionDirection === 'left') {
+                    transform = 'translateX(0) scale(1)';
+                  } else {
+                    transform = 'translateX(calc(100% + 16px)) scale(0.8)';
+                  }
+                  zIndex = 1;
+                }
+                
+                return (
+                  <div
+                    key={`intro-${slideIndex}`}
+                    className="absolute inset-0 w-full h-full pointer-events-none"
+                    style={{
+                      transform,
+                      zIndex,
+                      transition: isDragging ? 'none' : isTransitioning ? 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    }}
+                  >
+                    <IntroCard slideIndex={slideIndex} />
+                  </div>
+                );
+              })}
+            </div>
           ) : hasQuestions && currentQuestion ? (
             <div 
               className="relative w-full h-full flex items-center justify-center"
