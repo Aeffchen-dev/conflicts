@@ -34,11 +34,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
 
   return (
     <div 
-      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none h-full flex flex-col justify-between items-center ${content.animationClass}`}
-      style={{
-        backgroundColor: 'hsl(160, 55%, 75%)',
-        color: 'hsl(160, 70%, 15%)'
-      }}
+      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none h-full flex flex-col justify-between items-center intro-gradient-bg ${content.animationClass}`}
     >
       {/* Tap zones */}
       <div className="absolute left-0 top-0 w-20 h-full z-20 cursor-pointer" onClick={onSwipeRight} />
@@ -65,7 +61,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
         style={{ 
           fontFamily: 'Arial, sans-serif',
           fontSize: '14px',
-          color: 'black'
+          
         }}
       >
         Swipe nach rechts um weiter zu navigieren
