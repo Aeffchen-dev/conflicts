@@ -1093,8 +1093,8 @@ export function QuizApp() {
                 );
               })}
               
-              {/* Render first category slide when transitioning from last intro slide */}
-              {currentIntroIndex === totalIntroSlides - 1 && categories.length > 0 && (
+              {/* Render first category slide when transitioning from slide 2 */}
+              {currentIntroIndex === 2 && categories.length > 0 && (
                 <div
                   className="absolute inset-0 w-full h-full pointer-events-none"
                   style={{
@@ -1103,8 +1103,8 @@ export function QuizApp() {
                       : (isTransitioning && transitionDirection === 'left')
                         ? 'translateX(0) scale(1)'
                         : 'translateX(calc(100% + 16px)) scale(0.8)',
-                    zIndex: isTransitioning && transitionDirection === 'left' ? 4 : 1,
-                    transition: isDragging ? 'none' : isTransitioning ? 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    zIndex: isTransitioning && transitionDirection === 'left' ? 4 : 2,
+                    transition: isDragging ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                   }}
                 >
                   {(() => {
@@ -1121,12 +1121,14 @@ export function QuizApp() {
                       return (
                         <div
                           key={`preview-${firstCategory}-${qIndex}`}
-                          className="absolute inset-0 w-full h-full pointer-events-none"
+                          className="absolute w-full h-full pointer-events-none"
                           style={{
+                            height: 'calc(90% - 8px)',
+                            top: 0,
+                            left: 0,
+                            right: 0,
                             transform: 'translateY(0) scale(1)',
                             zIndex: 3,
-                            transition: 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                            height: 'calc(90% - 8px)',
                           }}
                         >
                           <QuizCard
@@ -1135,7 +1137,7 @@ export function QuizApp() {
                             onSwipeRight={prevCategory}
                             onSwipeUp={nextQuestion}
                             onSwipeDown={prevQuestion}
-                            categoryIndex={categoryColorMap[firstCategory]}
+                            categoryIndex={categoryColorMap[firstCategory] || 0}
                           />
                         </div>
                       );
