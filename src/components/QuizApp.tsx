@@ -1072,23 +1072,23 @@ export function QuizApp() {
                   let verticalZIndex = 1;
                   
                   if (isBeforePrev) {
-                    // Before previous question - positioned far above, out of viewport
+                    // Before previous question - positioned far above with 16px gaps
                     if (isActiveCategory && isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
                       const scale = dragOffsetY > 0 ? Math.min(1, 0.85 + dragProgress * 0.15) : 1;
-                      verticalTransform = `translateY(calc(-200vh + ${dragOffsetY}px)) scale(${scale})`;
+                      verticalTransform = `translateY(calc(-200% - 32px + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
-                      verticalTransform = 'translateY(-200vh) scale(1)';
+                      verticalTransform = 'translateY(calc(-200% - 32px)) scale(1)';
                     }
                     verticalZIndex = 0;
                   } else if (isPrev) {
-                    // Previous question - positioned above, out of viewport after transition
+                    // Previous question - positioned above with 16px gap
                     if (isActiveCategory && isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
                       const scale = dragOffsetY > 0 ? Math.min(1, 0.85 + dragProgress * 0.15) : 1;
-                      verticalTransform = `translateY(calc(-100vh + ${dragOffsetY}px)) scale(${scale})`;
+                      verticalTransform = `translateY(calc(-100% - 16px + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
-                      verticalTransform = 'translateY(-100vh) scale(1)';
+                      verticalTransform = 'translateY(calc(-100% - 16px)) scale(1)';
                     }
                     verticalZIndex = 0;
                   } else if (isCurrent) {
@@ -1102,23 +1102,23 @@ export function QuizApp() {
                     }
                     verticalZIndex = 2;
                   } else if (isNext) {
-                    // Next question - positioned right after current (no overlap)
+                    // Next question - positioned right after current with 16px gap
                     if (isActiveCategory && isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
                       const scale = dragOffsetY < 0 ? Math.min(1, 0.85 + dragProgress * 0.15) : 1;
-                      verticalTransform = `translateY(calc(100% + ${dragOffsetY}px)) scale(${scale})`;
+                      verticalTransform = `translateY(calc(100% + 16px + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
-                      verticalTransform = 'translateY(100%) scale(1)';
+                      verticalTransform = 'translateY(calc(100% + 16px)) scale(1)';
                     }
                     verticalZIndex = 1;
                   } else if (isAfterNext) {
-                    // After next question - positioned below next
+                    // After next question - positioned below next with 16px gap
                     if (isActiveCategory && isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
                       const scale = dragOffsetY < 0 ? Math.min(1, 0.85 + dragProgress * 0.15) : 1;
-                      verticalTransform = `translateY(calc(200% + ${dragOffsetY}px)) scale(${scale})`;
+                      verticalTransform = `translateY(calc(200% + 32px + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
-                      verticalTransform = 'translateY(200%) scale(1)';
+                      verticalTransform = 'translateY(calc(200% + 32px)) scale(1)';
                     }
                     verticalZIndex = 1;
                   }
