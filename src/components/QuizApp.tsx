@@ -948,24 +948,6 @@ export function QuizApp() {
                   );
                 });
               })}
-              
-              {/* Category indicator */}
-              <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex gap-2 z-10 pointer-events-none">
-                {categories.map((_, index) => (
-                  <div
-                    key={index}
-                    className="w-2 h-2 rounded-full transition-all"
-                    style={{
-                      backgroundColor: index === currentCategoryIndex ? 'white' : 'rgba(255,255,255,0.3)'
-                    }}
-                  />
-                ))}
-              </div>
-              
-              {/* Question indicator within category */}
-              <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 text-white text-sm opacity-50 z-10 pointer-events-none">
-                {currentQuestionIndexInCategory + 1} / {questionsInCategory.length}
-              </div>
             </div>
           ) : (
             <div className="flex items-center justify-center h-full text-white text-xl">Keine Fragen verfügbar</div>
