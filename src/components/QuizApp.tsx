@@ -794,8 +794,35 @@ export function QuizApp() {
           {loading ? (
             <div className="flex items-center justify-center h-full text-white text-xl">Lade Fragen...</div>
           ) : hasQuestions && currentQuestion ? (
-            <div className="relative w-full h-full flex items-center justify-center">
-              {/* Render current category and adjacent categories for smooth transitions */}
+            <div 
+              className="relative w-full h-full flex items-center justify-center"
+              onMouseDown={(e) => {
+                handleDragStart(e.clientX, e.clientY);
+              }}
+              onMouseMove={(e) => {
+                handleDragMove(e.clientX, e.clientY);
+              }}
+              onMouseUp={() => {
+                handleDragEnd();
+              }}
+              onMouseLeave={() => {
+                if (isDragging) {
+                  handleDragEnd();
+                }
+              }}
+              onTouchStart={(e) => {
+                const touch = e.touches[0];
+                handleDragStart(touch.clientX, touch.clientY);
+              }}
+              onTouchMove={(e) => {
+                const touch = e.touches[0];
+                handleDragMove(touch.clientX, touch.clientY);
+              }}
+              onTouchEnd={() => {
+                handleDragEnd();
+              }}
+            >
+              {/* Render previous, current, and next categories as separate DOM elements */}
               {categories.map((category, catIndex) => {
                 const isActive = catIndex === currentCategoryIndex;
                 const isPrev = catIndex === (currentCategoryIndex - 1 + categories.length) % categories.length;
@@ -855,36 +882,11 @@ export function QuizApp() {
                 return (
                   <div
                     key={`category-${catIndex}`}
-                    className="absolute inset-0 w-full h-full"
+                    className="absolute inset-0 w-full h-full pointer-events-none"
                     style={{
                       transform,
                       zIndex,
                       transition: isDragging ? 'none' : 'transform 0.3s ease-in-out'
-                    }}
-                    onMouseDown={(e) => {
-                      handleDragStart(e.clientX, e.clientY);
-                    }}
-                    onMouseMove={(e) => {
-                      handleDragMove(e.clientX, e.clientY);
-                    }}
-                    onMouseUp={() => {
-                      handleDragEnd();
-                    }}
-                    onMouseLeave={() => {
-                      if (isDragging) {
-                        handleDragEnd();
-                      }
-                    }}
-                    onTouchStart={(e) => {
-                      const touch = e.touches[0];
-                      handleDragStart(touch.clientX, touch.clientY);
-                    }}
-                    onTouchMove={(e) => {
-                      const touch = e.touches[0];
-                      handleDragMove(touch.clientX, touch.clientY);
-                    }}
-                    onTouchEnd={() => {
-                      handleDragEnd();
                     }}
                   >
                     <QuizCard
@@ -903,7 +905,7 @@ export function QuizApp() {
               })}
               
               {/* Category indicator */}
-              <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex gap-2">
+              <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex gap-2 z-10 pointer-events-none">
                 {categories.map((_, index) => (
                   <div
                     key={index}
@@ -916,7 +918,7 @@ export function QuizApp() {
               </div>
               
               {/* Question indicator within category */}
-              <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 text-white text-sm opacity-50">
+              <div className="absolute bottom-12 left-1/2 transform -translate-x-1/2 text-white text-sm opacity-50 z-10 pointer-events-none">
                 {currentQuestionIndexInCategory + 1} / {questionsInCategory.length}
               </div>
             </div>
