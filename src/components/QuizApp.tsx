@@ -967,46 +967,42 @@ export function QuizApp() {
             <div className="flex items-center justify-center h-full">
               <div className="animate-wiggle-loading">
                 <svg 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  viewBox="0 0 32 24"
-                  className="w-16 h-12"
+                  width="26" 
+                  height="26" 
+                  viewBox="0 0 32 24" 
+                  fill="none" 
+                  xmlns="http://www.w3.org/2000/svg"
                   style={{
-                    transform: 'rotate(-45deg) scale(1.3)',
                     filter: 'drop-shadow(2px 2px 4px rgba(0,0,0,0.3))'
                   }}
                 >
-                  {/* Left adhesive strip */}
-                  <rect x="0" y="0" width="10" height="24" rx="1" fill="white" opacity="0.95"/>
+                  {/* Main bandaid body with gradient */}
+                  <defs>
+                    <linearGradient id="bandaidGradientLoading" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" style={{ stopColor: '#d9b38c', stopOpacity: 1 }} />
+                      <stop offset="50%" style={{ stopColor: '#d4a574', stopOpacity: 1 }} />
+                      <stop offset="100%" style={{ stopColor: '#c9986a', stopOpacity: 1 }} />
+                    </linearGradient>
+                  </defs>
+                  <rect x="1" y="4" width="30" height="16" rx="5" fill="url(#bandaidGradientLoading)" stroke="#b8946a" strokeWidth="0.5"/>
                   
-                  {/* Center pad */}
-                  <rect x="10" y="6" width="12" height="12" rx="1" fill="#f5e6d3"/>
+                  {/* Center pad (lighter area) */}
+                  <rect x="11" y="6" width="10" height="12" rx="2" fill="#e5d4b8" opacity="0.9"/>
                   
-                  {/* Right adhesive strip */}
-                  <rect x="22" y="0" width="10" height="24" rx="1" fill="white" opacity="0.95"/>
+                  {/* Holes pattern - white dots */}
+                  <circle cx="5" cy="8" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="8" cy="8" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="5" cy="12" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="8" cy="12" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="5" cy="16" r="0.8" fill="white" opacity="0.9"/>
+                  <circle cx="8" cy="16" r="0.8" fill="white" opacity="0.9"/>
                   
-                  {/* Left holes */}
-                  <circle cx="3" cy="4" r="0.8" fill="white" opacity="0.9"/>
-                  <circle cx="6" cy="4" r="0.8" fill="white" opacity="0.9"/>
-                  <circle cx="3" cy="8" r="0.8" fill="white" opacity="0.9"/>
-                  <circle cx="6" cy="8" r="0.8" fill="white" opacity="0.9"/>
-                  <circle cx="3" cy="12" r="0.8" fill="white" opacity="0.9"/>
-                  <circle cx="6" cy="12" r="0.8" fill="white" opacity="0.9"/>
-                  <circle cx="3" cy="16" r="0.8" fill="white" opacity="0.9"/>
-                  <circle cx="6" cy="16" r="0.8" fill="white" opacity="0.9"/>
-                  <circle cx="3" cy="20" r="0.8" fill="white" opacity="0.9"/>
-                  <circle cx="6" cy="20" r="0.8" fill="white" opacity="0.9"/>
-                  
-                  {/* Right holes */}
-                  <circle cx="24" cy="4" r="0.8" fill="white" opacity="0.9"/>
-                  <circle cx="27" cy="4" r="0.8" fill="white" opacity="0.9"/>
                   <circle cx="24" cy="8" r="0.8" fill="white" opacity="0.9"/>
                   <circle cx="27" cy="8" r="0.8" fill="white" opacity="0.9"/>
                   <circle cx="24" cy="12" r="0.8" fill="white" opacity="0.9"/>
                   <circle cx="27" cy="12" r="0.8" fill="white" opacity="0.9"/>
                   <circle cx="24" cy="16" r="0.8" fill="white" opacity="0.9"/>
                   <circle cx="27" cy="16" r="0.8" fill="white" opacity="0.9"/>
-                  <circle cx="24" cy="20" r="0.8" fill="white" opacity="0.9"/>
-                  <circle cx="27" cy="20" r="0.8" fill="white" opacity="0.9"/>
                   
                   {/* Center pad holes (smaller, less visible) */}
                   <circle cx="13" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
