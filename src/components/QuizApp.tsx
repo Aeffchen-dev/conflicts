@@ -934,23 +934,23 @@ export function QuizApp() {
           
           @keyframes wiggle-loading {
             0% {
-              transform: rotate(-45deg) scale(1.56) perspective(500px) rotateX(60deg) rotateY(-15deg);
+              transform: rotate(-45deg) scale(1.56) perspective(500px) rotateX(60deg) rotateY(-15deg) rotateZ(-3deg);
               opacity: 0.7;
             }
             40% {
-              transform: rotate(-45deg) scale(1.56) perspective(500px) rotateX(20deg) rotateY(-5deg);
+              transform: rotate(-45deg) scale(1.56) perspective(500px) rotateX(20deg) rotateY(-5deg) rotateZ(2deg);
               opacity: 1;
             }
             60% {
-              transform: rotate(-45deg) scale(1.56) perspective(500px) rotateX(5deg) rotateY(2deg);
+              transform: rotate(-45deg) scale(1.56) perspective(500px) rotateX(5deg) rotateY(2deg) rotateZ(-1deg);
               opacity: 1;
             }
             80% {
-              transform: rotate(-45deg) scale(1.56) perspective(500px) rotateX(-2deg) rotateY(0deg);
+              transform: rotate(-45deg) scale(1.56) perspective(500px) rotateX(-2deg) rotateY(0deg) rotateZ(1deg);
               opacity: 1;
             }
             100% {
-              transform: rotate(-45deg) scale(1.56) perspective(500px) rotateX(0deg) rotateY(0deg);
+              transform: rotate(-45deg) scale(1.56) perspective(500px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
               opacity: 1;
             }
           }
