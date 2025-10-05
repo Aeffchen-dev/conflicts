@@ -464,17 +464,17 @@ export function QuizApp() {
     // Reset band-aid state to allow re-animation
     setShowBandaid(false);
     
-    // Text animation duration: 0.8s
-    // Band-aid starts AFTER text completes at 0.8s
+    // Text animation: 7 letters × 0.08s delay + 0.15s duration = ~0.71s total
+    // Band-aid starts AFTER text completes
     setTimeout(() => {
       setShowBandaid(true);
-    }, 800);
+    }, 720);
     
     // End text animation
     setTimeout(() => {
       setLogoAnimating(false);
       setAnimatingLetterIndex(-1);
-    }, 800);
+    }, 720);
   };
 
   const handleToggleChange = (checked: boolean) => {
@@ -524,7 +524,7 @@ export function QuizApp() {
               style={{
                 display: 'inline-block',
                 opacity: logoAnimating ? 0 : 1,
-                animation: logoAnimating ? `letterReveal${index} 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards` : 'none'
+                animation: logoAnimating ? `letterReveal${index} 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.08}s forwards` : 'none'
               }}
             >
               {letter}
@@ -681,14 +681,14 @@ export function QuizApp() {
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
             30% {
-              transform: rotate(-45deg) scaleX(1.33) rotateZ(-14deg) translateY(-4px);
+              transform: rotate(-45deg) scaleX(1.15) rotateZ(-8deg) translateY(-2px);
               opacity: 1;
-              filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.4));
+              filter: drop-shadow(3px 4px 6px rgba(0,0,0,0.35));
             }
             70% {
-              transform: rotate(-45deg) scaleX(1.08) rotateZ(-3deg) translateY(-0.5px);
+              transform: rotate(-45deg) scaleX(1.05) rotateZ(-2deg) translateY(-0.5px);
               opacity: 1;
-              filter: drop-shadow(2px 3px 4px rgba(0,0,0,0.3));
+              filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.25));
             }
             100% {
               transform: rotate(-45deg) scaleX(1) rotateZ(0deg) translateY(0px);
