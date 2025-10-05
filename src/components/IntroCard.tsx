@@ -47,14 +47,17 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       
       <div className="flex-1 flex flex-col items-center justify-center text-center p-8 relative z-10">
         <h1 
-          className="text-3xl md:text-4xl lg:text-5xl max-w-full leading-tight lg:leading-[1.09]"
+          className={slideIndex === 0 ? 'text-pulse' : ''}
           style={{ 
             fontFamily: 'Kokoro, serif',
             fontWeight: 'bold',
             fontStyle: 'italic',
             hyphens: 'none',
             overflowWrap: 'break-word',
-            wordBreak: 'normal'
+            wordBreak: 'normal',
+            fontSize: 'clamp(1.875rem, 5vw, 3rem)',
+            lineHeight: '1.09',
+            color: 'hsl(160, 70%, 15%)'
           }}
         >
           {content.text}
@@ -62,45 +65,30 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       </div>
       
       <p 
-        className={`text-center p-8 relative z-10 inline-block mx-auto ${slideIndex === 0 ? 'text-color-wave' : ''}`}
+        className={`text-center p-8 relative z-10 inline-block mx-auto`}
         style={{ 
           fontFamily: 'Arial, sans-serif',
           fontSize: '14px',
-          ...(slideIndex !== 0 && { color: 'black' })
+          color: 'black'
         }}
       >
         Swipe nach rechts um weiter zu navigieren
       </p>
       
       <style>{`
-        @keyframes shimmer-sweep {
-          0% {
-            background-position: -200% center;
+        @keyframes text-pulse {
+          0%, 100% {
+            transform: scale(1);
+            opacity: 1;
           }
-          28.57% {
-            background-position: 200% center;
-          }
-          100% {
-            background-position: 200% center;
+          50% {
+            transform: scale(1.05);
+            opacity: 0.8;
           }
         }
         
-        .text-color-wave {
-          background-image: linear-gradient(
-            90deg,
-            hsl(160, 70%, 15%) 0%,
-            hsl(160, 70%, 15%) 45%,
-            hsl(160, 70%, 65%) 50%,
-            hsl(160, 70%, 15%) 55%,
-            hsl(160, 70%, 15%) 100%
-          );
-          background-size: 250% 100%;
-          background-position: -200% center;
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-          -webkit-text-fill-color: transparent;
-          animation: shimmer-sweep 7s ease-in-out infinite;
+        .text-pulse {
+          animation: text-pulse 2s ease-in-out 3;
         }
         
         @keyframes slide-horizontal-active {
