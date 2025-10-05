@@ -523,10 +523,8 @@ export function QuizApp() {
               key={index}
               style={{
                 display: 'inline-block',
-                opacity: logoAnimating ? 0 : 1,
-                filter: logoAnimating ? 'blur(8px)' : 'blur(0px)',
-                transform: logoAnimating ? 'translateX(-10px)' : 'translateX(0)',
-                animation: logoAnimating ? `letterReveal 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.08}s forwards` : 'none'
+                animation: logoAnimating ? `letterReveal 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.08}s forwards` : 'none',
+                opacity: logoAnimating ? 0 : 1
               }}
             >
               {letter}
