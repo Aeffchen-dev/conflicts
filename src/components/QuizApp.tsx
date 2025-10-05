@@ -666,13 +666,13 @@ export function QuizApp() {
           style={{ fontFamily: 'Kokoro, serif', fontSize: '20px', fontWeight: 'bold', fontStyle: 'italic' }}
           onClick={handleLogoClick}
         >
-          {'Resolve'.split('').map((letter, index) => (
+          {'Talk it trough'.split('').map((letter, index) => (
             <span
               key={index}
               style={{
                 display: 'inline-block',
                 opacity: logoAnimating ? 0 : 1,
-                animation: logoAnimating ? `letterReveal${index} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.1}s forwards` : 'none'
+                animation: logoAnimating ? `letterReveal${index} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.07}s forwards` : 'none'
               }}
             >
               {letter}
