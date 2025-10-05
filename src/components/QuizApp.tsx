@@ -507,7 +507,16 @@ export function QuizApp() {
     
     // Determine direction on first significant movement
     if (!dragDirection && (Math.abs(offsetX) > 10 || Math.abs(offsetY) > 10)) {
-      if (Math.abs(offsetX) > Math.abs(offsetY)) {
+      // On slide 2, allow vertical if swiping down significantly
+      if (!hasSeenIntro && currentIntroIndex === 2 && Math.abs(offsetY) > Math.abs(offsetX)) {
+        setDragDirection('vertical');
+      } 
+      // On slide 3, allow vertical if swiping up significantly  
+      else if (!hasSeenIntro && currentIntroIndex === 3 && Math.abs(offsetY) > Math.abs(offsetX)) {
+        setDragDirection('vertical');
+      }
+      // Otherwise determine based on which is greater
+      else if (Math.abs(offsetX) > Math.abs(offsetY)) {
         setDragDirection('horizontal');
       } else {
         setDragDirection('vertical');
@@ -529,17 +538,39 @@ export function QuizApp() {
     
     const threshold = 80;
     
-    if (dragDirection === 'horizontal' && Math.abs(dragOffsetX) > threshold) {
-      if (dragOffsetX > 0) {
-        prevCategory();
-      } else {
-        nextCategory();
+    // Handle intro slide navigation  
+    if (!hasSeenIntro) {
+      if (dragDirection === 'horizontal' && Math.abs(dragOffsetX) > threshold) {
+        if (dragOffsetX > 0) {
+          prevCategory();
+        } else {
+          nextCategory();
+        }
+      } else if (dragDirection === 'vertical' && Math.abs(dragOffsetY) > threshold) {
+        // On slide 2, swipe down goes to slide 3
+        if (currentIntroIndex === 2 && dragOffsetY < 0) {
+          nextCategory();
+        }
+        // On slide 3, swipe up goes back to slide 2
+        else if (currentIntroIndex === 3 && dragOffsetY > 0) {
+          prevCategory();
+        }
       }
-    } else if (dragDirection === 'vertical' && Math.abs(dragOffsetY) > threshold) {
-      if (dragOffsetY > 0) {
-        prevQuestion();
-      } else {
-        nextQuestion();
+    }
+    // Handle question navigation
+    else {
+      if (dragDirection === 'horizontal' && Math.abs(dragOffsetX) > threshold) {
+        if (dragOffsetX > 0) {
+          prevCategory();
+        } else {
+          nextCategory();
+        }
+      } else if (dragDirection === 'vertical' && Math.abs(dragOffsetY) > threshold) {
+        if (dragOffsetY > 0) {
+          prevQuestion();
+        } else {
+          nextQuestion();
+        }
       }
     }
     
@@ -949,6 +980,11 @@ export function QuizApp() {
                     const dragProgress = Math.abs(dragOffsetX) / 300;
                     const scale = Math.max(0.8, 1 - dragProgress * 0.2);
                     transform = `translateX(${dragOffsetX}px) scale(${scale})`;
+                  } else if (isDragging && dragDirection === 'vertical' && currentIntroIndex === 2) {
+                    // Allow vertical dragging on slide 2 to peek at slide 3
+                    const dragProgress = Math.abs(dragOffsetY) / 300;
+                    const scale = Math.max(0.8, 1 - dragProgress * 0.2);
+                    transform = `translateY(${dragOffsetY}px) scale(${scale})`;
                   } else if (isTransitioning && transitionDirection === 'left') {
                     transform = 'translateX(calc(-100% - 16px)) scale(0.8)';
                   } else if (isTransitioning && transitionDirection === 'right') {
@@ -964,7 +1000,7 @@ export function QuizApp() {
                     // Vertical micro-animation: slide more visibly up
                     transform = 'translateY(-25%) scale(0.96)';
                   } else {
-                    transform = 'translateX(0) scale(1)';
+                    transform = currentIntroIndex === 2 ? 'translateY(0) scale(1)' : 'translateX(0) scale(1)';
                   }
                   zIndex = 3;
                 } else if (isPrev) {
@@ -972,12 +1008,16 @@ export function QuizApp() {
                     const dragProgress = Math.abs(dragOffsetX) / 300;
                     const scale = Math.min(1, 0.8 + dragProgress * 0.2);
                     transform = `translateX(calc(-100% - 16px + ${dragOffsetX}px)) scale(${scale})`;
+                  } else if (isDragging && dragDirection === 'vertical' && currentIntroIndex === 3) {
+                    const dragProgress = Math.abs(dragOffsetY) / 300;
+                    const scale = Math.min(1, 0.8 + dragProgress * 0.2);
+                    transform = `translateY(calc(-100% - 16px + ${dragOffsetY}px)) scale(${scale})`;
                   } else if (isTransitioning && transitionDirection === 'right') {
                     transform = 'translateX(0) scale(1)';
                   } else if (isTransitioning && transitionDirection === 'up') {
                     transform = 'translateY(0) scale(1)';
                   } else {
-                    // Position previous slides to the left OR above depending on which slide we're on
+                    // Slide 3's previous is slide 2, which is above (vertical)
                     if (currentIntroIndex === 3 && slideIndex === 2) {
                       transform = 'translateY(calc(-100% - 16px)) scale(0.8)';
                     } else {
@@ -990,7 +1030,7 @@ export function QuizApp() {
                     const dragProgress = Math.abs(dragOffsetX) / 300;
                     const scale = Math.min(1, 0.8 + dragProgress * 0.2);
                     transform = `translateX(calc(100% + 16px + ${dragOffsetX}px)) scale(${scale})`;
-                  } else if (isDragging && dragDirection === 'vertical') {
+                  } else if (isDragging && dragDirection === 'vertical' && currentIntroIndex === 2) {
                     const dragProgress = Math.abs(dragOffsetY) / 300;
                     const scale = Math.min(1, 0.8 + dragProgress * 0.2);
                     transform = `translateY(calc(100% + 16px + ${dragOffsetY}px)) scale(${scale})`;
@@ -1005,7 +1045,7 @@ export function QuizApp() {
                     // Vertical micro-animation: next slide (slide 3) peeks in more from bottom
                     transform = 'translateY(calc(100% + 16px - 30%)) scale(0.88)';
                   } else {
-                    // Position next slides to the right OR below depending on which slide we're on
+                    // Slide 3 is vertically below slide 2
                     if (currentIntroIndex === 2 && slideIndex === 3) {
                       transform = 'translateY(calc(100% + 16px)) scale(0.8)';
                     } else {
