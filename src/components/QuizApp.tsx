@@ -1315,6 +1315,16 @@ export function QuizApp() {
                   let verticalTransform = '';
                   let verticalZIndex = 1;
                   
+                  // For previous category, show current question at same vertical position as active category's current
+                  if (isPrevCategory && !isCurrent) {
+                    return null; // Only show current question for previous category
+                  }
+                  
+                  // For next category, show current question at same vertical position as active category's current  
+                  if (isNextCategory && !isCurrent) {
+                    return null; // Only show current question for next category
+                  }
+                  
                   if (isBeforePrev) {
                     // Before previous question - far above viewport
                     if (isActiveCategory && isDragging && dragDirection === 'vertical') {
