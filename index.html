@@ -56,6 +56,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap" rel="stylesheet">
+    <link rel="preload" href="/fonts/kokoro-bolditalic-webfont.woff2" as="font" type="font/woff2" crossorigin>
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-S44V7ET6KL"></script>
@@ -81,9 +82,9 @@
       #splash.fade-out { opacity: 0; transition: opacity 200ms ease; pointer-events: none; }
       
       /* Splash header matching the app header exactly */
-      #splash-header { margin-top: 1rem; display: flex; align-items: baseline; justify-content: space-between; width: 100%; padding: 0 1rem; position: relative; z-index: 50; padding-top: env(safe-area-inset-top, 0); max-width: 100%; box-sizing: border-box; }
-      #splash-logo { color: white; cursor: pointer; position: relative; display: flex; align-items: center; font-family: 'Kokoro', serif; font-size: 25px; font-weight: bold; font-style: italic; flex-shrink: 0; }
-      #splash-logo span { display: inline-block; position: relative; }
+      #splash-header { margin-top: 1rem; display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 0 1rem; position: relative; z-index: 50; padding-top: env(safe-area-inset-top, 0); max-width: 100%; box-sizing: border-box; }
+      #splash-logo { color: white; cursor: pointer; position: relative; display: flex; align-items: center; font-family: 'Kokoro', serif; font-size: 25px; font-weight: bold; font-style: italic; flex-shrink: 0; line-height: 1; }
+      #splash-logo span { display: inline-block; position: relative; line-height: 1; }
       #splash-categories { color: white; font-weight: normal; display: flex; align-items: center; font-size: 14px; background: none; border: none; cursor: default; padding: 0; margin: 0; white-space: nowrap; flex-shrink: 1; min-width: 0; padding-top: 2px; }
 
       /* Loading bandaid centered in remaining space */
@@ -114,7 +115,7 @@
           <span>f</span>
           <span style="position: relative; z-index: 1;">
             l
-            <div style="position: absolute; right: -6px; bottom: -10px; transform: rotate(-45deg) scale(1.09); perspective: 1000px; transform-style: preserve-3d; opacity: 1; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3)); z-index: 0;">
+            <div style="position: absolute; right: -6px; bottom: -2px; transform: rotate(-45deg) scale(1.09); perspective: 1000px; transform-style: preserve-3d; opacity: 1; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3)); z-index: 0;">
               <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <linearGradient id="bandaidGradient" x1="0%" y1="0%" x2="0%" y2="100%">
