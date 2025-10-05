@@ -55,7 +55,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
         {slideIndex === 1 && (
           <ArrowLeftRight 
             size={48} 
-            strokeWidth={3}
+            strokeWidth={2}
             style={{ color: 'hsl(160, 70%, 15%)' }}
           />
         )}
@@ -64,7 +64,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
         {slideIndex === 2 && (
           <ArrowUpDown 
             size={48} 
-            strokeWidth={3}
+            strokeWidth={2}
             style={{ color: 'hsl(160, 70%, 15%)' }}
           />
         )}
