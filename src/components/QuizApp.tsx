@@ -940,14 +940,21 @@ export function QuizApp() {
                 return (
                   <div
                     key={`intro-${slideIndex}`}
-                    className="absolute inset-0 w-full h-full pointer-events-none"
+                    className={`absolute inset-0 w-full h-full ${isActive ? 'pointer-events-auto' : 'pointer-events-none'}`}
                     style={{
                       transform,
                       zIndex,
                       transition: isDragging ? 'none' : isTransitioning ? 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
                     }}
                   >
-                    <IntroCard slideIndex={slideIndex} isActive={isActive} isNext={isNext} isPrev={isPrev} />
+                    <IntroCard 
+                      slideIndex={slideIndex} 
+                      isActive={isActive} 
+                      isNext={isNext} 
+                      isPrev={isPrev}
+                      onSwipeLeft={nextCategory}
+                      onSwipeRight={prevCategory}
+                    />
                   </div>
                 );
               })}

@@ -3,9 +3,11 @@ interface IntroCardProps {
   isActive?: boolean;
   isNext?: boolean;
   isPrev?: boolean;
+  onSwipeLeft?: () => void;
+  onSwipeRight?: () => void;
 }
 
-export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev = false }: IntroCardProps) {
+export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev = false, onSwipeLeft, onSwipeRight }: IntroCardProps) {
   const getContent = () => {
     switch (slideIndex) {
       case 0:
@@ -32,13 +34,17 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
 
   return (
     <div 
-      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none h-full flex flex-col justify-between items-center p-8 ${content.animationClass}`}
+      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none h-full flex flex-col justify-between items-center ${content.animationClass}`}
       style={{
         backgroundColor: 'hsl(160, 55%, 75%)',
         color: 'hsl(160, 70%, 15%)'
       }}
     >
-      <div className="flex-1 flex flex-col items-center justify-center text-center">
+      {/* Tap zones */}
+      <div className="absolute left-0 top-0 w-20 h-full z-20 cursor-pointer" onClick={onSwipeRight} />
+      <div className="absolute right-0 top-0 w-20 h-full z-20 cursor-pointer" onClick={onSwipeLeft} />
+      
+      <div className="flex-1 flex flex-col items-center justify-center text-center p-8 relative z-10">
         <h1 
           className="text-3xl md:text-4xl lg:text-5xl max-w-full leading-tight lg:leading-[1.09]"
           style={{ 
@@ -55,7 +61,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       </div>
       
       <p 
-        className="text-center"
+        className="text-center p-8 relative z-10"
         style={{ 
           fontFamily: 'Arial, sans-serif',
           fontSize: '14px',
