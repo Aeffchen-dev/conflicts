@@ -202,26 +202,35 @@ All colors MUST be HSL.
 }
 
 /* Animated gradient background */
-@keyframes gradientMove {
+@keyframes organicBlob {
   0% {
-    background-position: 0% 50%;
+    background-position: 20% 30%;
   }
-  25% {
-    background-position: 100% 50%;
+  15% {
+    background-position: 75% 45%;
   }
-  50% {
-    background-position: 100% 100%;
+  30% {
+    background-position: 85% 70%;
+  }
+  45% {
+    background-position: 50% 85%;
+  }
+  60% {
+    background-position: 15% 75%;
   }
   75% {
-    background-position: 0% 100%;
+    background-position: 10% 40%;
+  }
+  90% {
+    background-position: 45% 20%;
   }
   100% {
-    background-position: 0% 50%;
+    background-position: 20% 30%;
   }
 }
 
 .intro-gradient-bg {
-  background: radial-gradient(circle at 50% 50%, hsl(160 55% 75%), hsl(160 60% 60%));
-  background-size: 200% 200%;
-  animation: gradientMove 12s ease infinite;
+  background: radial-gradient(ellipse at 50% 50%, hsl(160 55% 75%), hsl(160 60% 60%));
+  background-size: 300% 300%;
+  animation: organicBlob 18s ease-in-out infinite;
 }
