@@ -1092,7 +1092,7 @@ export function QuizApp() {
                     }
                     verticalZIndex = 0;
                   } else if (isCurrent) {
-                    // Current question - centered
+                    // Current question - centered, height allows 10% of next slide visible
                     if (isActiveCategory && isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
                       const scale = Math.max(0.85, 1 - dragProgress * 0.15);
@@ -1102,13 +1102,13 @@ export function QuizApp() {
                     }
                     verticalZIndex = 2;
                   } else if (isNext) {
-                    // Next question - positioned below
+                    // Next question - positioned so 10% is visible below current
                     if (isActiveCategory && isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
                       const scale = dragOffsetY < 0 ? Math.min(1, 0.85 + dragProgress * 0.15) : 1;
-                      verticalTransform = `translateY(calc(70vh + 16px + ${dragOffsetY}px)) scale(${scale})`;
+                      verticalTransform = `translateY(calc(90% + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
-                      verticalTransform = 'translateY(calc(70vh + 16px)) scale(1)';
+                      verticalTransform = 'translateY(90%) scale(1)';
                     }
                     verticalZIndex = 1;
                   } else if (isAfterNext) {
@@ -1116,9 +1116,9 @@ export function QuizApp() {
                     if (isActiveCategory && isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.min(Math.abs(dragOffsetY) / 300, 1);
                       const scale = dragOffsetY < 0 ? Math.min(1, 0.85 + dragProgress * 0.15) : 1;
-                      verticalTransform = `translateY(calc(140vh + 32px + ${dragOffsetY}px)) scale(${scale})`;
+                      verticalTransform = `translateY(calc(180% + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
-                      verticalTransform = 'translateY(calc(140vh + 32px)) scale(1)';
+                      verticalTransform = 'translateY(180%) scale(1)';
                     }
                     verticalZIndex = 1;
                   }
