@@ -1040,13 +1040,13 @@ export function QuizApp() {
                     }
                     zIndex = 3;
                   } else if (isActiveCategory && isPrevQuestion) {
-                    // Current category, previous question - don't move during horizontal transitions
+                    // Current category, previous question - position higher off-screen
                     if (isDragging && dragDirection === 'vertical') {
                       const dragProgress = Math.abs(dragOffsetY) / 300;
                       const scale = Math.min(1, 0.85 + dragProgress * 0.15);
-                      transform = `translateY(calc(-100% + ${dragOffsetY}px)) scale(${scale})`;
+                      transform = `translateY(calc(-120% + ${dragOffsetY}px)) scale(${scale})`;
                     } else {
-                      transform = 'translateY(-100%) scale(0.85)';
+                      transform = 'translateY(-120%) scale(0.85)';
                     }
                     zIndex = 2;
                   } else if (isActiveCategory && isNextQuestion) {
