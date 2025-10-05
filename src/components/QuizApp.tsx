@@ -1018,12 +1018,12 @@ export function QuizApp() {
                   const isPrevQuestion = qIndex === (questionIndexToUse - 1 + categoryQuestions.length) % categoryQuestions.length;
                   const isNextQuestion = qIndex === (questionIndexToUse + 1) % categoryQuestions.length;
                   
-                  // Render all vertical slides (prev/current/next) for active category
+                  // Render current and next slides for active category (no previous)
                   // Only render current question for prev/next categories during horizontal swipes
                   const isHorizontalTransition = (isDragging && dragDirection === 'horizontal') || 
                                                 (isTransitioning && (transitionDirection === 'left' || transitionDirection === 'right'));
                   
-                  const shouldRender = (isActiveCategory && (isActiveQuestion || isPrevQuestion || isNextQuestion)) ||
+                  const shouldRender = (isActiveCategory && (isActiveQuestion || isNextQuestion)) ||
                                       ((isPrevCategory || isNextCategory) && isActiveQuestion);
                   
                   if (!shouldRender) return null;
@@ -1039,9 +1039,7 @@ export function QuizApp() {
                       const rotation = dragOffsetX > 0 ? dragProgress * 5 : -dragProgress * 5;
                       transform = `translateX(${dragOffsetX}px) scale(${scale}) rotate(${rotation}deg)`;
                     } else if (isDragging && dragDirection === 'vertical') {
-                      const dragProgress = Math.abs(dragOffsetY) / 300;
-                      const scale = Math.max(0.85, 1 - dragProgress * 0.15);
-                      transform = `translateY(${dragOffsetY}px) scale(${scale})`;
+                      transform = `translateY(${dragOffsetY}px)`;
                     } else if (isTransitioning && transitionDirection === 'left') {
                       transform = 'translateX(calc(-100% - 16px)) scale(0.8) rotate(-5deg)';
                     } else if (isTransitioning && transitionDirection === 'right') {
@@ -1050,24 +1048,12 @@ export function QuizApp() {
                       transform = 'translateX(0) translateY(0) scale(1) rotate(0deg)';
                     }
                     zIndex = 3;
-                  } else if (isActiveCategory && isPrevQuestion) {
-                    // Current category, previous question - always visible above
-                    if (isDragging && dragDirection === 'vertical') {
-                      const dragProgress = Math.abs(dragOffsetY) / 300;
-                      const scale = Math.min(1, 0.85 + dragProgress * 0.15);
-                      transform = `translateY(calc(-70vh - 16px + ${dragOffsetY}px)) scale(${scale})`;
-                    } else {
-                      transform = 'translateY(calc(-70vh - 16px)) scale(0.85)';
-                    }
-                    zIndex = 1;
                   } else if (isActiveCategory && isNextQuestion) {
-                    // Current category, next question - always visible below
+                    // Current category, next question - visible below with 16px margin
                     if (isDragging && dragDirection === 'vertical') {
-                      const dragProgress = Math.abs(dragOffsetY) / 300;
-                      const scale = Math.min(1, 0.85 + dragProgress * 0.15);
-                      transform = `translateY(calc(70vh + 16px + ${dragOffsetY}px)) scale(${scale})`;
+                      transform = `translateY(calc(70vh + 16px + ${dragOffsetY}px))`;
                     } else {
-                      transform = 'translateY(calc(70vh + 16px)) scale(0.85)';
+                      transform = 'translateY(calc(70vh + 16px))';
                     }
                     zIndex = 1;
                   } else if (isPrevCategory) {

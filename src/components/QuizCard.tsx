@@ -204,7 +204,6 @@ export function QuizCard({
       style={{
         height: '70vh',
         maxHeight: '70vh',
-        marginBottom: '16px',
         backgroundColor: question.category.toLowerCase() !== 'intro' ? categoryColors.bg : 'hsl(var(--card-background))',
         color: question.category.toLowerCase() !== 'intro' ? categoryColors.text : 'hsl(var(--foreground))'
       }}
