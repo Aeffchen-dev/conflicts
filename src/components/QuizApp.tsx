@@ -368,6 +368,19 @@ export function QuizApp() {
   // Intro slide state
   const [currentIntroIndex, setCurrentIntroIndex] = useState(0);
   const totalIntroSlides = 3;
+  
+  // Micro-animation state
+  const [showMicroAnimation, setShowMicroAnimation] = useState(false);
+  
+  // Trigger micro-animation when on slides 2 or 3
+  useEffect(() => {
+    if ((currentIntroIndex === 1 || currentIntroIndex === 2) && !isTransitioning && !isDragging) {
+      const timer = setTimeout(() => setShowMicroAnimation(true), 300);
+      return () => clearTimeout(timer);
+    } else {
+      setShowMicroAnimation(false);
+    }
+  }, [currentIntroIndex, isTransitioning, isDragging]);
 
   const nextCategory = () => {
     if (!isTransitioning) {
@@ -905,21 +918,6 @@ export function QuizApp() {
                 const isNext = slideIndex === currentIntroIndex + 1;
                 
                 if (!isActive && !isPrev && !isNext) return null;
-                
-                // Use a ref to track micro-animation timing
-                const microAnimationTimerRef = useRef<NodeJS.Timeout | null>(null);
-                const [showMicroAnimation, setShowMicroAnimation] = useState(false);
-                
-                useEffect(() => {
-                  if ((currentIntroIndex === 1 || currentIntroIndex === 2) && !isTransitioning && !isDragging && isActive) {
-                    microAnimationTimerRef.current = setTimeout(() => setShowMicroAnimation(true), 300);
-                    return () => {
-                      if (microAnimationTimerRef.current) clearTimeout(microAnimationTimerRef.current);
-                    };
-                  } else {
-                    setShowMicroAnimation(false);
-                  }
-                }, [currentIntroIndex, isTransitioning, isDragging, isActive]);
                 
                 let transform = '';
                 let zIndex = 1;
