@@ -1088,7 +1088,7 @@ export function QuizApp() {
                   return (
                     <div
                       key={`category-${catIndex}-question-${qIndex}`}
-                      className="absolute inset-0 w-full h-full pointer-events-none"
+                      className={`absolute inset-0 w-full h-full ${isActiveCategory && isActiveQuestion ? 'pointer-events-auto' : 'pointer-events-none'}`}
                       style={{
                         transform,
                         zIndex,
