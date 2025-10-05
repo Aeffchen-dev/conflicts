@@ -89,16 +89,18 @@
 
       /* Loading bandaid centered in remaining space */
       #splash-content { flex: 1; display: flex; align-items: center; justify-content: center; perspective: 1000px; }
-      #splash-content .bandaid { transform-style: preserve-3d; animation: wiggle-loading 1.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite; }
+      #splash-content .bandaid { transform-style: preserve-3d; animation: leaf-fall 2.4s cubic-bezier(0.25, 0.1, 0.25, 1) infinite; }
       
-      @keyframes wiggle-loading {
-        0%   { transform: rotate(-45deg) scale(1.56) perspective(600px) rotateX(45deg) rotateY(-12deg) rotateZ(-2deg) scaleY(0.95); opacity: 0.75; }
-        15%  { transform: rotate(-45deg) scale(1.56) perspective(600px) rotateX(30deg) rotateY(-8deg)  rotateZ(1deg)  scaleY(1.08); opacity: 0.9; }
-        30%  { transform: rotate(-45deg) scale(1.56) perspective(600px) rotateX(15deg) rotateY(-3deg)  rotateZ(2deg)  scaleY(0.98); opacity: 1; }
-        50%  { transform: rotate(-45deg) scale(1.56) perspective(600px) rotateX(5deg)  rotateY(2deg)   rotateZ(-1deg) scaleY(1.05); opacity: 1; }
-        70%  { transform: rotate(-45deg) scale(1.56) perspective(600px) rotateX(-2deg) rotateY(1deg)   rotateZ(1deg)  scaleY(1.02); opacity: 1; }
-        85%  { transform: rotate(-45deg) scale(1.56) perspective(600px) rotateX(-1deg) rotateY(0deg)   rotateZ(0deg)  scaleY(1.01); opacity: 1; }
-        100% { transform: rotate(-45deg) scale(1.56) perspective(600px) rotateX(0deg)  rotateY(0deg)   rotateZ(0deg)  scaleY(1); opacity: 1; }
+      @keyframes leaf-fall {
+        0%   { transform: rotate(-45deg) scale(1.56) perspective(700px) rotateX(50deg) rotateY(-18deg) rotateZ(-5deg) scaleX(0.92) scaleY(1.08); opacity: 0.7; }
+        12%  { transform: rotate(-45deg) scale(1.56) perspective(700px) rotateX(38deg) rotateY(-12deg) rotateZ(3deg)  scaleX(1.06) scaleY(0.96); opacity: 0.85; }
+        25%  { transform: rotate(-45deg) scale(1.56) perspective(700px) rotateX(25deg) rotateY(-6deg)  rotateZ(-2deg) scaleX(0.98) scaleY(1.04); opacity: 0.92; }
+        38%  { transform: rotate(-45deg) scale(1.56) perspective(700px) rotateX(15deg) rotateY(3deg)   rotateZ(2deg)  scaleX(1.03) scaleY(0.99); opacity: 0.98; }
+        50%  { transform: rotate(-45deg) scale(1.56) perspective(700px) rotateX(8deg)  rotateY(6deg)   rotateZ(-1deg) scaleX(0.99) scaleY(1.02); opacity: 1; }
+        62%  { transform: rotate(-45deg) scale(1.56) perspective(700px) rotateX(4deg)  rotateY(3deg)   rotateZ(1deg)  scaleX(1.01) scaleY(0.99); opacity: 1; }
+        75%  { transform: rotate(-45deg) scale(1.56) perspective(700px) rotateX(2deg)  rotateY(1deg)   rotateZ(-0.5deg) scaleX(1.0) scaleY(1.01); opacity: 1; }
+        88%  { transform: rotate(-45deg) scale(1.56) perspective(700px) rotateX(0.5deg) rotateY(0deg)  rotateZ(0.2deg) scaleX(1.0) scaleY(1.0); opacity: 1; }
+        100% { transform: rotate(-45deg) scale(1.56) perspective(700px) rotateX(0deg)  rotateY(0deg)   rotateZ(0deg)  scaleX(1.0) scaleY(1.0); opacity: 1; }
       }
     </style>
   </head>
@@ -115,7 +117,7 @@
           <span>f</span>
           <span style="position: relative; z-index: 1;">
             l
-            <div style="position: absolute; right: -6px; bottom: -2px; transform: rotate(-45deg) scale(1.09); perspective: 1000px; transform-style: preserve-3d; opacity: 1; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3)); z-index: 0;">
+            <div style="position: absolute; right: -6px; bottom: -5px; transform: rotate(-45deg) scale(1.09); perspective: 1000px; transform-style: preserve-3d; opacity: 1; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3)); z-index: 0;">
               <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <defs>
                   <linearGradient id="bandaidGradient" x1="0%" y1="0%" x2="0%" y2="100%">
