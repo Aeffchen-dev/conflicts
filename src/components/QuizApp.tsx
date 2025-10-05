@@ -672,10 +672,11 @@ export function QuizApp() {
               style={{
                 display: 'inline-block',
                 opacity: logoAnimating ? 0 : 1,
-                animation: logoAnimating ? `letterReveal${index} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.07}s forwards` : 'none'
+                animation: logoAnimating ? `letterReveal${index} 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${index * 0.07}s forwards` : 'none',
+                minWidth: letter === ' ' ? '0.3em' : 'auto'
               }}
             >
-              {letter}
+              {letter === ' ' ? '\u00A0' : letter}
             </span>
           ))}
           <div 
