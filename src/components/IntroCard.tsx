@@ -85,7 +85,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
                     className="team-letter"
                     style={{
                       display: 'inline-block',
-                      animationDelay: `${index * 0.1}s`
+                      animationDelay: `${index * 0.15}s`
                     }}
                   >
                     {letter}
@@ -116,16 +116,16 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
           0%, 100% {
             transform: translateY(0);
           }
-          5% {
+          8% {
             transform: translateY(-15px);
           }
-          10% {
+          16% {
             transform: translateY(0);
           }
         }
         
         .team-letter {
-          animation: letterBounce 3s ease-in-out infinite;
+          animation: letterBounce 4s ease-in-out infinite;
         }
       `}</style>
     </div>
