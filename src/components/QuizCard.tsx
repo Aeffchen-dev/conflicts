@@ -43,7 +43,12 @@ export function QuizCard({
   const [isLocalDragging, setIsLocalDragging] = useState(false);
   const [processedText, setProcessedText] = useState<JSX.Element[]>([]);
   const [randomAnimation] = useState(() => {
-    const animations = ['animate-wave-border-1', 'animate-wave-border-2', 'animate-wave-border-3'];
+    const animations = [
+      'animate-wave-border-1', 'animate-wave-border-2', 'animate-wave-border-3', 'animate-wave-border-4',
+      'animate-wave-border-5', 'animate-wave-border-6', 'animate-wave-border-7', 'animate-wave-border-8',
+      'animate-wave-border-9', 'animate-wave-border-10', 'animate-wave-border-11', 'animate-wave-border-12',
+      'animate-wave-border-13', 'animate-wave-border-14', 'animate-wave-border-15', 'animate-wave-border-16'
+    ];
     return animations[Math.floor(Math.random() * animations.length)];
   });
   
