@@ -932,17 +932,23 @@ export function QuizApp() {
             }
           }
           
-          @keyframes pulse-scale {
+          @keyframes wiggle-loading {
             0%, 100% {
-              transform: rotate(-45deg) scale(1.3);
+              transform: rotate(-45deg) scale(1.3) translateX(0) translateY(0);
+            }
+            25% {
+              transform: rotate(-45deg) scale(1.3) translateX(-3px) translateY(2px) rotate(2deg);
             }
             50% {
-              transform: rotate(-45deg) scale(1.45);
+              transform: rotate(-45deg) scale(1.3) translateX(3px) translateY(-2px) rotate(-2deg);
+            }
+            75% {
+              transform: rotate(-45deg) scale(1.3) translateX(-2px) translateY(1px) rotate(1deg);
             }
           }
           
-          .animate-pulse-scale {
-            animation: pulse-scale 1.5s ease-in-out infinite;
+          .animate-wiggle-loading {
+            animation: wiggle-loading 0.8s ease-in-out infinite;
           }
         `}</style>
         <button 
@@ -959,7 +965,7 @@ export function QuizApp() {
         <div className="flex-1 flex items-stretch justify-center min-h-0 relative" style={{ overflow: 'visible' }}>
           {loading ? (
             <div className="flex items-center justify-center h-full">
-              <div className="animate-pulse-scale">
+              <div className="animate-wiggle-loading">
                 <svg 
                   xmlns="http://www.w3.org/2000/svg" 
                   viewBox="0 0 32 24"
