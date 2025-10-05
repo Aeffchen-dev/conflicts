@@ -363,7 +363,7 @@ export function QuizApp() {
 
   // Animation states
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [transitionDirection, setTransitionDirection] = useState<'left' | 'right' | null>(null);
+  const [transitionDirection, setTransitionDirection] = useState<'left' | 'right' | 'up' | 'down' | null>(null);
 
   // Intro slide state
   const [currentIntroIndex, setCurrentIntroIndex] = useState(0);
@@ -437,27 +437,33 @@ export function QuizApp() {
 
   const nextQuestion = () => {
     if (isTransitioning) return;
-    const newIndex = (currentQuestionIndexInCategory + 1) % questionsInCategory.length;
     setIsTransitioning(true);
+    setTransitionDirection('up');
+    const newIndex = (currentQuestionIndexInCategory + 1) % questionsInCategory.length;
+    
     setTimeout(() => {
       setQuestionIndicesPerCategory(prev => ({
         ...prev,
         [currentCategory]: newIndex
       }));
       setIsTransitioning(false);
+      setTransitionDirection(null);
     }, 300);
   };
 
   const prevQuestion = () => {
     if (isTransitioning) return;
-    const newIndex = (currentQuestionIndexInCategory - 1 + questionsInCategory.length) % questionsInCategory.length;
     setIsTransitioning(true);
+    setTransitionDirection('down');
+    const newIndex = (currentQuestionIndexInCategory - 1 + questionsInCategory.length) % questionsInCategory.length;
+    
     setTimeout(() => {
       setQuestionIndicesPerCategory(prev => ({
         ...prev,
         [currentCategory]: newIndex
       }));
       setIsTransitioning(false);
+      setTransitionDirection(null);
     }, 300);
   };
 
@@ -1081,9 +1087,11 @@ export function QuizApp() {
                         style={{
                           transform: isActiveCategory && isDragging && dragDirection === 'vertical'
                             ? `translateY(calc(-70vh - 16px + ${dragOffsetY}px)) scale(0.85)`
+                            : isActiveCategory && isTransitioning && transitionDirection === 'down'
+                            ? 'translateY(0) scale(1)'
                             : 'translateY(calc(-70vh - 16px)) scale(0.85)',
-                          zIndex: 0,
-                          transition: isDragging && dragDirection === 'vertical' ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                          zIndex: isActiveCategory && isTransitioning && transitionDirection === 'down' ? 3 : 0,
+                          transition: isDragging && dragDirection === 'vertical' ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s'
                         }}
                       >
                         <QuizCard
@@ -1113,6 +1121,10 @@ export function QuizApp() {
                                 const scale = Math.max(0.85, 1 - dragProgress * 0.15);
                                 return `translateY(${dragOffsetY}px) scale(${scale})`;
                               })()
+                            : isActiveCategory && isTransitioning && transitionDirection === 'up'
+                            ? 'translateY(calc(-70vh - 16px)) scale(0.85)'
+                            : isActiveCategory && isTransitioning && transitionDirection === 'down'
+                            ? 'translateY(calc(70vh + 16px)) scale(0.85)'
                             : 'translateY(0) scale(1)',
                           zIndex: 2,
                           transition: isDragging && dragDirection === 'vertical' ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
@@ -1145,9 +1157,11 @@ export function QuizApp() {
                                 const scale = Math.min(1, 0.85 + dragProgress * 0.15);
                                 return `translateY(calc(70vh + 16px + ${dragOffsetY}px)) scale(${scale})`;
                               })()
+                            : isActiveCategory && isTransitioning && transitionDirection === 'up'
+                            ? 'translateY(0) scale(1)'
                             : 'translateY(calc(70vh + 16px)) scale(0.85)',
-                          zIndex: 1,
-                          transition: isDragging && dragDirection === 'vertical' ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)'
+                          zIndex: isActiveCategory && isTransitioning && transitionDirection === 'up' ? 3 : 1,
+                          transition: isDragging && dragDirection === 'vertical' ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), z-index 0s'
                         }}
                       >
                         <QuizCard
