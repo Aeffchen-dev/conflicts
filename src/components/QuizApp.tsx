@@ -1044,13 +1044,24 @@ export function QuizApp() {
                   if (isDragging && dragDirection === 'horizontal') {
                     const dragProgress = Math.abs(dragOffsetX) / 300;
                     const scale = Math.min(1, 0.8 + dragProgress * 0.2);
-                    transform = `translateX(calc(100% + 16px + ${dragOffsetX}px)) scale(${scale})`;
+                    
+                    // Slide 3 follows slide 2 horizontally while staying vertically positioned below
+                    if (currentIntroIndex === 2 && slideIndex === 3) {
+                      transform = `translateX(${dragOffsetX}px) translateY(calc(100% + 16px)) scale(0.8)`;
+                    } else {
+                      transform = `translateX(calc(100% + 16px + ${dragOffsetX}px)) scale(${scale})`;
+                    }
                   } else if (isDragging && dragDirection === 'vertical' && currentIntroIndex === 2) {
                     const dragProgress = Math.abs(dragOffsetY) / 300;
                     const scale = Math.min(1, 0.8 + dragProgress * 0.2);
                     transform = `translateY(calc(100% + 16px + ${dragOffsetY}px)) scale(${scale})`;
                   } else if (isTransitioning && transitionDirection === 'left') {
-                    transform = 'translateX(0) scale(1)';
+                    // During horizontal transition from slide 2, slide 3 moves with it
+                    if (currentIntroIndex === 2 && slideIndex === 3) {
+                      transform = 'translateX(calc(-100% - 16px)) translateY(calc(100% + 16px)) scale(0.8)';
+                    } else {
+                      transform = 'translateX(0) scale(1)';
+                    }
                   } else if (isTransitioning && transitionDirection === 'down') {
                     transform = 'translateY(0) scale(1)';
                   } else if (showMicroAnimation && currentIntroIndex === 1) {
