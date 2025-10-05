@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, ChevronUp, ChevronDown } from 'lucide-react';
+import { ArrowLeftRight, ArrowUpDown } from 'lucide-react';
 
 interface IntroCardProps {
   slideIndex: number;
@@ -51,36 +51,28 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       <div className="absolute right-0 top-0 w-20 h-full z-20 cursor-pointer" onClick={onSwipeLeft} />
       
       <div className="flex-1 flex flex-col items-center justify-center text-center p-8 relative z-10">
-        {/* Arrows for slide 2 (horizontal) */}
+        {/* Double-headed arrow for slide 2 (horizontal) */}
         {slideIndex === 1 && (
-          <>
-            <ChevronLeft 
-              className="absolute left-8 top-1/2 -translate-y-1/2 animate-pulse" 
-              size={32} 
-              strokeWidth={3}
-            />
-            <ChevronRight 
-              className="absolute right-8 top-1/2 -translate-y-1/2 animate-pulse" 
-              size={32} 
-              strokeWidth={3}
-            />
-          </>
+          <ArrowLeftRight 
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 ${
+              isTransitioning ? 'animate-wobble-horizontal' : ''
+            }`}
+            size={48} 
+            strokeWidth={2.5}
+            style={{ color: 'hsl(160, 70%, 15%)' }}
+          />
         )}
         
-        {/* Arrows for slide 3 (vertical) */}
+        {/* Double-headed arrow for slide 3 (vertical) */}
         {slideIndex === 2 && (
-          <>
-            <ChevronUp 
-              className="absolute top-16 left-1/2 -translate-x-1/2 animate-pulse" 
-              size={32} 
-              strokeWidth={3}
-            />
-            <ChevronDown 
-              className="absolute bottom-24 left-1/2 -translate-x-1/2 animate-pulse" 
-              size={32} 
-              strokeWidth={3}
-            />
-          </>
+          <ArrowUpDown 
+            className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-20 ${
+              isTransitioning ? 'animate-wobble-vertical' : ''
+            }`}
+            size={48} 
+            strokeWidth={2.5}
+            style={{ color: 'hsl(160, 70%, 15%)' }}
+          />
         )}
         
         <h1 
@@ -112,6 +104,38 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       </p>
       
       <style>{`
+        
+        @keyframes wobble-horizontal {
+          0%, 100% {
+            transform: translate(-50%, -50%) translateX(0);
+          }
+          25% {
+            transform: translate(-50%, -50%) translateX(-8px);
+          }
+          75% {
+            transform: translate(-50%, -50%) translateX(8px);
+          }
+        }
+        
+        @keyframes wobble-vertical {
+          0%, 100% {
+            transform: translate(-50%, -50%) translateY(0);
+          }
+          25% {
+            transform: translate(-50%, -50%) translateY(-8px);
+          }
+          75% {
+            transform: translate(-50%, -50%) translateY(8px);
+          }
+        }
+        
+        .animate-wobble-horizontal {
+          animation: wobble-horizontal 0.6s ease-in-out infinite;
+        }
+        
+        .animate-wobble-vertical {
+          animation: wobble-vertical 0.6s ease-in-out infinite;
+        }
         
         @keyframes slide-horizontal-active {
           0% {
