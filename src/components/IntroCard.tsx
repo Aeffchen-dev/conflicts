@@ -78,7 +78,22 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
           {slideIndex === 3 ? (
             <>
               {'Konflikte als '}
-              <span className="shimmer-text">Team</span>
+              {['T', 'e', 'a', 'm'].map((letter, index) => {
+                const randomRotation = (Math.random() * 6 - 3).toFixed(2); // -3 to +3 degrees
+                return (
+                  <span
+                    key={index}
+                    className="team-letter"
+                    style={{
+                      display: 'inline-block',
+                      '--rotation': `${randomRotation}deg`,
+                      animationDelay: `${index * 0.1}s`
+                    } as React.CSSProperties}
+                  >
+                    {letter}
+                  </span>
+                );
+              })}
               {' lösen, statt Gegner zu werden'}
             </>
           ) : (
@@ -99,28 +114,20 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       </p>
       
       <style>{`
-        @keyframes teamPulse {
+        @keyframes letterRotate {
           0%, 100% {
-            color: hsl(160, 70%, 15%);
-            transform: scale(1);
+            transform: rotate(0deg);
           }
-          25% {
-            color: hsl(160, 65%, 45%);
-            transform: scale(1.05);
+          20% {
+            transform: rotate(var(--rotation));
           }
-          50% {
-            color: hsl(160, 60%, 65%);
-            transform: scale(1.08);
-          }
-          75% {
-            color: hsl(160, 65%, 45%);
-            transform: scale(1.05);
+          40% {
+            transform: rotate(0deg);
           }
         }
         
-        .shimmer-text {
-          display: inline-block;
-          animation: teamPulse 3s ease-in-out infinite;
+        .team-letter {
+          animation: letterRotate 3s ease-out infinite;
           transform-origin: center;
         }
       `}</style>
