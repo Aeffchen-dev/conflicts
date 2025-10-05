@@ -832,22 +832,26 @@ export function QuizApp() {
                 
                 const categoryQuestions = categorizedQuestions[category] || [];
                 
+                // For prev/next categories, always show question 0 to avoid visible jumps
+                // For active category, use the current question index
+                const questionIndexToUse = isActiveCategory ? currentQuestionIndexInCategory : 0;
+                
                 // For each category, render previous/current/next questions
                 return categoryQuestions.map((question, qIndex) => {
-                  const isActiveQuestion = qIndex === currentQuestionIndexInCategory;
-                  const isPrevQuestion = qIndex === (currentQuestionIndexInCategory - 1 + categoryQuestions.length) % categoryQuestions.length;
-                  const isNextQuestion = qIndex === (currentQuestionIndexInCategory + 1) % categoryQuestions.length;
+                  const isActiveQuestion = qIndex === questionIndexToUse;
+                  const isPrevQuestion = qIndex === (questionIndexToUse - 1 + categoryQuestions.length) % categoryQuestions.length;
+                  const isNextQuestion = qIndex === (questionIndexToUse + 1) % categoryQuestions.length;
                   
                   // Only render this question if:
                   // 1. It's in the active category and is current/prev/next question
-                  // 2. It's in prev/next category and is the current question of that category
+                  // 2. It's in prev/next category and is the first question (index 0)
                   // 3. Don't show prev/next questions during horizontal transitions
                   const isHorizontalTransition = (isDragging && dragDirection === 'horizontal') || 
                                                 (isTransitioning && (transitionDirection === 'left' || transitionDirection === 'right'));
                   
                   const shouldRender = (isActiveCategory && isActiveQuestion) ||
                                       (isActiveCategory && (isPrevQuestion || isNextQuestion) && !isHorizontalTransition) ||
-                                      ((isPrevCategory || isNextCategory) && isActiveQuestion);
+                                      ((isPrevCategory || isNextCategory) && qIndex === 0);
                   
                   if (!shouldRender) return null;
                   
