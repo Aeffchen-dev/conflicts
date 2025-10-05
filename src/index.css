@@ -48,22 +48,22 @@ All colors MUST be HSL.
     --quiz-surface: 0 0% 12%;
     
     /* Category-specific colors from user palette */
-    --quiz-category1-bg: 126 87% 82%;        /* Lime Green #B0F2B4 */
-    --quiz-category1-text: 126 87% 15%;      /* Darker Lime Green text */
+    --quiz-category1-bg: 185 83% 76%;        /* Electric Blue #8EECF5 */
+    --quiz-category1-text: 185 83% 12%;      /* Darker Electric Blue text */
     --quiz-category2-bg: 311 64% 85%;        /* Pink Lavender #F1C0E8 */
     --quiz-category2-text: 311 64% 18%;      /* Darker Pink Lavender text */
     --quiz-category3-bg: 263 65% 84%;        /* Lavender Blue #CFBAF0 */
     --quiz-category3-text: 263 65% 15%;      /* Darker Lavender Blue text */
     --quiz-category4-bg: 27 88% 90%;         /* Champagne Pink #FDE4CF */
     --quiz-category4-text: 27 88% 18%;       /* Darker Champagne Pink text */
-    --quiz-category5-bg: 356 100% 91%;       /* Baby Pink #FFCFD2 */
-    --quiz-category5-text: 356 100% 20%;     /* Darker Baby Pink text */
+    --quiz-category5-bg: 263 65% 84%;        /* Lavender Blue #CFBAF0 */
+    --quiz-category5-text: 263 65% 15%;      /* Darker Lavender Blue text */
     --quiz-category6-bg: 56 85% 89%;         /* Lemon Chiffon #FBF8CC */
     --quiz-category6-text: 56 85% 18%;       /* Darker Lemon Chiffon text */
     --quiz-category7-bg: 167 82% 78%;        /* Magic Mint #98F5E1 */
     --quiz-category7-text: 167 82% 12%;      /* Darker Magic Mint text */
-    --quiz-category8-bg: 126 70% 85%;        /* Lime variation */
-    --quiz-category8-text: 126 70% 15%;      /* Darker Lime text */
+    --quiz-category8-bg: 195 81% 76%;        /* Sky Blue #90DBF4 */
+    --quiz-category8-text: 195 81% 12%;      /* Darker Sky Blue text */
     
     /* Legacy category colors - keeping for backward compatibility */
     --quiz-werte-bg: 266 100% 51%;           /* #7004FF */
