@@ -919,27 +919,27 @@ export function QuizApp() {
                     }
                     zIndex = 2;
                   } else if (isPrevCategory) {
-                    // Previous category
+                    // Previous category - keep vertically centered during horizontal transitions
                     if (isDragging && dragDirection === 'horizontal') {
                       const dragProgress = Math.abs(dragOffsetX) / 300;
                       const scale = Math.min(1, 0.8 + dragProgress * 0.2);
-                      transform = `translateX(calc(-100% - 16px + ${dragOffsetX}px)) scale(${scale}) rotate(0deg)`;
+                      transform = `translateX(calc(-100% - 16px + ${dragOffsetX}px)) translateY(0) scale(${scale}) rotate(0deg)`;
                     } else if (isTransitioning && transitionDirection === 'right') {
-                      transform = 'translateX(0) scale(1) rotate(0deg)';
+                      transform = 'translateX(0) translateY(0) scale(1) rotate(0deg)';
                     } else {
-                      transform = 'translateX(calc(-100% - 16px)) scale(0.8) rotate(0deg)';
+                      transform = 'translateX(calc(-100% - 16px)) translateY(0) scale(0.8) rotate(0deg)';
                     }
                     zIndex = 1;
                   } else if (isNextCategory) {
-                    // Next category
+                    // Next category - keep vertically centered during horizontal transitions
                     if (isDragging && dragDirection === 'horizontal') {
                       const dragProgress = Math.abs(dragOffsetX) / 300;
                       const scale = Math.min(1, 0.8 + dragProgress * 0.2);
-                      transform = `translateX(calc(100% + 16px + ${dragOffsetX}px)) scale(${scale}) rotate(0deg)`;
+                      transform = `translateX(calc(100% + 16px + ${dragOffsetX}px)) translateY(0) scale(${scale}) rotate(0deg)`;
                     } else if (isTransitioning && transitionDirection === 'left') {
-                      transform = 'translateX(0) scale(1) rotate(0deg)';
+                      transform = 'translateX(0) translateY(0) scale(1) rotate(0deg)';
                     } else {
-                      transform = 'translateX(calc(100% + 16px)) scale(0.8) rotate(0deg)';
+                      transform = 'translateX(calc(100% + 16px)) translateY(0) scale(0.8) rotate(0deg)';
                     }
                     zIndex = 1;
                   }
