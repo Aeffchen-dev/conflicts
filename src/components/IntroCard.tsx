@@ -1,8 +1,9 @@
 interface IntroCardProps {
   slideIndex: number;
+  isActive?: boolean;
 }
 
-export function IntroCard({ slideIndex }: IntroCardProps) {
+export function IntroCard({ slideIndex, isActive = false }: IntroCardProps) {
   const getContent = () => {
     switch (slideIndex) {
       case 0:
@@ -29,7 +30,7 @@ export function IntroCard({ slideIndex }: IntroCardProps) {
 
   return (
     <div 
-      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none h-full flex flex-col justify-center items-center p-8 ${content.animationClass}`}
+      className={`relative w-full max-w-[500px] mx-auto rounded-[2rem] shadow-card overflow-hidden select-none h-full flex flex-col justify-center items-center p-8 ${isActive ? content.animationClass : ''}`}
       style={{
         backgroundColor: 'hsl(0, 0%, 40%)',
         color: 'white'
