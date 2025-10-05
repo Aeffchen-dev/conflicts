@@ -80,11 +80,11 @@
       #splash { position: fixed; inset: 0; display: flex; flex-direction: column; background: #000; z-index: 9999; }
       #splash.fade-out { opacity: 0; transition: opacity 200ms ease; pointer-events: none; }
       
-      /* Splash header matching the app header */
-      #splash-header { margin-top: 1rem; display: flex; align-items: baseline; justify-content: space-between; width: 100%; padding: 0 1rem; padding-top: env(safe-area-inset-top, 0); }
-      #splash-logo { color: white; font-family: 'Kokoro', serif; font-size: 25px; font-weight: bold; font-style: italic; position: relative; display: inline-flex; }
-      #splash-logo span { display: inline-block; position: relative; }
-      #splash-categories { color: white; font-family: Arial, sans-serif; font-size: 14px; font-weight: normal; display: flex; align-items: center; }
+      /* Splash header matching the app header exactly */
+      #splash-header { margin-top: 1rem; display: flex; align-items: baseline; justify-content: space-between; width: 100%; padding: 0 1rem; position: relative; z-index: 50; padding-top: env(safe-area-inset-top, 0); }
+      #splash-logo { color: white; cursor: pointer; position: relative; display: flex; align-items: center; font-family: 'Kokoro', serif; font-size: 25px; font-weight: bold; font-style: italic; }
+      #splash-logo span { display: inline-block; position: relative; opacity: 1; }
+      #splash-categories { color: white; font-weight: normal; display: flex; align-items: center; font-size: 14px; background: none; border: none; cursor: default; }
       
       /* Loading bandaid centered in remaining space */
       #splash-content { flex: 1; display: flex; align-items: center; justify-content: center; perspective: 1000px; }
@@ -103,40 +103,51 @@
   <body style="background-color: #000000; margin: 0; padding: 0;">
     <!-- Splash loader with header -->
     <div id="splash" aria-label="Loading">
-      <!-- Header matching QuizApp header -->
+      <!-- Header copied from regular QuizApp header -->
       <div id="splash-header">
         <div id="splash-logo">
-          <span>C</span><span>o</span><span>n</span><span>f</span><span style="position: relative;">l
-            <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="position: absolute; right: -4px; bottom: 0px; transform: rotate(-45deg) scale(1.09); perspective: 1000px; transform-style: preserve-3d; opacity: 1; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3)); z-index: 10;">
-              <defs>
-                <linearGradient id="bandaidGradientHeader" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stop-color="#d9b38c" stop-opacity="1" />
-                  <stop offset="50%" stop-color="#d4a574" stop-opacity="1" />
-                  <stop offset="100%" stop-color="#c9986a" stop-opacity="1" />
-                </linearGradient>
-              </defs>
-              <rect x="1" y="4" width="30" height="16" rx="5" fill="url(#bandaidGradientHeader)" stroke="#b8946a" stroke-width="0.5"/>
-              <rect x="11" y="6" width="10" height="12" rx="2" fill="#e5d4b8" opacity="0.9"/>
-              <circle cx="5" cy="8" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="8" cy="8" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="5" cy="12" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="8" cy="12" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="5" cy="16" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="8" cy="16" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="24" cy="8" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="27" cy="8" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="24" cy="12" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="27" cy="12" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="24" cy="16" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="27" cy="16" r="0.8" fill="white" opacity="0.9"/>
-              <circle cx="13" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
-              <circle cx="16" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
-              <circle cx="19" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
-              <circle cx="13" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
-              <circle cx="16" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
-              <circle cx="19" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
-            </svg>
-          </span><span>i</span><span>c</span><span>t</span><span>s</span>
+          <span>C</span>
+          <span>o</span>
+          <span>n</span>
+          <span>f</span>
+          <span style="position: relative;">
+            l
+            <div style="position: absolute; right: -4px; bottom: 0px; transform: rotate(-45deg) scale(1.09); perspective: 1000px; transform-style: preserve-3d; opacity: 1; filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));">
+              <svg width="20" height="20" viewBox="0 0 32 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <linearGradient id="bandaidGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#d9b38c" stop-opacity="1" />
+                    <stop offset="50%" stop-color="#d4a574" stop-opacity="1" />
+                    <stop offset="100%" stop-color="#c9986a" stop-opacity="1" />
+                  </linearGradient>
+                </defs>
+                <rect x="1" y="4" width="30" height="16" rx="5" fill="url(#bandaidGradient)" stroke="#b8946a" stroke-width="0.5"/>
+                <rect x="11" y="6" width="10" height="12" rx="2" fill="#e5d4b8" opacity="0.9"/>
+                <circle cx="5" cy="8" r="0.8" fill="white" opacity="0.9"/>
+                <circle cx="8" cy="8" r="0.8" fill="white" opacity="0.9"/>
+                <circle cx="5" cy="12" r="0.8" fill="white" opacity="0.9"/>
+                <circle cx="8" cy="12" r="0.8" fill="white" opacity="0.9"/>
+                <circle cx="5" cy="16" r="0.8" fill="white" opacity="0.9"/>
+                <circle cx="8" cy="16" r="0.8" fill="white" opacity="0.9"/>
+                <circle cx="24" cy="8" r="0.8" fill="white" opacity="0.9"/>
+                <circle cx="27" cy="8" r="0.8" fill="white" opacity="0.9"/>
+                <circle cx="24" cy="12" r="0.8" fill="white" opacity="0.9"/>
+                <circle cx="27" cy="12" r="0.8" fill="white" opacity="0.9"/>
+                <circle cx="24" cy="16" r="0.8" fill="white" opacity="0.9"/>
+                <circle cx="27" cy="16" r="0.8" fill="white" opacity="0.9"/>
+                <circle cx="13" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
+                <circle cx="16" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
+                <circle cx="19" cy="10" r="0.5" fill="#c9a680" opacity="0.4"/>
+                <circle cx="13" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
+                <circle cx="16" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
+                <circle cx="19" cy="14" r="0.5" fill="#c9a680" opacity="0.4"/>
+              </svg>
+            </div>
+          </span>
+          <span>i</span>
+          <span>c</span>
+          <span>t</span>
+          <span>s</span>
         </div>
         <button id="splash-categories">Kategorien wählen</button>
       </div>
