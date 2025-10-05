@@ -1,5 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import { ArrowLeft, ArrowRight, ArrowUp, ArrowDown } from 'lucide-react';
 
 interface IntroCardProps {
   slideIndex: number;
@@ -51,36 +50,54 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       <div className="absolute right-0 top-0 w-20 h-full z-20 cursor-pointer" onClick={onSwipeLeft} />
       
       <div className="flex-1 flex flex-col items-center justify-center text-center p-8 relative z-10 gap-8">
-        {/* Horizontal arrows for slide 2 */}
+        {/* Connected horizontal arrows for slide 2 */}
         {slideIndex === 1 && (
-          <div className="flex items-center gap-4">
-            <ArrowLeft 
-              size={32} 
-              strokeWidth={2}
-              style={{ color: 'hsl(160, 70%, 15%)' }}
-            />
-            <ArrowRight 
-              size={32} 
-              strokeWidth={2}
-              style={{ color: 'hsl(160, 70%, 15%)' }}
-            />
-          </div>
+          <svg 
+            width="120" 
+            height="40" 
+            viewBox="0 0 120 40" 
+            style={{ color: 'hsl(160, 70%, 15%)' }}
+          >
+            <defs>
+              <marker id="arrow-left" markerWidth="10" markerHeight="10" refX="1" refY="5" orient="auto">
+                <polygon points="10,5 1,1 1,9" fill="currentColor" />
+              </marker>
+              <marker id="arrow-right" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+                <polygon points="1,5 10,1 10,9" fill="currentColor" />
+              </marker>
+            </defs>
+            {/* Left arrow */}
+            <line x1="25" y1="20" x2="10" y2="20" stroke="currentColor" strokeWidth="3" markerEnd="url(#arrow-left)" />
+            {/* Center line */}
+            <line x1="25" y1="20" x2="95" y2="20" stroke="currentColor" strokeWidth="3" />
+            {/* Right arrow */}
+            <line x1="95" y1="20" x2="110" y2="20" stroke="currentColor" strokeWidth="3" markerEnd="url(#arrow-right)" />
+          </svg>
         )}
         
-        {/* Vertical arrows for slide 3 */}
+        {/* Connected vertical arrows for slide 3 */}
         {slideIndex === 2 && (
-          <div className="flex flex-col items-center gap-4">
-            <ArrowUp 
-              size={32} 
-              strokeWidth={2}
-              style={{ color: 'hsl(160, 70%, 15%)' }}
-            />
-            <ArrowDown 
-              size={32} 
-              strokeWidth={2}
-              style={{ color: 'hsl(160, 70%, 15%)' }}
-            />
-          </div>
+          <svg 
+            width="40" 
+            height="120" 
+            viewBox="0 0 40 120" 
+            style={{ color: 'hsl(160, 70%, 15%)' }}
+          >
+            <defs>
+              <marker id="arrow-up" markerWidth="10" markerHeight="10" refX="5" refY="1" orient="auto">
+                <polygon points="5,10 1,1 9,1" fill="currentColor" />
+              </marker>
+              <marker id="arrow-down" markerWidth="10" markerHeight="10" refX="5" refY="9" orient="auto">
+                <polygon points="5,1 1,10 9,10" fill="currentColor" />
+              </marker>
+            </defs>
+            {/* Up arrow */}
+            <line x1="20" y1="25" x2="20" y2="10" stroke="currentColor" strokeWidth="3" markerEnd="url(#arrow-up)" />
+            {/* Center line */}
+            <line x1="20" y1="25" x2="20" y2="95" stroke="currentColor" strokeWidth="3" />
+            {/* Down arrow */}
+            <line x1="20" y1="95" x2="20" y2="110" stroke="currentColor" strokeWidth="3" markerEnd="url(#arrow-down)" />
+          </svg>
         )}
         
         <h1 
