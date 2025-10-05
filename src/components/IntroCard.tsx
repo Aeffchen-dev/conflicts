@@ -61,7 +61,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       </div>
       
       <p 
-        className={`text-center p-8 relative z-10 ${slideIndex === 0 ? 'text-opacity-sweep' : ''}`}
+        className={`text-center p-8 relative z-10 inline-block mx-auto ${slideIndex === 0 ? 'text-color-wave' : ''}`}
         style={{ 
           fontFamily: 'Arial, sans-serif',
           fontSize: '14px',
@@ -81,15 +81,21 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
           }
         }
         
-        .text-opacity-sweep {
-          background: linear-gradient(90deg, 
-            black 0%, 
-            black 40%, 
-            rgba(0,0,0,0.9) 50%, 
-            black 60%, 
-            black 100%
+        .text-color-wave {
+          /* Use current text color as base and a 10% lighter mix for the wave */
+          --base: currentColor;
+          --light: color-mix(in oklab, var(--base) 90%, white 10%);
+
+          background-image: linear-gradient(
+            90deg,
+            var(--base) 0%,
+            var(--base) 45%,
+            var(--light) 50%,
+            var(--base) 55%,
+            var(--base) 100%
           );
           background-size: 200% 100%;
+          background-position: -100% center;
           -webkit-background-clip: text;
           background-clip: text;
           -webkit-text-fill-color: transparent;
