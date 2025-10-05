@@ -10,12 +10,15 @@ const container = document.getElementById('root')!
 const root = createRoot(container)
 root.render(<App />)
 
-// Fade out and remove splash once React has rendered a frame
+// Fade out and remove splash once React has rendered
 const splash = document.getElementById('splash')
 if (splash) {
+  // Wait for one animation frame to ensure React content is painted
   requestAnimationFrame(() => {
-    splash.classList.add('fade-out')
-    setTimeout(() => splash.remove(), 220)
+    requestAnimationFrame(() => {
+      splash.classList.add('fade-out')
+      setTimeout(() => splash.remove(), 200)
+    })
   })
 }
 
