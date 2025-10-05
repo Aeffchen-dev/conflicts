@@ -9,9 +9,10 @@ interface IntroCardProps {
   onSwipeLeft?: () => void;
   onSwipeRight?: () => void;
   isTransitioning?: boolean;
+  nextDirection?: 'horizontal' | 'vertical';
 }
 
-export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev = false, onSwipeLeft, onSwipeRight, isTransitioning = false }: IntroCardProps) {
+export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev = false, onSwipeLeft, onSwipeRight, isTransitioning = false, nextDirection }: IntroCardProps) {
   const getContent = () => {
     switch (slideIndex) {
       case 0:
@@ -27,7 +28,13 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
       case 2:
         return {
           text: 'Swipe nach oben und unten um zwischen den Fragen einer Kategorie zu wechseln',
-          animationClass: !isTransitioning && isActive ? 'animate-slide-vertical-active' : !isTransitioning && isNext ? 'animate-slide-vertical-next' : !isTransitioning && isPrev ? 'animate-slide-vertical-prev' : ''
+          animationClass: !isTransitioning && isActive
+            ? 'animate-slide-vertical-active'
+            : !isTransitioning && isNext
+              ? (nextDirection === 'horizontal' ? 'animate-slide-horizontal-next' : 'animate-slide-vertical-next')
+              : !isTransitioning && isPrev
+                ? 'animate-slide-vertical-prev'
+                : ''
         };
       default:
         return { text: '', animationClass: '' };

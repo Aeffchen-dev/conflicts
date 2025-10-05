@@ -964,6 +964,7 @@ export function QuizApp() {
                       onSwipeLeft={nextCategory}
                       onSwipeRight={prevCategory}
                       isTransitioning={isTransitioning || isDragging}
+                      nextDirection={isNext && currentIntroIndex === 1 ? 'horizontal' : undefined}
                     />
                   </div>
                 );
