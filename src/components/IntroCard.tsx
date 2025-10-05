@@ -10,7 +10,7 @@ export function IntroCard({ slideIndex, isActive = false, isNext = false, isPrev
     switch (slideIndex) {
       case 0:
         return {
-          text: 'Fragen um akute Konflikte gut zu navigieren und zufriedenstellend zu lösen',
+          text: 'Fragen um akute Konflikte gut zu navigieren und zufriedenstellend lösen zu können',
           animationClass: ''
         };
       case 1:
