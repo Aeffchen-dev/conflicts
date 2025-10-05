@@ -660,9 +660,9 @@ export function QuizApp() {
   return (
     <div className="min-h-[100svh] h-[100svh] bg-background overflow-hidden flex flex-col relative" style={{ height: '100svh' }}>
       {/* App Header with controls - Always visible */}
-      <div className="mt-4 flex items-center justify-between w-full px-4 relative z-50" style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}>
+      <div className="mt-4 flex items-baseline justify-between w-full px-4 relative z-50" style={{ paddingTop: 'env(safe-area-inset-top, 0)' }}>
         <div 
-          className="text-white cursor-pointer relative flex items-center" 
+          className="text-white cursor-pointer relative flex items-baseline" 
           style={{ fontFamily: 'Kokoro, serif', fontSize: '20px', fontWeight: 'bold', fontStyle: 'italic' }}
           onClick={handleLogoClick}
         >
@@ -848,7 +848,7 @@ export function QuizApp() {
         `}</style>
         <button 
           onClick={() => setCategorySelectorOpen(true)}
-          className="text-white font-normal flex items-center"
+          className="text-white font-normal flex items-baseline"
           style={{ fontSize: '14px' }}
         >
           Kategorien wählen
