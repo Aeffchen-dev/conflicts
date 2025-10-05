@@ -831,9 +831,9 @@ export function QuizApp() {
               filter: drop-shadow(1px 1px 2px rgba(0,0,0,0.2));
             }
             30% {
-              transform: rotate(-45deg) scale(2.2, 1.7) rotateZ(-14deg) translateY(-4px);
+              transform: rotate(-45deg) scale(1.6, 1.45) rotateZ(-8deg) translateY(-2px);
               opacity: 1;
-              filter: drop-shadow(4px 6px 8px rgba(0,0,0,0.4));
+              filter: drop-shadow(3px 4px 6px rgba(0,0,0,0.35));
             }
             80% {
               transform: rotate(-45deg) scale(1.3, 1.29) rotateZ(-0.3deg) translateY(-0.05px);
