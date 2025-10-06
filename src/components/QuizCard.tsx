@@ -43,7 +43,7 @@ export function QuizCard({
   const [isLocalDragging, setIsLocalDragging] = useState(false);
   const [processedText, setProcessedText] = useState<JSX.Element[]>([]);
   
-  // Generate unique animation based on question text to ensure each card gets different animation
+  // Generate random animation for more variety within categories
   const randomAnimation = (() => {
     const animations = [
       'animate-wave-border-1', 'animate-wave-border-2', 'animate-wave-border-3', 'animate-wave-border-4',
@@ -51,9 +51,10 @@ export function QuizCard({
       'animate-wave-border-9', 'animate-wave-border-10', 'animate-wave-border-11', 'animate-wave-border-12',
       'animate-wave-border-13', 'animate-wave-border-14', 'animate-wave-border-15', 'animate-wave-border-16'
     ];
-    // Use question text to create a unique but consistent hash
+    // Create more randomness by combining hash with timestamp and random factor
     const hash = question.question.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    return animations[hash % animations.length];
+    const randomFactor = Math.floor(Math.random() * animations.length);
+    return animations[(hash + randomFactor) % animations.length];
   })();
   
   const textRef = useRef<HTMLHeadingElement>(null);
