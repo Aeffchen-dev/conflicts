@@ -1162,11 +1162,23 @@ export function QuizApp() {
                 return (
                   <div
                     key={`intro-${slideIndex}`}
-                    className={`absolute inset-0 w-full h-full ${isActive ? 'pointer-events-auto' : 'pointer-events-none'}`}
+                    className={`absolute inset-0 w-full h-full ${isActive || (slideIndex === 3 && currentIntroIndex === 2) || (slideIndex === 2 && currentIntroIndex === 3) ? 'pointer-events-auto' : 'pointer-events-none'}`}
                     style={{
                       transform,
                       zIndex,
                       transition: isDragging ? 'none' : (isTransitioning || showMicroAnimation) ? 'transform 0.25s ease-in-out' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      cursor: !isActive && ((slideIndex === 3 && currentIntroIndex === 2) || (slideIndex === 2 && currentIntroIndex === 3)) ? 'pointer' : 'default'
+                    }}
+                    onClick={(e) => {
+                      if (!isDragging && !isTransitioning && !isActive) {
+                        if (slideIndex === 3 && currentIntroIndex === 2) {
+                          e.stopPropagation();
+                          goToSlide3();
+                        } else if (slideIndex === 2 && currentIntroIndex === 3) {
+                          e.stopPropagation();
+                          returnFromSlide3();
+                        }
+                      }
                     }}
                   >
                     <IntroCard 
@@ -1211,7 +1223,7 @@ export function QuizApp() {
                       return (
                         <div
                           key={`preview-${firstCategory}-${qIndex}`}
-                          className="absolute w-full h-full pointer-events-none"
+                          className={`absolute w-full h-full ${isNext ? 'pointer-events-auto' : 'pointer-events-none'}`}
                           style={{
                             height: isCurrent ? 'calc(90% - 8px)' : '100%',
                             top: 0,
@@ -1219,6 +1231,13 @@ export function QuizApp() {
                             right: 0,
                             transform: isCurrent ? 'translateY(0) scale(1)' : 'translateY(calc(90% + 16px)) scale(1)',
                             zIndex: isCurrent ? 3 : 1,
+                            cursor: isNext ? 'pointer' : 'default'
+                          }}
+                          onClick={(e) => {
+                            if (isNext && !isDragging && !isTransitioning) {
+                              e.stopPropagation();
+                              nextQuestion();
+                            }
                           }}
                         >
                           <QuizCard
@@ -1265,7 +1284,7 @@ export function QuizApp() {
                       return (
                         <div
                           key={`preview-slide3-${firstCategory}-${qIndex}`}
-                          className="absolute w-full h-full pointer-events-none"
+                          className={`absolute w-full h-full ${isNext ? 'pointer-events-auto' : 'pointer-events-none'}`}
                           style={{
                             height: isCurrent ? 'calc(90% - 8px)' : '100%',
                             top: 0,
@@ -1273,6 +1292,13 @@ export function QuizApp() {
                             right: 0,
                             transform: isCurrent ? 'translateY(0) scale(1)' : 'translateY(calc(90% + 16px)) scale(1)',
                             zIndex: isCurrent ? 3 : 1,
+                            cursor: isNext ? 'pointer' : 'default'
+                          }}
+                          onClick={(e) => {
+                            if (isNext && !isDragging && !isTransitioning) {
+                              e.stopPropagation();
+                              nextQuestion();
+                            }
                           }}
                         >
                           <QuizCard
@@ -1477,7 +1503,7 @@ export function QuizApp() {
                   return (
                     <div
                       key={`category-${catIndex}-question-${qIndex}`}
-                      className={`absolute w-full ${isActiveCategory && isCurrent ? 'pointer-events-auto' : 'pointer-events-none'}`}
+                      className={`absolute w-full ${isActiveCategory && (isCurrent || isNext || isPrev) ? 'pointer-events-auto' : 'pointer-events-none'}`}
                       style={{
                         height: isCurrent ? 'calc(90% - 8px)' : '100%',
                         top: 0,
@@ -1488,7 +1514,19 @@ export function QuizApp() {
                         transition: isDragging 
                           ? 'none' 
                           : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
-                        pointerEvents: isActiveCategory && isCurrent ? 'auto' : 'none'
+                        pointerEvents: isActiveCategory && (isCurrent || isNext || isPrev) ? 'auto' : 'none',
+                        cursor: isActiveCategory && !isCurrent && (isNext || isPrev) ? 'pointer' : 'default'
+                      }}
+                      onClick={(e) => {
+                        if (isActiveCategory && !isDragging && !isTransitioning) {
+                          if (isNext) {
+                            e.stopPropagation();
+                            nextQuestion();
+                          } else if (isPrev) {
+                            e.stopPropagation();
+                            prevQuestion();
+                          }
+                        }
                       }}
                     >
                       <QuizCard
