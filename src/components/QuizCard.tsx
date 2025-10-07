@@ -20,7 +20,6 @@ interface QuizCardProps {
   onDragEnd?: () => void;
   dragOffset?: number;
   isDragging?: boolean;
-  isTransitioning?: boolean;
 }
 
 export function QuizCard({ 
@@ -35,8 +34,7 @@ export function QuizCard({
   onDragMove,
   onDragEnd,
   dragOffset = 0,
-  isDragging = false,
-  isTransitioning = false
+  isDragging = false
 }: QuizCardProps) {
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -44,61 +42,11 @@ export function QuizCard({
   const [mouseEnd, setMouseEnd] = useState<number | null>(null);
   const [isLocalDragging, setIsLocalDragging] = useState(false);
   const [processedText, setProcessedText] = useState<JSX.Element[]>([]);
-  const [isPillVisible, setIsPillVisible] = useState(false);
-  const [shouldAnimate, setShouldAnimate] = useState(false);
-  
-  // Generate random animation for more variety within categories
-  const randomAnimation = (() => {
-    const animations = [
-      'animate-wave-border-1', 'animate-wave-border-2', 'animate-wave-border-3', 'animate-wave-border-4',
-      'animate-wave-border-5', 'animate-wave-border-6', 'animate-wave-border-7', 'animate-wave-border-8',
-      'animate-wave-border-9', 'animate-wave-border-10', 'animate-wave-border-11', 'animate-wave-border-12',
-      'animate-wave-border-13', 'animate-wave-border-14', 'animate-wave-border-15', 'animate-wave-border-16'
-    ];
-    // Create more randomness by combining hash with timestamp and random factor
-    const hash = question.question.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
-    const randomFactor = Math.floor(Math.random() * animations.length);
-    return animations[(hash + randomFactor) % animations.length];
-  })();
   
   const textRef = useRef<HTMLHeadingElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
-  const pillRef = useRef<HTMLDivElement>(null);
 
   const minSwipeDistance = 50;
-
-  // Intersection Observer to track pill visibility
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const wasVisible = isPillVisible;
-          setIsPillVisible(entry.isIntersecting);
-          
-          // When becoming visible, pause briefly then restart animation smoothly
-          if (!wasVisible && entry.isIntersecting) {
-            setShouldAnimate(false);
-            setTimeout(() => {
-              setShouldAnimate(true);
-            }, 100);
-          } else if (!entry.isIntersecting) {
-            setShouldAnimate(false);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-
-    if (pillRef.current) {
-      observer.observe(pillRef.current);
-    }
-
-    return () => {
-      if (pillRef.current) {
-        observer.unobserve(pillRef.current);
-      }
-    };
-  }, [isPillVisible]);
 
   // Process text to clean line breaks
   useEffect(() => {
@@ -113,15 +61,6 @@ export function QuizCard({
 
     processText();
   }, [question.question]);
-
-  // Pause/resume pill animation during transitions
-  useEffect(() => {
-    if (!isTransitioning && isPillVisible) {
-      setShouldAnimate(true);
-    } else {
-      setShouldAnimate(false);
-    }
-  }, [isTransitioning, isPillVisible]);
 
   // Get category-specific colors using specific category mapping
   const getCategoryColors = (categoryIndex: number) => {
@@ -307,13 +246,11 @@ export function QuizCard({
         {question.category.toLowerCase() !== 'intro' && (
           <div className="mb-4">
             <div 
-              ref={pillRef}
-              className={`px-4 py-2 font-medium inline-block ${randomAnimation}`}
+              className="px-4 py-2 rounded-full font-medium inline-block"
               style={{
                 backgroundColor: categoryColors.pillBg,
                 color: categoryColors.text,
-                fontSize: '12px',
-                animationPlayState: shouldAnimate ? 'running' : 'paused'
+                fontSize: '12px'
               }}
             >
               {question.category}
