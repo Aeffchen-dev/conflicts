@@ -20,6 +20,7 @@ interface QuizCardProps {
   onDragEnd?: () => void;
   dragOffset?: number;
   isDragging?: boolean;
+  isTransitioning?: boolean;
 }
 
 export function QuizCard({ 
@@ -34,7 +35,8 @@ export function QuizCard({
   onDragMove,
   onDragEnd,
   dragOffset = 0,
-  isDragging = false
+  isDragging = false,
+  isTransitioning = false
 }: QuizCardProps) {
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -264,7 +266,8 @@ export function QuizCard({
               style={{
                 backgroundColor: categoryColors.pillBg,
                 color: categoryColors.text,
-                fontSize: '12px'
+                fontSize: '12px',
+                animationPlayState: isTransitioning ? 'paused' : 'running'
               }}
             >
               {question.category}
