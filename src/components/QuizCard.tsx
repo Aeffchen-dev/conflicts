@@ -116,11 +116,10 @@ export function QuizCard({
 
   // Pause/resume pill animation during transitions
   useEffect(() => {
-    if (isTransitioning) {
+    if (!isTransitioning && isPillVisible) {
+      setShouldAnimate(true);
+    } else {
       setShouldAnimate(false);
-    } else if (isPillVisible) {
-      const t = window.setTimeout(() => setShouldAnimate(true), 120);
-      return () => window.clearTimeout(t);
     }
   }, [isTransitioning, isPillVisible]);
 
@@ -309,11 +308,12 @@ export function QuizCard({
           <div className="mb-4">
             <div 
               ref={pillRef}
-              className={`px-4 py-2 font-medium inline-block ${shouldAnimate ? randomAnimation : ''}`}
+              className={`px-4 py-2 font-medium inline-block ${randomAnimation}`}
               style={{
                 backgroundColor: categoryColors.pillBg,
                 color: categoryColors.text,
-                fontSize: '12px'
+                fontSize: '12px',
+                animationPlayState: shouldAnimate ? 'running' : 'paused'
               }}
             >
               {question.category}
