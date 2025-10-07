@@ -43,7 +43,7 @@ export function QuizCard({
   const [isLocalDragging, setIsLocalDragging] = useState(false);
   const [processedText, setProcessedText] = useState<JSX.Element[]>([]);
   const [isPillVisible, setIsPillVisible] = useState(false);
-  const [animationKey, setAnimationKey] = useState(0);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
   
   // Generate random animation for more variety within categories
   const randomAnimation = (() => {
@@ -73,9 +73,14 @@ export function QuizCard({
           const wasVisible = isPillVisible;
           setIsPillVisible(entry.isIntersecting);
           
-          // Reset animation when becoming visible after being hidden
+          // When becoming visible, pause briefly then restart animation smoothly
           if (!wasVisible && entry.isIntersecting) {
-            setAnimationKey(prev => prev + 1);
+            setShouldAnimate(false);
+            setTimeout(() => {
+              setShouldAnimate(true);
+            }, 100);
+          } else if (!entry.isIntersecting) {
+            setShouldAnimate(false);
           }
         });
       },
@@ -291,14 +296,12 @@ export function QuizCard({
         {question.category.toLowerCase() !== 'intro' && (
           <div className="mb-4">
             <div 
-              key={animationKey}
               ref={pillRef}
-              className={`px-4 py-2 font-medium inline-block ${randomAnimation}`}
+              className={`px-4 py-2 font-medium inline-block ${shouldAnimate ? randomAnimation : ''}`}
               style={{
                 backgroundColor: categoryColors.pillBg,
                 color: categoryColors.text,
-                fontSize: '12px',
-                animationPlayState: isPillVisible ? 'running' : 'paused'
+                fontSize: '12px'
               }}
             >
               {question.category}
