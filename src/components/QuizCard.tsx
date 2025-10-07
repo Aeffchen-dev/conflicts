@@ -20,6 +20,7 @@ interface QuizCardProps {
   onDragEnd?: () => void;
   dragOffset?: number;
   isDragging?: boolean;
+  isTransitioning?: boolean;
 }
 
 export function QuizCard({ 
@@ -34,7 +35,8 @@ export function QuizCard({
   onDragMove,
   onDragEnd,
   dragOffset = 0,
-  isDragging = false
+  isDragging = false,
+  isTransitioning = false
 }: QuizCardProps) {
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
@@ -111,6 +113,16 @@ export function QuizCard({
 
     processText();
   }, [question.question]);
+
+  // Pause/resume pill animation during transitions
+  useEffect(() => {
+    if (isTransitioning) {
+      setShouldAnimate(false);
+    } else if (isPillVisible) {
+      const t = window.setTimeout(() => setShouldAnimate(true), 120);
+      return () => window.clearTimeout(t);
+    }
+  }, [isTransitioning, isPillVisible]);
 
   // Get category-specific colors using specific category mapping
   const getCategoryColors = (categoryIndex: number) => {

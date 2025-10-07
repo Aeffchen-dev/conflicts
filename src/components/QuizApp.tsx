@@ -1247,6 +1247,7 @@ export function QuizApp() {
                             onSwipeUp={nextQuestion}
                             onSwipeDown={prevQuestion}
                             categoryIndex={categoryColorMap[firstCategory] || 0}
+                            isTransitioning={isTransitioning || isDragging}
                           />
                         </div>
                       );
@@ -1308,6 +1309,7 @@ export function QuizApp() {
                             onSwipeUp={nextQuestion}
                             onSwipeDown={prevQuestion}
                             categoryIndex={categoryColorMap[firstCategory] || 0}
+                            isTransitioning={isTransitioning || isDragging}
                           />
                         </div>
                       );
@@ -1536,6 +1538,7 @@ export function QuizApp() {
                         onSwipeUp={prevQuestion}
                         onSwipeDown={nextQuestion}
                         categoryIndex={categoryColorMap[question.category] || 0}
+                        isTransitioning={isTransitioning || isDragging}
                         onDragStart={() => {}}
                         onDragMove={() => {}}
                         onDragEnd={() => {}}
