@@ -42,6 +42,7 @@ export function QuizCard({
   const [mouseEnd, setMouseEnd] = useState<number | null>(null);
   const [isLocalDragging, setIsLocalDragging] = useState(false);
   const [processedText, setProcessedText] = useState<JSX.Element[]>([]);
+  const [isPillVisible, setIsPillVisible] = useState(false);
   
   // Generate random animation for more variety within categories
   const randomAnimation = (() => {
@@ -59,8 +60,31 @@ export function QuizCard({
   
   const textRef = useRef<HTMLHeadingElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
+  const pillRef = useRef<HTMLDivElement>(null);
 
   const minSwipeDistance = 50;
+
+  // Intersection Observer to track pill visibility
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsPillVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    if (pillRef.current) {
+      observer.observe(pillRef.current);
+    }
+
+    return () => {
+      if (pillRef.current) {
+        observer.unobserve(pillRef.current);
+      }
+    };
+  }, []);
 
   // Process text to clean line breaks
   useEffect(() => {
@@ -260,11 +284,13 @@ export function QuizCard({
         {question.category.toLowerCase() !== 'intro' && (
           <div className="mb-4">
             <div 
+              ref={pillRef}
               className={`px-4 py-2 font-medium inline-block ${randomAnimation}`}
               style={{
                 backgroundColor: categoryColors.pillBg,
                 color: categoryColors.text,
-                fontSize: '12px'
+                fontSize: '12px',
+                animationPlayState: isPillVisible ? 'running' : 'paused'
               }}
             >
               {question.category}
