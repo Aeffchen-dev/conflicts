@@ -1166,7 +1166,7 @@ export function QuizApp() {
                     style={{
                       transform,
                       zIndex,
-                      transition: isDragging ? 'none' : (isTransitioning || showMicroAnimation) ? 'transform 0.25s ease-in-out' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                      transition: isDragging ? 'none' : (isTransitioning || showMicroAnimation) ? 'transform 0.25s ease-in-out' : 'transform 0.3s ease-in-out',
                     }}
                   >
                     <IntroCard 
@@ -1193,7 +1193,7 @@ export function QuizApp() {
                         ? 'translateX(0) scale(1)'
                         : 'translateX(calc(100% + 16px)) scale(0.8)',
                     zIndex: isTransitioning && transitionDirection === 'left' ? 4 : 2,
-                    transition: isDragging ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    transition: isDragging ? 'none' : 'transform 0.3s ease-in-out',
                   }}
                 >
                   {(() => {
@@ -1247,7 +1247,7 @@ export function QuizApp() {
                         ? 'translateX(0) scale(1)'
                         : 'translateX(calc(100% + 16px)) scale(0.8)',
                     zIndex: isTransitioning && transitionDirection === 'left' ? 4 : 2,
-                    transition: isDragging ? 'none' : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                    transition: isDragging ? 'none' : 'transform 0.3s ease-in-out',
                   }}
                 >
                   {(() => {
@@ -1487,7 +1487,7 @@ export function QuizApp() {
                         zIndex: categoryZIndex * 10 + verticalZIndex,
                         transition: isDragging 
                           ? 'none' 
-                          : 'transform 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+                          : 'transform 0.3s ease-in-out',
                         pointerEvents: isActiveCategory && isCurrent ? 'auto' : 'none'
                       }}
                     >
