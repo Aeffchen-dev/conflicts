@@ -97,11 +97,11 @@ export function QuizCard({
     
     // CSS custom properties for the colors with proper contrast ratios
     const colorVars = {
-      1: { bg: 'hsl(var(--quiz-category1-bg))', text: 'hsl(var(--quiz-category1-text))', pillBg: 'hsl(356 100% 80%)' }, // Baby Pink pill
-      2: { bg: 'hsl(var(--quiz-category2-bg))', text: 'hsl(var(--quiz-category2-text))', pillBg: 'hsl(311 64% 72%)' }, // Pink Lavender pill
-      3: { bg: 'hsl(var(--quiz-category3-bg))', text: 'hsl(var(--quiz-category3-text))', pillBg: 'hsl(263 65% 70%)' }, // Lavender Blue pill
-      4: { bg: 'hsl(var(--quiz-category4-bg))', text: 'hsl(var(--quiz-category4-text))', pillBg: 'hsl(217 78% 65%)' }, // Baby Blue Eyes pill
-      5: { bg: 'hsl(var(--quiz-category5-bg))', text: 'hsl(var(--quiz-category5-text))', pillBg: 'hsl(195 81% 60%)' }, // Sky Blue pill
+      1: { bg: 'hsl(var(--quiz-category1-bg))', text: 'hsl(var(--quiz-category1-text))', pillBg: 'hsl(311 64% 72%)' }, // Pink Lavender pill
+      2: { bg: 'hsl(var(--quiz-category2-bg))', text: 'hsl(var(--quiz-category2-text))', pillBg: 'hsl(263 65% 70%)' }, // Lavender Blue pill
+      3: { bg: 'hsl(var(--quiz-category3-bg))', text: 'hsl(var(--quiz-category3-text))', pillBg: 'hsl(217 78% 65%)' }, // Baby Blue Eyes pill
+      4: { bg: 'hsl(var(--quiz-category4-bg))', text: 'hsl(var(--quiz-category4-text))', pillBg: 'hsl(195 81% 60%)' }, // Sky Blue pill
+      5: { bg: 'hsl(var(--quiz-category5-bg))', text: 'hsl(var(--quiz-category5-text))', pillBg: 'hsl(356 100% 80%)' }, // Baby Pink pill
     };
     
     return colorVars[colorIndex as keyof typeof colorVars] || colorVars[1];
